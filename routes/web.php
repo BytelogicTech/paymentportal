@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BankController;
+use App\Http\Controllers\merchantController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,5 +38,13 @@ Route::group(['prefix' => 'bank'], function(){
 });
 
 
+Route::group(['prefix' => 'merchant'], function(){
+    Route::get('/index', [merchantController::class, 'index']);
+    Route::get('/create', [merchantController::class, 'create']);
+    Route::post('/store', [merchantController::class, 'store']);
+    Route::get('/edit/{id}', [merchantController::class, 'edit']);
+    Route::post('/update', [merchantController::class, 'update']);
+    Route::get('/delete/{id}', [merchantController::class, 'destroy']);
+});
 
 //  Route::resource('bank',BankController::class);

@@ -59,19 +59,17 @@ class BankController extends Controller
         // $bank->status = 1;
         $file = $request->logo;
         // dd($file);
-        if($request->logo)
-        {
-        $fileext = $file->getClientOriginalExtension();
-        if ($fileext == "jpg" || $fileext == "jpeg" || $fileext == "png") {
-            $filename = time() . "." . $fileext;
-            
-            $file->move('images/', $filename);
-            $bank->logo = $filename;
-        } else 
-        {
-            return back()->with('error', 'Please upload Logo');
+        if ($request->logo) {
+            $fileext = $file->getClientOriginalExtension();
+            if ($fileext == "jpg" || $fileext == "jpeg" || $fileext == "png") {
+                $filename = time() . "." . $fileext;
+
+                $file->move('images/', $filename);
+                $bank->logo = $filename;
+            } else {
+                return back()->with('error', 'Please upload Logo');
+            }
         }
-    }
 
         $bank->save();
 
@@ -106,7 +104,11 @@ class BankController extends Controller
     public function edit($id)
     {
         $bank = bank::findorFail($id);
-        return view('bank/edit', compact('bank'));
+        // ->join('bank_accounts', 'bank_accounts.bank_id','=','banks.id')
+        // ->get();
+        // dd($bank);
+        $bankaccounts = bank_account::where('bank_id',$id)->get();
+        return view('bank/edit', compact('bank','bankaccounts'));
     }
 
     /**
@@ -139,32 +141,28 @@ class BankController extends Controller
         // $bank->status = 1;
         $file = $request->logo;
         // dd($file);
-        if($request->logo)
-    {
-        
-        $fileext = $file->getClientOriginalExtension();
-        if ($fileext == "jpg" || $fileext == "jpeg" || $fileext == "png")
-         {
-            $filename = time() . "." . $fileext;
-            $file->move('images/', $filename);
-            $bank->logo = $filename;
-        } 
-        else 
-        {
-            return back()->with('error', 'Please upload Logo');
+        if ($request->logo) {
+
+            $fileext = $file->getClientOriginalExtension();
+            if ($fileext == "jpg" || $fileext == "jpeg" || $fileext == "png") {
+                $filename = time() . "." . $fileext;
+                $file->move('images/', $filename);
+                $bank->logo = $filename;
+            } else {
+                return back()->with('error', 'Please upload Logo');
+            }
         }
-    }
 
         $bank->update();
 
-        $bankid = $bank->id;
+        // $bankid = $bank->id;
 
-        $bankaccount = new bank_account();
-        $bankaccount->bank_id = $bankid;
-        $bankaccount->currency = $request->currency;
-        $bankaccount->account_number = $request->account_number;
-        $bankaccount->nick_name = $request->nickname;
-        $bankaccount->save();
+        // $bankaccount = new bank_account();
+        // $bankaccount->bank_id = $bankid;
+        // $bankaccount->currency = $request->currency;
+        // $bankaccount->account_number = $request->account_number;
+        // $bankaccount->nick_name = $request->nickname;
+        // $bankaccount->save();
 
         return redirect('bank/index')->with('success', 'bank Added Successfully');
     }
@@ -175,8 +173,11 @@ class BankController extends Controller
      * @param  \App\Models\bank  $bank
      * @return \Illuminate\Http\Response
      */
-    public function destroy(bank $bank)
+    public function destroy($id)
     {
-        //
+        $bank = bank::findorFail($id);
+        $bank->delete();
+
+        return redirect('bank/index')->with('success', 'Bank Deleted Successfully');
     }
 }
