@@ -589,7 +589,8 @@
                                             '<select class="form-control select2" style="width: 100%;" name="currency[]">'+
                                                 '<option value="" selected disabled>Please Select One</option>'+
                                                 '<option value="USD">USD</option>'+
-                                                '<option value="EUR">EUR</option>'+                                         
+                                                '<option value="EUR">EUR</option>'+  
+                                                '<option value="GBP">GBP</option>'+
                                             '</select>'+
                                         '</div>'+
                                     '</div>'+
