@@ -440,17 +440,13 @@
 
 
 
-                                <div class="form-group">
-                                    <label for="swift_code">Secondary Email</label>
-                                    <input type="email" placeholder="Enter Secondary Email" class="form-control" name="swift_code" required />
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="description">Rolling Reserve Release Days</label>
+                                        <input type="number" placeholder="Enter Rolling Reserve Release Days" class="form-control" name="rolling_reserve_release_days" />
+                                    </div>
                                 </div>
-
-
-                                <div class="form-group">
-                                    <label for="description">Rolling Reserve Release Days</label>
-                                    <input type="number" placeholder="Enter Rolling Reserve Release Days" class="form-control" name="rolling_reserve_release_days" />
-                                </div>
-
 
                                 <div class="row">
                                     <div class="col-md-6">
@@ -489,14 +485,11 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Invoice Remarks</label>
-                                            <textarea placeholder="Invoice Remarks" class="form-control" name="invoice_remarks">
-
-                                    </textarea>
+                                            <textarea placeholder="Invoice Remarks" class="form-control" name="invoice_remarks"></textarea>
 
                                         </div>
-                                    </div>                        
+                                    </div>
                                 </div>
-
 
 
 
@@ -511,11 +504,12 @@
                                         <div class="form-group">
                                             <label>Enable mail for Customers?
                                             </label>
-                                            <select class="form-control select2" style="width: 100%;" name="enable_mail_for_customers">
-                                                <option value="1">Active</option>
-                                                <option value="0">Inactive</option>
+                                            <!-- Default checked -->
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" name="enable_mail_for_customers" class="custom-control-input" id="customSwitch1" checked>
+                                                <label class="custom-control-label" for="customSwitch1"></label>
+                                            </div>
 
-                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -528,11 +522,12 @@
                                         <div class="form-group">
                                             <label>Company Details on left
                                             </label>
-                                            <select class="form-control select2" style="width: 100%;" name="company_details_on_left">
-                                                <option value="1">Active</option>
-                                                <option value="0">Inactive</option>
+                                            <!-- Default checked -->
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" name="company_details_on_left" class="custom-control-input" id="customSwitch2" checked>
+                                                <label class="custom-control-label" for="customSwitch2"></label>
+                                            </div>
 
-                                            </select>
                                         </div>
                                     </div>
 
@@ -540,11 +535,12 @@
                                         <div class="form-group">
                                             <label>Invoice Details on right
                                             </label>
-                                            <select class="form-control select2" style="width: 100%;" name="invoice_details_on_right">
-                                                <option value="1">Active</option>
-                                                <option value="0">Inactive</option>
+                                            <!-- Default checked -->
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" name="invoice_details_on_right" class="custom-control-input" id="customSwitch3" checked>
+                                                <label class="custom-control-label" for="customSwitch3"></label>
+                                            </div>
 
-                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -555,11 +551,12 @@
                                         <div class="form-group">
                                             <label>B2B Access
                                             </label>
-                                            <select class="form-control select2" style="width: 100%;" name="b2b_access">
-                                                <option value="1">Active</option>
-                                                <option value="0">Inactive</option>
+                                            <!-- Default checked -->
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" name="b2b_access" class="custom-control-input" id="customSwitch4" checked>
+                                                <label class="custom-control-label" for="customSwitch4"></label>
+                                            </div>
 
-                                            </select>
                                         </div>
                                     </div>
 
@@ -567,11 +564,12 @@
                                         <div class="form-group">
                                             <label>Status
                                             </label>
-                                            <select class="form-control select2" style="width: 100%;" name="status">
-                                                <option value="1">Active</option>
-                                                <option value="0">Inactive</option>
+                                            <!-- Default checked -->
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" name="status" class="custom-control-input" id="customSwitch5" checked>
+                                                <label class="custom-control-label" for="customSwitch5">Toggle this switch element</label>
+                                            </div>
 
-                                            </select>
                                         </div>
                                     </div>
                                 </div>

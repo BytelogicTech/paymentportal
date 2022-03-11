@@ -52,7 +52,6 @@
                     <th>Settlement Notification Email</th>
                     <th>Upload Logo</th>
                     <th>Action</th>
-
                   </tr>
                   </thead>
 

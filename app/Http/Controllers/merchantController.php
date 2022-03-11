@@ -48,7 +48,7 @@ class merchantController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+         dd($request->all());
         $merchant = new merchant();
         $merchant->merchant_name = $request->merchant_name;
         $merchant->bank_account_id = $request->bank_account_id;
@@ -67,13 +67,10 @@ class merchantController extends Controller
         $merchant->alternate_payout_commission = $request->alternate_payout_commission;
         $merchant->b2b_percentage = $request->b2b_percentage;
         $merchant->rolling_reserve_percentage = $request->rolling_reserve_percentage;
-        $merchant->rolling_reserve_release_days = $request->declarrolling_reserve_release_days;
+        $merchant->rolling_reserve_release_days = $request->rolling_reserve_release_days;
         $merchant->website = $request->website;
         $merchant->customer_support_number = $request->customer_support_number;
         $merchant->invoice_remarks = $request->invoice_remarks;
-        // $merchant->declaration_content = $request->declaration_content;
-        // $merchant->declaration_content = $request->declaration_content;
-        // $merchant->declaration_content = $request->declaration_content;
         $merchant->enable_mail_for_customers = $request->enable_mail_for_customers;
         $merchant->company_details_on_left = $request->company_details_on_left;
         $merchant->invoice_details_on_right = $request->invoice_details_on_right;
@@ -122,12 +119,14 @@ class merchantController extends Controller
      */
     public function edit($id)
     {
+        $bankaccounts = bank_account::join('banks','banks.id','=','bank_accounts.bank_id','left outer')->get();
+
         $merchant = merchant::findorFail($id);
         // ->join('merchant_accounts', 'merchant_accounts.merchant_id','=','merchants.id')
         // ->get();
         // dd($merchant);
         
-        return view('merchant/edit', compact('merchant'));
+        return view('merchant/edit', compact('merchant','bankaccounts'));
     }
 
     /**
@@ -158,13 +157,10 @@ class merchantController extends Controller
         $merchant->alternate_payout_commission = $request->alternate_payout_commission;
         $merchant->b2b_percentage = $request->b2b_percentage;
         $merchant->rolling_reserve_percentage = $request->rolling_reserve_percentage;
-        $merchant->rolling_reserve_release_days = $request->declarrolling_reserve_release_days;
+        $merchant->rolling_reserve_release_days = $request->rolling_reserve_release_days;
         $merchant->website = $request->website;
         $merchant->customer_support_number = $request->customer_support_number;
         $merchant->invoice_remarks = $request->invoice_remarks;
-        $merchant->declaration_content = $request->declaration_content;
-        $merchant->declaration_content = $request->declaration_content;
-        $merchant->declaration_content = $request->declaration_content;
         $merchant->enable_mail_for_customers = $request->enable_mail_for_customers;
         $merchant->company_details_on_left = $request->company_details_on_left;
         $merchant->invoice_details_on_right = $request->invoice_details_on_right;

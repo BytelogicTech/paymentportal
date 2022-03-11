@@ -40,19 +40,28 @@
                         <form action="{{url('merchant/update')}}" method="POST" enctype="multipart/form-data">
                             <div class="card-body">
                                 @csrf
+                                <input type="hidden" name="id" value="{{$merchant->id}}"/>
 
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="name">Merchant Name*</label>
-                                            <input type="text" placeholder="Enter Merchant Name" class="form-control" name="merchant_name" required />
+                                            <input type="text" placeholder="Enter Merchant Name" class="form-control" name="merchant_name" required value="{{$merchant->merchant_name}}" />
 
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Bank Accounts Assigned*</label>
-                                            <input type="text" placeholder="Nothing Selected" class="form-control" name="bank_account_id" required />
+                                            <select name="bank_account_id" value="{{$merchant->bank_account_id}}" id="" class="form-control" >
+                                                <option>Select Bank Account</option>
+
+                                                @foreach($bankaccounts as $bankaccount)
+                                                <optgroup label="{{$bankaccount->bank_name}}">
+                                                    <option value="{{$bankaccount->id}}">{{$bankaccount->beneficiary_name}} - {{$bankaccount->currency}} - ({{$bankaccount->account_number}}) </option>
+                                                </optgroup>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -63,13 +72,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">First Name*</label>
-                                            <input type="text" placeholder="Enter First Name" class="form-control" name="first_name" required />
+                                            <input type="text" placeholder="Enter First Name" class="form-control" name="first_name" required value="{{$merchant->first_name}}"/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Last Name*</label>
-                                            <input type="text" placeholder="Enter Last Name" class="form-control" name="last_name" required />
+                                            <input type="text" placeholder="Enter Last Name" class="form-control" name="last_name" required value="{{$merchant->last_name}}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -81,14 +90,14 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="zipcode">Email*:</label>
-                                            <input type="email" placeholder="Enter Email" class="form-control" name="email" />
+                                            <input type="email" placeholder="Enter Email" class="form-control" name="email" value="{{$merchant->email}}" />
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Country*</label>
-                                            <select class="form-control select2" style="width: 100%;" name="Country" required>
+                                            <select class="form-control select2" style="width: 100%;" name="Country" required value="{{$merchant->Country}}" id="Country">
                                                 <option value="" selected disabled>Please Select One</option>
                                                 <option value="Afganistan">Afghanistan</option>
                                                 <option value="Albania">Albania</option>
@@ -346,13 +355,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Secondary Email</label>
-                                            <input type="email" placeholder="Enter Secondary Email" class="form-control" name="secondary_email" required />
+                                            <input type="email" placeholder="Enter Secondary Email" class="form-control" name="secondary_email" required value="{{$merchant->secondary_email}}"/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Invoice Email</label>
-                                            <input type="email" placeholder="Enter Invoice Email" class="form-control" name="invoice_email" required />
+                                            <input type="email" placeholder="Enter Invoice Email" class="form-control" name="invoice_email" required value="{{$merchant->invoice_email}}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -362,13 +371,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Payout Notification Email</label>
-                                            <input type="email" placeholder="Enter Payout Notification Email" class="form-control" name="payout_notification_email" required />
+                                            <input type="email" placeholder="Enter Payout Notification Email" class="form-control" name="payout_notification_email" required value="{{$merchant->payout_notification_email}}"/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Settlement Notification Email</label>
-                                            <input type="email" placeholder="Enter Settlement Notification Email" class="form-control" name="settlement_notification_email" required />
+                                            <input type="email" placeholder="Enter Settlement Notification Email" class="form-control" name="settlement_notification_email" required value="{{$merchant->settlement_notification_email}}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -377,13 +386,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Payout Notification Email [FOR ADMIN]l</label>
-                                            <input type="email" placeholder="Enter Payout Notification Email FOR ADMIN" class="form-control" name="payout_notification_email_admin" required />
+                                            <input type="email" placeholder="Enter Payout Notification Email FOR ADMIN" class="form-control" name="payout_notification_email_admin" required value="{{$merchant->payout_notification_email_admin}}"/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Settlement Notification Email [FOR ADMIN]</label>
-                                            <input type="email" placeholder="Enter Settlement Notification Email FOR ADMIN" class="form-control" name="settlement_notification_email_admin" required />
+                                            <input type="email" placeholder="Enter Settlement Notification Email FOR ADMIN" class="form-control" name="settlement_notification_email_admin" required value="{{$merchant->settlement_notification_email_admin}}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -392,13 +401,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Incoming Percentage *</label>
-                                            <input type="text" placeholder="Enter Incoming Percentage" class="form-control" name="incoming_percentage" required />
+                                            <input type="number" placeholder="Enter Incoming Percentage" class="form-control" name="incoming_percentage" required value="{{$merchant->incoming_percentage}}"/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Payout Percentage *</label>
-                                            <input type="text" placeholder="Enter Payout Percentage" class="form-control" name="payout_percentage" required />
+                                            <input type="number" placeholder="Enter Payout Percentage" class="form-control" name="payout_percentage" required value="{{$merchant->payout_percentage}}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -406,50 +415,46 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="account_number">Alternate Payout Commission</label>
-                                        <input type="text" placeholder="Enter Alternate Payout Commission" class="form-control" name="alternate_payout_commission"/>
+                                        <input type="number" placeholder="Enter Alternate Payout Commission" class="form-control" name="alternate_payout_commission" value="{{$merchant->alternate_payout_commission}}"/>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="description">B2B Percentage*I</label>
-                                            <input type="text" placeholder="Enter B2B Percentage" class="form-control" name="b2b _percentage" required />
+                                            <label for="description">B2B Percentage*</label>
+                                            <input type="number" placeholder="Enter B2B Percentage" class="form-control" name="b2b_percentage" required value="{{$merchant->b2b_percentage}}"/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Rolling Reserve Percentage*</label>
-                                            <input type="text" placeholder="Enter Rolling Reserve Percentage" class="form-control" name="rolling_reserve_percentage" required />
+                                            <input type="number" placeholder="Enter Rolling Reserve Percentage" class="form-control" name="rolling_reserve_percentage" required value="{{$merchant->rolling_reserve_percentage}}"/>
                                         </div>
                                     </div>
                                 </div>
 
 
 
-                                <div class="form-group">
-                                    <label for="swift_code">Secondary Email</label>
-                                    <input type="email" placeholder="Enter Secondary Email" class="form-control" name="swift_code" required />
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="description">Rolling Reserve Release Days</label>
+                                        <input type="number" placeholder="Enter Rolling Reserve Release Days" class="form-control" name="rolling_reserve_release_days" value="{{$merchant->rolling_reserve_release_days}}"/>
+                                    </div>
                                 </div>
-
-
-                                <div class="form-group">
-                                    <label for="description">Rolling Reserve Release Days</label>
-                                    <input type="text" placeholder="Enter Rolling Reserve Release Days" class="form-control" name="rolling_reserve_release_days"/>
-                                </div>
-
 
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="company_name">Password*</label>
-                                            <input type="text" placeholder="New Password" class="form-control" name="company_name" required />
+                                            <input type="text" placeholder="New Password" class="form-control" name="company_name" required value="{{$merchant->company_name}}"/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="company_email">Repeat Password*:</label>
-                                            <input type="text" placeholder="Repeat Password" class="form-control" name="company_email" />
+                                            <input type="text" placeholder="Repeat Password" class="form-control" name="company_email" value="{{$merchant->company_email}}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -459,7 +464,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="prefix">Website</label>
-                                            <input type="text" placeholder="Enter Website" class="form-control" name="website" required />
+                                            <input type="text" placeholder="Enter Website" class="form-control" name="website" required value="{{$merchant->website}}"/>
                                         </div>
                                     </div>
 
@@ -467,29 +472,36 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="declaration_content">Customer Support Number:</label>
-                                            <input type="text" placeholder="Enter Customer Support Number" class="form-control" name="customer_support_number" />
+                                            <input type="text" placeholder="Enter Customer Support Number" class="form-control" name="customer_support_number" value="{{$merchant->customer_support_number}}"/>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="description">Invoice Remarks</label>
-                                    <input type="text" placeholder="Enter Rolling Reserve Release Days" class="form-control" name="invoice_remarks" />
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="description">Invoice Remarks</label>
+                                            <textarea placeholder="Invoice Remarks" class="form-control" name="invoice_remarks">
+                                            {{$merchant->invoice_remarks}}
+                                            </textarea>
+                                        </div>
+                                    </div>
                                 </div>
 
 
+    
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="logo">Upload Logo:</label>
-                                            <input type="file" placeholder="Choose File" class="form-control" name="upload_logo" />
+                                            <input type="file" placeholder="Choose File" class="form-control" name="upload_logo" value="{{$merchant->upload_logo}}"/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Enable mail for Customers?
                                             </label>
-                                            <select class="form-control select2" style="width: 100%;" name="enable_mail_for_customers">
+                                            <select class="form-control select2" style="width: 100%;" name="enable_mail_for_customers" value="{{$merchant->enable_mail_for_customers}}">
                                                 <option value="1">Active</option>
                                                 <option value="0">Inactive</option>
 
@@ -506,7 +518,7 @@
                                         <div class="form-group">
                                             <label>Company Details on left
                                             </label>
-                                            <select class="form-control select2" style="width: 100%;" name="company_details_on_left">
+                                            <select class="form-control select2" style="width: 100%;" name="company_details_on_left" value="{{$merchant->company_details_on_left}}">
                                                 <option value="1">Active</option>
                                                 <option value="0">Inactive</option>
 
@@ -518,7 +530,7 @@
                                         <div class="form-group">
                                             <label>Invoice Details on right
                                             </label>
-                                            <select class="form-control select2" style="width: 100%;" name="invoice_details_on_right">
+                                            <select class="form-control select2" style="width: 100%;" name="invoice_details_on_right" value="{{$merchant->invoice_details_on_right}}">
                                                 <option value="1">Active</option>
                                                 <option value="0">Inactive</option>
 
@@ -533,7 +545,7 @@
                                         <div class="form-group">
                                             <label>B2B Access
                                             </label>
-                                            <select class="form-control select2" style="width: 100%;" name="b2b_access">
+                                            <select class="form-control select2" style="width: 100%;" name="b2b_access" value="{{$merchant->b2b_access}}">
                                                 <option value="1">Active</option>
                                                 <option value="0">Inactive</option>
 
@@ -545,7 +557,7 @@
                                         <div class="form-group">
                                             <label>Status
                                             </label>
-                                            <select class="form-control select2" style="width: 100%;" name="status">
+                                            <select class="form-control select2" style="width: 100%;" name="status" value="{{$merchant->status}}">
                                                 <option value="1">Active</option>
                                                 <option value="0">Inactive</option>
 
@@ -573,3 +585,11 @@
 </div>
 
 @include('footer')
+
+<script>
+    $('#Country').val('{{$merchant->Country}}');
+</script>
+
+<script>
+    $('#bank_account_id').val('{{$merchant->bank_account_id}}');
+</script>

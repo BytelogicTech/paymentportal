@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\merchantController;
+use App\Http\Controllers\customerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,12 +21,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('index', [CategoryController::class, 'index']);
-Route::get('create', [CategoryController::class, 'create']);
-Route::post('store', [CategoryController::class, 'store']);
-Route::get('edit/{id}', [CategoryController::class, 'edit']);
-Route::post('update', [CategoryController::class, 'update']);
-Route::get('delete/{id}', [CategoryController::class, 'destroy']);
+// Route::get('index', [CategoryController::class, 'index']);
+// Route::get('create', [CategoryController::class, 'create']);
+// Route::post('store', [CategoryController::class, 'store']);
+// Route::get('edit/{id}', [CategoryController::class, 'edit']);
+// Route::post('update', [CategoryController::class, 'update']);
+// Route::get('delete/{id}', [CategoryController::class, 'destroy']);
 
 
 Route::group(['prefix' => 'bank'], function(){
@@ -48,3 +49,12 @@ Route::group(['prefix' => 'merchant'], function(){
 });
 
 //  Route::resource('bank',BankController::class);
+
+Route::group(['prefix' => 'customer'], function(){
+    Route::get('/index', [customerController::class, 'index']);
+    Route::get('/create', [customerController::class, 'create']);
+    Route::post('/store', [customerController::class, 'store']);
+    Route::get('/edit/{id}', [customerController::class, 'edit']);
+    Route::post('/update', [customerController::class, 'update']);
+    Route::get('/delete/{id}', [customerController::class, 'destroy']);
+});
