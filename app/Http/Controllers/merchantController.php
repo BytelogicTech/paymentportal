@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\bank;
 use App\Models\bank_account;
 use App\Models\merchant;
 // use App\Models\merchant_account;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class merchantController extends Controller
 {
@@ -27,10 +29,13 @@ class merchantController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        // $bankaccounts = bank_account::groupBy('bank_account.banks_id')->get();
-
-        $bankaccounts = bank_account::join('banks','banks.id','=','bank_accounts.bank_id','left outer')->get();
+    {       
+        $bankaccounts =  DB::table('bank_accounts')
+        ->join('banks','banks.id','=','bank_accounts.bank_id')
+        ->select('bank_accounts.id as bank_accountsid','bank_accounts.bank_id','banks.bank_name','banks.beneficiary_name','bank_accounts.currency','bank_accounts.account_number','bank_accounts.nick_name')            
+        ->get()
+        ->groupBy('bank_id'); 
+        
         // dd($bankaccounts);
         return view('merchant/create',compact('bankaccounts'));
     }

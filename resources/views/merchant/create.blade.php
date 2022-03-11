@@ -52,12 +52,17 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Bank Accounts Assigned*</label>
+
+                                        
+                                                
                                             <select name="bank_account_id" class="form-control">
                                                 <option>Select Bank Account</option>
 
-                                                @foreach($bankaccounts as $bankaccount)
-                                                <optgroup label="{{$bankaccount->bank_name}}">
-                                                    <option value="{{$bankaccount->id}}">{{$bankaccount->beneficiary_name}} - {{$bankaccount->currency}} - ({{$bankaccount->account_number}}) </option>
+                                                @foreach($bankaccounts as  $bankaccount) 
+                                                <optgroup label="{{$bankaccount[0]->bank_name}}">
+                                                    @foreach($bankaccount as $item)
+                                                    <option value="{{$item->bank_accountsid}}">{{$item->beneficiary_name}} - {{$item->currency}} - ({{$item->account_number}}) </option>
+                                                    @endforeach
                                                 </optgroup>
                                                 @endforeach
                                             </select>

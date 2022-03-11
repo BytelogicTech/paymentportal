@@ -38,9 +38,9 @@ class BankController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $bank = new bank();
-        $bank->beneficiary_name = $request->beneficiary_name;
+        $bank->beneficiary_name = $request->baneficiary_name;
         $bank->beneficiary_address = $request->beneficiary_address;
         $bank->bank_nickname = $request->bank_nickname;
         $bank->bank_name = $request->bank_name;
