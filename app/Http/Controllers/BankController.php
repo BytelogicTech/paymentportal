@@ -55,8 +55,15 @@ class BankController extends Controller
         $bank->declaration_content = $request->declaration_content;
         $bank->instructions_title = $request->instructions_title;
         $bank->instructions_content = $request->instructions_content;
-        $bank->status = $request->status;
-        // $bank->status = 1;
+        if($request->status=='on')
+        {
+            $bank->status = 1;
+        }
+        else
+        {
+            $bank->status=0;
+        }
+        
         $file = $request->logo;
         // dd($file);
         if ($request->logo) {
@@ -75,12 +82,20 @@ class BankController extends Controller
 
         $bankid = $bank->id;
 
-        $bankaccount = new bank_account();
-        $bankaccount->bank_id = $bankid;
-        $bankaccount->currency = $request->currency;
-        $bankaccount->account_number = $request->account_number;
-        $bankaccount->nick_name = $request->nickname;
-        $bankaccount->save();
+        $addmorecount = count($request->currency);
+
+        for($i=0;$i<$addmorecount;$i++)
+        {
+            $bankaccount = new bank_account();
+            $bankaccount->bank_id = $bankid;
+            $bankaccount->currency = $request->currency[$i];
+            $bankaccount->account_number = $request->account_number[$i];
+            $bankaccount->nick_name = $request->nickname[$i];
+            $bankaccount->save();
+        }
+        
+
+        
 
         return redirect('bank/index')->with('success', 'bank Added Successfully');
     }
@@ -120,7 +135,7 @@ class BankController extends Controller
      */
     public function update(Request $request)
     {
-        // dd($request->all());
+        dd($request->all());
         $bank = bank::findorFail($request->id);
         $bank->beneficiary_name = $request->beneficiary_name;
         $bank->beneficiary_address = $request->beneficiary_address;

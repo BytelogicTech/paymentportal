@@ -20,6 +20,8 @@
 <!-- Bootstrap 4 -->
 <script src="{{asset('public/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- DataTables  & Plugins -->
+<script src="{{asset('public/plugins/bootstrap-switch/js/bootstrap-switch.min.js')}}"></script>
+<script src="{{asset('public/plugins/select2/js/select2.full.min.js')}}"></script>
 <script src="{{asset('public/plugins/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('public/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
 <script src="{{asset('public/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
@@ -32,6 +34,9 @@
 <script src="{{asset('public/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
 <script src="{{asset('public/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
 <script src="{{asset('public/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+
+
+
 <!-- AdminLTE App -->
 <script src="{{asset('public/dist/js/adminlte.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->

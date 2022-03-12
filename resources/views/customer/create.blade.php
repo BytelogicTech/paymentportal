@@ -660,8 +660,8 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Bank Country</label>
-                                            <select class="form-control select2" style="width: 100%;" name="Country" required>
+                                            <label>Country*</label>
+                                            <select class="select2 form-control" style="width: 100%;height:30px;" name="country" required>
                                                 <option value="" selected disabled>Please Select One</option>
                                                 <option value="Afganistan">Afghanistan</option>
                                                 <option value="Albania">Albania</option>
@@ -915,6 +915,8 @@
                                 </div>
 
 
+
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -1066,6 +1068,10 @@
                                     </div>
                                 </div>
 
+                                <div class="text-center">
+                                    <a href="javascript:void(0);" name="add" id="add_accounts" class="btn btn-success"><i class="fa fa-plus"></i> Additional Payout Account</a>
+
+                                </div>
 
                                 <h4>Documents
                                 </h4>
@@ -1077,6 +1083,7 @@
                                         <div class="form-group">
                                             <label>Document Type *</label>
                                             <select class="form-control select2" style="width: 100%;" name="enable_mail_for_customers">
+                                            <option value="" selected disabled>Please Select One</option>
                                                 <option value="photo_id">Photo ID</option>
                                                 <option value="bank_statement">Bank Statement</option>
                                                 <option value="utility_bill">utility Bill</option>
@@ -1088,18 +1095,45 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="logo">Parent Merchant *</label>
+                                            <label for="logo">Upload File *</label>
                                             <input type="file" placeholder="Choose File" class="form-control" name="upload_logo" />
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="description">Rolling Reserve Release Days</label>
-                                        <input type="number" placeholder="Enter Rolling Reserve Release Days" class="form-control" name="rolling_reserve_release_days"/>
+                                <div class="text-center">
+                                    <a href="javascript:void(0);" name="add" id="add_accounts" class="btn btn-success"><i class="fa fa-plus"></i> Add Document</a>
+
+                                </div>
+
+
+
+                                <h4>Parent Merchant *</h4>
+                                
+                                <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Parent Merchant *</label>
+                                            <select class="select2 form-control" name="parent_merchant" required>
+                                                <option value="" selected disabled>Please Select One</option>
+                                                <option value="testmerchant">Test Merchant</option>
+                                              
+                                            </select>
                                     </div>
                                 </div>
+
+                                <!-- Bootstrap Switch -->
+                                <center>
+                                    <p>Status</p>
+                                    <input type="checkbox" data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="status">
+
+                                </center>
+
+                                <!-- /.card -->
+                                <br />
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+
+
 
                         </form>
                     </div>
@@ -1115,3 +1149,12 @@
 </div>
 
 @include('footer')
+<script>
+    $(function() {
+        $('.select2').select2()
+    });
+</script>
+
+<script>
+    $('[data-toggle="switch"]').bootstrapSwitch();
+</script>

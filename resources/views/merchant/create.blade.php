@@ -53,12 +53,12 @@
                                         <div class="form-group">
                                             <label for="description">Bank Accounts Assigned*</label>
 
-                                        
-                                                
-                                            <select name="bank_account_id" class="form-control">
+
+
+                                            <select name="bank_account_id" class="select2 form-control">
                                                 <option>Select Bank Account</option>
 
-                                                @foreach($bankaccounts as  $bankaccount) 
+                                                @foreach($bankaccounts as $bankaccount)
                                                 <optgroup label="{{$bankaccount[0]->bank_name}}">
                                                     @foreach($bankaccount as $item)
                                                     <option value="{{$item->bank_accountsid}}">{{$item->beneficiary_name}} - {{$item->currency}} - ({{$item->account_number}}) </option>
@@ -101,7 +101,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Country*</label>
-                                            <select class="form-control select2" style="width: 100%;" name="Country" required>
+                                            <select class="select2 form-control" style="width: 100%;" name="Country" required>
                                                 <option value="" selected disabled>Please Select One</option>
                                                 <option value="Afganistan">Afghanistan</option>
                                                 <option value="Albania">Albania</option>
@@ -497,18 +497,15 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="logo">Upload Logo:</label>
-                                            <input type="file" placeholder="Choose File" class="form-control" name="upload_logo" />
+                                            <input type="file" placeholder="Choose File" class="form-control" name="upload_logo"/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Enable mail for Customers?
-                                            </label>
-                                            <!-- Default checked -->
-                                            <div class="custom-control custom-switch">
-                                                <input type="checkbox" name="enable_mail_for_customers" class="custom-control-input" id="customSwitch1" checked>
-                                                <label class="custom-control-label" for="customSwitch1"></label>
-                                            </div>
+                                            <center>
+                                                <p>Enable mail for Customers?</p>
+                                                <input type="checkbox" data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="enable_mail_for_customers">
+                                            </center>
 
                                         </div>
                                     </div>
@@ -520,26 +517,23 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Company Details on left
-                                            </label>
+                                           
                                             <!-- Default checked -->
-                                            <div class="custom-control custom-switch">
-                                                <input type="checkbox" name="company_details_on_left" class="custom-control-input" id="customSwitch2" checked>
-                                                <label class="custom-control-label" for="customSwitch2"></label>
-                                            </div>
+                                            <center>
+                                                <p>Company Details on left</p>
+                                                <input type="checkbox" data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="company_details_on_left">
+                                            </center>
 
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Invoice Details on right
-                                            </label>
-                                            <!-- Default checked -->
-                                            <div class="custom-control custom-switch">
-                                                <input type="checkbox" name="invoice_details_on_right" class="custom-control-input" id="customSwitch3" checked>
-                                                <label class="custom-control-label" for="customSwitch3"></label>
-                                            </div>
+                                        <center>
+                                                <p>Invoice Details on right</p>
+                                                <input type="checkbox" data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="invoice_details_on_right">
+                                            </center>
+
 
                                         </div>
                                     </div>
@@ -549,26 +543,21 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>B2B Access
-                                            </label>
-                                            <!-- Default checked -->
-                                            <div class="custom-control custom-switch">
-                                                <input type="checkbox" name="b2b_access" class="custom-control-input" id="customSwitch4" checked>
-                                                <label class="custom-control-label" for="customSwitch4"></label>
-                                            </div>
+                                        <center>
+                                                <p>B2B Access</p>
+                                                <input type="checkbox" data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="b2b_access">
+                                            </center>
+
 
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Status
-                                            </label>
-                                            <!-- Default checked -->
-                                            <div class="custom-control custom-switch">
-                                                <input type="checkbox" name="status" class="custom-control-input" id="customSwitch5" checked>
-                                                <label class="custom-control-label" for="customSwitch5">Toggle this switch element</label>
-                                            </div>
+                                        <center>
+                                                <p>Status</p>
+                                                <input type="checkbox" data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="status">
+                                            </center>
 
                                         </div>
                                     </div>
@@ -593,3 +582,13 @@
 </div>
 
 @include('footer')
+
+
+<script>
+    $(function() {
+        $('.select2').select2()
+    });
+</script>
+<script>
+    $('[data-toggle="switch"]').bootstrapSwitch();
+</script>

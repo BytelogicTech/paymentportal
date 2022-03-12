@@ -1,5 +1,6 @@
 @include('header')
 
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -59,13 +60,13 @@
 
 
 
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="description">Bank Nickname:</label>
+                                        <input type="text" placeholder="Enter Bank Nickname" class="form-control" name="bank_nickname" />
+                                    </div>
 
-                                <div class="form-group">
-                                    <label for="description">Bank Nickname:</label>
-                                    <input type="text" placeholder="Enter Bank Nickname" class="form-control" name="bank_nickname" />
                                 </div>
-
-
 
                                 <div class="row">
                                     <div class="col-md-6">
@@ -96,7 +97,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Country*</label>
-                                            <select class="form-control select2" style="width: 100%;" name="country" required>
+                                            <select class="select2 form-control" style="width: 100%;height:30px;" name="country" required>
                                                 <option value="" selected disabled>Please Select One</option>
                                                 <option value="Afganistan">Afghanistan</option>
                                                 <option value="Albania">Albania</option>
@@ -353,138 +354,144 @@
 
 
                                 <div id="bank_accounts">
-                                <div class="row" >
-                                    <div class="col-md-3">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Currency</label>
+                                                <select class="form-control" style="width: 100%;" name="currency[]" required>
+                                                    <option value="" selected disabled>Please Select One</option>
+                                                    <option value="USD">USD</option>
+                                                    <option value="EUR">EUR</option>
+                                                    <option value="GBP">GBP</option>
+                                                    <option value="DZD">DZD</option>
+                                                    <option value="AED">AED</option>
+                                                    <option value="ARP">ARP</option>
+                                                    <option value="AUD">AUD</option>
+                                                    <option value="ATS">ATS</option>
+                                                    <option value="BSD">BSD</option>
+                                                    <option value="BBD">BBD</option>
+                                                    <option value="BEF">BEF</option>
+                                                    <option value="BMD">BMD</option>
+                                                    <option value="BRR">BRR</option>
+                                                    <option value="BGN">BGN</option>
+                                                    <option value="CAD">CAD</option>
+                                                    <option value="CLP">CLP</option>
+                                                    <option value="CNY">CNY</option>
+                                                    <option value="CYP">CYP</option>
+                                                    <option value="CSK">CSK</option>
+                                                    <option value="DKK">DKK</option>
+                                                    <option value="NLG">NLG</option>
+                                                    <option value="XCD">XCD</option>
+                                                    <option value="EGP">EGP</option>
+                                                    <option value="FJD">FJD</option>
+                                                    <option value="FIM">FIM</option>
+                                                    <option value="FRF">FRF</option>
+                                                    <option value="DEM">DEM</option>
+                                                    <option value="XAU">XAU</option>
+                                                    <option value="GRD">GRD</option>
+                                                    <option value="HKD">HKD</option>
+                                                    <option value="HUF">HUF</option>
+                                                    <option value="ISK">ISK</option>
+                                                    <option value="INR">INR</option>
+                                                    <option value="IDR">IDR</option>
+                                                    <option value="IEP">IEP</option>
+                                                    <option value="ILS">ILS</option>
+                                                    <option value="ITL">ITL</option>
+                                                    <option value="JMD">JMD</option>
+                                                    <option value="JPY">JPY</option>
+                                                    <option value="JOD">JOD</option>
+                                                    <option value="KRW">KRW</option>
+                                                    <option value="LBP">LBP</option>
+                                                    <option value="LUF">LUF</option>
+                                                    <option value="MYR">MYR</option>
+                                                    <option value="MXP">MXP</option>
+                                                    <option value="NLG">NLG</option>
+                                                    <option value="NZD">NZD</option>
+                                                    <option value="NOK">NOK</option>
+                                                    <option value="PKR">PKR</option>
+                                                    <option value="XPD">XPD</option>
+                                                    <option value="PHP">PHP</option>
+                                                    <option value="XPT">XPT</option>
+                                                    <option value="PLZ">PLZ</option>
+                                                    <option value="PTE">PTE</option>
+                                                    <option value="ROL">ROL</option>
+                                                    <option value="RUR">RUR</option>
+                                                    <option value="SAR">SAR</option>
+                                                    <option value="XAG">XAG</option>
+                                                    <option value="SGD">SGD</option>
+                                                    <option value="SKK">SKK</option>
+                                                    <option value="ZAR">ZAR</option>
+                                                    <option value="KRW">KRW</option>
+                                                    <option value="ESP">ESP</option>
+                                                    <option value="XDR">XDR</option>
+                                                    <option value="SDD">SDD</option>
+                                                    <option value="SEK">SEK</option>
+                                                    <option value="CHF">CHF</option>
+                                                    <option value="TWD">TWD</option>
+                                                    <option value="THB">THB</option>
+                                                    <option value="TTD">TTD</option>
+                                                    <option value="TRL">TRL</option>
+                                                    <option value="VEB">VEB</option>
+                                                    <option value="ZMK">ZMK</option>
+                                                    <option value="EUR">EUR</option>
+                                                    <option value="XCD">XCD</option>
+                                                    <option value="XDR">XDR</option>
+                                                    <option value="XAG">XAG</option>
+                                                    <option value="XAU">XAU</option>
+                                                    <option value="XPD">XPD</option>
+                                                    <option value="XPT">XPT</option>
+                                                    <option value="BTC">BTC</option>
+                                                    <option value="BTC/EUR">BTC/EUR</option>
+                                                    <option value="BTC/USD">BTC/USD</option>
+                                                    <option value="USDT">USDT</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="account_number">Account Number/IBAN:</label>
+                                                <input type="text" placeholder="Enter Account Number" required class="form-control" name="account_number[]" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="nickname">Nickname:</label>
+                                                <input type="text" placeholder="Enter Account Nickname" required class="form-control" name="nickname[]" />
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+                                <div class="text-center">
+                                    <a href="javascript:void(0);" name="add" id="add_accounts" class="btn btn-success"><i class="fa fa-plus"></i> Add More</a>
+
+                                </div>
+
+
+
+
+
+
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="swift_code">Swift Code*</label>
+                                        <input type="text" placeholder="Enter Swift Code" class="form-control" name="swift_code" required />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Currency</label>
-                                            <select class="form-control select2" style="width: 100%;" name="currency[]">
-                                                <option value="" selected disabled>Please Select One</option>
-                                                <option value="USD">USD</option>
-                                                <option value="EUR">EUR</option>
-                                                <option value="GBP">GBP</option>
-                                                <option value="DZD">DZD</option>
-                                                <option value="AED">AED</option>
-                                                <option value="ARP">ARP</option>
-                                                <option value="AUD">AUD</option>
-                                                <option value="ATS">ATS</option>
-                                                <option value="BSD">BSD</option>
-                                                <option value="BBD">BBD</option>
-                                                <option value="BEF">BEF</option>
-                                                <option value="BMD">BMD</option>
-                                                <option value="BRR">BRR</option>
-                                                <option value="BGN">BGN</option>
-                                                <option value="CAD">CAD</option>
-                                                <option value="CLP">CLP</option>
-                                                <option value="CNY">CNY</option>
-                                                <option value="CYP">CYP</option>
-                                                <option value="CSK">CSK</option>
-                                                <option value="DKK">DKK</option>
-                                                <option value="NLG">NLG</option>
-                                                <option value="XCD">XCD</option>
-                                                <option value="EGP">EGP</option>
-                                                <option value="FJD">FJD</option>
-                                                <option value="FIM">FIM</option>
-                                                <option value="FRF">FRF</option>
-                                                <option value="DEM">DEM</option>
-                                                <option value="XAU">XAU</option>
-                                                <option value="GRD">GRD</option>
-                                                <option value="HKD">HKD</option>
-                                                <option value="HUF">HUF</option>
-                                                <option value="ISK">ISK</option>
-                                                <option value="INR">INR</option>
-                                                <option value="IDR">IDR</option>
-                                                <option value="IEP">IEP</option>
-                                                <option value="ILS">ILS</option>
-                                                <option value="ITL">ITL</option>
-                                                <option value="JMD">JMD</option>
-                                                <option value="JPY">JPY</option>
-                                                <option value="JOD">JOD</option>
-                                                <option value="KRW">KRW</option>
-                                                <option value="LBP">LBP</option>
-                                                <option value="LUF">LUF</option>
-                                                <option value="MYR">MYR</option>
-                                                <option value="MXP">MXP</option>
-                                                <option value="NLG">NLG</option>
-                                                <option value="NZD">NZD</option>
-                                                <option value="NOK">NOK</option>
-                                                <option value="PKR">PKR</option>
-                                                <option value="XPD">XPD</option>
-                                                <option value="PHP">PHP</option>
-                                                <option value="XPT">XPT</option>
-                                                <option value="PLZ">PLZ</option>
-                                                <option value="PTE">PTE</option>
-                                                <option value="ROL">ROL</option>
-                                                <option value="RUR">RUR</option>
-                                                <option value="SAR">SAR</option>
-                                                <option value="XAG">XAG</option>
-                                                <option value="SGD">SGD</option>
-                                                <option value="SKK">SKK</option>
-                                                <option value="ZAR">ZAR</option>
-                                                <option value="KRW">KRW</option>
-                                                <option value="ESP">ESP</option>
-                                                <option value="XDR">XDR</option>
-                                                <option value="SDD">SDD</option>
-                                                <option value="SEK">SEK</option>
-                                                <option value="CHF">CHF</option>
-                                                <option value="TWD">TWD</option>
-                                                <option value="THB">THB</option>
-                                                <option value="TTD">TTD</option>
-                                                <option value="TRL">TRL</option>
-                                                <option value="VEB">VEB</option>
-                                                <option value="ZMK">ZMK</option>
-                                                <option value="EUR">EUR</option>
-                                                <option value="XCD">XCD</option>
-                                                <option value="XDR">XDR</option>
-                                                <option value="XAG">XAG</option>
-                                                <option value="XAU">XAU</option>
-                                                <option value="XPD">XPD</option>
-                                                <option value="XPT">XPT</option>
-                                                <option value="BTC">BTC</option>
-                                                <option value="BTC/EUR">BTC/EUR</option>
-                                                <option value="BTC/USD">BTC/USD</option>
-                                                <option value="USDT">USDT</option>
-                                            </select>
+                                            <label for="description">Remarks</label>
+                                            <textarea placeholder="Invoice Remarks" class="form-control" name="remarks"></textarea>
+
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="account_number">Account Number/IBAN:</label>
-                                            <input type="text" placeholder="Enter Account Number" class="form-control" name="account_number[]" />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="nickname">Nickname:</label>
-                                            <input type="text" placeholder="Enter Account Nickname" class="form-control" name="nickname[]" />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-1">
-                                    <label> Add </label>
-                                    <a href="javascript:void(0);" name="add" id="add_accounts" class="btn btn-success"><i class="fa fa-plus"></i></a>
-                                    </div>
-
                                 </div>
-
-                                </div>
-
-
-
-
-
-
-
-
-                                <div class="form-group">
-                                    <label for="swift_code">Swift Code*</label>
-                                    <input type="text" placeholder="Enter Swift Code" class="form-control" name="swift_code" required />
-                                </div>
-
-
-                                <div class="form-group">
-                                    <label for="description">Remarks:</label>
-                                    <input type="text" class="form-control" name="remarks" />
-                                </div>
-
 
                                 <div class="row">
                                     <div class="col-md-6">
@@ -509,10 +516,12 @@
                                             <input type="text" placeholder="Enter Prefix for invoice number" class="form-control" name="prefix" required />
                                         </div>
                                     </div>
+
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="declaration_content">Declaration Contenet:</label>
-                                            <input type="text" placeholder="Add Declaration Content" class="form-control" name="declaration_content" />
+                                            <label for="description">Declaration Content</label>
+                                            <textarea placeholder="Invoice Remarks" class="form-control" name="declaration_content"></textarea>
+
                                         </div>
                                     </div>
                                 </div>
@@ -528,33 +537,26 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="instructions_content">Instructions Content:</label>
-                                            <input type="text" placeholder="Add Instructions Content" class="form-control" name="instructions_content" />
+                                            <label for="description">Instructions Content</label>
+                                            <textarea placeholder="Invoice Remarks" class="form-control" name="instructions_content"></textarea>
+
                                         </div>
                                     </div>
                                 </div>
-
-
-
-
-
-
-
 
                                 <div class="form-group">
                                     <label for="logo">Upload Logo:</label>
                                     <input type="file" placeholder="Choose File" class="form-control" name="logo" />
                                 </div>
 
-                                <div class="form-group">
-                                    <label>Status</label>
-                                    <select class="form-control select2" style="width: 100%;" name="status">
-                                        <option value="1">Active</option>
-                                        <option value="0">Inactive</option>
+                                <!-- Bootstrap Switch -->
+                                <center>
+                                    <p>Status</p>
+                                    <input type="checkbox" data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="status">
 
-                                    </select>
-                                </div>
+                                </center>
 
+                                <!-- /.card -->
 
 
                                 <br />
@@ -575,49 +577,140 @@
 
 @include('footer')
 
+<script>
+    $(function() {
+        $('.select2').select2()
+    });
+</script>
+
+
 
 <script type="text/javascript">
     // wordofday Edit
-    $(document).ready(function() {    
+    $(document).ready(function() {
         var i = 1;
         $('#add_accounts').click(function() {
             i++;
             $('#bank_accounts').append('  <div class="row" id="row' + i + '">' +
-            '<div class="col-md-3">'+
-                                        '<div class="form-group">'+
-                                            '<label>Currency</label>'+
-                                            '<select class="form-control select2" style="width: 100%;" name="currency[]">'+
-                                                '<option value="" selected disabled>Please Select One</option>'+
-                                                '<option value="USD">USD</option>'+
-                                                '<option value="EUR">EUR</option>'+  
-                                                '<option value="GBP">GBP</option>'+
-                                            '</select>'+
-                                        '</div>'+
-                                    '</div>'+
-                                    '<div class="col-md-4">'+
-                                        '<div class="form-group">'+
-                                            '<label for="account_number">Account Number/IBAN:</label>'+
-                                            '<input type="text" placeholder="Enter Account Number" class="form-control" name="account_number[]" />'+
-                                        '</div>'+
-                                    '</div>'+
-                                    '<div class="col-md-4">'+
-                                        '<div class="form-group">'+
-                                            '<label for="nickname">Nickname:</label>'+
-                                            '<input type="text" placeholder="Enter Account Nickname" class="form-control" name="nickname[]" />'+
-                                        '</div>'+
-                                    '</div>'+
+                '<div class="col-md-3">' +
+                '<div class="form-group">' +
+                '<label>Currency</label>' +
+                '<select class="form-control select2" style="width: 100%;" name="currency[]" required>' +
+                '<option value="" selected disabled>Please Select One</option>' +
+                '<option value="USD">USD</option>' +
+                '<option value="EUR">EUR</option>' +
+                '<option value="GBP">GBP</option>' +
+                '<option value="DZD">DZD</option>' +
+                '<option value = "AED" >AED</option>' +
+                '<option value = "ARP" >ARP</option>' +
+                '<option value = "AUD" >AUD</option>' +
+                '<option value = "ATS" > ATS </option>' +
+                '<option value = "BSD" > BSD </option>' + 
+                '<option value = "BBD" > BBD </option>' + 
+                '<option value = "BEF" > BEF </option>' + 
+                '<option value = "BMD" > BMD </option>' +
+                '<option value = "BRR" > BRR </option>' +
+                '<option value = "BGN" > BGN </option>'+
+                '<option value = "CAD" > CAD </option>'+
+                '<option value = "CLP" > CLP </option> '+
+                '<option value = "CNY" > CNY </option> '+
+                '<option value = "CYP" > CYP </option> '+
+                '<option value = "CSK" > CSK </option> '+
+                '<option value = "DKK" > DKK </option> '+
+                '<option value = "NLG" > NLG </option> '+
+                '<option value = "XCD" > XCD </option> '+
+                '<option value = "EGP" > EGP </option> '+
+                '<option value = "FJD" > FJD </option> '+
+                '<option value = "FIM" > FIM </option> '+
+                '<option value = "FRF" > FRF </option> '+
+                '<option value = "DEM" > DEM </option> '+
+                '<option value = "XAU" > XAU </option> '+
+                '<option value = "GRD" > GRD </option> '+
+                '<option value = "HKD" > HKD </option> '+
+                '<option value = "HUF" > HUF </option> '+
+                '<option value = "ISK" > ISK </option> '+
+                '<option value = "INR" > INR </option> '+
+                '<option value = "IDR" > IDR </option> '+
+                '<option value = "IEP" > IEP </option> '+
+                '<option value = "ILS" > ILS </option> '+
+                '<option value = "ITL" > ITL </option> '+
+                '<option value = "JMD" > JMD < /option> '+
+                '<option value = "JPY" > JPY < /option> '+
+                '<option value = "JOD" > JOD < /option> '+
+                '<option value = "KRW" > KRW < /option> '+
+                '<option value = "LBP" > LBP < /option> '+
+                '<option value = "LUF" > LUF < /option> '+
+                '<option value = "MYR" > MYR < /option> '+
+                '<option value = "MXP" > MXP < /option> '+
+                '<option value = "NLG" > NLG < /option> '+
+                '<option value = "NZD" > NZD < /option> '+
+                '<option value = "NOK" > NOK < /option> '+
+                '<option value = "PKR" > PKR < /option>'+
+                '<option value = "XPD" > XPD < /option> '+
+                '<option value = "PHP" > PHP < /option> '+
+                '<option value = "XPT" > XPT < /option> '+
+                '<option value = "PLZ" > PLZ < /option> '+
+                '<option value = "PTE" > PTE < /option> '+
+                '<option value = "ROL" > ROL < /option> '+
+                '<option value = "RUR" > RUR < /option> '+
+                '<option value = "SAR" > SAR < /option> '+
+                '<option value = "XAG" > XAG < /option> '+
+                '<option value = "SGD" > SGD < /option> '+
+                '<option value = "SKK" > SKK < /option> '+
+                '<option value = "ZAR" > ZAR < /option> '+
+                '<option value = "KRW" > KRW < /option>'+
+                '<option value = "ESP" > ESP < /option> '+
+                '<option value = "XDR" > XDR < /option> '+
+                '<option value = "SDD" > SDD < /option> '+
+                '<option value = "SEK" > SEK < /option> '+
+                '<option value = "CHF" > CHF < /option> '+
+                '<option value = "TWD" > TWD < /option> '+
+                '<option value = "THB" > THB < /option> '+
+                '<option value = "TTD" > TTD < /option> '+
+                '<option value = "TRL" > TRL < /option> '+
+                '<option value = "VEB" > VEB < /option> '+
+                '<option value = "ZMK" > ZMK < /option> '+
+                '<option value = "EUR" > EUR < /option> '+
+                '<option value = "XCD" > XCD < /option> '+
+                '<option value = "XDR" > XDR < /option> '+
+                '<option value = "XAG" > XAG < /option>'+
+                '<option value = "XAU" > XAU < /option> '+
+                '<option value = "XPD" > XPD < /option> '+
+                '<option value = "XPT" > XPT < /option> '+
+                '<option value = "BTC" > BTC < /option> '+
+                '<option value = "BTC/EUR" > BTC / EUR < /option> '+
+                '<option value = "BTC/USD" > BTC / USD < /option> '+
+                '<option value = "USDT" > USDT < /option>'+
+                '</select>' +
+                '</div>' +
+                '</div>' +
+                '<div class="col-md-4">' +
+                '<div class="form-group">' +
+                '<label for="account_number">Account Number/IBAN:</label>' +
+                '<input type="text" placeholder="Enter Account Number" class="form-control" name="account_number[]" required />' +
+                '</div>' +
+                '</div>' +
+                '<div class="col-md-4">' +
+                '<div class="form-group">' +
+                '<label for="nickname">Nickname:</label>' +
+                '<input type="text" placeholder="Enter Account Nickname" class="form-control" name="nickname[]" required/>' +
+                '</div>' +
+                '</div>' +
                 '<div class="col-md-1">' +
-                '<label> Add </label>'+
-                '<a href="javascript:void(0);" name="remove" id="' + i + '" class="btn btn-danger btn-remove"><i class="fa fa-minus"></i></a>' +
+                '<label> Remove </label>' +
+                '<a href="javascript:void(0);" name="remove" id="' + i + '" class="btn btn-danger btn-remove form-control remove_btn"><i class="fa fa-minus"></i></a>' +
                 '</div>' +
                 '</div> ');
 
             $('.btn-remove').click(function() {
                 var btnid = $(this).attr('id');
                 $('#row' + btnid).remove();
-            });            
-          
+            });
+
         });
-        
+
     });
+</script>
+<script>
+    $('[data-toggle="switch"]').bootstrapSwitch();
 </script>
