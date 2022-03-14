@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class customer extends Model
 {
     protected $table='customers';
-    protected $fillable=['first_name','last_name','email','phone','address','country','date_of_birth','id_number'];
+    protected $fillable=['merchant_fk_id','first_name','last_name','email','phone','address','country','date_of_birth','id_number'];
 }

@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('merchant_fk_id');
             $table->string('first_name');
             $table->string('last_name')->nullable();
             $table->string('email');
@@ -24,6 +25,8 @@ return new class extends Migration
             $table->string('date_of_birth')->nullable();
             $table->double('id_number')->nullable();
             $table->timestamps();
+            $table->foreign('merchant_fk_id')->references('id')->on('merchants');
+
         });
     }
 

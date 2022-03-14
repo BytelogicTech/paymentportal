@@ -135,7 +135,7 @@ class BankController extends Controller
      */
     public function update(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
         $bank = bank::findorFail($request->id);
         $bank->beneficiary_name = $request->beneficiary_name;
         $bank->beneficiary_address = $request->beneficiary_address;
