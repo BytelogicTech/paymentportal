@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\bank;
 use App\Models\bank_account;
 use App\Models\customer;
+use App\Models\merchant;
 use App\Models\bank_account_payouts;
 use App\Models\customer_documents;
 // use App\Models\customer_account;
@@ -32,9 +33,10 @@ class customerController extends Controller
     public function create()
     {
         // $bankaccounts = bank_account::groupBy('bank_account.banks_id')->get();
-
+        $merchants = merchant::all();
+        
        
-        return view('customer/create');
+        return view('customer/create', compact('merchants'));
     }
 
     /**
@@ -55,11 +57,15 @@ class customerController extends Controller
         $customer->country = $request->country;
         $customer->date_of_birth = $request->date_of_birth;
         $customer->id_number = $request->id_number;
-        
+
+        $customer->merchant_fk_id=$request->merchant_fk_id;
+
+
         $customer->save();  
         $customerid = $customer->id;
 
         $customer->parent_merchant = $request->parent_merchant;
+
         if($request->status=='on')
         {
             $customer->status = 1;
@@ -93,10 +99,22 @@ class customerController extends Controller
             $bankaccountpayouts->intermediary_bank_address = $request->intermediary_bank_address[$i];
             $bankaccountpayouts->intermediary_bank_swift = $request->intermediary_bank_swift[$i];
             $bankaccountpayouts->intermediary_bank_details_remarks = $request->intermediary_bank_details_remarks[$i];
-            $bankaccountpayouts->document_type = $request->document_type[$i];
+            
+            $bankaccountpayouts->save();
+        }
+
+
+
+        $addmorecount = count($request->currency);
+
+        for($i=0;$i<$addmorecount;$i++)
+        {
+            $customerdocuments = new customer_documents();
+            $customerdocuments->customer_fk_id = $customerid;
+
+            $customerdocuments->document_type = $request->document_type[$i];
 
             $file = $request->upload_file[$i];
-        //dd($file);
         if ($request->upload_file) {
             $fileext = $file->getClientOriginalExtension();
             if ($fileext == "jpg" || $fileext == "jpeg" || $fileext == "png") {
@@ -108,9 +126,13 @@ class customerController extends Controller
                 return back()->with('error', 'Please Upload File');
             }
         }
+
             
-            $bankaccountpayouts->save();
+            $customerdocuments->save();
         }
+        
+
+
 
         return redirect('customer/index')->with('success', 'customer Added Successfully');
     }
@@ -133,14 +155,14 @@ class customerController extends Controller
      */
     public function edit($id)
     {
-        $bankaccounts = bank_account::join('banks','banks.id','=','bank_accounts.bank_id','left outer')->get();
-
         $customer = customer::findorFail($id);
-        // ->join('customer_accounts', 'customer_accounts.customer_id','=','customers.id')
+        $merchants = merchant::all();
+        // ->join('bank_accounts', 'bank_accounts.bank_id','=','banks.id')
         // ->get();
-        // dd($customer);
-        
-        return view('customer/edit', compact('customer'));
+        // dd($bank);
+        $bankaccountpayouts = bank_account_payouts::where('customer_fk_id',$id)->get();
+        $customerdocuments = customer_documents::where('customer_fk_id',$id)->get();
+        return view('customer/edit', compact('customer','bankaccountpayouts','customerdocuments','merchants'));
     }
     /**
      * Update the specified resource in storage.
@@ -153,34 +175,18 @@ class customerController extends Controller
     {
         // dd($request->all());
         $customer = customer::findorFail($request->id);
-        $customer->customer_name = $request->customer_name;
-        $customer->bank_account_id = $request->bank_account_id;
         $customer->first_name = $request->first_name;
         $customer->last_name = $request->last_name;
         $customer->email = $request->email;
-        $customer->Country = $request->Country;
-        $customer->secondary_email = $request->secondary_email;
-        $customer->invoice_email = $request->invoice_email;
-        $customer->payout_notification_email = $request->payout_notification_email;
-        $customer->settlement_notification_email = $request->settlement_notification_email;
-        $customer->payout_notification_email_admin = $request->payout_notification_email_admin;
-        $customer->settlement_notification_email_admin = $request->settlement_notification_email_admin;
-        $customer->incoming_percentage = $request->incoming_percentage;
-        $customer->payout_percentage = $request->payout_percentage;
-        $customer->alternate_payout_commission = $request->alternate_payout_commission;
-        $customer->b2b_percentage = $request->b2b_percentage;
-        $customer->rolling_reserve_percentage = $request->rolling_reserve_percentage;
-        $customer->rolling_reserve_release_days = $request->rolling_reserve_release_days;
-        $customer->website = $request->website;
-        $customer->customer_support_number = $request->customer_support_number;
-        $customer->invoice_remarks = $request->invoice_remarks;
-        $customer->enable_mail_for_customers = $request->enable_mail_for_customers;
-        $customer->company_details_on_left = $request->company_details_on_left;
-        $customer->invoice_details_on_right = $request->invoice_details_on_right;
-        $customer->b2b_access = $request->b2b_access;
-        $customer->status = $request->status;
+        $customer->phone = $request->phone;
+        $customer->address = $request->address;
+        $customer->country = $request->country;
+        $customer->date_of_birth = $request->date_of_birth;
+        $customer->id_number = $request->id_number;
 
-        $customer->save();
+        $customer->merchant_fk_id=$request->merchant_fk_id;
+
+        $customer->update();
 
 
 

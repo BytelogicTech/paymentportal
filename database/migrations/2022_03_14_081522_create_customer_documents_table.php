@@ -18,7 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('customer_fk_id');
             $table->string('document_type');
             $table->string('upload_file');
-            $table->string('parent_merchant');
+            $table->foreign('customer_fk_id')->references('id')->on('customers');
+
             $table->timestamps();
         });
     }

@@ -1113,10 +1113,11 @@
                                 <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Parent Merchant *</label>
-                                            <select class="select2 form-control" name="parent_merchant" required>
+                                            <select class="select2 form-control" name="merchant_fk_id" required>
                                                 <option value="" selected disabled>Please Select One</option>
-                                                <option value="testmerchant">Test Merchant</option>
-                                              
+                                                @foreach($merchants as $merchant)
+                                                <option value="{{$merchant->id}}">{{$merchant->merchant_name}}</option>
+                                              @endforeach
                                             </select>
                                     </div>
                                 </div>
