@@ -45,7 +45,7 @@ class customerController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
         $customer = new customer();
         $customer->first_name = $request->first_name;
         $customer->last_name = $request->last_name;
@@ -55,39 +55,11 @@ class customerController extends Controller
         $customer->country = $request->country;
         $customer->date_of_birth = $request->date_of_birth;
         $customer->id_number = $request->id_number;
-        $customer->beneficiary_name = $request->beneficiary_name;
-        $customer->beneficiary_nickname = $request->beneficiary_nickname;
-        $customer->beneficiary_address = $request->beneficiary_address;
-        $customer->beneficiary_country = $request->beneficiary_country;
-        $customer->bank_name = $request->bank_name;
-        $customer->bank_branch = $request->bank_branch;
-        $customer->bank_address = $request->bank_address;
-        $customer->bank_country = $request->bank_country;
-        $customer->account_number = $request->account_number;
-        $customer->currency = $request->currency;
-        $customer->remarks = $request->remarks;
-        $customer->intermediary_bank_name = $request->intermediary_bank_name;
-        $customer->intermediary_bank_address = $request->intermediary_bank_address;
-        $customer->intermediary_bank_swift = $request->intermediary_bank_swift;
-        $customer->intermediary_bank_details_remarks = $request->intermediary_bank_details_remarks;
-        $customer->document_type = $request->document_type;
+        
+        $customer->save();  
+        $customerid = $customer->id;
+
         $customer->parent_merchant = $request->parent_merchant;
-
-        $file = $request->upload_file;
-        //dd($file);
-        if ($request->upload_file) {
-            $fileext = $file->getClientOriginalExtension();
-            if ($fileext == "jpg" || $fileext == "jpeg" || $fileext == "png") {
-                $filename = time() . "." . $fileext;
-
-                $file->move('images/', $filename);
-                $customer->upload_file = $filename;
-            } else {
-                return back()->with('error', 'Please Upload File');
-            }
-        }
-
-
         if($request->status=='on')
         {
             $customer->status = 1;
@@ -98,14 +70,12 @@ class customerController extends Controller
         }
         
        
-
-        $customer->save();  
-        $customerid = $customer->id;
+        
         $addmorecount = count($request->currency);
         
         for($i=0;$i<$addmorecount;$i++)
         {
-            $bankaccountpayouts = new bank_account();
+            $bankaccountpayouts = new bank_account_payouts();
             $bankaccountpayouts->customer_fk_id = $customerid;
             $bankaccountpayouts->beneficiary_name = $request->beneficiary_name[$i];
             $bankaccountpayouts->beneficiary_nickname = $request->beneficiary_nickname[$i];
@@ -124,10 +94,21 @@ class customerController extends Controller
             $bankaccountpayouts->intermediary_bank_swift = $request->intermediary_bank_swift[$i];
             $bankaccountpayouts->intermediary_bank_details_remarks = $request->intermediary_bank_details_remarks[$i];
             $bankaccountpayouts->document_type = $request->document_type[$i];
-            $bankaccountpayouts->upload_file = $request->upload_file[$i];
-            
-            
 
+            $file = $request->upload_file[$i];
+        //dd($file);
+        if ($request->upload_file) {
+            $fileext = $file->getClientOriginalExtension();
+            if ($fileext == "jpg" || $fileext == "jpeg" || $fileext == "png") {
+                $filename = time() . "." . $fileext;
+
+                $file->move('images/', $filename);
+                $customer->upload_file = $filename;
+            } else {
+                return back()->with('error', 'Please Upload File');
+            }
+        }
+            
             $bankaccountpayouts->save();
         }
 
