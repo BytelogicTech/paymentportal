@@ -47,7 +47,7 @@ class customerController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
+        //dd($request->status);
         $customer = new customer();
         $customer->first_name = $request->first_name;
         $customer->last_name = $request->last_name;
@@ -74,6 +74,7 @@ class customerController extends Controller
         {
             $customer->status=0;
         }
+        
         
        
         
@@ -183,8 +184,10 @@ class customerController extends Controller
         $customer->country = $request->country;
         $customer->date_of_birth = $request->date_of_birth;
         $customer->id_number = $request->id_number;
-
         $customer->merchant_fk_id=$request->merchant_fk_id;
+        $customer->parent_merchant = $request->parent_merchant;
+        $customer->status = $request->status;
+
 
         $customer->update();
 

@@ -1,10 +1,5 @@
 @include('header')
 
-
-
-
-
-
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -33,7 +28,7 @@
 
             <div class="card">
               <div class="card-header">
-                <a href="{{url('customer/create')}}" class="btn btn-success btn-sm"><i class="fa fa-plus-square"></i> Add new bank </a>
+                <a href="{{url('customer/create')}}" class="btn btn-success btn-sm"><i class="fa fa-plus-square"></i> Add New Customers </a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">

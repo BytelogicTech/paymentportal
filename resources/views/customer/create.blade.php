@@ -1125,7 +1125,7 @@
                                 <!-- Bootstrap Switch -->
                                 <center>
                                     <p>Status</p>
-                                    <input type="checkbox" data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="status">
+                                    <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="status">
 
                                 </center>
 
