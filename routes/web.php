@@ -4,6 +4,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\merchantController;
 use App\Http\Controllers\customerController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,3 +60,21 @@ Route::group(['prefix' => 'customer'], function(){
     Route::post('/update', [customerController::class, 'update']);
     Route::get('/delete/{id}', [customerController::class, 'destroy']);
 });
+
+
+Route::group(['prefix' => 'transaction'], function(){
+    Route::get('/index', [TransactionController::class, 'index'])->name('transaction.index');
+    Route::get('/create', [TransactionController::class, 'create']);
+    Route::post('/store', [TransactionController::class, 'store']);
+    Route::get('/edit/{id}', [TransactionController::class, 'edit']);
+    Route::post('/update', [TransactionController::class, 'update']);
+    Route::get('/delete/{id}', [TransactionController::class, 'destroy']);
+});
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+
+
