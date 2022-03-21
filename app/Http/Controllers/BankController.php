@@ -91,6 +91,7 @@ class BankController extends Controller
             $bankaccount->currency = $request->currency[$i];
             $bankaccount->account_number = $request->account_number[$i];
             $bankaccount->nick_name = $request->nickname[$i];
+            $bankaccount->bank_charges = $request->bank_charges[$i];
             $bankaccount->save();
         }
         
@@ -180,6 +181,20 @@ class BankController extends Controller
         // $bankaccount->save();
 
         return redirect('bank/index')->with('success', 'bank Added Successfully');
+    }
+
+    public function bankaccountupdate(Request $request)
+    {
+        //dd("hello");
+        $bankaccount = bank_account::findorFail($request->bankaccountid);
+        $bankaccount->currency=$request->currency;
+        $bankaccount->account_number=$request->account_number;
+        $bankaccount->nick_name=$request->nick_name;
+        $bankaccount->bank_charges=$request->bank_charges;
+
+        $bankaccount->save();
+
+        return back();
     }
 
     /**
