@@ -13,21 +13,14 @@
 
             @csrf
 
-            <input type="text" name="bankaccountid" id="id_edit" />
+            <input type="hidden" name="bankaccountid" id="id_edit" />
             <div class="modal-body">
               
             <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="description">Currency*</label>
-                                            <select id="currency_edit" class="form-control" style="width: 100%;" name="currency" required>
-                                                    <option value="" disabled>Please Select One</option>
-
-                                                    @foreach(config('constants.currency_list') as $key=> $currency)
-                                               <option value="{{$key}}">{{$key}}</option>
-                                               @endforeach
-                                                   
-                                                </select>
+                                            <input type="text" readonly name="currency" id="currency_edit" class="form-control" />                                           
                                         </div>
                                     </div>
 
@@ -35,7 +28,7 @@
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="account_number">Account Number/IBAN:</label>
-                                                <input id="account_number_edit" type="text" placeholder="Enter Account Number" class="form-control" name="account_number"  />
+                                                <input id="account_number_edit" type="text" placeholder="Enter Account Number" class="form-control" name="account_number" readonly />
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -175,7 +168,7 @@
                                             <select class="form-control select2" style="width: 100%;" name="country" required value="{{$bank->country}}" id="country">
                                                 <option value="" selected disabled>Please Select One</option>
                                                @foreach(config('constants.countryar') as $country)
-                                               <option>{{$country}}</option>
+                                               <option value="{{$country}}" @if($country==$bank->country) selected @endif>{{$country}}</option>
                                                @endforeach
                                             </select>
                                         </div>
@@ -204,23 +197,22 @@
                                     <a href="#"  data-toggle="modal" data-target="#modal-default" class="btn btn-warning btn-sm" data-bankaccountid="{{$bankaccount->id}}" data-currency="{{$bankaccount->currency}}" data-account_number="{{$bankaccount->account_number}}" data-nickname="{{$bankaccount->nick_name}}" data-bank_charges="{{$bankaccount->bank_charges}}" >
                                         <i class="far fa-edit" aria-hidden="true"></i>
                                     </a>
-            <a href="{{url('bankaccount/delete/'.$bankaccount->id)}}" onclick="return confirm('Are you sure, you want to delete it?')" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
+            <a href="{{url('bankaccountdestroy/'.$bankaccount->id)}}" onclick="return confirm('Are you sure, you want to delete it?')" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                     </td>                                
                                 </tr>
                                 @endforeach
                                 </tbody>
                                 </table>
 
-                                @foreach($bankaccounts as $bankaccount)
                                 <div id="bank_accounts" style="margin-top: 20px;">
                                     <div class="row">
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <label>Currency</label>
-                                                <select class="form-control select2" style="width: 100%;" name="currency">
+                                                <select class="form-control" style="width: 100%;" name="currency[]">
                                                     <option value="" selected disabled>Please Select One</option>
                                                     @foreach(config('constants.currency_list') as $key=> $currency)
-                                               <option @if($bankaccount->currency == $key) selected @endif>{{$key}}</option>
+                                               <option value="{{$key}}">{{$key}}</option>
                                                @endforeach
                                                    
                                                 </select>
@@ -229,27 +221,27 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="account_number">Account Number/IBAN:</label>
-                                                <input type="text" placeholder="Enter Account Number" class="form-control" name="account_number" value="{{$bankaccount->account_number}}" />
+                                                <input type="text" placeholder="Enter Account Number" class="form-control" name="account_number[]" />
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="nickname">Nickname:</label>
-                                                <input type="text" placeholder="Enter Account Nickname" class="form-control" name="nickname" value="{{$bankaccount->nick_name}}" />
+                                                <input type="text" placeholder="Enter Account Nickname" class="form-control" name="nickname[]" />
                                             </div>
                                         </div>
 
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="nickname">Bank Charges:</label>
-                                                <input type="text" placeholder="Enter Account Nickname" required class="form-control" name="bank_charges" value="{{$bankaccount->bank_charges}}" required />
+                                                <input type="text" placeholder="Enter Bank Charges" class="form-control" name="bank_charges[]"  />
                                             </div>
                                         </div>
 
                                     </div>
                                 </div>
 
-                                @endforeach
+                             
 
 
                                 <div class="text-center">
@@ -326,7 +318,8 @@
 
 
 
-
+                                <div class="row">
+                                    <div class="col-md-6">
 
 
 
@@ -334,12 +327,21 @@
                                     <label for="logo">Upload Logo:</label>
                                     <input type="file" placeholder="Choose File" class="form-control" name="logo" value="{{$bank->logo}}" />
                                 </div>
+                                    </div>
+                                    <div class="col-md-6">
 
+
+
+                                    <div class="form-group">
+                                        <img src="{{asset('public/images/'.$bank->logo)}}" style="width:200px;"/>
+                                    </div>
+                                        </div>
+                                </div>
 
 
                                 <center>
                                     <p>Status</p>
-                                    <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="status" value="{{$bank->status}}">
+                                    <input type="checkbox" @if($bank->status==1) checked @endif data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="status" value="{{$bank->status}}">
 
                                 </center>
 
@@ -415,53 +417,53 @@
                 '<option value = "IEP" > IEP </option> ' +
                 '<option value = "ILS" > ILS </option> ' +
                 '<option value = "ITL" > ITL </option> ' +
-                '<option value = "JMD" > JMD < /option> ' +
-                '<option value = "JPY" > JPY < /option> ' +
-                '<option value = "JOD" > JOD < /option> ' +
-                '<option value = "KRW" > KRW < /option> ' +
-                '<option value = "LBP" > LBP < /option> ' +
-                '<option value = "LUF" > LUF < /option> ' +
-                '<option value = "MYR" > MYR < /option> ' +
-                '<option value = "MXP" > MXP < /option> ' +
-                '<option value = "NLG" > NLG < /option> ' +
-                '<option value = "NZD" > NZD < /option> ' +
-                '<option value = "NOK" > NOK < /option> ' +
-                '<option value = "PKR" > PKR < /option>' +
-                '<option value = "XPD" > XPD < /option> ' +
-                '<option value = "PHP" > PHP < /option> ' +
-                '<option value = "XPT" > XPT < /option> ' +
-                '<option value = "PLZ" > PLZ < /option> ' +
-                '<option value = "PTE" > PTE < /option> ' +
-                '<option value = "ROL" > ROL < /option> ' +
-                '<option value = "RUR" > RUR < /option> ' +
-                '<option value = "SAR" > SAR < /option> ' +
-                '<option value = "XAG" > XAG < /option> ' +
-                '<option value = "SGD" > SGD < /option> ' +
-                '<option value = "SKK" > SKK < /option> ' +
-                '<option value = "ZAR" > ZAR < /option> ' +
-                '<option value = "KRW" > KRW < /option>' +
-                '<option value = "ESP" > ESP < /option> ' +
-                '<option value = "XDR" > XDR < /option> ' +
-                '<option value = "SDD" > SDD < /option> ' +
-                '<option value = "SEK" > SEK < /option> ' +
-                '<option value = "CHF" > CHF < /option> ' +
-                '<option value = "TWD" > TWD < /option> ' +
-                '<option value = "THB" > THB < /option> ' +
-                '<option value = "TTD" > TTD < /option> ' +
-                '<option value = "TRL" > TRL < /option> ' +
-                '<option value = "VEB" > VEB < /option> ' +
-                '<option value = "ZMK" > ZMK < /option> ' +
-                '<option value = "EUR" > EUR < /option> ' +
-                '<option value = "XCD" > XCD < /option> ' +
-                '<option value = "XDR" > XDR < /option> ' +
-                '<option value = "XAG" > XAG < /option>' +
-                '<option value = "XAU" > XAU < /option> ' +
-                '<option value = "XPD" > XPD < /option> ' +
-                '<option value = "XPT" > XPT < /option> ' +
-                '<option value = "BTC" > BTC < /option> ' +
-                '<option value = "BTC/EUR" > BTC / EUR < /option> ' +
-                '<option value = "BTC/USD" > BTC / USD < /option> ' +
-                '<option value = "USDT" > USDT < /option>' +
+                '<option value = "JMD" > JMD </option> ' +
+                '<option value = "JPY" > JPY </option> ' +
+                '<option value = "JOD" > JOD </option> ' +
+                '<option value = "KRW" > KRW </option> ' +
+                '<option value = "LBP" > LBP </option> ' +
+                '<option value = "LUF" > LUF </option> ' +
+                '<option value = "MYR" > MYR </option> ' +
+                '<option value = "MXP" > MXP </option> ' +
+                '<option value = "NLG" > NLG </option> ' +
+                '<option value = "NZD" > NZD </option> ' +
+                '<option value = "NOK" > NOK </option> ' +
+                '<option value = "PKR" > PKR </option>' +
+                '<option value = "XPD" > XPD </option> ' +
+                '<option value = "PHP" > PHP </option> ' +
+                '<option value = "XPT" > XPT </option> ' +
+                '<option value = "PLZ" > PLZ </option> ' +
+                '<option value = "PTE" > PTE </option> ' +
+                '<option value = "ROL" > ROL </option> ' +
+                '<option value = "RUR" > RUR </option> ' +
+                '<option value = "SAR" > SAR </option> ' +
+                '<option value = "XAG" > XAG </option> ' +
+                '<option value = "SGD" > SGD </option> ' +
+                '<option value = "SKK" > SKK </option> ' +
+                '<option value = "ZAR" > ZAR </option> ' +
+                '<option value = "KRW" > KRW </option>' +
+                '<option value = "ESP" > ESP </option> ' +
+                '<option value = "XDR" > XDR </option> ' +
+                '<option value = "SDD" > SDD </option> ' +
+                '<option value = "SEK" > SEK </option> ' +
+                '<option value = "CHF" > CHF </option> ' +
+                '<option value = "TWD" > TWD </option> ' +
+                '<option value = "THB" > THB </option> ' +
+                '<option value = "TTD" > TTD </option> ' +
+                '<option value = "TRL" > TRL </option> ' +
+                '<option value = "VEB" > VEB </option> ' +
+                '<option value = "ZMK" > ZMK </option> ' +
+                '<option value = "EUR" > EUR </option> ' +
+                '<option value = "XCD" > XCD </option> ' +
+                '<option value = "XDR" > XDR </option> ' +
+                '<option value = "XAG" > XAG </option>' +
+                '<option value = "XAU" > XAU </option> ' +
+                '<option value = "XPD" > XPD </option> ' +
+                '<option value = "XPT" > XPT </option> ' +
+                '<option value = "BTC" > BTC </option> ' +
+                '<option value = "BTC/EUR" > BTC / EUR </option> ' +
+                '<option value = "BTC/USD" > BTC / USD </option> ' +
+                '<option value = "USDT" > USDT </option>' +
                 '</select>' +
                 '</div>' +
                 '</div>' +
@@ -519,7 +521,7 @@
      
 
       var modal = $(this)
-      modal.find(' #currency_edit option[value=' + currency + ']').attr("selected", "selected");
+      modal.find('#currency_edit').val(currency); 
       modal.find('#account_number_edit').val(account_number);  
       modal.find('#nickname_edit').val(nickname);
       modal.find('#bank_charges_edit').val(bank_charges);    

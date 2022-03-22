@@ -43,7 +43,7 @@ Route::group(['prefix' => 'bank'], function(){
 
    
     Route::post('/bankaccountupdate', [BankController::class, 'bankaccountupdate']);
-    Route::get('/delete/{id}', [BankController::class, 'bankaccountdestroy']);
+    Route::get('/bankaccountdestroy/{bankaccountid}', [BankController::class, 'bankaccountdestroy']);
 
 
 Route::group(['prefix' => 'merchant'], function(){
