@@ -499,7 +499,7 @@
                                         <div class="form-group">
                                             <center>
                                                 <p>Enable mail for Customers?</p>
-                                                <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="enable_mail_for_customers">
+                                                <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Enabled" data-off-text="Disabled" name="enable_mail_for_customers">
                                             </center>
 
                                         </div>
@@ -516,7 +516,7 @@
                                             <!-- Default checked -->
                                             <center>
                                                 <p>Company Details on left</p>
-                                                <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="company_details_on_left">
+                                                <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Enabled" data-off-text="Disabled" name="company_details_on_left">
                                             </center>
 
                                         </div>
@@ -526,7 +526,7 @@
                                         <div class="form-group">
                                         <center>
                                                 <p>Invoice Details on right</p>
-                                                <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="invoice_details_on_right">
+                                                <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Enabled" data-off-text="Disabled" name="invoice_details_on_right">
                                             </center>
 
 
@@ -540,7 +540,7 @@
                                         <div class="form-group">
                                         <center>
                                                 <p>B2B Access</p>
-                                                <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="b2b_access">
+                                                <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Enabled" data-off-text="Disabled" name="b2b_access">
                                             </center>
 
 

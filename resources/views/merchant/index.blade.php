@@ -44,13 +44,11 @@
                   <tr>
                     <th>Sr.</th>
                     <th>Merchant Name</th>
-                    <th>Secondary Email</th>
-                    <th>Invoice Email</th>
-                    <th>Payout Notification Email</th>
-                    <th>Settlement Notification Email</th>
+                    <th>Email</th>               
+                    <th>Country</th>
+                    <th>Created By</th>
                     <th>Status</th>
-                    <th>Upload Logo</th>
-                    <th>Action</th>
+                    <th>Actions</th>
                   </tr>
                   </thead>
 
@@ -62,18 +60,16 @@
     <tr>
         <td>{{$count}}</td>
         <td>{{$merchant->merchant_name}}</td>
-        <td>{{$merchant->secondary_email}}</td>
-        <td>{{$merchant->invoice_email}}</td>
-        <td>{{$merchant->payout_notification_email}}</td>
-        <td>{{$merchant->settlement_notification_email}}</td>
+        <td>{{$merchant->email}}</td>
+        <td>{{$merchant->Country}}</td>
+        <td>{{@$userpluck[$merchant->created_by]}}</td>
         <td>
           @if($merchant->status==1)
-            <label class="text-success"> Active</label>
+            <label class="text-success"> Activated</label>
             @else
-            <label class="text-danger"> Inactive</label>
+            <label class="text-danger"> Deactivated</label>
           @endif
         </td>
-        <td><img src="{{asset('/images/'.$merchant->upload_logo)}}" style="width:50px;"/></td>
         <td>
             <a href="{{url('merchant/edit/'.$merchant->id)}}" class="btn btn-warning btn-sm"><i class="far fa-edit" aria-hidden="true"></i></a>
             <a href="{{url('merchant/delete/'.$merchant->id)}}" onclick="return confirm('Are you sure, you want to delete it?')" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>

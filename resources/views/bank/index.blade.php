@@ -46,7 +46,7 @@
                     <th>Baneficiary Name</th>
                     <th>Country</th>
                     <th>Status</th>
-                    <th>Logo</th>
+                  
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -68,7 +68,7 @@
             <label class="text-danger"> Inactive</label>
           @endif
         </td>
-        <td><img src="{{asset('public/images/'.$bank->logo)}}" style="width:50px;"/></td>
+      
         <td>
             <a href="{{url('bank/edit/'.$bank->id)}}" class="btn btn-warning btn-sm"><i class="far fa-edit" aria-hidden="true"></i></a>
             <a href="{{url('bank/delete/'.$bank->id)}}" onclick="return confirm('Are you sure, you want to delete it?')" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>

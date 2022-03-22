@@ -490,9 +490,10 @@
                                 <!-- Bootstrap Switch -->
                                 <center>
                                     <p>Status</p>
-                                    <input type="checkbox" data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="status" value="" @if($customer->status == '1') checked @endif >
+                                    <input type="checkbox" @if($customer->status==1) checked @endif data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="status">
 
                                 </center>
+
 
 
 

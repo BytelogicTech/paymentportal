@@ -341,7 +341,7 @@
 
                                 <center>
                                     <p>Status</p>
-                                    <input type="checkbox" @if($bank->status==1) checked @endif data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="status" value="{{$bank->status}}">
+                                    <input type="checkbox" @if($bank->status==1) checked @endif data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="status">
 
                                 </center>
 

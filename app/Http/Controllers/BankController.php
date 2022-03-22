@@ -153,7 +153,12 @@ class BankController extends Controller
         $bank->declaration_content = $request->declaration_content;
         $bank->instructions_title = $request->instructions_title;
         $bank->instructions_content = $request->instructions_content;
-        $bank->status = $request->status;
+        //dd($request->status);
+        if ($request->status == 'on') {
+            $bank->status = 1;
+        } else {
+            $bank->status = 0;
+        }
         // $bank->status = 1;
         $file = $request->logo;
         // dd($file);

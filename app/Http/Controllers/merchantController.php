@@ -5,12 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\bank;
 use App\Models\bank_account;
 use App\Models\merchant;
+use App\Models\User;
 // use App\Models\merchant_account;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class merchantController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,8 +26,11 @@ class merchantController extends Controller
     public function index()
     {
         $merchants = merchant::all();
-        // dd($merchants);
-        return view('merchant/index', compact('merchants'));
+        $userpluck = User::pluck('first_name','id');
+
+        
+        return view('merchant/index', compact('merchants','userpluck'));
+
     }
 
     /**
@@ -133,6 +143,8 @@ class merchantController extends Controller
             }
         }
 
+        $merchant->created_by = Auth::user()->id;
+
         $merchant->save();  
 
        
@@ -201,11 +213,52 @@ class merchantController extends Controller
         $merchant->website = $request->website;
         $merchant->customer_support_number = $request->customer_support_number;
         $merchant->invoice_remarks = $request->invoice_remarks;
-        $merchant->enable_mail_for_customers = $request->enable_mail_for_customers;
-        $merchant->company_details_on_left = $request->company_details_on_left;
-        $merchant->invoice_details_on_right = $request->invoice_details_on_right;
-        $merchant->b2b_access = $request->b2b_access;
-        $merchant->status = $request->status;
+        if($request->enable_mail_for_customers=='on')
+        {
+            $merchant->enable_mail_for_customers = 1;
+        }
+        else
+        {
+            $merchant->enable_mail_for_customers=0;
+        }
+        //$merchant->enable_mail_for_customers = $request->enable_mail_for_customers;
+        if($request->company_details_on_left=='on')
+        {
+            $merchant->company_details_on_left = 1;
+        }
+        else
+        {
+            $merchant->company_details_on_left=0;
+        }
+        //$merchant->company_details_on_left = $request->company_details_on_left;
+        if($request->invoice_details_on_right=='on')
+        {
+            $merchant->invoice_details_on_right=1;
+        }
+        else
+        {
+            $merchant->invoice_details_on_right=0;
+        }
+        //$merchant->invoice_details_on_right = $request->invoice_details_on_right;
+        if($request->b2b_access=='on')
+        {
+            $merchant->b2b_access='1';
+        }
+        else
+        {
+             $merchant->b2b_access='0';
+        }
+
+        //$merchant->b2b_access = $request->b2b_access;
+
+        if($request->status=='on')
+        {
+            $merchant->status = 1;
+        }
+        else
+        {
+            $merchant->status=0;
+        }
         
 
         // $merchant->status = 1;

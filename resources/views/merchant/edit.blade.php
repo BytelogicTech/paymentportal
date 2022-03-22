@@ -53,7 +53,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Bank Accounts Assigned*</label>
-                                            <select name="bank_account_id" value="{{$merchant->bank_account_id}}" id="" class="form-control">
+                                            <select name="bank_account_id" value="{{$merchant->bank_account_id}}" id="" class="select2 form-control">
                                                 <option>Select Bank Account</option>
 
                                                 @foreach($bankaccounts as $bankaccount)
@@ -489,19 +489,35 @@
                                 </div>
 
 
-
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="logo">Upload Logo:</label>
-                                            <input type="file" placeholder="Choose File" class="form-control" name="upload_logo" value="{{$merchant->upload_logo}}"/>
-                                        </div>
+
+
+
+                                <div class="form-group">
+                                    <label for="logo">Upload Logo:</label>
+                                    <input type="file" placeholder="Choose File" class="form-control" name="upload_logo" value="{{$merchant->upload_logo}}" />
+                                </div>
                                     </div>
+                                    <div class="col-md-6">
+
+
+
+                                    <div class="form-group">
+                                        <img src="{{asset('/images/'.$merchant->upload_logo)}}" style="width:200px;"/>
+                                    </div>
+                                        </div>
+                                </div>
+
+
+
+                                <div class="row">
+                                 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <center>
                                                 <p>Enable mail for Customers?</p>
-                                                <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="enable_mail_for_customers" value="{{$merchant->enable_mail_for_customers}}">
+                                                <input type="checkbox" @if($merchant->enable_mail_for_customers==1) checked @endif data-toggle="switch" data-handle-width="100" data-on-text="Enabled" data-off-text="Disabled" name="enable_mail_for_customers" >
                                             </center>
 
                                         </div>
@@ -518,7 +534,7 @@
                                             <!-- Default checked -->
                                             <center>
                                                 <p>Company Details on left</p>
-                                                <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="company_details_on_left" value="{{$merchant->company_details_on_left}}">
+                                                <input type="checkbox" @if($merchant->company_details_on_left==1) checked @endif data-toggle="switch" data-handle-width="100" data-on-text="Enabled" data-off-text="Disabled" name="company_details_on_left" >
                                             </center>
 
                                         </div>
@@ -528,7 +544,7 @@
                                         <div class="form-group">
                                         <center>
                                                 <p>Invoice Details on right</p>
-                                                <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="invoice_details_on_right" value="{{$merchant->invoice_details_on_right}}">
+                                                <input type="checkbox" @if($merchant->invoice_details_on_right==1) checked @endif data-toggle="switch" data-handle-width="100" data-on-text="Enabled" data-off-text="Disabled" name="invoice_details_on_right" >
                                             </center>
 
 
@@ -542,7 +558,7 @@
                                         <div class="form-group">
                                         <center>
                                                 <p>B2B Access</p>
-                                                <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="b2b_access" value="{{$merchant->b2b_access}}">
+                                                <input type="checkbox" @if($merchant->b2b_access==1) checked @endif data-toggle="switch" data-handle-width="100" data-on-text="Enabled" data-off-text="Disabled" name="b2b_access" >
                                             </center>
 
 
@@ -552,9 +568,11 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                         <center>
-                                                <p>Status</p>
-                                                <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="status" value="{{$merchant->status}}">
-                                            </center>
+                                    <p>Status</p>
+                                    <input type="checkbox" @if($merchant->status==1) checked @endif data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="status">
+
+                                </center>
+
 
                                         </div>
                                     </div>

@@ -10,9 +10,15 @@ use App\Models\bank_account_payouts;
 use App\Models\customer_documents;
 // use App\Models\customer_account;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class customerController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -60,6 +66,7 @@ class customerController extends Controller
 
         $customer->merchant_fk_id=$request->merchant_fk_id;
 
+        $customer->created_by = Auth::user()->id;
 
         $customer->save();  
         $customerid = $customer->id;
@@ -100,6 +107,8 @@ class customerController extends Controller
             $bankaccountpayouts->intermediary_bank_address = $request->intermediary_bank_address[$i];
             $bankaccountpayouts->intermediary_bank_swift = $request->intermediary_bank_swift[$i];
             $bankaccountpayouts->intermediary_bank_details_remarks = $request->intermediary_bank_details_remarks[$i];
+            $bankaccountpayouts->created_by = Auth::user()->id;
+
             
             $bankaccountpayouts->save();
         }
@@ -128,7 +137,8 @@ class customerController extends Controller
             }
         }
 
-            
+        $customerdocuments->created_by = Auth::user()->id;
+
             $customerdocuments->save();
         }
         
@@ -186,7 +196,16 @@ class customerController extends Controller
         $customer->id_number = $request->id_number;
         $customer->merchant_fk_id=$request->merchant_fk_id;
         $customer->parent_merchant = $request->parent_merchant;
-        $customer->status = $request->status;
+       
+        if($request->status=='on')
+        {
+            $customer->status = 1;
+        }
+        else
+        {
+            $customer->status=0;
+        }
+        
 
 
         $customer->update();
