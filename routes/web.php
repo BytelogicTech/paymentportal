@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\merchantController;
 use App\Http\Controllers\customerController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PayoutController;
@@ -20,16 +21,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-// Route::get('index', [CategoryController::class, 'index']);
-// Route::get('create', [CategoryController::class, 'create']);
-// Route::post('store', [CategoryController::class, 'store']);
-// Route::get('edit/{id}', [CategoryController::class, 'edit']);
-// Route::post('update', [CategoryController::class, 'update']);
-// Route::get('delete/{id}', [CategoryController::class, 'destroy']);
+
+Route::get('/', [HomeController::class, 'index']);
 
 
 Route::group(['prefix' => 'bank'], function(){
@@ -56,7 +50,7 @@ Route::group(['prefix' => 'merchant'], function(){
     Route::get('/delete/{id}', [merchantController::class, 'destroy']);
 });
 
-//  Route::resource('bank',BankController::class);
+
 
 Route::group(['prefix' => 'customer'], function(){
     Route::get('/index', [customerController::class, 'index']);

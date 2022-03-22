@@ -5,14 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\bank;
 use App\Models\bank_account;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BankController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+ 
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $banks = bank::all();
@@ -74,7 +77,7 @@ class BankController extends Controller
                 return back()->with('error', 'Please upload Logo');
             }
         }
-
+        $bank->created_by = Auth::user()->id;
         $bank->save();
 
         $bankid = $bank->id;
@@ -88,6 +91,7 @@ class BankController extends Controller
             $bankaccount->account_number = $request->account_number[$i];
             $bankaccount->nick_name = $request->nickname[$i];
             $bankaccount->bank_charges = $request->bank_charges[$i];
+            $bankaccount->created_by = Auth::user()->id;
             $bankaccount->save();
         }
 
