@@ -6,6 +6,7 @@ use App\Http\Controllers\merchantController;
 use App\Http\Controllers\customerController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PayoutController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -70,6 +71,27 @@ Route::group(['prefix' => 'transaction'], function(){
     Route::post('/update', [TransactionController::class, 'update']);
     Route::get('/delete/{id}', [TransactionController::class, 'destroy']);
 });
+
+
+Route::group(['prefix' => 'user'], function(){
+    Route::get('/index', [UserController::class, 'index']);
+    Route::get('/create', [UserController::class, 'create']);
+    Route::post('/store', [UserController::class, 'store']);
+    Route::get('/edit/{id}', [UserController::class, 'edit']);
+    Route::post('/update', [UserController::class, 'update']);
+    Route::get('/delete/{id}', [UserController::class, 'destroy']);
+});
+
+Route::group(['prefix' => 'payout'], function(){
+    Route::get('/index', [PayoutController::class, 'index']);
+    Route::get('/create', [PayoutController::class, 'create']);
+    Route::post('/store', [PayoutController::class, 'store']);
+    Route::get('/edit/{id}', [PayoutController::class, 'edit']);
+    Route::post('/update', [PayoutController::class, 'update']);
+    Route::get('/delete/{id}', [PayoutController::class, 'destroy']);
+});
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

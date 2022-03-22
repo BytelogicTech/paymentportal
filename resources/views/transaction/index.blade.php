@@ -52,7 +52,9 @@
                     <th>Status</th>
                     <th>Amount Recieved</th>
                     <th>Date Recieved</th>
-                    <th>Created By</th>
+                    <th>Created At</th>
+                    <th>Actions</th>
+                    <th>Download</th>
                   </tr>
                   </thead>
 
@@ -71,9 +73,23 @@
         <td>{{$transaction->status_of_transaction}}</td>
         <td>{{$transaction->amount_recieved}}</td>
         <td>{{$transaction->date_recieved}}</td>
+        <td>{{$transaction->created_at}}</td>
         <td>
             <a href="{{url('transaction/edit/'.$transaction->id)}}" class="btn btn-warning btn-sm"><i class="far fa-edit" aria-hidden="true"></i></a>
             <a href="{{url('transaction/delete/'.$transaction->id)}}" onclick="return confirm('Are you sure, you want to delete it?')" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
+        </td>
+        <td>
+          @if($transaction->upload_signed_invoice)
+          <a class="btn btn-primary" href="{{asset('public/invoice/'.$transaction->upload_signed_invoice)}}" target="_blank"><i class="fa fa-download"></i></a>
+          @else
+          No Invoice
+          @endif
+
+          @if($transaction->proof_of_payment)
+          <a class="btn btn-default" href="{{asset('public/pop/'.$transaction->proof_of_payment)}}" target="_blank">POP</a>
+          @else
+         | No payment Proof
+          @endif
         </td>
     </tr>
     @endforeach

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\merchant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -13,11 +14,12 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index1()
+    public function index()
     {
         $users = User::all();
+        $merchantpluck = merchant::pluck('merchant_name','id');
 
-        return view('home', compact('users'));
+        return view('user/index', compact('users','merchantpluck'));
     }
 
     /**
@@ -25,22 +27,12 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
       
-        return User::create([
-            'first_name' => $request['first_name'],
-            'last_name' => $request['last_name'],
-            'phone' => $request['phone'],
-            'address' => $request['address'],
-            'email' => $request['email'],
-            'email_verified_at' => $request['email_verified_at'],
-            'password' => Hash::make($request['password']),
-            'role' => $request['role'],
-            'remember_token' => $request['remember_token'],
-            
-            
-        ]);
+       $users = User::all();
+       $merchants = merchant::all();
+        return view('user/create',compact('users','merchants') );
     }
 
     /**
@@ -51,13 +43,28 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $user = new User();
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->merchant_fk_id = $request->merchant_fk_id;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->email = $request->email;
+        $user->email_verified_at = $request->email_verified_at;
+        $user->password = Hash::make($request->password);
+        $user->role = $request->role;
+        $user->remember_token = $request->remember_token;
+        $user->save();
+        return redirect('user/index')->with('message','User Added Successfully');
+   
     }
 
 
     public function edit($id)
     {
-        
+        $user = User::findorFail($id);
+        $merchants = merchant::all();
+        return view('user/edit', compact('user','merchants'));
     }
 
     /**
@@ -69,7 +76,26 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
+        $id = $request->id;
+        $user = user::find($id);
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->merchant_fk_id = $request->merchant_fk_id;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->email = $request->email;
+        $user->email_verified_at = $request->email_verified_at;
+
+        if($request->password)
+        {
+            $user->password = Hash::make($request->password);
+        }
+      
         
+        $user->role = $request->role;
+        $user->remember_token = $request->remember_token;
+        // $user->save();
+        return redirect('user/index')->with('message','User Updated Successfully');
     }
 
     /**
@@ -80,7 +106,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        
+        $user = user::find($id);
+        $user->delete();
+
+        return redirect('user/index')->with('success','User Deleted Successfully');
     }
 }
 

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->text('remarks')->nullable();
             $table->string('reference_id')->nullable();
             $table->string('upload_signed_invoice')->nullable();
+            $table->string('proof_of_payment')->nullable();
             $table->date('date_recieved')->nullable();
             $table->double('amount_recieved')->nullable();
             $table->string('status_of_transaction');

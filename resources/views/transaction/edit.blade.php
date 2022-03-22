@@ -132,6 +132,13 @@
                                             <input type="file" class="form-control" name="upload_signed_invoice" value="{{$transaction->upload_signed_invoice}}">
                                         </div>
                                     </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="description">Payment Proof</label>
+                                            <input type="file" class="form-control" name="proof_of_payment">
+                                        </div>
+                                    </div>
                                     
 
                                     

@@ -287,13 +287,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{url('bank/index')}}" class="nav-link">
+                  <a href="{{url('user/index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>View All Users</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{url('bank/create')}}" class="nav-link">
+                  <a href="{{url('user/create')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Add new User</p>
                   </a>

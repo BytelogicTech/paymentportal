@@ -86,12 +86,14 @@ class TransactionController extends Controller
             if ($fileext == "jpg" || $fileext == "jpeg" || $fileext == "png" || $fileext == "pdf" || $fileext == "doc" || $fileext == "docx" || $fileext == "jpeg") {
                 $filename = time() . "." . $fileext;
 
-                $file->move('images/', $filename);
+                $file->move('public/invoice/', $filename);
                 $transaction->upload_signed_invoice = $filename;
             } else {
                 return back()->with('error', 'Please upload File');
             }
-            $transaction->date_recieved = $request->date_recieved;
+            
+        }
+        $transaction->date_recieved = $request->date_recieved;
             $transaction->amount_recieved = $request->amount_recieved;
             $transaction->status_of_transaction = $request->status_of_transaction;
             $transaction->type_of_transaction = $request->type_of_transaction;
@@ -99,7 +101,6 @@ class TransactionController extends Controller
             $transaction->save();
 
             return redirect('transaction/index')->with('success', 'transaction Added Successfully');
-        }
     }
 
     /**
@@ -162,8 +163,24 @@ class TransactionController extends Controller
             if ($fileext == "jpg" || $fileext == "jpeg" || $fileext == "png" || $fileext == "pdf" || $fileext == "doc" || $fileext == "docx" || $fileext == "jpeg") {
                 $filename = time() . "." . $fileext;
 
-                $file->move('images/', $filename);
+                $file->move('public/invoice/', $filename);
                 $transaction->upload_signed_invoice = $filename;
+            } else {
+                return back()->with('error', 'Please upload File');
+            }
+            
+        }
+
+
+
+        $file_proof = $request->proof_of_payment;
+        if ($request->proof_of_payment) {
+            $fileext_proof = $file_proof->getClientOriginalExtension();
+            if ($fileext_proof == "jpg" || $fileext_proof == "jpeg" || $fileext_proof == "png" || $fileext_proof == "pdf" || $fileext_proof == "doc" || $fileext_proof == "docx" || $fileext_proof == "jpeg") {
+                $filename_proof = time() . "." . $fileext_proof;
+
+                $file_proof->move('public/pop/', $filename_proof);
+                $transaction->proof_of_payment = $filename_proof;
             } else {
                 return back()->with('error', 'Please upload File');
             }
