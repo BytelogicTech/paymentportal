@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('bank_charges');
             $table->timestamps();
             $table->foreign('bank_id')->references('id')->on('banks');
+            $table->unsignedBigInteger('created_by');
+            $table->foreign('created_by')->references('id')->on('users');
         });
     }
 

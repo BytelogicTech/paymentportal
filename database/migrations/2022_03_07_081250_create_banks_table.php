@@ -22,9 +22,6 @@ return new class extends Migration
             $table->string('bank_address');
             $table->string('zip_code')->nullable();
             $table->string('country');
-            // $table->string('currency');
-            // $table->string('account_number');
-            // $table->string('nickname');
             $table->string('swift_code');
             $table->string('remarks')->nullable();
             $table->string('company_name');
@@ -34,9 +31,10 @@ return new class extends Migration
             $table->string('instructions_title')->nullable();
             $table->string('instructions_content')->nullable();
             $table->string('logo');
-            $table->boolean('status');
-
+            $table->boolean('status');            
             $table->timestamps();
+            $table->unsignedBigInteger('created_by');
+            $table->foreign('created_by')->references('id')->on('users');
         });
     }
 

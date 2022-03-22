@@ -32,6 +32,8 @@ return new class extends Migration
             $table->string('status_of_payout');
             $table->string('upload_extra_document')->nullable();
             $table->timestamps();
+            $table->unsignedBigInteger('created_by');
+            $table->foreign('created_by')->references('id')->on('users');
         });
     }
 

@@ -34,6 +34,8 @@ return new class extends Migration
             $table->foreign('bank_account_fk_id')->references('id')->on('bank_accounts');
             $table->foreign('customer_fk_id')->references('id')->on('customers');
             $table->timestamps();
+            $table->unsignedBigInteger('created_by');
+            $table->foreign('created_by')->references('id')->on('users');
 
 
         });

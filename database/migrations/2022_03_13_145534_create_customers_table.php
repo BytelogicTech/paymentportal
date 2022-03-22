@@ -27,6 +27,8 @@ return new class extends Migration
             $table->boolean('status');
             $table->timestamps();
             $table->foreign('merchant_fk_id')->references('id')->on('merchants');
+            $table->unsignedBigInteger('created_by');
+            $table->foreign('created_by')->references('id')->on('users');
 
         });
     }

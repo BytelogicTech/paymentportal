@@ -46,6 +46,8 @@ return new class extends Migration
             $table->boolean('status');
             $table->timestamps();
             $table->foreign('bank_account_id')->references('id')->on('bank_accounts');
+            $table->unsignedBigInteger('created_by');
+            $table->foreign('created_by')->references('id')->on('users');
 
         });
     }
