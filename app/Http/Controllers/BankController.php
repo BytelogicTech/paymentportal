@@ -55,15 +55,12 @@ class BankController extends Controller
         $bank->declaration_content = $request->declaration_content;
         $bank->instructions_title = $request->instructions_title;
         $bank->instructions_content = $request->instructions_content;
-        if($request->status=='on')
-        {
+        if ($request->status == 'on') {
             $bank->status = 1;
+        } else {
+            $bank->status = 0;
         }
-        else
-        {
-            $bank->status=0;
-        }
-        
+
         $file = $request->logo;
         // dd($file);
         if ($request->logo) {
@@ -71,7 +68,7 @@ class BankController extends Controller
             if ($fileext == "jpg" || $fileext == "jpeg" || $fileext == "png") {
                 $filename = time() . "." . $fileext;
 
-                $file->move('images/', $filename);
+                $file->move('public/images/', $filename);
                 $bank->logo = $filename;
             } else {
                 return back()->with('error', 'Please upload Logo');
@@ -84,18 +81,18 @@ class BankController extends Controller
 
         $addmorecount = count($request->currency);
 
-        for($i=0;$i<$addmorecount;$i++)
-        {
+        for ($i = 0; $i < $addmorecount; $i++) {
             $bankaccount = new bank_account();
             $bankaccount->bank_id = $bankid;
             $bankaccount->currency = $request->currency[$i];
             $bankaccount->account_number = $request->account_number[$i];
             $bankaccount->nick_name = $request->nickname[$i];
+            $bankaccount->bank_charges = $request->bank_charges[$i];
             $bankaccount->save();
         }
-        
 
-        
+
+
 
         return redirect('bank/index')->with('success', 'bank Added Successfully');
     }
@@ -122,8 +119,8 @@ class BankController extends Controller
         // ->join('bank_accounts', 'bank_accounts.bank_id','=','banks.id')
         // ->get();
         // dd($bank);
-        $bankaccounts = bank_account::where('bank_id',$id)->get();
-        return view('bank/edit', compact('bank','bankaccounts'));
+        $bankaccounts = bank_account::where('bank_id', $id)->get();
+        return view('bank/edit', compact('bank', 'bankaccounts'));
     }
 
     /**
@@ -161,7 +158,7 @@ class BankController extends Controller
             $fileext = $file->getClientOriginalExtension();
             if ($fileext == "jpg" || $fileext == "jpeg" || $fileext == "png") {
                 $filename = time() . "." . $fileext;
-                $file->move('images/', $filename);
+                $file->move('public/images/', $filename);
                 $bank->logo = $filename;
             } else {
                 return back()->with('error', 'Please upload Logo');
@@ -170,16 +167,37 @@ class BankController extends Controller
 
         $bank->update();
 
-        // $bankid = $bank->id;
+        $bankid = $bank->id;
 
-        // $bankaccount = new bank_account();
-        // $bankaccount->bank_id = $bankid;
-        // $bankaccount->currency = $request->currency;
-        // $bankaccount->account_number = $request->account_number;
-        // $bankaccount->nick_name = $request->nickname;
-        // $bankaccount->save();
+        if ($request->currency) {
+            $addmorecount = count($request->currency);
+
+            for ($i = 0; $i < $addmorecount; $i++) {
+                $bankaccount = new bank_account();
+                $bankaccount->bank_id = $bankid;
+                $bankaccount->currency = $request->currency[$i];
+                $bankaccount->account_number = $request->account_number[$i];
+                $bankaccount->nick_name = $request->nickname[$i];
+                $bankaccount->bank_charges = $request->bank_charges[$i];
+                $bankaccount->save();
+            }
+        }
 
         return redirect('bank/index')->with('success', 'bank Added Successfully');
+    }
+
+    public function bankaccountupdate(Request $request)
+    {
+        //dd("hello");
+        $bankaccount = bank_account::findorFail($request->bankaccountid);
+        $bankaccount->currency = $request->currency;
+        $bankaccount->account_number = $request->account_number;
+        $bankaccount->nick_name = $request->nick_name;
+        $bankaccount->bank_charges = $request->bank_charges;
+
+        $bankaccount->save();
+
+        return back();
     }
 
     /**
@@ -194,5 +212,13 @@ class BankController extends Controller
         $bank->delete();
 
         return redirect('bank/index')->with('success', 'Bank Deleted Successfully');
+    }
+
+    public function bankaccountdestroy($bankaccountid)
+    {
+        $bank_account = bank_account::findorFail($bankaccountid);
+        $bank_account->delete();
+
+        return back()->with('success', 'Bank Deleted Successfully');
     }
 }

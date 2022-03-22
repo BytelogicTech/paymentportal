@@ -7,12 +7,15 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Merchants</h1>
+                    <h1>
+                        <h1>Edit Bank - {{$bank->beneficiary_name}}</h1>
+                    </h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">General Form</li>
+                        <li class="breadcrumb-item"><a href="{{url('/home')}}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{url('bank/index')}}">All Banks</a></li>
+                        <li class="breadcrumb-item active">Edit Bank - {{$bank->beneficiary_name}}</li>
                     </ol>
                 </div>
             </div>
@@ -28,7 +31,7 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Add New Merchant</h3>
+                            <h3 class="card-title">Edit Bank</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
@@ -37,47 +40,48 @@
 
 
 
-                        <form action="{{url('merchant/store')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{url('bank/update')}}" method="POST" enctype="multipart/form-data">
                             <div class="card-body">
                                 @csrf
+                                <input type="hidden" name="id" value="{{$bank->id}}" />
 
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="name">Merchant Name*</label>
-                                            <input type="text" placeholder="Enter Merchant Name" class="form-control" name="merchant_name" required />
+                                            <label for="name">Baneficiary Name*</label>
+                                            <input type="text" placeholder="Enter Baneficiary Name" class="form-control" name="beneficiary_name" required value="{{$bank->beneficiary_name}}" />
+
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="description">Bank Accounts Assigned*</label>
-                                            <select name="bank_account_id" class="select2 form-control">
-                                                <option>Select Bank Account</option>
-                                                @foreach($bankaccounts as $bankaccount)
-                                                <optgroup label="{{$bankaccount[0]->bank_name}}">
-                                                    @foreach($bankaccount as $item)
-                                                    <option value="{{$item->bank_accountsid}}">{{$item->beneficiary_name}} - {{$item->currency}} - ({{$item->account_number}}) </option>
-                                                    @endforeach
-                                                </optgroup>
-                                                @endforeach
-                                            </select>
+                                            <label for="description">Beneficiary Address*</label>
+                                            <input type="text" placeholder="Enter Baneficiary Address" class="form-control" name="beneficiary_address" required value="{{$bank->beneficiary_address}}" />
                                         </div>
                                     </div>
                                 </div>
 
 
 
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="description">Bank Nickname:</label>
+                                        <input type="text" placeholder="Enter Bank Nickname" class="form-control" name="bank_nickname" value="{{$bank->bank_nickname}}" />
+                                    </div>
+
+                                </div>
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="description">First Name*</label>
-                                            <input type="text" placeholder="Enter First Name" class="form-control" name="first_name" required />
+                                            <label for="description">Bank Name*</label>
+                                            <input type="text" placeholder="Enter Bank Name" class="form-control" name="bank_name" required value="{{$bank->bank_name}}" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="description">Last Name*</label>
-                                            <input type="text" placeholder="Enter Last Name" class="form-control" name="last_name" required />
+                                            <label for="description">Bank Address*</label>
+                                            <input type="text" placeholder="Enter Bank Address Name" class="form-control" name="bank_address" required value="{{$bank->bank_address}}" />
                                         </div>
                                     </div>
                                 </div>
@@ -88,15 +92,15 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="zipcode">Email*:</label>
-                                            <input type="email" placeholder="Enter Email" class="form-control" name="email" />
+                                            <label for="zipcode">Zip Code:</label>
+                                            <input type="text" placeholder="Enter Zip Code" class="form-control" name="zip_code" value="{{$bank->zip_code}}" />
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Country*</label>
-                                            <select class="select2 form-control" style="width: 100%;" name="Country" required>
+                                            <select class="form-control select2" style="width: 100%;" name="country" required value="{{$bank->country}}" id="country">
                                                 <option value="" selected disabled>Please Select One</option>
                                                 <option value="Afganistan">Afghanistan</option>
                                                 <option value="Albania">Albania</option>
@@ -350,185 +354,145 @@
                                 </div>
 
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="description">Secondary Email</label>
-                                            <input type="email" placeholder="Enter Secondary Email" class="form-control" name="secondary_email" required />
+
+                                @foreach($bankaccounts as $bankaccount)
+                                <div id="bank_accounts">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label>Currency</label>
+                                                <select class="form-control select2" style="width: 100%;" name="currency" value="{{$bank->currency}}">
+                                                    <option value="" selected disabled>Please Select One</option>
+                                                    <option value="USD" @if($bankaccount->currency == 'USD') selected @endif >USD</option>
+                                                    <option value="EUR" @if($bankaccount->currency == 'EUR') selected @endif>EUR</option>
+                                                    <option value="GBP" @if($bankaccount->currency == 'GBP') selected @endif>GBP</option>
+                                                    <option value="DZD" @if($bankaccount->currency == 'DZD') selected @endif>DZD</option>
+                                                    <option value="AED" @if($bankaccount->currency == 'EUR') selected @endif>AED</option>
+                                                    <option value="ARP" @if($bankaccount->currency == 'EUR') selected @endif>ARP</option>
+                                                    <option value="AUD" @if($bankaccount->currency == 'AUD') selected @endif>AUD</option>
+                                                    <option value="ATS" @if($bankaccount->currency == 'EUR') selected @endif>ATS</option>
+                                                    <option value="BSD" @if($bankaccount->currency == 'EUR') selected @endif>BSD</option>
+                                                    <option value="BBD" @if($bankaccount->currency == 'EUR') selected @endif>BBD</option>
+                                                    <option value="BEF" @if($bankaccount->currency == 'EUR') selected @endif>BEF</option>
+                                                    <option value="BMD" @if($bankaccount->currency == 'EUR') selected @endif>BMD</option>
+                                                    <option value="BRR" @if($bankaccount->currency == 'EUR') selected @endif>BRR</option>
+                                                    <option value="BGN" @if($bankaccount->currency == 'EUR') selected @endif>BGN</option>
+                                                    <option value="CAD" @if($bankaccount->currency == 'EUR') selected @endif>CAD</option>
+                                                    <option value="CLP" @if($bankaccount->currency == 'EUR') selected @endif>CLP</option>
+                                                    <option value="CNY" @if($bankaccount->currency == 'EUR') selected @endif>CNY</option>
+                                                    <option value="CYP" @if($bankaccount->currency == 'EUR') selected @endif>CYP</option>
+                                                    <option value="CSK" @if($bankaccount->currency == 'EUR') selected @endif>CSK</option>
+                                                    <option value="DKK" @if($bankaccount->currency == 'EUR') selected @endif>DKK</option>
+                                                    <option value="NLG" @if($bankaccount->currency == 'EUR') selected @endif>NLG</option>
+                                                    <option value="XCD" @if($bankaccount->currency == 'EUR') selected @endif>XCD</option>
+                                                    <option value="EGP" @if($bankaccount->currency == 'EUR') selected @endif>EGP</option>
+                                                    <option value="FJD" @if($bankaccount->currency == 'EUR') selected @endif>FJD</option>
+                                                    <option value="FIM" @if($bankaccount->currency == 'EUR') selected @endif>FIM</option>
+                                                    <option value="FRF" @if($bankaccount->currency == 'EUR') selected @endif>FRF</option>
+                                                    <option value="DEM" @if($bankaccount->currency == 'EUR') selected @endif>DEM</option>
+                                                    <option value="XAU" @if($bankaccount->currency == 'EUR') selected @endif>XAU</option>
+                                                    <option value="GRD" @if($bankaccount->currency == 'EUR') selected @endif>GRD</option>
+                                                    <option value="HKD" @if($bankaccount->currency == 'EUR') selected @endif>HKD</option>
+                                                    <option value="HUF" @if($bankaccount->currency == 'EUR') selected @endif>HUF</option>
+                                                    <option value="ISK" @if($bankaccount->currency == 'EUR') selected @endif>ISK</option>
+                                                    <option value="INR" @if($bankaccount->currency == 'EUR') selected @endif>INR</option>
+                                                    <option value="IDR" @if($bankaccount->currency == 'EUR') selected @endif>IDR</option>
+                                                    <option value="IEP" @if($bankaccount->currency == 'EUR') selected @endif>IEP</option>
+                                                    <option value="ILS" @if($bankaccount->currency == 'EUR') selected @endif>ILS</option>
+                                                    <option value="ITL" @if($bankaccount->currency == 'EUR') selected @endif>ITL</option>
+                                                    <option value="JMD" @if($bankaccount->currency == 'EUR') selected @endif>JMD</option>
+                                                    <option value="JPY" @if($bankaccount->currency == 'EUR') selected @endif>JPY</option>
+                                                    <option value="JOD" @if($bankaccount->currency == 'EUR') selected @endif>JOD</option>
+                                                    <option value="KRW" @if($bankaccount->currency == 'EUR') selected @endif>KRW</option>
+                                                    <option value="LBP" @if($bankaccount->currency == 'EUR') selected @endif>LBP</option>
+                                                    <option value="LUF" @if($bankaccount->currency == 'EUR') selected @endif>LUF</option>
+                                                    <option value="MYR" @if($bankaccount->currency == 'EUR') selected @endif>MYR</option>
+                                                    <option value="MXP" @if($bankaccount->currency == 'EUR') selected @endif>MXP</option>
+                                                    <option value="NLG" @if($bankaccount->currency == 'EUR') selected @endif>NLG</option>
+                                                    <option value="NZD" @if($bankaccount->currency == 'EUR') selected @endif>NZD</option>
+                                                    <option value="NOK" @if($bankaccount->currency == 'EUR') selected @endif>NOK</option>
+                                                    <option value="PKR" @if($bankaccount->currency == 'EUR') selected @endif>PKR</option>
+                                                    <option value="XPD" @if($bankaccount->currency == 'EUR') selected @endif>XPD</option>
+                                                    <option value="PHP" @if($bankaccount->currency == 'EUR') selected @endif>PHP</option>
+                                                    <option value="XPT" @if($bankaccount->currency == 'EUR') selected @endif>XPT</option>
+                                                    <option value="PLZ" @if($bankaccount->currency == 'EUR') selected @endif>PLZ</option>
+                                                    <option value="PTE" @if($bankaccount->currency == 'EUR') selected @endif>PTE</option>
+                                                    <option value="ROL" @if($bankaccount->currency == 'EUR') selected @endif>ROL</option>
+                                                    <option value="RUR" @if($bankaccount->currency == 'EUR') selected @endif>RUR</option>
+                                                    <option value="SAR" @if($bankaccount->currency == 'EUR') selected @endif>SAR</option>
+                                                    <option value="XAG" @if($bankaccount->currency == 'EUR') selected @endif>XAG</option>
+                                                    <option value="SGD" @if($bankaccount->currency == 'EUR') selected @endif>SGD</option>
+                                                    <option value="SKK" @if($bankaccount->currency == 'EUR') selected @endif>SKK</option>
+                                                    <option value="ZAR" @if($bankaccount->currency == 'EUR') selected @endif>ZAR</option>
+                                                    <option value="KRW" @if($bankaccount->currency == 'EUR') selected @endif>KRW</option>
+                                                    <option value="ESP" @if($bankaccount->currency == 'EUR') selected @endif>ESP</option>
+                                                    <option value="XDR" @if($bankaccount->currency == 'EUR') selected @endif>XDR</option>
+                                                    <option value="SDD" @if($bankaccount->currency == 'EUR') selected @endif>SDD</option>
+                                                    <option value="SEK" @if($bankaccount->currency == 'EUR') selected @endif>SEK</option>
+                                                    <option value="CHF" @if($bankaccount->currency == 'EUR') selected @endif>CHF</option>
+                                                    <option value="TWD" @if($bankaccount->currency == 'EUR') selected @endif>TWD</option>
+                                                    <option value="THB" @if($bankaccount->currency == 'EUR') selected @endif>THB</option>
+                                                    <option value="TTD" @if($bankaccount->currency == 'EUR') selected @endif>TTD</option>
+                                                    <option value="TRL" @if($bankaccount->currency == 'EUR') selected @endif>TRL</option>
+                                                    <option value="VEB" @if($bankaccount->currency == 'EUR') selected @endif>VEB</option>
+                                                    <option value="ZMK" @if($bankaccount->currency == 'EUR') selected @endif>ZMK</option>
+                                                    <option value="EUR" @if($bankaccount->currency == 'EUR') selected @endif>EUR</option>
+                                                    <option value="XCD" @if($bankaccount->currency == 'EUR') selected @endif>XCD</option>
+                                                    <option value="XDR" @if($bankaccount->currency == 'EUR') selected @endif>XDR</option>
+                                                    <option value="XAG" @if($bankaccount->currency == 'EUR') selected @endif>XAG</option>
+                                                    <option value="XAU" @if($bankaccount->currency == 'EUR') selected @endif>XAU</option>
+                                                    <option value="XPD" @if($bankaccount->currency == 'EUR') selected @endif>XPD</option>
+                                                    <option value="XPT" @if($bankaccount->currency == 'EUR') selected @endif>XPT</option>
+                                                    <option value="BTC" @if($bankaccount->currency == 'EUR') selected @endif>BTC</option>
+                                                    <option value="BTC/EUR" @if($bankaccount->currency == 'EUR') selected @endif>BTC/EUR</option>
+                                                    <option value="BTC/USD" @if($bankaccount->currency == 'EUR') selected @endif>BTC/USD</option>
+                                                    <option value="USDT" @if($bankaccount->currency == 'EUR') selected @endif>USDT</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="description">Invoice Email</label>
-                                            <input type="email" placeholder="Enter Invoice Email" class="form-control" name="invoice_email" required />
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="account_number">Account Number/IBAN:</label>
+                                                <input type="text" placeholder="Enter Account Number" class="form-control" name="account_number" value="{{$bankaccount->account_number}}" />
+                                            </div>
                                         </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="nickname">Nickname:</label>
+                                                <input type="text" placeholder="Enter Account Nickname" class="form-control" name="nickname" value="{{$bankaccount->nick_name}}" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="nickname">Bank Charges:</label>
+                                                <input type="text" placeholder="Enter Account Nickname" required class="form-control" name="bank_charges" value="{{$bankaccount->bank_charges}}" required />
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
 
+                                @endforeach
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="description">Payout Notification Email</label>
-                                            <input type="email" placeholder="Enter Payout Notification Email" class="form-control" name="payout_notification_email" required />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="description">Settlement Notification Email</label>
-                                            <input type="email" placeholder="Enter Settlement Notification Email" class="form-control" name="settlement_notification_email" required />
-                                        </div>
-                                    </div>
+
+                                <div class="text-center">
+                                    <a href="javascript:void(0);" name="add" id="add_accounts" class="btn btn-success"><i class="fa fa-plus"></i> Add More</a>
+
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="description">Payout Notification Email [FOR ADMIN]l</label>
-                                            <input type="email" placeholder="Enter Payout Notification Email FOR ADMIN" class="form-control" name="payout_notification_email_admin" required />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="description">Settlement Notification Email [FOR ADMIN]</label>
-                                            <input type="email" placeholder="Enter Settlement Notification Email FOR ADMIN" class="form-control" name="settlement_notification_email_admin" required />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="description">Incoming Percentage *</label>
-                                            <input type="number" placeholder="Enter Incoming Percentage" class="form-control" name="incoming_percentage" required />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="description">Payout Percentage *</label>
-                                            <input type="number" placeholder="Enter Payout Percentage" class="form-control" name="payout_percentage" required />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="account_number">Alternate Payout Commission</label>
-                                        <input type="number" placeholder="Enter Alternate Payout Commission" class="form-control" name="alternate_payout_commission" />
+                                        <label for="swift_code">Swift Code*</label>
+                                        <input type="text" placeholder="Enter Swift Code" class="form-control" name="swift_code" required value="{{$bank->swift_code}}" />
                                     </div>
-                                </div>
 
+                                </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="description">B2B Percentage*</label>
-                                            <input type="number" placeholder="Enter B2B Percentage" class="form-control" name="b2b_percentage" required />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="description">Rolling Reserve Percentage*</label>
-                                            <input type="number" placeholder="Enter Rolling Reserve Percentage" class="form-control" name="rolling_reserve_percentage" required />
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="description">Rolling Reserve Release Days</label>
-                                        <input type="number" placeholder="Enter Rolling Reserve Release Days" class="form-control" name="rolling_reserve_release_days" />
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="company_name">Password*</label>
-                                            <input type="text" placeholder="New Password" class="form-control" name="company_name" required />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="company_email">Repeat Password*:</label>
-                                            <input type="text" placeholder="Repeat Password" class="form-control" name="company_email" />
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="prefix">Website</label>
-                                            <input type="text" placeholder="Enter Website" class="form-control" name="website" required />
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="declaration_content">Customer Support Number:</label>
-                                            <input type="text" placeholder="Enter Customer Support Number" class="form-control" name="customer_support_number" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="description">Invoice Remarks</label>
-                                            <textarea placeholder="Invoice Remarks" class="form-control" name="invoice_remarks"></textarea>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="logo">Upload Logo:</label>
-                                            <input type="file" placeholder="Choose File" class="form-control" name="upload_logo"/>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <center>
-                                                <p>Enable mail for Customers?</p>
-                                                <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="enable_mail_for_customers">
-                                            </center>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                           
-                                            <!-- Default checked -->
-                                            <center>
-                                                <p>Company Details on left</p>
-                                                <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="company_details_on_left">
-                                            </center>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                        <center>
-                                                <p>Invoice Details on right</p>
-                                                <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="invoice_details_on_right">
-                                            </center>
-
+                                            <label for="description">Remarks</label>
+                                            <textarea placeholder="Invoice Remarks" class="form-control" name="remarks">{{$bank->remarks}}</textarea>
 
                                         </div>
                                     </div>
@@ -538,25 +502,70 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                        <center>
-                                                <p>B2B Access</p>
-                                                <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="b2b_access">
-                                            </center>
-
-
+                                            <label for="company_name">Company Name*</label>
+                                            <input type="text" placeholder="Enter Company Name" class="form-control" name="company_name" required value="{{$bank->company_name}}" />
                                         </div>
                                     </div>
-
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                        <center>
-                                                <p>Status</p>
-                                                <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="status">
-                                            </center>
-
+                                            <label for="company_email">Company Email:</label>
+                                            <input type="email" placeholder="Enter Company Email" class="form-control" name="company_email" value="{{$bank->company_email}}" />
                                         </div>
                                     </div>
                                 </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="prefix">Prefix(for invoice number)*</label>
+                                            <input type="text" placeholder="Enter Prefix for invoice number" class="form-control" name="prefix" required value="{{$bank->prefix}}" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="declaration_content">Declaration Contenet:</label>
+                                            <input type="text" placeholder="Add Declaration Content" class="form-control" name="declaration_content" value="{{$bank->declaration_content}}" />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="instructions_title">Instructions Title(for invoice):</label>
+                                            <input type="text" placeholder="Enter Title for instructions" class="form-control" name="instructions_title" value="{{$bank->instructions_title}}" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="instructions_content">Instructions Content:</label>
+                                            <input type="text" placeholder="Add Instructions Content" class="form-control" name="instructions_content" value="{{$bank->instructions_content}}" />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+
+                                <div class="form-group">
+                                    <label for="logo">Upload Logo:</label>
+                                    <input type="file" placeholder="Choose File" class="form-control" name="logo" value="{{$bank->logo}}" />
+                                </div>
+
+
+
+                                <center>
+                                    <p>Status</p>
+                                    <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="status" value="{{$bank->status}}">
+
+                                </center>
 
 
 
@@ -578,10 +587,144 @@
 
 @include('footer')
 
-
 <script>
     $(function() {
         $('.select2').select2()
+    });
+</script>
+
+
+
+<script type="text/javascript">
+    // wordofday Edit
+    $(document).ready(function() {
+        var i = 1;
+        $('#add_accounts').click(function() {
+            i++;
+            $('#bank_accounts').append('  <div class="row" id="row' + i + '">' +
+                '<div class="col-md-2">' +
+                '<div class="form-group">' +
+                '<label>Currency</label>' +
+                '<select class="form-control select2" style="width: 100%;" name="currency[]" required>' +
+                '<option value="" selected disabled>Please Select One</option>' +
+                '<option value="USD">USD</option>' +
+                '<option value="EUR">EUR</option>' +
+                '<option value="GBP">GBP</option>' +
+                '<option value="DZD">DZD</option>' +
+                '<option value = "AED" >AED</option>' +
+                '<option value = "ARP" >ARP</option>' +
+                '<option value = "AUD" >AUD</option>' +
+                '<option value = "ATS" > ATS </option>' +
+                '<option value = "BSD" > BSD </option>' +
+                '<option value = "BBD" > BBD </option>' +
+                '<option value = "BEF" > BEF </option>' +
+                '<option value = "BMD" > BMD </option>' +
+                '<option value = "BRR" > BRR </option>' +
+                '<option value = "BGN" > BGN </option>' +
+                '<option value = "CAD" > CAD </option>' +
+                '<option value = "CLP" > CLP </option> ' +
+                '<option value = "CNY" > CNY </option> ' +
+                '<option value = "CYP" > CYP </option> ' +
+                '<option value = "CSK" > CSK </option> ' +
+                '<option value = "DKK" > DKK </option> ' +
+                '<option value = "NLG" > NLG </option> ' +
+                '<option value = "XCD" > XCD </option> ' +
+                '<option value = "EGP" > EGP </option> ' +
+                '<option value = "FJD" > FJD </option> ' +
+                '<option value = "FIM" > FIM </option> ' +
+                '<option value = "FRF" > FRF </option> ' +
+                '<option value = "DEM" > DEM </option> ' +
+                '<option value = "XAU" > XAU </option> ' +
+                '<option value = "GRD" > GRD </option> ' +
+                '<option value = "HKD" > HKD </option> ' +
+                '<option value = "HUF" > HUF </option> ' +
+                '<option value = "ISK" > ISK </option> ' +
+                '<option value = "INR" > INR </option> ' +
+                '<option value = "IDR" > IDR </option> ' +
+                '<option value = "IEP" > IEP </option> ' +
+                '<option value = "ILS" > ILS </option> ' +
+                '<option value = "ITL" > ITL </option> ' +
+                '<option value = "JMD" > JMD < /option> ' +
+                '<option value = "JPY" > JPY < /option> ' +
+                '<option value = "JOD" > JOD < /option> ' +
+                '<option value = "KRW" > KRW < /option> ' +
+                '<option value = "LBP" > LBP < /option> ' +
+                '<option value = "LUF" > LUF < /option> ' +
+                '<option value = "MYR" > MYR < /option> ' +
+                '<option value = "MXP" > MXP < /option> ' +
+                '<option value = "NLG" > NLG < /option> ' +
+                '<option value = "NZD" > NZD < /option> ' +
+                '<option value = "NOK" > NOK < /option> ' +
+                '<option value = "PKR" > PKR < /option>' +
+                '<option value = "XPD" > XPD < /option> ' +
+                '<option value = "PHP" > PHP < /option> ' +
+                '<option value = "XPT" > XPT < /option> ' +
+                '<option value = "PLZ" > PLZ < /option> ' +
+                '<option value = "PTE" > PTE < /option> ' +
+                '<option value = "ROL" > ROL < /option> ' +
+                '<option value = "RUR" > RUR < /option> ' +
+                '<option value = "SAR" > SAR < /option> ' +
+                '<option value = "XAG" > XAG < /option> ' +
+                '<option value = "SGD" > SGD < /option> ' +
+                '<option value = "SKK" > SKK < /option> ' +
+                '<option value = "ZAR" > ZAR < /option> ' +
+                '<option value = "KRW" > KRW < /option>' +
+                '<option value = "ESP" > ESP < /option> ' +
+                '<option value = "XDR" > XDR < /option> ' +
+                '<option value = "SDD" > SDD < /option> ' +
+                '<option value = "SEK" > SEK < /option> ' +
+                '<option value = "CHF" > CHF < /option> ' +
+                '<option value = "TWD" > TWD < /option> ' +
+                '<option value = "THB" > THB < /option> ' +
+                '<option value = "TTD" > TTD < /option> ' +
+                '<option value = "TRL" > TRL < /option> ' +
+                '<option value = "VEB" > VEB < /option> ' +
+                '<option value = "ZMK" > ZMK < /option> ' +
+                '<option value = "EUR" > EUR < /option> ' +
+                '<option value = "XCD" > XCD < /option> ' +
+                '<option value = "XDR" > XDR < /option> ' +
+                '<option value = "XAG" > XAG < /option>' +
+                '<option value = "XAU" > XAU < /option> ' +
+                '<option value = "XPD" > XPD < /option> ' +
+                '<option value = "XPT" > XPT < /option> ' +
+                '<option value = "BTC" > BTC < /option> ' +
+                '<option value = "BTC/EUR" > BTC / EUR < /option> ' +
+                '<option value = "BTC/USD" > BTC / USD < /option> ' +
+                '<option value = "USDT" > USDT < /option>' +
+                '</select>' +
+                '</div>' +
+                '</div>' +
+                '<div class="col-md-3">' +
+                '<div class="form-group">' +
+                '<label for="account_number">Account Number/IBAN:</label>' +
+                '<input type="text" placeholder="Enter Account Number" class="form-control" name="account_number[]" required />' +
+                '</div>' +
+                '</div>' +
+                '<div class="col-md-3">' +
+                '<div class="form-group">' +
+                '<label for="nickname">Nickname:</label>' +
+                '<input type="text" placeholder="Enter Account Nickname" class="form-control" name="nickname[]" required/>' +
+                '</div>' +
+                '</div>' +
+                '<div class="col-md-3">' +
+                '<div class="form-group">' +
+                '<label for="nickname">Bank Charges:</label>' +
+                '<input type="text" placeholder="Enter Account Nickname" class="form-control" name="bank_charges[]" required/>' +
+                '</div>' +
+                '</div>' +
+                '<div class="col-md-1">' +
+                '<label> Remove </label>' +
+                '<a href="javascript:void(0);" name="remove" id="' + i + '" class="btn btn-danger btn-remove form-control remove_btn"><i class="fa fa-minus"></i></a>' +
+                '</div>' +
+                '</div> ');
+
+            $('.btn-remove').click(function() {
+                var btnid = $(this).attr('id');
+                $('#row' + btnid).remove();
+            });
+
+        });
+
     });
 </script>
 <script>

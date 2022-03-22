@@ -42,6 +42,11 @@ Route::group(['prefix' => 'bank'], function(){
 });
 
 
+   
+    Route::post('/bankaccountupdate', [BankController::class, 'bankaccountupdate']);
+    Route::get('/bankaccountdestroy/{bankaccountid}', [BankController::class, 'bankaccountdestroy']);
+
+
 Route::group(['prefix' => 'merchant'], function(){
     Route::get('/index', [merchantController::class, 'index']);
     Route::get('/create', [merchantController::class, 'create']);
@@ -95,8 +100,4 @@ Route::group(['prefix' => 'payout'], function(){
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-
-
 

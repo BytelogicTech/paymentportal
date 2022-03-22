@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('currency');
             $table->string('account_number');
             $table->string('nick_name');
+            $table->string('bank_charges');
             $table->timestamps();
             $table->foreign('bank_id')->references('id')->on('banks');
         });
