@@ -53,7 +53,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Bank Accounts Assigned*</label>
-                                            <select name="bank_account_id" value="{{$merchant->bank_account_id}}" id="" class="select2 form-control">
+                                            <select name="bank_account_id" id="" class="select2 form-control">
                                                 <option>Select Bank Account</option>
 
                                                 @foreach($bankaccounts as $bankaccount)

@@ -227,7 +227,6 @@ class BankController extends Controller
     {
         $bank_account = bank_account::findorFail($bankaccountid);
         $bank_account->delete();
-
         return back()->with('success', 'Bank Deleted Successfully');
     }
 }

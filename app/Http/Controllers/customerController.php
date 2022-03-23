@@ -8,6 +8,7 @@ use App\Models\customer;
 use App\Models\merchant;
 use App\Models\bank_account_payouts;
 use App\Models\customer_documents;
+use App\Models\User;
 // use App\Models\customer_account;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +29,9 @@ class customerController extends Controller
     {
         $customers = customer::all();
         // dd($customers);
-        return view('customer/index', compact('customers'));
+        $userpluck = User::pluck('first_name','id');
+
+        return view('customer/index', compact('customers','userpluck'));
     }
 
     /**
@@ -195,7 +198,6 @@ class customerController extends Controller
         $customer->date_of_birth = $request->date_of_birth;
         $customer->id_number = $request->id_number;
         $customer->merchant_fk_id=$request->merchant_fk_id;
-        $customer->parent_merchant = $request->parent_merchant;
        
         if($request->status=='on')
         {
@@ -227,5 +229,15 @@ class customerController extends Controller
         $customer->delete();
 
         return redirect('customer/index')->with('success', 'customer Deleted Successfully');
+    }
+
+
+
+    public function bankaccountpayoutdestroy($bankaccountpayoutid)
+    {
+        $bank_account_payouts = bank_account_payouts::findorFail($bankaccountpayoutid);
+        $bank_account_payouts->delete();
+
+        return back()->with('success', 'Bank Deleted Successfully');
     }
 }
