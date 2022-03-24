@@ -61,6 +61,9 @@ Route::group(['prefix' => 'customer'], function(){
     Route::get('/delete/{id}', [customerController::class, 'destroy']);
 });
 
+Route::get('/bankaccountpayoutdestroy/{bankaccountpayoutid}', [customerController::class, 'bankaccountpayoutdestroy']);
+
+
 
 Route::group(['prefix' => 'transaction'], function(){
     Route::get('/index', [TransactionController::class, 'index'])->name('transaction.index');

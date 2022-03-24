@@ -8,27 +8,31 @@ use App\Models\customer;
 use App\Models\merchant;
 use App\Models\bank_account_payouts;
 use App\Models\customer_documents;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 // use App\Models\customer_account;
 use Illuminate\Http\Request;
 
 class customerController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
 
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     public function index()
     {
         $customers = customer::all();
         // dd($customers);
-        return view('customer/index', compact('customers'));
+        $userpluck = User::pluck('first_name','id');
+        $merchantpluck = merchant::pluck('first_name','id');
+        return view('customer/index', compact('customers','userpluck','merchantpluck'));
     }
 
     /**
@@ -193,8 +197,16 @@ class customerController extends Controller
         $customer->date_of_birth = $request->date_of_birth;
         $customer->id_number = $request->id_number;
         $customer->merchant_fk_id=$request->merchant_fk_id;
-        $customer->parent_merchant = $request->parent_merchant;
-        $customer->status = $request->status;
+       
+        if($request->status=='on')
+        {
+            $customer->status = 1;
+        }
+        else
+        {
+            $customer->status=0;
+        }
+        
 
 
         $customer->update();
@@ -216,5 +228,15 @@ class customerController extends Controller
         $customer->delete();
 
         return redirect('customer/index')->with('success', 'customer Deleted Successfully');
+    }
+
+
+
+    public function bankaccountpayoutdestroy($bankaccountpayoutid)
+    {
+        $bank_account_payouts = bank_account_payouts::findorFail($bankaccountpayoutid);
+        $bank_account_payouts->delete();
+
+        return back()->with('success', 'Bank Deleted Successfully');
     }
 }

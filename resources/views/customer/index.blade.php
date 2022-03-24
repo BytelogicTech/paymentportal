@@ -41,6 +41,9 @@
                     <th>Last Name</th>
                     <th>Email</th>
                     <th>Phone</th>
+                    <th>Parent Merchant</th>
+                    <th>Created By</th>
+                    <th>Created On</th>
                     <th>Status</th>
                     <th>Action</th>
                   </tr>
@@ -57,6 +60,9 @@
         <td>{{$customer->last_name}}</td>
         <td>{{$customer->email}}</td>
         <td>{{$customer->phone}}</td>
+        <td>{{@$merchantpluck[$customer->merchant_fk_id]}}</td>
+        <td>{{@$userpluck[$customer->created_by]}}</td>
+        <td>{{$customer->created_at}}</td>
         <td>
           @if($customer->status==1)
             <label class="text-success"> Active</label>

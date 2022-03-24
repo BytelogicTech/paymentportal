@@ -145,8 +145,14 @@
                                 <h4>Bank Account Details for Payout</h4>
                                 <p>Only mandatory for customer payouts/withdrawals
                                 </p>
+                            
+                                <table class="table table-bordered table-hover"> 
+                                                                
 
-                                @foreach($bankaccountpayouts as $bankaccountpayout)
+                         
+                                        @foreach($bankaccountpayouts as $bankaccountpayout)
+
+                                        
 
 
                                 <div id="bank_accounts_details">
@@ -490,9 +496,10 @@
                                 <!-- Bootstrap Switch -->
                                 <center>
                                     <p>Status</p>
-                                    <input type="checkbox" data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="status" value="" @if($customer->status == '1') checked @endif >
+                                    <input type="checkbox" @if($customer->status==1) checked @endif data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="status">
 
                                 </center>
+
 
 
 

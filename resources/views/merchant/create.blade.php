@@ -443,21 +443,38 @@
                                     </div>
                                 </div>
 
+
+
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="company_name">Password*</label>
-                                            <input type="text" placeholder="New Password" class="form-control" name="company_name" required />
+                                            <label for="password">Password*</label>
+                                            <input id="password" type="password" onChange="onChange()" placeholder="Enter Password" class="form-control" name="password" value="" required autocomplete="password" autofocus>
+
+                                            @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+
                                         </div>
                                     </div>
+
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="company_email">Repeat Password*:</label>
-                                            <input type="text" placeholder="Repeat Password" class="form-control" name="company_email" />
+                                            <label for="confirm_password">Repeat Password*:</label>
+                                            <input id="confirm" type="password" onChange="onChange()" placeholder="Enter Password" class="form-control" name="confirm" value="" required autocomplete="confirm" autofocus>
+
+                                            @error('confirm_password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+
                                         </div>
                                     </div>
                                 </div>
-
 
                                 <div class="row">
                                     <div class="col-md-6">
@@ -492,14 +509,14 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="logo">Upload Logo:</label>
-                                            <input type="file" placeholder="Choose File" class="form-control" name="upload_logo"/>
+                                            <input type="file" placeholder="Choose File" class="form-control" name="upload_logo" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <center>
                                                 <p>Enable mail for Customers?</p>
-                                                <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="enable_mail_for_customers">
+                                                <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Enabled" data-off-text="Disabled" name="enable_mail_for_customers">
                                             </center>
 
                                         </div>
@@ -512,11 +529,11 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                           
+
                                             <!-- Default checked -->
                                             <center>
                                                 <p>Company Details on left</p>
-                                                <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="company_details_on_left">
+                                                <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Enabled" data-off-text="Disabled" name="company_details_on_left">
                                             </center>
 
                                         </div>
@@ -524,9 +541,9 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                        <center>
+                                            <center>
                                                 <p>Invoice Details on right</p>
-                                                <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="invoice_details_on_right">
+                                                <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Enabled" data-off-text="Disabled" name="invoice_details_on_right">
                                             </center>
 
 
@@ -538,9 +555,9 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                        <center>
+                                            <center>
                                                 <p>B2B Access</p>
-                                                <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="b2b_access">
+                                                <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Enabled" data-off-text="Disabled" name="b2b_access">
                                             </center>
 
 
@@ -549,7 +566,7 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                        <center>
+                                            <center>
                                                 <p>Status</p>
                                                 <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="status">
                                             </center>
@@ -586,4 +603,17 @@
 </script>
 <script>
     $('[data-toggle="switch"]').bootstrapSwitch();
+</script>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script>
+    function onChange() {
+        const password = document.querySelector('input[name=password]');
+        const confirm = document.querySelector('input[name=confirm]');
+        if (confirm.value === password.value) {
+            confirm.setCustomValidity('');
+        } else {
+            confirm.setCustomValidity('Passwords do not match');
+        }
+    }
 </script>

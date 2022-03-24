@@ -65,9 +65,9 @@
         <td>{{@$userpluck[$merchant->created_by]}}</td>
         <td>
           @if($merchant->status==1)
-            <label class="text-success"> Active</label>
+            <label class="text-success"> Activated</label>
             @else
-            <label class="text-danger"> Inactive</label>
+            <label class="text-danger"> Deactivated</label>
           @endif
         </td>
         <td>
