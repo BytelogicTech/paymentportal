@@ -646,3 +646,5 @@
 <script>
     $('[data-toggle="switch"]').bootstrapSwitch();
 </script>
+bank create.txt
+Displaying bank create.txt.

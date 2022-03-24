@@ -73,7 +73,7 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $id = $request->id;
-        $user = user::find($id);
+        $user = User::find($id);
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         $user->merchant_fk_id = $request->merchant_fk_id;
@@ -90,7 +90,7 @@ class UserController extends Controller
         
         $user->role = $request->role;
         $user->remember_token = $request->remember_token;
-        // $user->save();
+        $user->save();
         return redirect('user/index')->with('message','User Updated Successfully');
     }
 

@@ -123,8 +123,8 @@
                                             <label for="role">User Role*</label>
                                             <select class="select2 form-control" name="role" required>
                                                 <option value="" disabled selected>Please Select One</option>                                            
-                                                <option value="merchant admin">Merchant Admin</option>
-                                                <option value="merchant view-only">Merchant View-Only</option>
+                                                <option value="Merchant Admin">Merchant Admin</option>
+                                                <option value="Merchant View-Only">Merchant View-Only</option>
                                                 
                                             </select>
                                               

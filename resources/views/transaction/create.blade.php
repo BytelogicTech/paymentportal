@@ -53,7 +53,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Parent Merchant*</label>
-                                            <select class="select2 form-control" name="merchant_fk_id">
+                                            <select class="select2 form-control" name="merchant_fk_id" required>
                                                 <option value="" disabled selected>Please Select One</option>
                                                 @foreach($merchants as $merchant)
                                                 <option value="{{$merchant->id}}">{{$merchant->merchant_name}}</option>
@@ -65,7 +65,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Bank To*</label>
-                                            <select name="bank_account_fk_id" class="select2 form-control">
+                                            <select name="bank_account_fk_id" class="select2 form-control" required>
                                                 <option>Select Bank Account</option>
 
                                                 @foreach($bankaccounts as $bankaccount)
@@ -82,7 +82,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Customer*</label>
-                                            <select class="select2 form-control" name="customer_fk_id">
+                                            <select class="select2 form-control" name="customer_fk_id" >
                                                 <option value="" disabled selected>Please Select One</option>
                                                 @foreach($customers as $customer)
                                                 <option value="{{$customer->id}}">{{$customer->first_name}}</option>

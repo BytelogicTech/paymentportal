@@ -8,6 +8,7 @@ use App\Models\customer;
 use App\Models\merchant;
 use App\Models\bank_account_payouts;
 use App\Models\customer_documents;
+use Illuminate\Support\Facades\Auth;
 // use App\Models\customer_account;
 use Illuminate\Http\Request;
 
@@ -18,6 +19,11 @@ class customerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $customers = customer::all();
@@ -60,9 +66,11 @@ class customerController extends Controller
 
         $customer->merchant_fk_id=$request->merchant_fk_id;
 
-
+        $customer->created_by = Auth::user()->id;
         $customer->save();  
         $customerid = $customer->id;
+
+        
 
         $customer->parent_merchant = $request->parent_merchant;
 
@@ -100,7 +108,7 @@ class customerController extends Controller
             $bankaccountpayouts->intermediary_bank_address = $request->intermediary_bank_address[$i];
             $bankaccountpayouts->intermediary_bank_swift = $request->intermediary_bank_swift[$i];
             $bankaccountpayouts->intermediary_bank_details_remarks = $request->intermediary_bank_details_remarks[$i];
-            
+            $bankaccountpayouts->created_by = Auth::user()->id;
             $bankaccountpayouts->save();
         }
 
@@ -128,7 +136,7 @@ class customerController extends Controller
             }
         }
 
-            
+            $customerdocuments->created_by = Auth::user()->id;
             $customerdocuments->save();
         }
         

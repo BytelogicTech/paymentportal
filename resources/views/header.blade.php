@@ -147,13 +147,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{url('bank/index')}}" class="nav-link">
+                  <a href="{{url('customer/index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>View All Customers</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{url('bank/create')}}" class="nav-link">
+                  <a href="{{url('customer/create')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Add new Customer</p>
                   </a>
@@ -253,6 +253,30 @@
                   <a href="{{url('bank/create')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Add new Bank</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fa fa-university"></i>
+                <p>
+                  Payouts
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{url('payout/index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>View All Payouts</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{url('payout/create')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add new Payout</p>
                   </a>
                 </li>
               </ul>

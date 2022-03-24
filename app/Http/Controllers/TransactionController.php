@@ -130,8 +130,9 @@ class TransactionController extends Controller
             ->groupBy('bank_id');
         $customers = customer::all();
         $transaction = transaction::find($id);
+        $bankpluck = bank::pluck('beneficiary_name','id');
         
-        return view('transaction/edit', compact('transaction','merchants','bankaccounts','customers'));
+        return view('transaction/edit', compact('transaction','merchants','bankaccounts','customers','bankpluck'));
     }
 
     /**

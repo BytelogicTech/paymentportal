@@ -1,8 +1,6 @@
 @include('header')
 
-<head>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-</head>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -31,7 +29,7 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Add New payout</h3>
+                            <h3 class="card-title">Add New Payout</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
@@ -40,173 +38,150 @@
 
 
 
-                        <div class="card-body">
-                    <form method="POST" action="{{ url('payout/store') }}">
-                        @csrf
+                        <form action="{{url('payout/store')}}" method="POST" enctype="multipart/form-data">
+                            <div class="card-body">
+                                @csrf
 
-                        
+
 
                             <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="first_name">First Name*</label>
-                                            <input id="first_name" type="text" placeholder="Enter FIrst Name" class="form-control" name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
-
-                                            @error('first_name')
-                                            <span class="invalid-feedback" role="alert">
-                                             <strong>{{ $message }}</strong>
-                                            </span>
-                                             @enderror
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="last_name">Last Name*</label>
-                                            <input id="last_name" type="text" placeholder="Enter Last Name" class="form-control" name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
-                                            
-                                            @error('last_name')
-                                            <span class="invalid-feedback" role="alert">
-                                             <strong>{{ $message }}</strong>
-                                            </span>
-                                             @enderror
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="email">Email*</label>
-                                            <input id="email" type="email" placeholder="Enter Email" class="form-control" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                                              
-                                            @error('email')
-                                            <span class="invalid-feedback" role="alert">
-                                             <strong>{{ $message }}</strong>
-                                            </span>
-                                             @enderror
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="phone">Phone No</label>
-                                            <input id="phone" type="text" placeholder="Enter Phone No." class="form-control" name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus>
-                                              
-                                            @error('phone')
-                                            <span class="invalid-feedback" role="alert">
-                                             <strong>{{ $message }}</strong>
-                                            </span>
-                                             @enderror
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="address">Address</label>
-                                            <textarea id="address" type="textarea" placeholder="Enter Address" class="form-control" name="address" value="{{ old('address') }}" required autocomplete="address" autofocus></textarea>
-                                            
-     
-                                            @error('address')
-                                            <span class="invalid-feedback" role="alert">
-                                             <strong>{{ $message }}</strong>
-                                            </span>
-                                             @enderror
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="role">User Role*</label>
-                                            <select class="select2 form-control" name="role" required>
-                                                <option value="" disabled selected>Please Select One</option>                                            
-                                                <option value="merchant admin">Merchant Admin</option>
-                                                <option value="merchant view-only">Merchant View-Only</option>
-                                                
-                                            </select>
-                                              
-                                            @error('role')
-                                            <span class="invalid-feedback" role="alert">
-                                             <strong>{{ $message }}</strong>
-                                            </span>
-                                             @enderror
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="password">Password*</label>
-                                            <input id="password" type="password" onChange="onChange()" placeholder="Enter Password" class="form-control" name="password" value="" required autocomplete="password" autofocus>
-                                              
-                                            @error('password')
-                                            <span class="invalid-feedback" role="alert">
-                                             <strong>{{ $message }}</strong>
-                                            </span>
-                                             @enderror
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="confirm_password">Confirm Password*</label>
-                                            <input id="confirm" type="password" onChange="onChange()" placeholder="Enter Password" class="form-control" name="confirm" value="" required autocomplete="confirm" autofocus>
-                                              
-                                            @error('confirm_password')
-                                            <span class="invalid-feedback" role="alert">
-                                             <strong>{{ $message }}</strong>
-                                            </span>
-                                             @enderror
-
-                                        </div>
-                                    </div>
-                                    
-                                    
-
-                                    
-
-                                    <div class="col-md-6">
+                                <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Parent Merchant*</label>
-                                            <select class="select2 form-control" name="merchant_fk_id">
+                                            <select class="select2 form-control" name="merchant_fk_id" required>
                                                 <option value="" disabled selected>Please Select One</option>
-                                                
                                                 @foreach($merchants as $merchant)
-                                                <option value="{{$merchant->id}}">{{$merchant->merchant_name}}</option>
+                                                <option value="{{$merchant->id}}">{{$merchant->first_name}}</option>
                                                 @endforeach
-                                                
+                                            </select>
+                                        </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="description">Customer*</label>
+                                            <select class="select2 form-control" name="customer_fk_id" required>
+                                                <option value="" disabled selected>Please Select One</option>
+                                                @foreach($customers as $customer)
+                                                <option value="{{$customer->id}}">{{$customer->first_name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="description">Bank Account To Transfer To*</label>
+                                            <select class="select2 form-control" name="bank_account_to_fk_id" required>
+                                                <option value="" disabled selected>Please Select One</option>
+                                                @foreach($bankaccounts as $bankaccount)
+                                                <optgroup label="{{$bankaccount[0]->bank_name}}">
+                                                    @foreach($bankaccount as $item)
+                                                    <option value="{{$item->bank_accountsid}}">{{$item->beneficiary_name}} - {{$item->currency}} - ({{$item->account_number}}) </option>
+                                                    @endforeach
+                                                </optgroup>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                </div>
+                                    
+
+                               
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Payment Amount*</label>
+                                            <input type="text" placeholder="Enter Payment Amount" class="form-control" name="payout_amount" required />
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Remarks / Purpose of Payment</label>
+                                            <textarea placeholder="Enter Payment Amount" class="form-control" name="remarks"></textarea>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Reference Id</label>
+                                            <input type="text" placeholder="Enter Payment Amount" class="form-control" name="reference_id"/>
+
+                                        </div>
+                                    </div>
+
+                                    
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="description">Upload Invoice</label>
+                                            <input type="file" class="form-control" name="upload_invoice">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="description">Upload Payout Confirmation Receipt</label>
+                                            <input type="file" class="form-control" name="upload_reciept">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="description">Bank Account To Transfer From*</label>
+                                            <select class="select2 form-control" name="bank_account_from_fk_id">
+                                                <option>Please Select One</option>
+                                                @foreach($bankaccounts as $bankaccount)
+                                                <optgroup label="{{$bankaccount[0]->bank_name}}">
+                                                    @foreach($bankaccount as $item)
+                                                    <option value="{{$item->bank_accountsid}}">{{$item->beneficiary_name}} - {{$item->currency}} - ({{$item->account_number}}) </option>
+                                                    @endforeach
+                                                </optgroup>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
 
-                            </div>
-                                       <div class="form-group">
-                                            <center>
-                                                <p>Status</p>
-                                                <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="Activated" data-off-text="Deactivated" name="enable_mail_for_customers">
-                                            </center>
 
+
+
+                                    
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="description">Status of Payment*</label>
+                                            <select class="select2 form-control" name="status_of_payout">
+                                                <option value="" disabled selected>Please Select One</option>
+                                                <option value="New">New</option>
+                                                <option value="Processing">Processing</option>
+                                                <option value="Paid">Paid</option>
+                                                <option value="Hold">Hold</option>
+                                                <option value="Canceled">Canceled</option>
+                                                <option value="Returned">Returned</option>
+                                                <option value="Rejected">Rejected</option>
+                                                
+                                            </select>
                                         </div>
+                                    </div>
+                                    
+                                    
 
-                                        <div class="row mb-0">
-                            <div class="col-md-3 offset-md-3">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div> 
-
-                                        
                                     
 
 
-                       
-                    </form>
-                </div>
+                                    
+                                </div>
+
+
+
+                                <!-- /.card -->
+
+
+
+                                <button type="submit" class="btn btn-primary">Add</button>
+                            </div>
+
+                        </form>
                     </div>
                     <!-- /.card -->
 
@@ -224,23 +199,6 @@
     $(function() {
         $('.select2').select2()
     });
-</script>
-
-<script>
-    $('[data-toggle="switch"]').bootstrapSwitch();
-</script>
-
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script>
-    function onChange() {
-  const password = document.querySelector('input[name=password]');
-  const confirm = document.querySelector('input[name=confirm]');
-  if (confirm.value === password.value) {
-    confirm.setCustomValidity('');
-  } else {
-    confirm.setCustomValidity('Passwords do not match');
-  }
-}
 </script>
 
 

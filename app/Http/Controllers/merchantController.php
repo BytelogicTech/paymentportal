@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\bank;
 use App\Models\bank_account;
 use App\Models\merchant;
+use App\Models\User;
 // use App\Models\merchant_account;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class merchantController extends Controller
 {
@@ -16,11 +18,16 @@ class merchantController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function __construct()
     {
+        $this->middleware('auth');
+    }
+    public function index()
+    {   
         $merchants = merchant::all();
-        // dd($merchants);
-        return view('merchant/index', compact('merchants'));
+        $userpluck = User::pluck('first_name','id');
+        return view('merchant/index', compact('merchants','userpluck'));
     }
 
     /**
@@ -132,8 +139,13 @@ class merchantController extends Controller
                 return back()->with('error', 'Please upload Logo');
             }
         }
+        
 
-        $merchant->save();  
+        $merchant->created_by = Auth::user()->id; 
+        $merchant->save();
+       
+
+        $merchantid = $merchant->id;  
 
        
 
