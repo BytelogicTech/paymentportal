@@ -8,9 +8,11 @@ use App\Models\customer;
 use App\Models\User;
 use App\Models\bankaccount;
 use App\Models\bank_account;
+use App\Models\bank_account_payouts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Nette\Utils\Json;
 
 class PayoutController extends Controller
 {
@@ -23,11 +25,6 @@ class PayoutController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     public function index()
     {
         $payouts = payout::all();
@@ -48,8 +45,7 @@ class PayoutController extends Controller
     public function create()
     {
         $payouts = payout::all();
-        $merchants = merchant::all();
-        $customers = customer::all();
+        $merchants = merchant::all();        
         $bankaccounts =  DB::table('bank_accounts')
         ->join('banks','banks.id','=','bank_accounts.bank_id')
         ->select('bank_accounts.id as bank_accountsid','bank_accounts.bank_id','banks.bank_name','banks.beneficiary_name','bank_accounts.currency','bank_accounts.account_number','bank_accounts.nick_name')            
@@ -58,7 +54,7 @@ class PayoutController extends Controller
 
         // dd($bankaccounts);
 
-        return view('payout/create', compact('payouts','merchants','customers','bankaccounts'));
+        return view('payout/create', compact('payouts','merchants','bankaccounts'));
     }
 
     /**
@@ -131,6 +127,10 @@ class PayoutController extends Controller
     public function edit($id)
     {
         $payout = payout::findorFail($id);
+        $bank_account_to_fk_id = payout::find($id)->bank_account_to_fk_id;
+        $customer_fk_id = bank_account_payouts::find($bank_account_to_fk_id)->customer_fk_id;
+        $bank_account_payouts = bank_account_payouts::where('customer_fk_id',$customer_fk_id)->get();
+        
         $merchants = merchant::all();
         $customers = customer::all();
         $bankaccounts = bank_account::all();
@@ -206,5 +206,24 @@ class PayoutController extends Controller
         $payout->delete();
 
         return redirect('payout/index')->with('success', 'Payout Deleted Successfully');  
+    }
+
+    public function getcustomers_bymerchant(Request $request)
+    {
+        $merchant_fk_id = $request->merchant_fk_id;
+
+        $customers = customer::where('merchant_fk_id',$merchant_fk_id)->get();
+
+        return $customers;
+
+    }
+    public function getpayout_bycustomer(Request $request)
+    {
+        $customer_fk_id = $request->customer_fk_id;
+    
+        $bank_account_payouts = bank_account_payouts::where('customer_fk_id',$customer_fk_id)->get();
+
+        return $bank_account_payouts;
+
     }
 }

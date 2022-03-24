@@ -28,10 +28,10 @@ return new class extends Migration
             $table->string('account_number');
             $table->string('currency');
             $table->string('remarks');
-            $table->string('intermediary_bank_name');
-            $table->string('intermediary_bank_address');
-            $table->string('intermediary_bank_swift');
-            $table->string('intermediary_bank_details_remarks');
+            $table->string('intermediary_bank_name')->nullable();
+            $table->string('intermediary_bank_address')->nullable();
+            $table->string('intermediary_bank_swift')->nullable();
+            $table->string('intermediary_bank_details_remarks')->nullable();
             $table->foreign('customer_fk_id')->references('id')->on('customers');
             $table->timestamps();
             $table->unsignedBigInteger('created_by');

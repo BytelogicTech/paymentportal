@@ -148,7 +148,7 @@ class merchantController extends Controller
         $merchant->save();
        
 
-        $merchantid = $merchant->id;  
+        // $merchantid = $merchant->id;  
 
        
 

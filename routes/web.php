@@ -98,3 +98,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+/////// AJAX Functions
+
+Route::post('/getcustomers_bymerchant', [PayoutController::class, 'getcustomers_bymerchant']);
+Route::post('/getpayout_bycustomer', [PayoutController::class, 'getpayout_bycustomer']);
+

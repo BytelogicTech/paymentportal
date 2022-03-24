@@ -48,7 +48,7 @@
                                 <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Parent Merchant*</label>
-                                            <select class="select2 form-control" name="merchant_fk_id" required>
+                                            <select class="select2 form-control" name="merchant_fk_id" required id="merchant_fk_id">
                                                 <option value="" disabled selected>Please Select One</option>
                                                 @foreach($merchants as $merchant)
                                                 <option value="{{$merchant->id}}">{{$merchant->first_name}}</option>
@@ -60,11 +60,8 @@
                                 <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Customer*</label>
-                                            <select class="select2 form-control" name="customer_fk_id" required>
-                                                <option value="" disabled selected>Please Select One</option>
-                                                @foreach($customers as $customer)
-                                                <option value="{{$customer->id}}">{{$customer->first_name}}</option>
-                                                @endforeach
+                                            <select class=" form-control" name="customer_fk_id" required id="customer_fk_id">
+                                                <option value="" disabled selected>Please Select One</option>                                                
                                             </select>
                                         </div>
                                 </div>
@@ -72,15 +69,9 @@
                                 <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Bank Account To Transfer To*</label>
-                                            <select class="select2 form-control" name="bank_account_to_fk_id" required>
+                                            <select class="form-control" name="bank_account_to_fk_id" required id="bank_account_to_fk_id">
                                                 <option value="" disabled selected>Please Select One</option>
-                                                @foreach($bankaccounts as $bankaccount)
-                                                <optgroup label="{{$bankaccount[0]->bank_name}}">
-                                                    @foreach($bankaccount as $item)
-                                                    <option value="{{$item->bank_accountsid}}">{{$item->beneficiary_name}} - {{$item->currency}} - ({{$item->account_number}}) </option>
-                                                    @endforeach
-                                                </optgroup>
-                                                @endforeach
+                                           
                                             </select>
                                         </div>
                                 </div>
@@ -201,5 +192,70 @@
     });
 </script>
 
+<script>
+    $('#merchant_fk_id').change(function(){
+        $('#customer_fk_id').html('');
+        var merchant_fk_id = $(this).val();
+
+        $.ajax({
+                type: 'POST',
+                url: "{{url('getcustomers_bymerchant')}}",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    merchant_fk_id: merchant_fk_id
+                },
+                success: function(data) {
+                    
+                var options = '<option value="" >Please Select One</option> ';
+                    $.each(data, function(i, value) {
+                    options+= '<option value='+value["id"]+'>'+value["first_name"]+'</option>';
+                    });
+                    // console.log(data);
+                    $('#customer_fk_id').html(options);
+                },
+                error: function(data) {
+                    console.log("error");
+                    console.log(data);
+                }
+            });
+        
+    });
+    </script>
+
+
+<script>
+    $('#customer_fk_id').change(function(){
+        $('#bank_account_to_fk_id').html('');
+        var customer_fk_id = $(this).val();
+        
+
+        $.ajax({
+                type: 'POST',
+                url: "{{url('getpayout_bycustomer')}}",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    customer_fk_id: customer_fk_id
+                },
+                success: function(data) {
+                    
+                var options = '<option value="" disabled selected>Please Select One</option> ';
+                    $.each(data, function(i, value) {
+                    options+= '<option id='+value["id"]+'>'+value["beneficiary_name"]+'-'+value["currency"]+'-'+value["account_number"]+'</option>';
+                    });
+                    console.log(data);
+                    $('#bank_account_to_fk_id').html(options);
+                },
+                error: function(data) {
+                    console.log("error");
+                    console.log(data);
+                }
+            });
+        
+    });
+    </script>
 
 

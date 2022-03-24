@@ -71,13 +71,7 @@ class customerController extends Controller
         $customer->merchant_fk_id=$request->merchant_fk_id;
 
         $customer->created_by = Auth::user()->id;
-        $customer->save();  
-        $customerid = $customer->id;
-
         
-
-        $customer->parent_merchant = $request->parent_merchant;
-
         if($request->status=='on')
         {
             $customer->status = 1;
@@ -86,9 +80,8 @@ class customerController extends Controller
         {
             $customer->status=0;
         }
-        
-        
-       
+        $customer->save();  
+        $customerid = $customer->id;
         
         $addmorecount = count($request->currency);
         

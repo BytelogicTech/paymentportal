@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('country');
             $table->string('date_of_birth')->nullable();
-            $table->double('id_number')->nullable();
+            $table->string('id_number')->nullable();
             $table->boolean('status');
             $table->timestamps();
             $table->foreign('merchant_fk_id')->references('id')->on('merchants');
