@@ -149,56 +149,10 @@
                                 <table class="table table-bordered table-hover"> 
                                                                 
 
-                                    <thead>
-                                        <tr class="alert-primary">
-                                            <th>Beneficiary Name</th>
-                                            <th>Beneficiary Nickname</th>
-                                            <th>Beneficiary Address</th>
-                                            <th>Beneficiary Country</th>
-                                            <th>Bank Name</th>
-                                            <th>Bank Branch </th>
-                                            <th>Bank Address</th>
-                                            <th>Bank Country</th>
-                                            <th>Bank Swift</th>
-                                            <th>Acc No/IBAN</th>
-                                            <th>Currency</th>
-                                            <th>Remarks</th>
-                                            <th>Intermediary Bank Name</th>
-                                            <th>Intermediary Bank Address</th>
-                                            <th>Intermediary Bank Swift Code</th>
-                                            <th>Intermediary Remarks</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
+                         
                                         @foreach($bankaccountpayouts as $bankaccountpayout)
 
-                                        <tr>
-
-                                            <td>{{$bankaccountpayout->beneficiary_name}}</td>
-                                            <td>{{$bankaccountpayout->beneficiary_nickname}}</td>
-                                            <td>{{$bankaccountpayout->beneficiary_address}}</td>
-                                            <td>{{$bankaccountpayout->beneficiary_country}}</td>
-                                            <td>{{$bankaccountpayout->bank_name}}</td>
-                                            <td>{{$bankaccountpayout->bank_branch}}</td>
-                                            <td>{{$bankaccountpayout->bank_address}}</td>
-                                            <td>{{$bankaccountpayout->bank_country}}</td>
-                                            <td>{{$bankaccountpayout->bank_swift}}</td>
-                                            <td>{{$bankaccountpayout->account_number}}</td>
-                                            <td>{{$bankaccountpayout->currency}}</td>
-                                            <td>{{$bankaccountpayout->remarks}}</td>
-                                            <td>{{$bankaccountpayout->intermediary_bank_name}}</td>
-                                            <td>{{$bankaccountpayout->intermediary_bank_address}}</td>
-                                            <td>{{$bankaccountpayout->intermediary_bank_swift}}</td>
-                                            <td>{{$bankaccountpayout->intermediary_bank_details_remarks}}</td>
-                                            <td>
-                                            <a href="{{url('bankaccountpayoutdestroy/'.$bankaccountpayout->id)}}" onclick="return confirm('Are you sure, you want to delete it?')" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                    </td>   
-                                        </tr>
-                                       
-                                    </tbody>
-                                </table>
+                                        
 
 
                                 <div id="bank_accounts_details">

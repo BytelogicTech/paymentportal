@@ -30,8 +30,8 @@ class customerController extends Controller
         $customers = customer::all();
         // dd($customers);
         $userpluck = User::pluck('first_name','id');
-
-        return view('customer/index', compact('customers','userpluck'));
+        $merchantpluck = merchant::pluck('first_name','id');
+        return view('customer/index', compact('customers','userpluck','merchantpluck'));
     }
 
     /**
