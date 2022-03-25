@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('payouts', function (Blueprint $table) {
             $table->id();            
             $table->unsignedBigInteger('bank_account_to_fk_id');
+            $table->unsignedBigInteger('merchant_fk_id');
+            $table->unsignedBigInteger('customer_fk_id');
             $table->double('payout_amount');
             $table->string('remarks')->nullable();
             $table->string('notes')->nullable();
@@ -33,6 +35,9 @@ return new class extends Migration
             $table->unsignedBigInteger('created_by');
             $table->foreign('created_by')->references('id')->on('users');
             $table->foreign('bank_account_to_fk_id')->references('id')->on('bank_account_payouts');
+            $table->foreign('merchant_fk_id')->references('id')->on('merchants');
+            $table->foreign('customer_fk_id')->references('id')->on('customers');
+            $table->foreign('bank_account_from_fk_id')->references('id')->on('bank_accounts');
         });
     }
 

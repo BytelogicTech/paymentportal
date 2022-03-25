@@ -51,21 +51,25 @@
                                             <select class="select2 form-control" name="merchant_fk_id" required id="merchant_fk_id">
                                                 <option value="" disabled selected>Please Select One</option>
                                                 @foreach($merchants as $merchant)
-                                                <option value="{{$merchant->id}}">{{$merchant->first_name}}</option>
+                                                <option value="{{$merchant->id}}">{{$merchant->merchant_name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                 </div>
+                            </div>
 
-                                <div class="col-md-6">
+                            <div class="row">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Customer*</label>
                                             <select class=" form-control" name="customer_fk_id" required id="customer_fk_id">
-                                                <option value="" disabled selected>Please Select One</option>                                                
+                                                <option value="customer_fk_id" disabled selected>Please Select One</option>                                                
                                             </select>
                                         </div>
                                 </div>
-
+                            </div>
+                            
+                            <div class="row">
                                 <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Bank Account To Transfer To*</label>
@@ -89,7 +93,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="name">Remarks / Purpose of Payment</label>
-                                            <textarea placeholder="Enter Payment Amount" class="form-control" name="remarks"></textarea>
+                                            <textarea placeholder="Remarks / Purpose of Payment" class="form-control" name="remarks"></textarea>
                                             
                                         </div>
                                     </div>
@@ -97,7 +101,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="name">Reference Id</label>
-                                            <input type="text" placeholder="Enter Payment Amount" class="form-control" name="reference_id"/>
+                                            <input type="text" placeholder="Enter Reference Id" class="form-control" name="reference_id"/>
 
                                         </div>
                                     </div>
@@ -119,7 +123,7 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="description">Bank Account To Transfer From*</label>
+                                            <label for="description">Bank Account To Transfer From</label>
                                             <select class="select2 form-control" name="bank_account_from_fk_id">
                                                 <option>Please Select One</option>
                                                 @foreach($bankaccounts as $bankaccount)
@@ -140,10 +144,9 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="description">Status of Payment*</label>
+                                            <label for="description">Status of Payout</label>
                                             <select class="select2 form-control" name="status_of_payout">
-                                                <option value="" disabled selected>Please Select One</option>
-                                                <option value="New">New</option>
+                                                <option value="New" selected>New</option>
                                                 <option value="Processing">Processing</option>
                                                 <option value="Paid">Paid</option>
                                                 <option value="Hold">Hold</option>
@@ -195,6 +198,7 @@
 <script>
     $('#merchant_fk_id').change(function(){
         $('#customer_fk_id').html('');
+        $('#bank_account_to_fk_id').html('');
         var merchant_fk_id = $(this).val();
 
         $.ajax({
@@ -244,7 +248,7 @@
                     
                 var options = '<option value="" disabled selected>Please Select One</option> ';
                     $.each(data, function(i, value) {
-                    options+= '<option id='+value["id"]+'>'+value["beneficiary_name"]+'-'+value["currency"]+'-'+value["account_number"]+'</option>';
+                    options+= '<option value='+value["id"]+'>'+value["beneficiary_name"]+'-'+value["currency"]+'-'+value["account_number"]+'</option>';
                     });
                     console.log(data);
                     $('#bank_account_to_fk_id').html(options);
@@ -257,5 +261,6 @@
         
     });
     </script>
+    
 
 

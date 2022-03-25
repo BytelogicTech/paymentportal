@@ -67,7 +67,7 @@
         <td>{{$count}}</td>
         <td>{{@$merchantpluck[$payout->merchant_fk_id]}}</td>
         <td>{{@$customerpluck[$payout->customer_fk_id]}}</td>
-        <td>{{@$bankaccountpluk[$payout->bank_account_to_fk_id]}}</td>
+        <td>{{@$bankaccountpayoutpluk[$payout->bank_account_to_fk_id]}}</td>
         <td>{{$payout->payout_amount}}</td>
         <td>{{$payout->bank_processing_charges}}</td>
         <td>{{$payout->status_of_payout}}</td>

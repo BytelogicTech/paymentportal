@@ -41,148 +41,115 @@
                         <form action="{{url('payout/update')}}" method="POST" enctype="multipart/form-data">
                             <div class="card-body">
                                 @csrf
-                            <input type="hidden" name="id" value="{{$payout->id}}">
-                           
+                                <input type="hidden" name="id" value="{{$payout->id}}">
 
 
-                            <div class="row">
-                                <div class="col-md-8">
+
+                                <div class="row">
+                                    <div class="col-md-8">
                                         <div class="form-group">
                                             <label for="description">Parent Merchant*</label>
-                                            <select class="select2 form-control" name="merchant_fk_id" value="{{$payout->merchant_fk_id}}" required>
+                                            <select class="select2 form-control" name="merchant_fk_id" id="merchant_fk_id" required>
                                                 <option value="" disabled selected>Please Select One</option>
                                                 @foreach($merchants as $merchant)
-                                                <option value="{{$merchant->id}}" @if($merchant->id == $payout->merchant_fk_id) selected @endif>{{$merchant->first_name}}</option>
+                                                <option value="{{$merchant->id}}" @if($merchant->id==$payout->merchant_fk_id) selected @endif>{{$merchant->merchant_name}}</option>
                                                 @endforeach
                                             </select>
 
-                                            
-                                        </div>
-                                </div>
 
-                                <div class="col-md-8">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-8">
                                         <div class="form-group">
                                             <label for="description">Customer*</label>
-                                            <select class="select2 form-control" name="customer_fk_id" required>
-                                                <option value="" disabled selected>Please Select One</option>
+                                            <select class="select2 form-control" name="customer_fk_id" id="customer_fk_id" required>
+                                                <option value="customer_fk_id" disabled selected>Please Select One</option>
                                                 @foreach($customers as $customer)
-                                                <option value="{{$customer->id}}" @if($customer->id == $payout->customer_fk_id) selected @endif>{{$customer->first_name}}</option>
+                                                <option value="{{$customer->id}}" @if($customer->id==$payout->customer_fk_id) selected @endif>{{$customer->first_name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                </div>
+                                    </div>
 
-                                <div class="col-md-8">
+                                    <div class="col-md-8">
                                         <div class="form-group">
                                             <label for="description">Bank Account To Transfer To*</label>
-                                            <select class="select2 form-control" name="bank_account_to_fk_id" required>
+                                            <select class="select2 form-control" name="bank_account_to_fk_id" id="bank_account_to_fk_id" required>
                                                 <option value="" disabled selected>Please Select One</option>
-                                                @foreach($bankaccounts as $bankaccount)
-                                                <optgroup label="{{$bankaccount[0]->bank_name}}">
-                                                    @foreach($bankaccount as $item)
-                                                    <option value="{{$item->bank_accountsid}}" @if($item->bank_accountsid == $payout->bank_account_to_fk_id) selected @endif>{{$item->beneficiary_name}} - {{$item->currency}} - ({{$item->account_number}}) </option>
-                                                    @endforeach
-                                                </optgroup>
+                                                @foreach($bank_account_payouts as $bank_account_payout)
+                                                <option value="{{$bank_account_payout->id}}" @if($bank_account_payout->id==$payout->bank_account_to_fk_id) selected @endif>{{$bank_account_payout->bank_name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                </div>
-                                    
-
-                               
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            <label for="name">Benificiary Name*</label>
-                                            <input type="text" placeholder="Enter Benificiary Name" class="form-control" name="payout_amount" value="{{$payout->bank_account_from_fk_id}}" required />
-
-                                        </div>
-                                    </div>
-                                    
-
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            <label for="name">Beneficiary Nickname</label>
-                                            <input type="text" placeholder="Enter Beneficiary Nickname" class="form-control" name="" value="{{$payout->bank_account_from_fk_id}}">
-                                                                                                                               
-                                        </div>
                                     </div>
 
                                     <div class="col-md-8">
-                                        <div class="form-group">
-                                            <label for="name">Beneficiary Address</label>
-                                            <input type="text" placeholder="Enter Beneficiary Address" class="form-control" name="" value="{{$payout->bank_account_from_fk_id}}"/>
-
-                                        </div>
-                                    </div>
-
-                                    
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            <label for="description">Bank Name</label>
-                                            <input type="text" placeholder="Enter Bank Name" class="form-control" name="" value="{{$payout->bank_account_from_fk_id}}">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            <label for="description">Bank Address</label>
-                                            <input type="text" placeholder="Enter Bank Address" class="form-control" name="" value="{{$payout->bank_account_from_fk_id}}">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            <label for="description">Bank Country</label>
-                                            <input type="text" placeholder="Enter Bank Country" class="form-control" name="" value="{{$payout->bank_account_from_fk_id}}">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            <label for="description">Bank Swift</label>
-                                            <input type="text" placeholder="Enter Bank Swift" class="form-control" name="upload_reciept" value="{{$payout->bank_account_from_fk_id}}">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            <label for="description">Currency</label>
-                                            <input type="text" placeholder="Currency" class="form-control" name="upload_reciept" value="{{$payout->bank_account_from_fk_id}}">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            <label for="description">Remarks</label>
-                                            <input type="text" placeholder="Remarks" class="form-control" name="upload_reciept" value="{{$payout->bank_account_from_fk_id}}">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            <label for="description">Intermediary Bank Name</label>
-                                            <input type="text" placeholder="Enter Intermediary Bank Name" class="form-control" name="upload_reciept" value="{{$payout->bank_account_from_fk_id}}">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            <label for="description">Intermediary Bank Address</label>
-                                            <input type="text" placeholder="Enter Intermediary Bank Address" class="form-control" name="upload_reciept" value="{{$payout->bank_account_from_fk_id}}">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            <label for="description">Intermediary Bank Swift Code</label>
-                                            <input type="text" placeholder="Intermediary Bank Swift Code" class="form-control" name="upload_reciept" value="{{$payout->bank_account_from_fk_id}}">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            <label for="description">Intermediary Remarks</label>
-                                            <input type="text" placeholder="Enter Bank Swift" class="form-control" name="upload_reciept" value="{{$payout->bank_account_from_fk_id}}">
+                                        <div class="tb-customer-accounts" style="margin-top: 20px;">
+                                            <table class="table tbl-customer-accounts table-bordered m-table m-table--border-brand m-table--head-bg-brand">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="bcolor">Beneficiary Name</td>
+                                                        <td>{{$bank_account_payout_existing->beneficiary_name}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Beneficiary Nickname</td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Beneficiary Address</td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Bank Name</td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Bank Branch</td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Bank Address</td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Bank Country</td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Bank Swift</td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Acc No/IBAN</td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Currency</td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Remarks</td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Intermediary Bank Name</td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Intermediary Bank Address</td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Intermediary Bank Swift Code</td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Intermediary Remarks</td>
+                                                        <td></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
 
@@ -235,40 +202,40 @@
                                             <input type="date" class="form-control" name="date_paid" value="{{$payout->date_paid}}">
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-md-8">
-                                    <label for="description">Status Of Payment</label>
-                                    <select class="select2 form-control" name="bank_account_to_fk_id" required>
-                                                <option value="" disabled selected>Please Select One</option>
-                                                <option value="New">New</option>
-                                                <option value="Processing">Processing</option>
-                                                <option value="Paid">Paid</option>
-                                                <option value="Hold">Hold</option>
-                                                <option value="Canceled">Canceled</option>
-                                                <option value="Returned">Returned</option>
-                                                <option value="Rejected">Rejected</option>
-                                    </select>
+                                        <label for="description">Status Of Payment</label>
+                                        <select class="form-control" name="status_of_payout" required>
+                                            <option value="" disabled selected>Please Select One</option>
+                                            <option value="New">New</option>
+                                            <option value="Processing">Processing</option>
+                                            <option value="Paid">Paid</option>
+                                            <option value="Hold">Hold</option>
+                                            <option value="Canceled">Canceled</option>
+                                            <option value="Returned">Returned</option>
+                                            <option value="Rejected">Rejected</option>
+                                        </select>
                                     </div>
 
                                     <div class="col-md-8">
                                         <div class="form-group">
                                             <label for="description">Amount Returned</label>
-                                            <input type="text" placeholder="0"class="form-control" name="amount_returned" value="{{$payout->amount_returned}}">
+                                            <input type="text" placeholder="0" class="form-control" name="amount_returned" value="{{$payout->amount_returned}}">
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-md-8">
-                                    <label for="description">Bank From</label>
-                                    <select class="select2 form-control" name="bank_account_to_fk_id" required>
-                                      <option value="" disabled selected>Please Select One</option>
-                                      @foreach($bankaccounts as $bankaccount)
-                                                <optgroup label="{{$bankaccount[0]->bank_name}}">
-                                                    @foreach($bankaccount as $item)
-                                                    <option value="{{$item->bank_accountsid}}" @if($item->bank_accountsid == $payout->bank_account_to_fk_id) selected @endif>{{$item->beneficiary_name}} - {{$item->currency}} - ({{$item->account_number}}) </option>
-                                                    @endforeach
-                                                </optgroup>
+                                        <label for="description">Bank From</label>
+                                        <select class="select2 form-control" name="bank_account_to_fk_id" required>
+                                            <option value="" disabled selected>Please Select One</option>
+                                            @foreach($bankaccounts as $bankaccount)
+                                            <optgroup label="{{$bankaccount[0]->bank_name}}">
+                                                @foreach($bankaccount as $item)
+                                                <option value="{{$item->bank_accountsid}}" @if($item->bank_accountsid == $payout->bank_account_to_fk_id) selected @endif>{{$item->beneficiary_name}} - {{$item->currency}} - ({{$item->account_number}}) </option>
                                                 @endforeach
-                                    </select>
+                                            </optgroup>
+                                            @endforeach
+                                        </select>
                                     </div>
 
                                     <div class="col-md-8">
@@ -291,6 +258,10 @@
                                             <input type="file" class="form-control" name="upload_extra_document" value="{{$payout->upload_extra_document}}">
                                         </div>
                                     </div>
+
+
+
+
                                 </div>
 
 
@@ -322,5 +293,68 @@
     });
 </script>
 
+<script>
+    $('#merchant_fk_id').change(function() {
+        $('#customer_fk_id').html('');
+        $('#bank_account_to_fk_id').html('');
+        var merchant_fk_id = $(this).val();
+
+        $.ajax({
+            type: 'POST',
+            url: "{{url('getcustomers_bymerchant')}}",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                merchant_fk_id: merchant_fk_id
+            },
+            success: function(data) {
+
+                var options = '<option value="" >Please Select One</option> ';
+                $.each(data, function(i, value) {
+                    options += '<option value=' + value["id"] + '>' + value["first_name"] + '</option>';
+                });
+                // console.log(data);
+                $('#customer_fk_id').html(options);
+            },
+            error: function(data) {
+                console.log("error");
+                console.log(data);
+            }
+        });
+
+    });
+</script>
+
+<script>
+    $('#customer_fk_id').change(function() {
+        $('#bank_account_to_fk_id').html('');
+        var customer_fk_id = $(this).val();
 
 
+        $.ajax({
+            type: 'POST',
+            url: "{{url('getpayout_bycustomer')}}",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                customer_fk_id: customer_fk_id
+            },
+            success: function(data) {
+
+                var options = '<option value="" disabled selected>Please Select One</option> ';
+                $.each(data, function(i, value) {
+                    options += '<option value=' + value["id"] + '>' + value["beneficiary_name"] + '-' + value["currency"] + '-' + value["account_number"] + '</option>';
+                });
+                console.log(data);
+                $('#bank_account_to_fk_id').html(options);
+            },
+            error: function(data) {
+                console.log("error");
+                console.log(data);
+            }
+        });
+
+    });
+</script>
