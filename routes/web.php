@@ -8,6 +8,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PayoutController;
+use App\Http\Controllers\settlementController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -94,6 +96,16 @@ Route::group(['prefix' => 'payout'], function(){
 });
 
 
+Route::group(['prefix' => 'settlement'], function(){
+    Route::get('/index', [settlementController::class, 'index'])->name('settlement.index');
+    Route::get('/create', [settlementController::class, 'create']);
+    Route::post('/store', [settlementController::class, 'store']);
+    Route::get('/edit/{id}', [settlementController::class, 'edit']);
+    Route::post('/update', [settlementController::class, 'update']);
+    Route::get('/delete/{id}', [settlementController::class, 'destroy']);
+});
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -102,4 +114,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::post('/getcustomers_bymerchant', [PayoutController::class, 'getcustomers_bymerchant']);
 Route::post('/getpayout_bycustomer', [PayoutController::class, 'getpayout_bycustomer']);
-
+Route::post('/getpayouts_bymerchant', [PayoutController::class, 'getpayouts_bymerchant']);

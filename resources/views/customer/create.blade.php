@@ -62,8 +62,8 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="description">Phone</label>
-                                            <input type="text" placeholder="Enter Phone" class="form-control" name="phone" required />
+                                            <label for="description">Phone *</label>
+                                            <input type="text" placeholder="Enter Phone" class="form-control" name="phone" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -361,14 +361,14 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="description">Beneficiary Name</label>
-                                            <input type="text" placeholder="Enter Beneficiary Name" class="form-control" name="beneficiary_name[]"/>
+                                            <label for="description">Beneficiary Name *</label>
+                                            <input type="text" placeholder="Enter Beneficiary Name" class="form-control" name="beneficiary_name[]" required/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="description">Beneficiary Nickname</label>
-                                            <input type="text" placeholder="Enter Beneficiary Nick Name" class="form-control" name="beneficiary_nickname[]"/>
+                                            <label for="description">Beneficiary Nickname *</label>
+                                            <input type="text" placeholder="Enter Beneficiary Nick Name" class="form-control" name="beneficiary_nickname[]" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -382,8 +382,8 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Beneficiary Country</label>
-                                            <select class="form-control select2" style="width: 100%;" name="beneficiary_country[]">
+                                            <label>Beneficiary Country *</label>
+                                            <select class="form-control select2" style="width: 100%;" name="beneficiary_country[]" required>
                                                 <option value="" selected disabled>Please Select One</option>
                                                 <option value="Afganistan">Afghanistan</option>
                                                 <option value="Albania">Albania</option>
@@ -639,14 +639,14 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="description">Bank Name</label>
-                                            <input type="text" placeholder="Enter Bank Name" class="form-control" name="bank_name[]"/>
+                                            <label for="description">Bank Name *</label>
+                                            <input type="text" placeholder="Enter Bank Name" class="form-control" name="bank_name[]" required/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="description">Bank Branch</label>
-                                            <input type="text" placeholder="Enter Bank Branch" class="form-control" name="bank_branch[]"/>
+                                            <label for="description">Bank Branch *</label>
+                                            <input type="text" placeholder="Enter Bank Branch" class="form-control" name="bank_branch[]" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -654,14 +654,14 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="description">Bank Address</label>
-                                            <input type="text" placeholder="Bank Address" class="form-control" name="bank_address[]"/>
+                                            <label for="description">Bank Address *</label>
+                                            <input type="text" placeholder="Bank Address" class="form-control" name="bank_address[]" required/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Bank Country</label>
-                                            <select class="select2 form-control" style="width: 100%;" name="bank_country[]">
+                                            <label>Bank Country *</label>
+                                            <select class="select2 form-control" style="width: 100%;" name="bank_country[]" required>
                                                 <option value="" selected disabled>Please Select One</option>
                                                 <option value="Afganistan">Afghanistan</option>
                                                 <option value="Albania">Albania</option>
@@ -1030,8 +1030,8 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="description">Remarks</label>
-                                            <input type="text" placeholder="Remarks/ABA Code/Sort Code/Routing Number/IFSc Code" class="form-control" name="remarks[]" required />
+                                            <label for="description">Remarks *</label>
+                                            <input type="text" placeholder="Remarks/ABA Code/Sort Code/Routing Number/IFSc Code" class="form-control" name="remarks[]" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -1867,7 +1867,7 @@
                '<div class="col-md-6">'+
                 '<div class="form-group">'+
                 '<label for="description">Remarks</label>'+
-                '<input type="text" placeholder="Remarks/ABA Code/Sort Code/Routing Number/IFSc Code" class="form-control" name="remarks[]" required />'+
+                '<input type="text" placeholder="Remarks/ABA Code/Sort Code/Routing Number/IFSc Code" class="form-control" name="remarks[]" />'+
                 '</div>'+
                 '</div>'+
                 
@@ -1897,8 +1897,7 @@
                 '</div>'+
                 '</div>'+
                 '<div class="col-md-3">' +
-                '<label> Delete </label>' +
-                '<a href="javascript:void(0);" name="remove" id="' + i + '" class="btn btn-danger btn-remove form-control remove_btn"><i class="fa fa-trash"></i></a>' +
+                '<a href="javascript:void(0);" name="remove" id="' + i + '" class="btn btn-danger btn-remove form-control remove_btn" ><i class="fa fa-trash" ></i></a>' +
                 '</div>' +
                 '</div> ');
                               

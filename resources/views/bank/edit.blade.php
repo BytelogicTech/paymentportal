@@ -41,7 +41,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="bank_charges">Bank Charges:</label>
-                                                <input id="bank_charges_edit" type="text" placeholder="Enter Bank Charges" required class="form-control" name="bank_charges" required />
+                                                <input id="bank_charges_edit" type="number" placeholder="Enter Bank Charges" required class="form-control" name="bank_charges" required />
                                             </div>
                                         </div>
                                  
@@ -234,7 +234,7 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="nickname">Bank Charges:</label>
-                                                <input type="text" placeholder="Enter Bank Charges" class="form-control" name="bank_charges[]"  />
+                                                <input type="number" placeholder="Enter Bank Charges" class="form-control" name="bank_charges[]"  />
                                             </div>
                                         </div>
 
@@ -482,7 +482,7 @@
                 '<div class="col-md-3">' +
                 '<div class="form-group">' +
                 '<label for="nickname">Bank Charges:</label>' +
-                '<input type="text" placeholder="Enter Account Nickname" class="form-control" name="bank_charges[]" required/>' +
+                '<input type="number" placeholder="Enter Account Nickname" class="form-control" name="bank_charges[]" required/>' +
                 '</div>' +
                 '</div>' +
                 '<div class="col-md-1">' +

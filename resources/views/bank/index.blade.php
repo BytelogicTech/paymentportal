@@ -11,6 +11,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
+          @include('flash')
             <h1>Banks</h1>
           </div>
           <div class="col-sm-6">

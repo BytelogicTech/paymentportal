@@ -89,7 +89,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="zipcode">Email*:</label>
-                                            <input type="email" placeholder="Enter Email" class="form-control" name="email" />
+                                            <input type="email" placeholder="Enter Email" class="form-control" name="email" required />
                                         </div>
                                     </div>
 
@@ -354,13 +354,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Secondary Email</label>
-                                            <input type="email" placeholder="Enter Secondary Email" class="form-control" name="secondary_email" required />
+                                            <input type="email" placeholder="Enter Secondary Email" class="form-control" name="secondary_email" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Invoice Email</label>
-                                            <input type="email" placeholder="Enter Invoice Email" class="form-control" name="invoice_email" required />
+                                            <input type="email" placeholder="Enter Invoice Email" class="form-control" name="invoice_email" />
                                         </div>
                                     </div>
                                 </div>
@@ -370,13 +370,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Payout Notification Email</label>
-                                            <input type="email" placeholder="Enter Payout Notification Email" class="form-control" name="payout_notification_email" required />
+                                            <input type="email" placeholder="Enter Payout Notification Email" class="form-control" name="payout_notification_email" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Settlement Notification Email</label>
-                                            <input type="email" placeholder="Enter Settlement Notification Email" class="form-control" name="settlement_notification_email" required />
+                                            <input type="email" placeholder="Enter Settlement Notification Email" class="form-control" name="settlement_notification_email" />
                                         </div>
                                     </div>
                                 </div>
@@ -385,13 +385,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Payout Notification Email [FOR ADMIN]l</label>
-                                            <input type="email" placeholder="Enter Payout Notification Email FOR ADMIN" class="form-control" name="payout_notification_email_admin" required />
+                                            <input type="email" placeholder="Enter Payout Notification Email FOR ADMIN" class="form-control" name="payout_notification_email_admin" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Settlement Notification Email [FOR ADMIN]</label>
-                                            <input type="email" placeholder="Enter Settlement Notification Email FOR ADMIN" class="form-control" name="settlement_notification_email_admin" required />
+                                            <input type="email" placeholder="Enter Settlement Notification Email FOR ADMIN" class="form-control" name="settlement_notification_email_admin" />
                                         </div>
                                     </div>
                                 </div>
@@ -421,9 +421,9 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="description">B2B Percentage*</label>
-                                            <input type="number" placeholder="Enter B2B Percentage" class="form-control" name="b2b_percentage" required />
+                                            <label for="description">B2B Percentage*</label>rcentage" required />
                                         </div>
+                                            <input type="number" placeholder="Enter B2B Percentage" class="form-control" name="b2b_pe
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -480,7 +480,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="prefix">Website</label>
-                                            <input type="text" placeholder="Enter Website" class="form-control" name="website" required />
+                                            <input type="text" placeholder="Enter Website" class="form-control" name="website" />
                                         </div>
                                     </div>
 
@@ -488,7 +488,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="declaration_content">Customer Support Number:</label>
-                                            <input type="text" placeholder="Enter Customer Support Number" class="form-control" name="customer_support_number" />
+                                            <input type="number" placeholder="Enter Customer Support Number" class="form-control" name="customer_support_number" />
                                         </div>
                                     </div>
                                 </div>

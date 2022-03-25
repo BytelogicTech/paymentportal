@@ -245,4 +245,20 @@ class PayoutController extends Controller
         return $bank_account_payouts;
 
     }
+
+    public function getpayouts_bymerchant(Request $request)
+    {
+        $merchant_fk_id = $request->merchant_fk_id;
+        $customers = customer::where('merchant_fk_id',$merchant_fk_id)->get();
+        $customers_ids = [];
+        foreach($customers as $customer)
+        {
+            array_push($customers_ids,$customer->id);
+        }
+    // return $customers_ids;
+        $bank_account_payouts = bank_account_payouts::whereIn('customer_fk_id',$customers_ids)->get();
+
+        return $bank_account_payouts;
+
+    }
 }
