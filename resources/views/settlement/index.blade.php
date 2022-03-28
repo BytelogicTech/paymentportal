@@ -64,30 +64,16 @@
     <tr>
         <td>{{$count}}</td>
         <td>{{@$merchantpluck[$settlement->merchant_fk_id]}}</td>
-        <td>{{@$customerpluck[$settlement->customer_fk_id]}}</td>
-        <td>{{@$bankaccountpluk[$settlement->bank_account_to_fk_id]}}</td>
+        <td>{{@$bankaccountpayoutbnamepluk[$settlement->bank_account_to_fk_id]}}</td>
+        <td>{{@$bankaccountpayoutpluk[$settlement->bank_account_to_fk_id]}}</td>
         <td>{{$settlement->settlement_amount}}</td>
-        <td>{{$settlement->bank_processing_charges}}</td>
-        <td>{{$settlement->status_of_settlement}}</td>
         <td>{{$settlement->date_paid}}</td>
-        <td>{{@$userpluck[$settlement->created_by]}}</td>
+        <td>{{$settlement->status_of_settlement}}</td>
+        <td>{{@$userpluck[$settlement->created_by]}}</td>       
         <td>{{$settlement->created_at}}</td>
         <td>
             <a href="{{url('settlement/edit/'.$settlement->id)}}" class="btn btn-warning btn-sm"><i class="far fa-edit" aria-hidden="true"></i></a>
             <a href="{{url('settlement/delete/'.$settlement->id)}}" onclick="return confirm('Are you sure, you want to delete it?')" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
-        </td>
-        <td>
-          @if($settlement->upload_invoice)
-          <a class="btn btn-primary" href="{{asset('public/invoice/'.$settlement->upload_invoice)}}" target="_blank"><i class="fa fa-download"></i></a>
-          @else
-          No Invoice
-          @endif
-
-          @if($settlement->upload_reciept)
-          <a class="btn btn-default" href="{{asset('public/pop/'.$settlement->upload_reciept)}}" target="_blank">POP</a>
-          @else
-         | No payment Proof
-          @endif
         </td>
     </tr>
     @endforeach
