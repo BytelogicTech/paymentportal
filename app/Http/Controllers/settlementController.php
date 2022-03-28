@@ -195,7 +195,7 @@ class settlementController extends Controller
         $settlement = settlement::findorFail($id);
         $settlement->delete();
 
-        return redirect('settlement/index')->with('success', 'Payout Deleted Successfully');  
+        return redirect('settlement/index')->with('success', 'Settlement Deleted Successfully');  
     }
 
  

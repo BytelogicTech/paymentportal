@@ -26,7 +26,10 @@ class settlementaccountController extends Controller
 
     public function index()
     {
-        
+        $settlementaccounts = settlementaccount::all();
+        $merchantpluck = merchant::pluck('merchant_name', 'id');
+        return view('settlementaccount/index',compact('settlementaccounts','merchantpluck'));
+
     }
 
     /**
@@ -55,10 +58,38 @@ class settlementaccountController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        $settlement = new settlement();
-        $settlement->id = $request->id;
-        $settlement->merchant_fk_id = $request->merchant_fk_id;
-        $settlement->save();
+        $settlementaccount = new settlementaccount();
+        $settlementaccount->id = $request->id;
+        $settlementaccount->merchant_fk_id = $request->merchant_fk_id;
+        $settlementaccount->beneficiary_name = $request->beneficiary_name;
+        $settlementaccount->beneficiary_nickname = $request->beneficiary_nickname;
+        $settlementaccount->beneficiary_address = $request->beneficiary_address;
+        $settlementaccount->bank_name = $request->bank_name;
+        $settlementaccount->bank_branch = $request->bank_branch;
+        $settlementaccount->bank_address = $request->bank_address;
+        $settlementaccount->bank_country = $request->bank_country;
+        $settlementaccount->bank_swift = $request->bank_swift;
+        $settlementaccount->account_number = $request->account_number;
+        $settlementaccount->currency = $request->currency;
+        $settlementaccount->remarks = $request->remarks;
+        $settlementaccount->intermediary_bank_name = $request->intermediary_bank_name;
+        $settlementaccount->intermediary_bank_address = $request->intermediary_bank_address;
+        $settlementaccount->intermediary_bank_swift = $request->intermediary_bank_swift;
+        $settlementaccount->intermediary_bank_details_remarks = $request->intermediary_bank_details_remarks;
+        $file = $request->upload_bank_statement;
+        if ($request->upload_bank_statement) {
+            $fileext = $file->getClientOriginalExtension();
+            if ($fileext == "jpg" || $fileext == "jpeg" || $fileext == "png") {
+                $filename = time() . "." . $fileext;
+
+                $file->move('public/images/', $filename);
+                $settlementaccount->upload_bank_statement = $filename;
+            } else {
+                return back()->with('error', 'Please upload Settlement Invoice');
+            }
+        }
+
+        $settlementaccount->save();
 
         return redirect('settlementaccount/index')->with('success', 'settlement Added Successfully');
     }
@@ -71,8 +102,12 @@ class settlementaccountController extends Controller
      */
     public function edit($id)
     {
-       
+        $settlementaccount = settlementaccount::findorFail($id);     
+        $merchants = merchant::all();          
+        // dd($payout);
+        return view('settlementaccount/edit', compact('settlementaccount','merchants'));
     }
+    
 
 
     /**
@@ -84,6 +119,40 @@ class settlementaccountController extends Controller
     public function update(Request $request)
     {
         
+        $settlementaccount = settlementaccount::findorFail($request->id);
+        $settlementaccount->id = $request->id;
+        $settlementaccount->merchant_fk_id = $request->merchant_fk_id;
+        $settlementaccount->beneficiary_name = $request->beneficiary_name;
+        $settlementaccount->beneficiary_nickname = $request->beneficiary_nickname;
+        $settlementaccount->beneficiary_address = $request->beneficiary_address;
+        $settlementaccount->bank_name = $request->bank_name;
+        $settlementaccount->bank_branch = $request->bank_branch;
+        $settlementaccount->bank_address = $request->bank_address;
+        $settlementaccount->bank_country = $request->bank_country;
+        $settlementaccount->bank_swift = $request->bank_swift;
+        $settlementaccount->account_number = $request->account_number;
+        $settlementaccount->currency = $request->currency;
+        $settlementaccount->remarks = $request->remarks;
+        $settlementaccount->intermediary_bank_name = $request->intermediary_bank_name;
+        $settlementaccount->intermediary_bank_address = $request->intermediary_bank_address;
+        $settlementaccount->intermediary_bank_swift = $request->intermediary_bank_swift;
+        $settlementaccount->intermediary_bank_details_remarks = $request->intermediary_bank_details_remarks;
+        $file = $request->upload_bank_statement;
+        if ($request->upload_bank_statement) {
+            $fileext = $file->getClientOriginalExtension();
+            if ($fileext == "jpg" || $fileext == "jpeg" || $fileext == "png") {
+                $filename = time() . "." . $fileext;
+
+                $file->move('public/images/', $filename);
+                $settlementaccount->upload_bank_statement = $filename;
+            } else {
+                return back()->with('error', 'Please upload Settlement Invoice');
+            }
+        }
+
+        $settlementaccount->save();
+        $settlementaccountid = $settlementaccount->id;
+        return redirect('settlementaccount/index')->with('success', 'Settlement Account Added Successfully');
     }
 
 
@@ -104,10 +173,10 @@ class settlementaccountController extends Controller
      */
     public function destroy($id)
     {
-        $settlement = settlement::findorFail($id);
-        $settlement->delete();
+        $settlementaccount = settlementaccount::findorFail($id);
+        $settlementaccount->delete();
 
-        return redirect('settlement/index')->with('success', 'Payout Deleted Successfully');  
+        return redirect('settlementaccount/index')->with('success', 'Settlement Account Deleted Successfully');  
     }
 
  

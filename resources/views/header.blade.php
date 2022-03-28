@@ -283,6 +283,55 @@
             </li>
 
 
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fa fa-university"></i>
+                <p>
+                  Settlements
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{url('settlement/index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>View All Settlements</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{url('settlement/create')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add New Settlement</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fa fa-university"></i>
+                <p>
+                  Settlement Accounts
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{url('settlementaccount/index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>View All Settlement Accounts</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{url('settlementaccount/create')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add New Settlement Account</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+
           </ul>
         </nav>
         <!-- /.sidebar-menu -->
