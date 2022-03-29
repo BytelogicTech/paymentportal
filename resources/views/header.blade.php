@@ -136,7 +136,7 @@
               </a>
             </li>
 
-            <li class="nav-header">SYSTEM</li>
+          <li class="nav-header">SYSTEM</li>
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-user"></i>
@@ -160,9 +160,11 @@
                 </li>
               </ul>
             </li>
+
+            
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-users"></i>
+                <i class="nav-icon fas fa-user"></i>
                 <p>
                   Users
                   <i class="fas fa-angle-left right"></i>
@@ -179,6 +181,54 @@
                   <a href="{{url('user/create')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Add new User</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-header">Transactions</li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-user"></i>
+                <p>
+                  Transaction
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{url('transaction/index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>View All Transaction</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{url('transaction/create')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add new Transaction</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fa fa-users"></i>
+                <p>
+                  Payouts
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{url('payout/index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>View All Payout</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{url('payout/create')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add new Payout</p>
                   </a>
                 </li>
               </ul>
@@ -209,29 +259,7 @@
               </ul>
             </li>
 
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-university"></i>
-                <p>
-                  Transactions
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="{{url('transaction/index')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>View All Tranaction</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{url('transaction/create')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Add new Transaction</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
+            
 
 
             <li class="nav-item">
@@ -258,29 +286,7 @@
               </ul>
             </li>
 
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-university"></i>
-                <p>
-                  Payouts
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="{{url('payout/index')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>View All Payouts</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{url('payout/create')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Add new Payout</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
+            
 
 
             <li class="nav-item">

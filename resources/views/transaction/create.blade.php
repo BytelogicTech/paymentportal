@@ -50,6 +50,7 @@
 
                                         </div>
                                     </div>
+
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Parent Merchant*</label>
@@ -125,12 +126,6 @@
                                             <input type="file" class="form-control" name="upload_signed_invoice">
                                         </div>
                                     </div>
-                                    
-
-                                    
-
-
-                                    
                                 </div>
 
 
@@ -157,10 +152,6 @@
                                                 <option>New</option>
                                                 <option>Recieved</option>
                                                 <option>Canceled</option>
-                                                <option>Refunded</option>
-                                                
-                                                
-                                                
                                             </select>
                                         </div>
                                     </div>
@@ -176,18 +167,6 @@
                                     </div>
 
                                 </div>
-
-
-
-
-
-
-
-
-
-                                <!-- /.card -->
-
-
 
                                 <button type="submit" class="btn btn-primary">Add</button>
                             </div>

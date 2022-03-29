@@ -28,14 +28,99 @@ class PayoutController extends Controller
     public function index()
     {
         $payouts = payout::all();
+        $merchant_fk_id = "";
+        $customer_fk_id = "";
         $merchants = merchant::all();
+        $customers = customer::all();
+        $bank_account_payouts = bank_account_payouts::all();
         $merchantpluck = merchant::pluck('merchant_name', 'id');
         $customerpluck = customer::pluck('first_name', 'id');
         $bankaccountpluk = bank_account::pluck('currency', 'id');
         $bankaccountpayoutpluk = bank_account_payouts::pluck('currency', 'id');
         $userpluck = User::pluck('first_name', 'id');
 
-        return view('payout/index', compact('payouts','merchants','merchantpluck','customerpluck','bankaccountpluk','userpluck','bankaccountpayoutpluk'));
+        $bankaccounts =  DB::table('bank_accounts')
+        ->join('banks','banks.id','=','bank_accounts.bank_id')
+        ->select('bank_accounts.id as bank_accountsid','bank_accounts.bank_id','banks.bank_name','banks.beneficiary_name','bank_accounts.currency','bank_accounts.account_number','bank_accounts.nick_name')            
+        ->get()
+        ->groupBy('bank_id');
+
+
+        return view('payout/index', compact('bankaccounts','payouts','merchants','customers','bank_account_payouts','merchantpluck','customerpluck','bankaccountpluk','userpluck','bankaccountpayoutpluk','merchant_fk_id'));
+    }
+
+    public function search(Request $request)
+    {
+        //dd($request->all());
+        $merchant_fk_id = $request->merchant_fk_id;
+        $customer_fk_id = $request->customer_fk_id;
+        $bank_paid_from = $request->bank_paid_from;
+        $currency = $request->currency;
+
+        $payouts = payout::query();
+
+        // if($merchant_fk_id!=null)
+        // {
+        //     $payouts = $payouts->where('merchant_fk_id',$merchant_fk_id);
+        // }
+        // if($request->payout_request_id!=null)
+        // {
+        //     $payouts = $payouts->where('reference_id',$request->payout_request_id);
+        // }
+        // if($customer_fk_id!=null)
+        // {
+        //     $payouts = $payouts->where('customer_fk_id',$customer_fk_id);
+        // }
+        // if($request->currency!=null)
+        // {
+        //     $payouts = $payouts->where('currency',$currency);
+        // }
+       
+
+        // if($request->payout_amount_from!=null)
+        // {
+        //     $payouts = $payouts->where('payout_amount','>=',$request->payout_amount_from);
+        // }
+        // if($request->payout_amount_to!=null)
+        // {
+        //     $payouts = $payouts->where('payout_amount','<=',$request->payout_amount_to);
+        // }
+
+        // if($request->date_paid_from!=null)
+        // {
+        //     $payouts = $payouts->where('date_paid','>=',$request->date_paid_from);
+        // }
+        // if($request->date_paid_to!=null)
+        // {
+        //     $payouts = $payouts->where('date_paid','<=',$request->date_paid_to);
+        // }
+        // if($request->status_of_payout!=null)
+        // {
+        //     $payouts = $payouts->where('status_of_payout',$request->status_of_payout);
+        // }
+        if($bank_paid_from!=null)
+        {
+            $payouts = $payouts->where('bank_paid_from',$bank_paid_from);
+        }
+     
+
+        $payouts = $payouts->get();
+        $merchants = merchant::all();
+        $customers = customer::all();
+       
+        $merchantpluck = merchant::pluck('merchant_name', 'id');
+        $customerpluck = customer::pluck('first_name', 'id');
+        $bankaccountpluk = bank_account::pluck('currency', 'id');
+        $bankaccountpayoutpluk = bank_account_payouts::pluck('currency', 'id');
+        $userpluck = User::pluck('first_name', 'id');
+        $bankaccounts =  DB::table('bank_accounts')
+        ->join('banks','banks.id','=','bank_accounts.bank_id')
+        ->select('bank_accounts.id as bank_accountsid','bank_accounts.bank_id','banks.bank_name','banks.beneficiary_name','bank_accounts.currency','bank_accounts.account_number','bank_accounts.nick_name')            
+        ->get()
+        ->groupBy('bank_id');
+
+        return view('payout/index', compact('payouts','merchants','customers','bank_account_payouts','merchantpluck','customerpluck','bankaccountpluk','userpluck','bankaccountpayoutpluk','merchant_fk_id','bankaccounts'));
+
     }
 
     /**
@@ -66,7 +151,7 @@ class PayoutController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        //dd($request->all());
         $payout = new payout();
         $payout->id = $request->id;
         $payout->merchant_fk_id = $request->merchant_fk_id;
@@ -135,6 +220,7 @@ class PayoutController extends Controller
         $merchants = merchant::all();
         $customers = customer::where('merchant_fk_id',$payout->merchant_fk_id)->get();
         $bank_account_payouts = bank_account_payouts::where('customer_fk_id',$customer_fk_id)->get();
+        // dd($bank_account_payouts);
         $bank_account_payout_existing = bank_account_payouts::findorFail($payout->bank_account_to_fk_id);
         $bankaccounts = bank_account::all();
         $bankaccounts =  DB::table('bank_accounts')
@@ -156,7 +242,8 @@ class PayoutController extends Controller
      */
     public function update(Request $request)
     {
-        $payout = new payout();
+        //dd($request->all());
+        //$payout = new payout();
         $payout = payout::findorFail($request->id);
         $payout->id = $request->id;
         $payout->merchant_fk_id = $request->merchant_fk_id;
@@ -193,20 +280,21 @@ class PayoutController extends Controller
                 return back()->with('error', 'Please upload File');
             }
         }
-        // $file_extra_document = $request->upload_extra_document
-        // if ($request->upload_extra_document) {
-        //     $fileext_proof = $file_extra_document->getClientOriginalExtension();
-        //     if ($fileext_doc == "jpg" || $fileext_doc == "jpeg" || $fileext_doc == "png" || $fileext_doc == "pdf" || $fileext_doc == "doc" || $fileext_doc == "docx" || $fileext_doc == "jpeg") {
-        //         $filename_doc = time() . "." . $fileext_doc;
+        $file_extra_document = $request->upload_extra_document;
+        if ($request->upload_extra_document) {
+            $fileext_doc = $file_extra_document->getClientOriginalExtension();
+            if ($fileext_doc == "jpg" || $fileext_doc == "jpeg" || $fileext_doc == "png" || $fileext_doc == "pdf" || $fileext_doc == "doc" || $fileext_doc == "docx" || $fileext_doc == "jpeg") {
+                $filename_doc = time() . "." . $fileext_doc;
 
-        //         $file_extra_document->move('public/pop/', $filename_doc);
-        //         $payout->upload_extra_document = $filename_doc;
-        //     } else {
-        //         return back()->with('error', 'Please upload File');
-        //     }
-        // }
+                $file_extra_document->move('public/pop/', $filename_doc);
+                $payout->upload_extra_document = $filename_doc;
+            } else {
+                return back()->with('error', 'Please upload File');
+            }
+        }
         $payout->bank_account_from_fk_id = $request->bank_account_from_fk_id;
         $payout->status_of_payout = $request->status_of_payout;
+        $payout->rejected_onhold_remarks = $request->rejected_onhold_remarks;
         $payout->created_by = Auth::user()->id;
         $payout->save();
         $payoutid = $payout->id;
@@ -227,6 +315,8 @@ class PayoutController extends Controller
         return redirect('payout/index')->with('success', 'Payout Deleted Successfully');  
     }
 
+
+
     public function getcustomers_bymerchant(Request $request)
     {
         $merchant_fk_id = $request->merchant_fk_id;
@@ -245,6 +335,16 @@ class PayoutController extends Controller
         return $bank_account_payouts;
 
     }
+
+    public function getpayout_bycustomer_table(Request $request)
+    {
+        $customer_pk_id = $request->customer_pk_id;
+    
+        $bank_account_payouts = bank_account_payouts::where('id',$customer_pk_id)->get();
+          //dd($bank_account_payouts);
+        return $bank_account_payouts;
+
+    } 
 
     public function getpayouts_bymerchant(Request $request)
     {

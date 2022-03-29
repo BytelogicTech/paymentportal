@@ -40,7 +40,7 @@
 
 
 
-                        <div class="card-body">
+                <div class="card-body">
                     <form method="POST" action="{{ url('user/store') }}">
                         @csrf
 
@@ -50,13 +50,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="first_name">First Name*</label>
-                                            <input id="first_name" type="text" placeholder="Enter FIrst Name" class="form-control" name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
+                                            <input id="first_name" type="text" placeholder="Enter FIrst Name" class="form-control" name="first_name" required autocomplete="first_name" autofocus>
 
                                             @error('first_name')
                                             <span class="invalid-feedback" role="alert">
                                              <strong>{{ $message }}</strong>
                                             </span>
-                                             @enderror
+                                            @enderror
 
                                         </div>
                                     </div>
@@ -64,7 +64,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="last_name">Last Name*</label>
-                                            <input id="last_name" type="text" placeholder="Enter Last Name" class="form-control" name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
+                                            <input id="last_name" type="text" placeholder="Enter Last Name" class="form-control" name="last_name" required autocomplete="last_name" autofocus>
                                             
                                             @error('last_name')
                                             <span class="invalid-feedback" role="alert">
@@ -78,7 +78,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="email">Email*</label>
-                                            <input id="email" type="email" placeholder="Enter Email" class="form-control" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                            <input id="email" type="email" placeholder="Enter Email" class="form-control" name="email" required autocomplete="email" autofocus>
                                               
                                             @error('email')
                                             <span class="invalid-feedback" role="alert">
@@ -92,7 +92,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="phone">Phone No</label>
-                                            <input id="phone" type="text" placeholder="Enter Phone No." class="form-control" name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus>
+                                            <input id="phone" type="text" placeholder="Enter Phone No." class="form-control" name="phone" required autocomplete="phone" autofocus>
                                               
                                             @error('phone')
                                             <span class="invalid-feedback" role="alert">
@@ -106,7 +106,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="address">Address</label>
-                                            <textarea id="address" type="textarea" placeholder="Enter Address" class="form-control" name="address" value="{{ old('address') }}" required autocomplete="address" autofocus></textarea>
+                                            <textarea id="address" type="textarea" placeholder="Enter Address" class="form-control" name="address" required autocomplete="address" autofocus></textarea>
                                             
      
                                             @error('address')
@@ -140,7 +140,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="password">Password*</label>
-                                            <input id="password" type="password" onChange="onChange()" placeholder="Enter Password" class="form-control" name="password" value="" required autocomplete="password" autofocus>
+                                            <input id="password" type="password" onChange="onChange()" placeholder="Enter Password" class="form-control" name="password" required autocomplete="password" autofocus>
                                               
                                             @error('password')
                                             <span class="invalid-feedback" role="alert">
@@ -154,7 +154,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="confirm_password">Confirm Password*</label>
-                                            <input id="confirm" type="password" onChange="onChange()" placeholder="Enter Password" class="form-control" name="confirm" value="" required autocomplete="confirm" autofocus>
+                                            <input id="confirm" type="password" onChange="onChange()" placeholder="Enter Password" class="form-control" name="confirm" required autocomplete="confirm" autofocus>
                                               
                                             @error('confirm_password')
                                             <span class="invalid-feedback" role="alert">
