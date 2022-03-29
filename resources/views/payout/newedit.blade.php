@@ -553,12 +553,70 @@
 
 
 
-public function getpayout_bycustomer(Request $request)
-    {
-        $bank_account_to_pk_id = $request->bank_account_to_pk_id;
-    
-        $bank_account_payouts = bank_account_payouts::where('customer_fk_id',$bank_account_to_pk_id)->get();
+           <!-- search Function -->
 
-        return $bank_account_payouts;
+           public function search(Request $request)
+    {
+        $merchant_fk_id = $request->merchant_fk_id;
+        $customer_fk_id = $request->customer_fk_id;
+        $status_of_payout = $request->status_of_payout;
+        $bank_paid_from = $request->bank_paid_from;
+        $currency = $request->currency;
+
+        $payouts = payout::query();
+
+        if($merchant_fk_id!=null)
+        {
+            $payouts = $payouts->where('merchant_fk_id',$merchant_fk_id);
+        }
+        if($request->payout_request_id!=null)
+        {
+            $payouts = $payouts->where('reference_id',$request->payout_request_id);
+        }
+        if($customer_fk_id!=null)
+        {
+            $payouts = $payouts->where('customer_fk_id',$customer_fk_id);
+        }
+        if($request->currency!=null)
+        {
+            $payouts = $payouts->where('currency',$currency);
+        }
+       
+
+        if($request->payout_amount_from!=null)
+        {
+            $payouts = $payouts->where('payout_amount','>=',$request->payout_amount_from);
+        }
+        if($request->payout_amount_to!=null)
+        {
+            $payouts = $payouts->where('payout_amount','<=',$request->payout_amount_to);
+        }
+
+        if($request->date_paid_from!=null)
+        {
+            $payouts = $payouts->where('date_paid','>=',$request->date_paid_from);
+        }
+        if($request->date_paid_to!=null)
+        {
+            $payouts = $payouts->where('date_paid','<=',$request->date_paid_to);
+        }
+        if($status_of_payout!=null)
+        {
+            $payouts = $payouts->where('status_of_payout',$status_of_payout);
+        }
+        if($bank_paid_from!=null)
+        {
+            $payouts = $payouts->where('bank_paid_from',$bank_paid_from);
+        }
+
+        $payouts = $payouts->get();
+        $merchants = merchant::all();
+        $merchantpluck = merchant::pluck('merchant_name', 'id');
+        $customerpluck = customer::pluck('first_name', 'id');
+        $bankaccountpluk = bank_account::pluck('currency', 'id');
+        $bankaccountpayoutpluk = bank_account_payouts::pluck('currency', 'id');
+        $userpluck = User::pluck('first_name', 'id');
+
+        return view('payout/index', compact('payouts','merchants','merchantpluck','customerpluck','bankaccountpluk','userpluck','bankaccountpayoutpluk','merchant_fk_id'));
 
     }

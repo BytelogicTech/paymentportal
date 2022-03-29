@@ -95,6 +95,8 @@ Route::group(['prefix' => 'payout'], function(){
     Route::get('/edit/{id}', [PayoutController::class, 'edit']);
     Route::post('/update', [PayoutController::class, 'update']);
     Route::get('/delete/{id}', [PayoutController::class, 'destroy']);
+    Route::post('/search', [PayoutController::class, 'search']);
+    Route::get('/search', [PayoutController::class, 'index']);
 });
 
 
@@ -119,7 +121,7 @@ Route::group(['prefix' => 'settlementaccount'], function(){
 });
 
 
-
+ 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
