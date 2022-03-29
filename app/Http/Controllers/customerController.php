@@ -36,6 +36,20 @@ class customerController extends Controller
         return view('customer/index', compact('customers','userpluck','merchantpluck','merchants','merchant_fk_id'));
     }
 
+    public function search(Request $request)
+    {
+
+        $merchant_fk_id = $request->merchant_fk_id;
+        // dd($request->all());
+        $customers = customer::where('merchant_fk_id',$merchant_fk_id)->get();
+        // dd($customers);
+        $userpluck = User::pluck('first_name','id');
+        $merchantpluck = merchant::pluck('first_name','id');
+        $merchants = merchant::all();
+        return view('customer/index', compact('customers','userpluck','merchantpluck','merchants','merchant_fk_id'));
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -224,19 +238,7 @@ class customerController extends Controller
         return redirect('customer/index')->with('success', 'customer Deleted Successfully');
     }
 
-    public function search(Request $request)
-    {
-
-        $merchant_fk_id = $request->merchant_fk_id;
-        // dd($request->all());
-        $customers = customer::where('merchant_fk_id',$merchant_fk_id)->get();
-        // dd($customers);
-        $userpluck = User::pluck('first_name','id');
-        $merchantpluck = merchant::pluck('first_name','id');
-        $merchants = merchant::all();
-        return view('customer/index', compact('customers','userpluck','merchantpluck','merchants','merchant_fk_id'));
-    }
-
+   
 
 
     public function bankaccountpayoutdestroy($bankaccountpayoutid)
