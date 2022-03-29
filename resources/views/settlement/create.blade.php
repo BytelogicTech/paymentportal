@@ -94,7 +94,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Reference ID</label>
-                                            <input type="text" placeholder="Enter Reference ID" class="form-control" name="reference_id" required />
+                                            <input type="text" placeholder="Enter Reference ID" class="form-control" name="reference_id"/>
                                         </div>
                                     </div>
                                 </div>

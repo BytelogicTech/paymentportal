@@ -9,6 +9,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PayoutController;
 use App\Http\Controllers\settlementController;
+use App\http\Controllers\settlementaccountController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -61,6 +62,7 @@ Route::group(['prefix' => 'customer'], function(){
     Route::get('/edit/{id}', [customerController::class, 'edit']);
     Route::post('/update', [customerController::class, 'update']);
     Route::get('/delete/{id}', [customerController::class, 'destroy']);
+    Route::post('/search', [customerController::class, 'search']);
 });
 
 Route::get('/bankaccountpayoutdestroy/{bankaccountpayoutid}', [customerController::class, 'bankaccountpayoutdestroy']);
@@ -104,6 +106,18 @@ Route::group(['prefix' => 'settlement'], function(){
     Route::post('/update', [settlementController::class, 'update']);
     Route::get('/delete/{id}', [settlementController::class, 'destroy']);
 });
+
+
+
+Route::group(['prefix' => 'settlementaccount'], function(){
+    Route::get('/index', [settlementaccountController::class, 'index'])->name('settlementaccount.index');
+    Route::get('/create', [settlementaccountController::class, 'create']);
+    Route::post('/store', [settlementaccountController::class, 'store']);
+    Route::get('/edit/{id}', [settlementaccountController::class, 'edit']);
+    Route::post('/update', [settlementaccountController::class, 'update']);
+    Route::get('/delete/{id}', [settlementaccountController::class, 'destroy']);
+});
+
 
 
 Auth::routes();

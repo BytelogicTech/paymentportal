@@ -26,7 +26,9 @@ return new class extends Migration
             $table->string('status_of_settlement')->nullable();;         
             $table->foreign('merchant_fk_id')->references('id')->on('merchants');
             $table->foreign('bank_account_to_fk_id')->references('id')->on('bank_account_payouts');
-            $table->foreign('bank_account_from_fk_id')->references('id')->on('payouts');
+            $table->foreign('bank_account_from_fk_id')->references('id')->on('bank_accounts');
+            $table->unsignedBigInteger('created_by');
+            $table->foreign('created_by')->references('id')->on('users');
            
             $table->timestamps();
         });

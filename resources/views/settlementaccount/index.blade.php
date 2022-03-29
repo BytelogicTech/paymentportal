@@ -3,8 +3,6 @@
 
 
 
-
-
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -12,7 +10,7 @@
         <div class="row mb-2">
           <div class="col-sm-6">
           @include('flash')
-            <h1>Settlements</h1>
+            <h1>Settlement Accounts</h1>
             
           </div>
           <div class="col-sm-6">
@@ -35,7 +33,7 @@
 
             <div class="card">
               <div class="card-header">
-                <a href="{{url('settlement/create')}}" class="btn btn-success btn-sm"><i class="fa fa-plus-square"></i> Add new settlement </a>
+                <a href="{{url('settlementaccount/create')}}" class="btn btn-success btn-sm"><i class="fa fa-plus-square"></i> Add new settlement </a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -46,34 +44,30 @@
                     <th>Sr.</th>
                     <th>Merchant Name</th>
                     <th>Beneficiary Name</th>
+                    <th>Beneficiary Nickname</th>
+                    <th>Bank Name</th>
                     <th>Currency</th>
-                    <th>Settlement Amount</th>
-                    <th>Date Paid</th>
-                    <th>Status</th>
-                    <th>Created BY</th>
-                    <th>Created On</th>
+                    <th>Account Number</th>
                     <th>Actions</th>                  
                   </tr>
                   </thead>
 
 
     @php $count=0; @endphp
-    @foreach($settlements as $settlement)
+    @foreach($settlementaccounts as $settlementaccount)
 
     @php $count++; @endphp
     <tr>
         <td>{{$count}}</td>
-        <td>{{@$merchantpluck[$settlement->merchant_fk_id]}}</td>
-        <td>{{@$bankaccountpayoutbnamepluk[$settlement->bank_account_to_fk_id]}}</td>
-        <td>{{@$bankaccountpayoutpluk[$settlement->bank_account_to_fk_id]}}</td>
-        <td>{{$settlement->settlement_amount}}</td>
-        <td>{{$settlement->date_paid}}</td>
-        <td>{{$settlement->status_of_settlement}}</td>
-        <td>{{@$userpluck[$settlement->created_by]}}</td>       
-        <td>{{$settlement->created_at}}</td>
+        <td>{{@$merchantpluck[$settlementaccount->merchant_fk_id]}}</td>
+        <td>{{$settlementaccount->beneficiary_name}}</td>
+        <td>{{$settlementaccount->beneficiary_nickname}}</td>    
+        <td>{{$settlementaccount->bank_name}}</td>      
+        <td>{{$settlementaccount->currency}}</td>      
+        <td>{{$settlementaccount->account_number}}</td>      
         <td>
-            <a href="{{url('settlement/edit/'.$settlement->id)}}" class="btn btn-warning btn-sm"><i class="far fa-edit" aria-hidden="true"></i></a>
-            <a href="{{url('settlement/delete/'.$settlement->id)}}" onclick="return confirm('Are you sure, you want to delete it?')" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
+            <a href="{{url('settlementaccount/edit/'.$settlementaccount->id)}}" class="btn btn-warning btn-sm"><i class="far fa-edit" aria-hidden="true"></i></a>
+            <a href="{{url('settlementaccount/delete/'.$settlementaccount->id)}}" onclick="return confirm('Are you sure, you want to delete it?')" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
         </td>
     </tr>
     @endforeach
