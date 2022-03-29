@@ -66,7 +66,7 @@
                                                 <option value="customer_fk_id" disabled selected>Please Select One</option>                                                
                                             </select>
                                         </div>
-                                </div>
+                                    </div>
                             </div>
                             
                             <div class="row">
@@ -216,7 +216,7 @@
                     $.each(data, function(i, value) {
                     options+= '<option value='+value["id"]+'>'+value["first_name"]+'</option>';
                     });
-                    // console.log(data);
+                    //console.log(data);
                     $('#customer_fk_id').html(options);
                 },
                 error: function(data) {
@@ -250,7 +250,7 @@
                     $.each(data, function(i, value) {
                     options+= '<option value='+value["id"]+'>'+value["beneficiary_name"]+'-'+value["currency"]+'-'+value["account_number"]+'</option>';
                     });
-                    console.log(data);
+                    // console.log(data);
                     $('#bank_account_to_fk_id').html(options);
                 },
                 error: function(data) {

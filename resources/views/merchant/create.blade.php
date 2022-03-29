@@ -421,9 +421,9 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="description">B2B Percentage*</label>rcentage" required />
+                                            <label for="description">B2B Percentage*</label>
                                         </div>
-                                            <input type="number" placeholder="Enter B2B Percentage" class="form-control" name="b2b_pe
+                                            <input type="number" placeholder="Enter B2B Percentage" class="form-control" name="b2b_percentage" required />
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">

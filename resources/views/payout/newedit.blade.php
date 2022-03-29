@@ -323,4 +323,242 @@
 </script>
 
 
+<!-- //////////      Ajax function for Table Reload in Payout edit      ///////////// -->
 
+<script>
+    $('#bank_account_to_fk_id').change(function() {
+        $('#table_div').html('');
+        var bank_account_to_fk_id = $(this).val();
+
+
+        $.ajax({
+            type: 'POST',
+            url: "{{url('gettable_bybank_fk_id')}}",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                bank_account_to_fk_id: bank_account_to_fk_id
+            },
+            success: function(data) {
+
+                
+                var table = "";
+                $.each(data, function(i, value) {
+                    
+                    table += '<table id=' + value["id"] + 'class="hide table tbl-customer-accounts table-bordered m-table m-table--border-brand m-table--head-bg-brand">' +
+                        '<tbody>' +
+                        '<tr>' +
+                        '<td>Beneficiary Name</td>' +
+                        '<td>' + value["beneficiary_name"] + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td>Beneficiary Nickname</td>' +
+                        '<td>' + value["beneficiary_nickname"] + '</td>' +
+                        '</tr>' +
+                        '</tbody>' +
+                        '</table>';
+                });
+                console.log(data);
+                
+                $('#table_div').html(table);
+            },
+            error: function(data) {
+                console.log("error");
+                console.log(data);
+            }
+        });
+
+    });
+
+    $('#bank_account_to_fk_id').change(function() {
+        var bank_account_to_fk_id = $(this).val();
+        $('#' + bank_account_to_fk_id).removeClass('hide');
+    });
+</script>
+
+
+<!-- //////////      Ajax function 2nd for Table Reload in Payout edit      ///////////// -->
+<script>
+    $('#bank_account_to_fk_id').change(function() {
+        $('#table_div').html('');
+        var bank_account_to_fk_id = $(this).val();
+
+
+        $.ajax({
+            type: 'POST',
+            url: "{{url('gettable_bybank_fk_id')}}",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                bank_account_to_fk_id: bank_account_to_fk_id
+            },
+            success: function(data) {
+
+                var options = '<option value="" disabled selected>Please Select One</option> ';
+                var table = "";
+                $.each(data, function(i, value) {
+                    options += '<option value=' + value["id"] + '>' + value["beneficiary_name"] + '-' + value["currency"] + '-' + value["account_number"] + '</option>';
+                    table += '<table id=' + value["id"] + 'class="hide table tbl-customer-accounts table-bordered m-table m-table--border-brand m-table--head-bg-brand">' +
+                        '<tbody>' +
+                        '<tr>' +
+                        '<td>Remarks</td>' +
+                        '<td>' + value["remarks"] + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td>Pauout Amount</td>' +
+                        '<td>' + value["payout_amount"] + '</td>' +
+                        '</tr>' +
+                        '</tbody>' +
+                        '</table>';
+                });
+                console.log(data);
+                
+                $('#table_div').html(table);
+            },
+            error: function(data) {
+                console.log("error");
+                console.log(data);
+            }
+        });
+
+    });
+
+    $('#bank_account_to_fk_id').change(function() {
+        var bank_account_to_fk_id = $(this).val();
+        $('#' + bank_account_to_fk_id).removeClass('hide');
+    });
+</script>
+
+
+
+<!-- //////////      Ajax function 3nd for Table Reload in Payout edit      ///////////// -->
+
+<script>
+    $('#bank_account_to_fk_id').change(function() {
+        $('#table_div').html('');
+        var customer_fk_id = $(this).val();
+
+
+        $.ajax({
+            type: 'POST',
+            url: "{{url('getpayout_bycustomer')}}",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                customer_fk_id: customer_fk_id
+            },
+            success: function(data) {
+
+                var options = '<option value="" disabled selected>Please Select One</option> ';
+                var table = "";
+                $.each(data, function(i, value) {
+                    options += '<option value=' + value["id"] + '>' + value["beneficiary_name"] + '-' + value["currency"] + '-' + value["account_number"] + '</option>';
+                    table += '<table id=' + value["id"] + 'class="hide table tbl-customer-accounts table-bordered m-table m-table--border-brand m-table--head-bg-brand">' +
+                    '<tbody>' +
+                        '<tr>' +
+                        '<td>Beneficiary Name</td>' +
+                        '<td>' + value["beneficiary_name"] + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td>Beneficiary Nickname</td>' +
+                        '<td>' + value["beneficiary_nickname"] + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td>Beneficiary Address</td>' +
+                        '<td>' + value["beneficiary_address"] + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td>Beneficiary Country</td>' +
+                        '<td>' + value["beneficiary_country"] + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td>Bank Name</td>' +
+                        '<td>' + value["bank_name"] + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td>Bank Branch</td>' +
+                        '<td>' + value["bank_branch"] + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td>Bank Address</td>' +
+                        '<td>' + value["bank_address"] + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td>Bank Country</td>' +
+                        '<td>' + value["bank_country"] + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td>Bank Swift</td>' +
+                        '<td>' + value["bank_swift"] + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td>Acc No / IBAN</td>' +
+                        '<td>' + value["account_number"] + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td>Currency</td>' +
+                        '<td>' + value["currency"] + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td>Remarks</td>' +
+                        '<td>' + value["remarks"] + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td>Remarks</td>' +
+                        '<td>' + value["remarks"] + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td>Intermediary Bank name</td>' +
+                        '<td>' + value["intermediary_bank_name"] + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td>Intermediary Bank Address</td>' +
+                        '<td>' + value["intermediary_bank_address"] + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td>Intermidiary Bank Swift Code</td>' +
+                        '<td>' + value["intermediary_bank_swift_code"] + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td>Intermidiary Remarks</td>' +
+                        '<td>' + value["intermediary_bank_deatails_remarks"] + '</td>' +
+                        '</tr>' +
+                        '</tbody>' +
+                        '</table>';
+                });
+                console.log(data);
+                
+                $('#table_div').html(table);
+            },
+            error: function(data) {
+                console.log("error");
+                console.log(data);
+            }
+        });
+
+    });
+
+    $('#bank_account_to_fk_id').change(function() {
+        var bank_account_to_fk_id = $(this).val();
+        $('#' + bank_account_to_fk_id).removeClass('hide');
+    });
+</script>
+
+
+
+
+
+
+
+public function getpayout_bycustomer(Request $request)
+    {
+        $bank_account_to_pk_id = $request->bank_account_to_pk_id;
+    
+        $bank_account_payouts = bank_account_payouts::where('customer_fk_id',$bank_account_to_pk_id)->get();
+
+        return $bank_account_payouts;
+
+    }
