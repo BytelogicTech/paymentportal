@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            @include('flash')
+            @include('flash') 
             <h1>Customers</h1>
           </div>
           <div class="col-sm-6">
@@ -33,6 +33,24 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
+
+  <div class="col-md-4">
+  <form action="{{url('customer/search')}}" method="post">
+    @csrf
+<select class="select2 form-control" name="merchant_fk_id" id="merchant_fk_id">
+  <option value="" selected disabled>Select Merchant</option>
+@foreach($merchants as $merchant)
+<option value="{{$merchant->id}}">{{$merchant->merchant_name}}</option>
+@endforeach
+</select>
+
+                                <br />
+                                <button type="submit" class="btn btn-primary">Submit</button>
+
+  </form>
+</div>
+
+
               <table id="example1"  class="table table-bordered table-hover">
 
                  <thead>
@@ -94,3 +112,14 @@
     <!-- /.content -->
   </div>
   @include('footer')
+
+  <script>
+    
+    $('#merchant_fk_id').val('{{$merchant_fk_id}}');  
+  </script>
+
+<script>
+    $(function() {
+        $('.select2').select2()
+    });
+</script>

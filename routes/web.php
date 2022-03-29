@@ -62,6 +62,7 @@ Route::group(['prefix' => 'customer'], function(){
     Route::get('/edit/{id}', [customerController::class, 'edit']);
     Route::post('/update', [customerController::class, 'update']);
     Route::get('/delete/{id}', [customerController::class, 'destroy']);
+    Route::post('/search', [customerController::class, 'search']);
 });
 
 Route::get('/bankaccountpayoutdestroy/{bankaccountpayoutid}', [customerController::class, 'bankaccountpayoutdestroy']);

@@ -29,10 +29,11 @@ class customerController extends Controller
     public function index()
     {
         $customers = customer::all();
-        // dd($customers);
+        $merchant_fk_id = '';
         $userpluck = User::pluck('first_name','id');
         $merchantpluck = merchant::pluck('first_name','id');
-        return view('customer/index', compact('customers','userpluck','merchantpluck'));
+        $merchants = merchant::all();
+        return view('customer/index', compact('customers','userpluck','merchantpluck','merchants','merchant_fk_id'));
     }
 
     /**
@@ -221,6 +222,19 @@ class customerController extends Controller
         $customer->delete();
 
         return redirect('customer/index')->with('success', 'customer Deleted Successfully');
+    }
+
+    public function search(Request $request)
+    {
+
+        $merchant_fk_id = $request->merchant_fk_id;
+        // dd($request->all());
+        $customers = customer::where('merchant_fk_id',$merchant_fk_id)->get();
+        // dd($customers);
+        $userpluck = User::pluck('first_name','id');
+        $merchantpluck = merchant::pluck('first_name','id');
+        $merchants = merchant::all();
+        return view('customer/index', compact('customers','userpluck','merchantpluck','merchants','merchant_fk_id'));
     }
 
 
