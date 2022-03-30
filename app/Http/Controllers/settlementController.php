@@ -260,6 +260,5 @@ class settlementController extends Controller
         return view('settlement/view');
     }
 
-
  
 }

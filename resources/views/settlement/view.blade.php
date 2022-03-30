@@ -35,7 +35,10 @@
                         <!-- form start -->
 
                         <form action="{{url('settlement/view')}}" method="POST" enctype="multipart/form-data">
+                        
                             <div class="card-body">
+                            
+                               
                                 <h4><b>Settlement Details</b></h4>
                             <div class="col-md-4">
                                         <div class="tb-customer-accounts" style="margin-top: 20px;">
@@ -71,6 +74,8 @@
                                                     
                                                     <tr>
                                                         <td>Beneficiary Name</td>
+                                                        <td></td>
+
                                                         <td></td>
                                                     </tr>
                                                     <tr>
