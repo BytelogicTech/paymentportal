@@ -40,9 +40,9 @@
             <!-- /.card-header -->
             <div class="card-body">
               <form action="{{url('settlement/search')}}" method="post">
-              @csrf
+                @csrf
                 <div class="row">
-                <div class="col-md-3">
+                  <div class="col-md-3">
                     <div class="form-group">
                       <label>Merchant Name:</label>
                       <select class="select2 form-control" name="merchant_fk_id" id="merchant_fk_id">
@@ -53,30 +53,30 @@
                       </select>
                     </div>
                   </div>
-                                    
+
                   <div class="col-md-3">
                     <div class="form-group">
-                    <label>Settlement Amount Between:</label>
-								<div class="input-daterange input-group">
-									<input type="text" class="form-control m-input bootdatepicker" name="settlement_amount_from" placeholder="From" data-col-index="11">
-									<div class="input-group-append">
-										<span class="input-group-text"><i class="la la-ellipsis-h">...</i></span>
-									</div>
-									<input type="text" class="form-control m-input bootdatepicker" name="settlement_amount_to" placeholder="To" data-col-index="11">
-								</div>
+                      <label>Settlement Amount Between:</label>
+                      <div class="input-daterange input-group">
+                        <input type="text" class="form-control m-input bootdatepicker" name="settlement_amount_from" placeholder="From" data-col-index="11">
+                        <div class="input-group-append">
+                          <span class="input-group-text"><i class="la la-ellipsis-h">...</i></span>
+                        </div>
+                        <input type="text" class="form-control m-input bootdatepicker" name="settlement_amount_to" placeholder="To" data-col-index="11">
+                      </div>
                     </div>
                   </div>
 
                   <div class="col-md-3">
                     <div class="form-group">
-                    <label>Date Paid Between:</label>
-								<div class="input-daterange input-group">
-									<input type="date" class="form-control m-input bootdatepicker" name="date_paid_from" placeholder="From" data-col-index="11">
-									<div class="input-group-append">
-										<span class="input-group-text"><i class="la la-ellipsis-h">...</i></span>
-									</div>
-									<input type="date" class="form-control m-input bootdatepicker" name="date_from_to" placeholder="To" data-col-index="11">
-								</div>
+                      <label>Date Paid Between:</label>
+                      <div class="input-daterange input-group">
+                        <input type="date" class="form-control m-input bootdatepicker" name="date_paid_from" placeholder="From" data-col-index="11">
+                        <div class="input-group-append">
+                          <span class="input-group-text"><i class="la la-ellipsis-h">...</i></span>
+                        </div>
+                        <input type="date" class="form-control m-input bootdatepicker" name="date_from_to" placeholder="To" data-col-index="11">
+                      </div>
                     </div>
                   </div>
 
@@ -84,6 +84,7 @@
                     <div class="form-group">
                       <label for="description">Status:</label>
                       <select class="form-control" name="status">
+                      <option value="" selected disabled>Please Select One</option>
                         <option value="New">New</option>
                         <option value="Processing">Processing</option>
                         <option value="Paid">Paid</option>
@@ -93,7 +94,7 @@
                     </div>
                   </div>
                 </div>
-              
+
             </div>
 
             <div class="card-header">
@@ -138,7 +139,8 @@
                 <td>{{$settlement->created_at}}</td>
                 <td>
                   <a href="{{url('settlement/edit/'.$settlement->id)}}" class="btn btn-warning btn-sm"><i class="far fa-edit" aria-hidden="true"></i></a>
-                  <a href="{{url('settlement/view/')}}" class="btn btn-primary"><i class="far fa-download" aria-hidden="true"></i></a>
+                  <a href="{{url('settlement/view/'.$settlement->id)}}" class="btn btn-primary"><i class="fa fa-download" aria-hidden="true"></i>
+                  </a>
 
                   <a href="{{url('settlement/delete/'.$settlement->id)}}" onclick="return confirm('Are you sure, you want to delete it?')" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
                 </td>

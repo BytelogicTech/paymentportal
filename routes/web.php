@@ -108,7 +108,9 @@ Route::group(['prefix' => 'settlement'], function(){
     Route::post('/update', [settlementController::class, 'update']);
     Route::get('/delete/{id}', [settlementController::class, 'destroy']);
     Route::post('/search', [settlementController::class, 'search']);
-    Route::get('/view', [settlementController::class, 'view']);
+    Route::get('/search', [settlementController::class, 'index']);
+
+    Route::get('/view/{id}', [settlementController::class, 'view']);
 });
 
 
