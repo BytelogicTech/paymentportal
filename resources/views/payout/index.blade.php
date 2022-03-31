@@ -46,7 +46,7 @@
                   <div class="col-md-3">
                     <label for="description">Merchant Name</label>
                     <select name="merchant_fk_id" class="form-control" id="merchant_fk_id">
-                      <option value="" selected disabled>Select Merchant</option>
+                      <option value="" selected >Select Merchant</option>
                       @foreach($merchants as $merchant)
                       <option value="{{$merchant->id}}">{{$merchant->merchant_name}}</option>
                       @endforeach
@@ -64,8 +64,8 @@
                   </div>
                   <div class="col-md-3">
                     <label>Currency</label>
-                    <select class="form-control select2" style="width: 100%;" name="currency[]">
-                      <option value="" selected disabled>Please Select One</option>
+                    <select class="form-control select2" style="width: 100%;" name="currency">
+                      <option value="" selected >Please Select One</option>
                       @foreach(config('constants.currency_list') as $key=> $currency)
                       <option value="{{$key}}">{{$key}}</option>
                       @endforeach
@@ -98,12 +98,12 @@
                   <div class="col-md-3">
                     <label>Status</label>
                     <select class="form-control" name="status_of_payout">
-                      <option value="" selected disabled></option>
+                      <option value="" selected >Select Status</option>
                       <option value="New">New</option>
                       <option value="Processing">Processing</option>
                       <option value="Paid">Paid</option>
                       <option value="Hold">Hold</option>
-                      <option value="Cancelled">Cancelled</option>
+                      <option value="Canceled">Canceled</option>
                       <option value="Returned">Returned</option>
                       <option value="Rejected">Rejected</option>
 
@@ -111,8 +111,8 @@
                   </div>
                   <div class="col-md-3">
                     <label for="description">Bank Paid From</label>
-                    <select class="select2 form-control" name="bank_account_from_fk_id">
-                      <option>Please Select One</option>
+                    <select class="select2 form-control" name="bank_account_from_fk_id" id="bank_account_from_fk_id">
+                      <option value="" >Please Select One</option>
                       @foreach($bankaccounts as $bankaccount)
                       <optgroup label="{{$bankaccount[0]->bank_name}}">
                         @foreach($bankaccount as $item)
@@ -130,7 +130,7 @@
 
                 <hr>
                 <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
-                <button type="reset" class="btn btn-danger"><i class="fa fa-cross"></i> Reset</button>
+                <button type="reset" class="btn btn-danger">X Reset</button>
               </form>
             </div>
 
@@ -213,6 +213,8 @@
 <script>
   $('#merchant_fk_id').val('{{$merchant_fk_id}}');
 </script>
+
+
 
 <script>
   $('#merchant_fk_id').change(function() {

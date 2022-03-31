@@ -54,7 +54,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Parent Merchant*</label>
-                                            <select class="select2 form-control" name="merchant_fk_id" required>
+                                            <select class="select2 form-control" name="merchant_fk_id" id="merchant_fk_id" required>
                                                 <option value="" disabled selected>Please Select One</option>
                                                 @foreach($merchants as $merchant)
                                                 <option value="{{$merchant->id}}">{{$merchant->merchant_name}}</option>
@@ -83,11 +83,8 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Customer*</label>
-                                            <select class="select2 form-control" name="customer_fk_id" >
-                                                <option value="" disabled selected>Please Select One</option>
-                                                @foreach($customers as $customer)
-                                                <option value="{{$customer->id}}">{{$customer->first_name}}</option>
-                                                @endforeach
+                                            <select class="select2 form-control" name="customer_fk_id"id="customer_fk_id" required>
+                                                <option value="customer_fk_id" disabled selected>Please Select One</option>
                                             </select>
                                         </div>
                                     </div>
@@ -188,6 +185,38 @@
 <script>
     $(function() {
         $('.select2').select2()
+    });
+</script>
+
+<script>
+    $('#merchant_fk_id').change(function(){
+        $('#customer_fk_id').html('');
+        var merchant_fk_id = $(this).val();
+
+        $.ajax({
+                type: 'POST',
+                url: "{{url('getcustomers_bymerchant')}}",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    merchant_fk_id: merchant_fk_id
+                },
+                success: function(data) {
+                    
+                var options = '<option value="" >Please Select One</option> ';
+                    $.each(data, function(i, value) {
+                    options+= '<option value='+value["id"]+'>'+value["first_name"]+'</option>';
+                    });
+                    //console.log(data);
+                    $('#customer_fk_id').html(options);
+                },
+                error: function(data) {
+                    console.log("error");
+                    console.log(data);
+                }
+            });
+        
     });
 </script>
 

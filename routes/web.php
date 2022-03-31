@@ -76,6 +76,8 @@ Route::group(['prefix' => 'transaction'], function(){
     Route::get('/edit/{id}', [TransactionController::class, 'edit']);
     Route::post('/update', [TransactionController::class, 'update']);
     Route::get('/delete/{id}', [TransactionController::class, 'destroy']);
+    Route::post('/search', [TransactionController::class, 'search']);
+    Route::get('/search', [TransactionController::class, 'index']);
 });
 
 
@@ -132,3 +134,5 @@ Route::post('/getcustomers_bymerchant', [PayoutController::class, 'getcustomers_
 Route::post('/getpayout_bycustomer', [PayoutController::class, 'getpayout_bycustomer']);
 Route::post('/getpayouts_bymerchant', [PayoutController::class, 'getpayouts_bymerchant']);
 Route::post('/getpayout_bycustomer_table', [PayoutController::class, 'getpayout_bycustomer_table']);
+
+Route::post('/getcustomers_bymerchant', [TransactionController::class, 'getcustomers_bymerchant']);

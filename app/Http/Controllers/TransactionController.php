@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\bank;
 use App\Models\User;
 use App\Models\bank_account;
+use App\Models\bank_account_payouts;
 use App\Models\customer;
 use App\Models\merchant;
 use App\Models\transaction;
@@ -27,21 +28,145 @@ class TransactionController extends Controller
      */
     public function index()
     {
-
+        $transactions = transaction::all();
+        $merchant_fk_id = "";
+        $customer_fk_id = "";
+        $bank_account_fk_id = "";
+        $status_of_transaction = "";
+        $type_of_transaction = "";
+        $currency ="";
+        $bank_account_fk_id = "";
+        $transaction_amount_from = "";
+        $transaction_amount_to = "";
+        $merchants = merchant::all();
+        $customers = customer::all();
+        $bankaccounts = bank_account::all();
+        $bank_account_payouts = bank_account_payouts::all();
         $transactions = transaction::all();
         $merchantpluck = merchant::pluck('merchant_name', 'id');
         $customerpluck = customer::pluck('first_name', 'id');
         $bankaccountpluk = bank_account::pluck('currency', 'id');
         $userpluck = User::pluck('first_name', 'id');
-        return view('transaction/index', compact('transactions', 'merchantpluck', 'customerpluck', 'bankaccountpluk','userpluck'));
 
-        // $students = student::all();
-        // $schoolpluck = school::pluck('school_name','id');
-        // // dd($students);
-        // return view('student/index',compact('students','schoolpluck'));
+        
 
-        // <td>{{@$schoolpluck[$student->school_fk_id]}}</td>
+        $bankaccounts =  DB::table('bank_accounts')
+        ->join('banks','banks.id','=','bank_accounts.bank_id')
+        ->select('bank_accounts.id as bank_accountsid','bank_accounts.bank_id','banks.bank_name','banks.beneficiary_name','bank_accounts.currency','bank_accounts.account_number','bank_accounts.nick_name')            
+        ->get()
+        ->groupBy('bank_id');
+
+        return view('transaction/index', compact('transactions', 'merchantpluck', 'customerpluck', 'bankaccountpluk','userpluck','merchants','customers','merchant_fk_id','customer_fk_id','bankaccounts','bank_account_payouts','status_of_transaction','type_of_transaction','currency','bank_account_fk_id','transaction_amount_from','transaction_amount_to'));
+
+        
     }
+
+     
+    public function search(Request $request)
+    {
+        // dd($request->all());
+        $status_of_transaction = $request->status_of_transaction;
+        $type_of_transaction = $request->type_of_transaction;
+        $merchant_fk_id = $request->merchant_fk_id;
+        $customer_fk_id = $request->customer_fk_id;
+        $bank_account_fk_id = $request->bank_account_fk_id;
+        $currency = $request->currency;
+        $transaction_amount_from= (int)$request->transaction_amount_from;
+        $transaction_amount_to= (int)$request->transaction_amount_to;
+        $date_paid_from= (date($request->date_paid_from));
+        $date_paid_to= (date($request->date_paid_to));
+        
+
+        $merchantpluck = merchant::pluck('merchant_name', 'id');
+        $customerpluck = customer::pluck('first_name', 'id');
+        $bankaccountpluk = bank_account::pluck('currency', 'id');
+        $userpluck = User::pluck('first_name', 'id');
+        $bank_account_payouts = bank_account_payouts::all();
+        $bank_accounts = bank_account::all();
+
+
+        $transactions = transaction::query();
+       
+        if($merchant_fk_id!=null)
+        {
+            $transactions = $transactions->where('merchant_fk_id',$merchant_fk_id);
+        }
+
+        if($request->invoice_number!=null)
+        {
+            $transactions = $transactions->where('invoice_number',$request->invoice_number);
+        }
+
+        if($customer_fk_id!=null)
+        {
+            $transactions = $transactions->where('customer_fk_id',$customer_fk_id);
+        }
+
+        if($bank_account_fk_id!=null)
+        {
+            $transactions = $transactions->where('bank_account_fk_id',$bank_account_fk_id);
+        }
+
+        if($transaction_amount_from!=0)
+        {
+            $transactions = $transactions->where('product_price','>=',$transaction_amount_from);
+        }
+        if($transaction_amount_to!=0)
+        {
+            $transactions = $transactions->where('product_price','<=',$transaction_amount_to);
+        }
+
+        if($date_paid_from!=null)
+        {
+            $transactions = $transactions->where('date_recieved','>=',$date_paid_from);
+        }
+        if($date_paid_to!=null)
+        {
+            $transactions = $transactions->where('date_recieved','<=',$date_paid_to);
+        }
+
+
+        if($status_of_transaction!=null)
+        {
+            $transactions = $transactions->where('status_of_transaction',$status_of_transaction);
+        }
+
+        if($type_of_transaction!=null)
+        {
+            $transactions = $transactions->where('type_of_transaction',$type_of_transaction);
+        }
+
+        if($currency!=null)
+        {
+            // dd('hello curency');
+            $transactions = $transactions->join('bank_accounts', 'bank_accounts.id','=', 'transactions.bank_account_fk_id')
+            ->where('currency',$currency);
+        }
+        
+        $transactions = $transactions->get();
+        
+        
+        $bankaccounts = bank_account::all();
+        $customers = customer::all();
+        $merchants = merchant::all();
+        $bank_account_payouts = bank_account_payouts::all();
+        $merchantpluck = merchant::pluck('merchant_name', 'id');
+        $customerpluck = customer::pluck('first_name', 'id');
+        $bankaccountpluk = bank_account::pluck('currency', 'id');
+        $userpluck = User::pluck('first_name', 'id');
+        $bankaccounts =  DB::table('bank_accounts')
+        ->join('banks','banks.id','=','bank_accounts.bank_id')
+        ->select('bank_accounts.id as bank_accountsid','bank_accounts.bank_id','banks.bank_name','banks.beneficiary_name','bank_accounts.currency','bank_accounts.account_number','bank_accounts.nick_name')            
+        ->get()
+        ->groupBy('bank_id');
+            
+        return view('transaction/index', compact('transactions', 'merchantpluck', 'customerpluck', 'bankaccountpluk','userpluck','customers','merchants','bankaccounts','bank_account_payouts','merchant_fk_id','status_of_transaction','type_of_transaction','currency','bank_account_fk_id','transaction_amount_from','transaction_amount_to'));
+    }
+
+
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -220,5 +345,16 @@ class TransactionController extends Controller
         $transaction->delete();
 
         return redirect('transaction/index')->with('success','Transaction Deleted Successfully');
+    }
+
+
+    public function getcustomers_bymerchant(Request $request)
+    {
+        $merchant_fk_id = $request->merchant_fk_id;
+
+        $customers = customer::where('merchant_fk_id',$merchant_fk_id)->get();
+
+        return $customers;
+
     }
 }

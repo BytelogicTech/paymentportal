@@ -620,3 +620,62 @@
         return view('payout/index', compact('payouts','merchants','merchantpluck','customerpluck','bankaccountpluk','userpluck','bankaccountpayoutpluk','merchant_fk_id'));
 
     }
+
+
+
+
+
+<!-- /////////////  Merchant Controller Index Function() /////////////// -->
+
+public function search(Request $request)
+    {
+        
+        $settlements = settlement::all();
+        $merchant_fk_id = $request->merchant_fk_id;
+        $settlement_amount_from= (int)$request->settlement_amount_from;
+        $settlement_amount_to= (int)$request->settlement_amount_to;
+            
+
+        $settlements=settlement::query();
+        if($merchant_fk_id!=null)
+        {
+            $settlements = settlement::where('merchant_fk_id',$merchant_fk_id);
+        }
+
+        if($settlement_amount_from!=0)
+        {
+            $settlements = $settlements->where('settlement_amount','>=',$settlement_amount_from);
+        }
+        if($settlement_amount_to!=0)
+        {
+            $settlements = $settlements->where('settlement_amount','<=',$settlement_amount_to);
+        }
+
+        // if($request->date_paid_from!=null)
+        // {
+        //     $settlements = $settlements->where('settlement_amount','>=',$request->date_paid_from);
+        // }
+        // if($request->date_paid_to!=null)
+        // {
+        //     $settlements = $settlements->where('settlement_amount','<=',$request->date_paid_to);
+        // }
+       
+        if($request->status!=null)
+        {
+            $settlements = $settlements->where('status_of_settlement',$request->status);
+        }
+
+
+      
+
+        $settlements=$settlements->get();
+        $bankaccountpayoutpluk = bank_account_payouts::pluck('currency', 'id');
+        $merchantpluck = merchant::pluck('merchant_name', 'id');
+        $bankaccountpayoutbnamepluk = bank_account_payouts::pluck('beneficiary_name', 'id');
+        $userpluck = User::pluck('first_name', 'id');
+        $merchants = merchant::all();
+       
+
+        // dd($settlements);
+        return view('settlement/index', compact('userpluck','merchants','settlements','merchant_fk_id','bankaccountpayoutpluk','bankaccountpayoutbnamepluk','merchantpluck'));
+    }

@@ -30,8 +30,10 @@ class PayoutController extends Controller
         $payouts = payout::all();
         $merchant_fk_id = "";
         $customer_fk_id = "";
+        $bank_account_from_fk_id = "";
         $merchants = merchant::all();
         $customers = customer::all();
+        $bankaccounts = bank_account::all();
         $bank_account_payouts = bank_account_payouts::all();
         $merchantpluck = merchant::pluck('merchant_name', 'id');
         $customerpluck = customer::pluck('first_name', 'id');
@@ -46,68 +48,82 @@ class PayoutController extends Controller
         ->groupBy('bank_id');
 
 
-        return view('payout/index', compact('bankaccounts','payouts','merchants','customers','bank_account_payouts','merchantpluck','customerpluck','bankaccountpluk','userpluck','bankaccountpayoutpluk','merchant_fk_id'));
+        return view('payout/index', compact('bankaccounts','payouts','merchants','customers','bank_account_payouts','merchantpluck','customerpluck','bankaccountpluk','userpluck','bankaccountpayoutpluk','merchant_fk_id','bank_account_from_fk_id'));
     }
 
     public function search(Request $request)
     {
-        //dd($request->all());
+        // dd($request->all());
         $merchant_fk_id = $request->merchant_fk_id;
         $customer_fk_id = $request->customer_fk_id;
-        $bank_paid_from = $request->bank_paid_from;
+        $bank_account_from_fk_id = $request->bank_account_from_fk_id;
+        $payout_amount_from= (int)$request->payout_amount_from;
+        $payout_amount_to= (int)$request->payout_amount_to;
+        $date_paid_from= (date($request->date_paid_from));
+        $date_paid_to= (date($request->date_paid_to));
+        $bank_account_payouts = bank_account_payouts::all();
         $currency = $request->currency;
+        
+
 
         $payouts = payout::query();
-
-        // if($merchant_fk_id!=null)
-        // {
-        //     $payouts = $payouts->where('merchant_fk_id',$merchant_fk_id);
-        // }
-        // if($request->payout_request_id!=null)
-        // {
-        //     $payouts = $payouts->where('reference_id',$request->payout_request_id);
-        // }
-        // if($customer_fk_id!=null)
-        // {
-        //     $payouts = $payouts->where('customer_fk_id',$customer_fk_id);
-        // }
-        // if($request->currency!=null)
-        // {
-        //     $payouts = $payouts->where('currency',$currency);
-        // }
+       
+        if($merchant_fk_id!=null)
+        {
+            $payouts = $payouts->where('merchant_fk_id',$merchant_fk_id);
+        }
+        if($request->reference_id!=null)
+        {
+            $payouts = $payouts->where('reference_id',$request->reference_id);
+        }
+        if($customer_fk_id!=null)
+        {
+            $payouts = $payouts->where('payouts.customer_fk_id',$customer_fk_id);
+        }
+        
        
 
-        // if($request->payout_amount_from!=null)
-        // {
-        //     $payouts = $payouts->where('payout_amount','>=',$request->payout_amount_from);
-        // }
-        // if($request->payout_amount_to!=null)
-        // {
-        //     $payouts = $payouts->where('payout_amount','<=',$request->payout_amount_to);
-        // }
-
-        // if($request->date_paid_from!=null)
-        // {
-        //     $payouts = $payouts->where('date_paid','>=',$request->date_paid_from);
-        // }
-        // if($request->date_paid_to!=null)
-        // {
-        //     $payouts = $payouts->where('date_paid','<=',$request->date_paid_to);
-        // }
-        // if($request->status_of_payout!=null)
-        // {
-        //     $payouts = $payouts->where('status_of_payout',$request->status_of_payout);
-        // }
-        if($bank_paid_from!=null)
+        if($payout_amount_from!=0)
         {
-            $payouts = $payouts->where('bank_paid_from',$bank_paid_from);
+            $payouts = $payouts->where('payout_amount','>=',$payout_amount_from);
         }
-     
+        if($payout_amount_to!=0)
+        {
+            $payouts = $payouts->where('payout_amount','<=',$payout_amount_to);
+        }
 
-        $payouts = $payouts->get();
+        if($date_paid_from!=null)
+        {
+            $payouts = $payouts->where('date_paid','>=',$date_paid_from);
+        }
+        if($date_paid_to!=null)
+        {
+            $payouts = $payouts->where('date_paid','<=',$date_paid_to);
+        }
+        if($request->status_of_payout!=null)
+        {
+            $payouts = $payouts->where('status_of_payout',$request->status_of_payout);
+        }
+        if($bank_account_from_fk_id!=null)
+        {
+            $payouts = $payouts->where('bank_account_from_fk_id',$bank_account_from_fk_id);
+        }
+
+        if($currency!=null)
+        {
+            // dd('hello curency');
+            $payouts = $payouts->join('bank_account_payouts', 'bank_account_payouts.id','=', 'payouts.bank_account_to_fk_id','right outer')
+            ->where('currency',$currency);
+        }
+
+        $payouts->select('payouts.id','payouts.merchant_fk_id','payouts.customer_fk_id','payouts.bank_account_to_fk_id','payouts.payout_amount','payouts.bank_processing_charges','payouts.status_of_payout','payouts.date_paid','payouts.created_by','payouts.created_at');
+
+     //dd($payouts);
+
+         $payouts = $payouts->get();
         $merchants = merchant::all();
         $customers = customer::all();
-       
+        
         $merchantpluck = merchant::pluck('merchant_name', 'id');
         $customerpluck = customer::pluck('first_name', 'id');
         $bankaccountpluk = bank_account::pluck('currency', 'id');
@@ -119,7 +135,7 @@ class PayoutController extends Controller
         ->get()
         ->groupBy('bank_id');
 
-        return view('payout/index', compact('payouts','merchants','customers','bank_account_payouts','merchantpluck','customerpluck','bankaccountpluk','userpluck','bankaccountpayoutpluk','merchant_fk_id','bankaccounts'));
+        return view('payout/index', compact('payouts','bank_account_payouts','merchants','customers','merchantpluck','customerpluck','bankaccountpluk','userpluck','bankaccountpayoutpluk','merchant_fk_id','bankaccounts'));
 
     }
 
