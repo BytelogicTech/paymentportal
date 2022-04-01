@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2022 at 11:53 AM
+-- Generation Time: Apr 01, 2022 at 02:02 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -383,38 +383,6 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `settlements`
---
-
-CREATE TABLE `settlements` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `merchant_fk_id` bigint(20) UNSIGNED NOT NULL,
-  `bank_account_from_fk_id` bigint(20) UNSIGNED NOT NULL,
-  `bank_account_to_fk_id` bigint(20) UNSIGNED NOT NULL,
-  `settlement_amount` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `upload_settlement_invoice` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `remarks` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `reference_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `rr_settlement` tinyint(1) DEFAULT NULL,
-  `status_of_settlement` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `date_paid` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_by` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `settlements`
---
-
-INSERT INTO `settlements` (`id`, `merchant_fk_id`, `bank_account_from_fk_id`, `bank_account_to_fk_id`, `settlement_amount`, `upload_settlement_invoice`, `remarks`, `reference_id`, `rr_settlement`, `status_of_settlement`, `date_paid`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, '100', '1648805626.jpg', 'For Shopping', 'ref_909', 1, 'New', NULL, 1, '2022-04-01 04:03:46', '2022-04-01 04:03:46'),
-(2, 2, 3, 2, '200', '1648805680.jpg', 'for laptop', '009', 1, 'Processing', NULL, 1, '2022-04-01 04:04:40', '2022-04-01 04:04:40'),
-(3, 3, 5, 3, '300', '1648805720.jpg', 'for Mouse', '333', 1, 'Paid', NULL, 1, '2022-04-01 04:05:20', '2022-04-01 04:05:20');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `settlement_accounts`
 --
 
@@ -514,10 +482,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `merchant_fk_id`, `phone`, `address`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'Bytelogic', NULL, '9876543210', 'Noida', 'admin@gmail.com', NULL, '$2y$10$FQPx2avQspjRdf7atFnUZ.NiOiM9Zsj2Q9xnSIG9NZKxKSgCoqJ0y', 'Merchant Admin', NULL, '2022-04-01 03:09:36', '2022-04-01 03:09:36'),
-(2, 'Suraj', 'Singh', 1, '9898767655', 'Gwalior', 's@gmail.com', NULL, '$2y$10$LzBNdEnqH.xRZAHoRzfpn.b6l1pnZoAOFtnDd0.RtTqrHWy.L5UCe', 'Merchant Admin', NULL, '2022-04-01 03:59:44', '2022-04-01 03:59:44'),
-(3, 'Dheeraj', 'Pal', 2, '6876666697', 'Unnao', 'dheeraj@gmail.com', NULL, '$2y$10$/dARViy59JVeEwZattF/0u6eHVp6a7Ge0ZSQOgby/Sxsn.WD3YjS6', 'Merchant View-Only', NULL, '2022-04-01 04:00:45', '2022-04-01 04:00:45'),
-(4, 'Keshav', 'Singh', 3, '6786696678', 'Noida', 'keshav@gmail.com', NULL, '$2y$10$Pz8F/yCN/4ugaE5UzsldW.3VfcqPYltOXLmdwXKl57vD4LktRPSn.', 'Merchant Admin', NULL, '2022-04-01 04:01:50', '2022-04-01 04:01:50');
+(1, 'Anurag', 'Bytelogic', 2, '9876543210', 'Noida', 'ma1@gmail.com', NULL, '$2y$10$FQPx2avQspjRdf7atFnUZ.NiOiM9Zsj2Q9xnSIG9NZKxKSgCoqJ0y', 'Merchant Admin', NULL, '2022-04-01 03:09:36', '2022-04-01 03:09:36'),
+(2, 'Suraj', 'Singh', 1, '9898767655', 'Gwalior', 'ma@gmail.com', NULL, '$2y$10$LzBNdEnqH.xRZAHoRzfpn.b6l1pnZoAOFtnDd0.RtTqrHWy.L5UCe', 'Merchant Admin', NULL, '2022-04-01 03:59:44', '2022-04-01 03:59:44'),
+(3, 'Dheeraj', 'Pal', 2, '6876666697', 'Unnao', 'mv@gmail.com', NULL, '$2y$10$/dARViy59JVeEwZattF/0u6eHVp6a7Ge0ZSQOgby/Sxsn.WD3YjS6', 'Merchant View-Only', NULL, '2022-04-01 04:00:45', '2022-04-01 04:00:45'),
+(4, 'Keshav', 'Singh', 3, '6786696678', 'Noida', 'ma2@gmail.com', NULL, '$2y$10$Pz8F/yCN/4ugaE5UzsldW.3VfcqPYltOXLmdwXKl57vD4LktRPSn.', 'Merchant Admin', NULL, '2022-04-01 04:01:50', '2022-04-01 04:01:50'),
+(5, 'Admin', 'Bytelogic', 0, '9876543210', 'Noida', 'admin@gmail.com', NULL, '$2y$10$FQPx2avQspjRdf7atFnUZ.NiOiM9Zsj2Q9xnSIG9NZKxKSgCoqJ0y', 'Admin', NULL, '2022-04-01 03:09:36', '2022-04-01 03:09:36');
 
 --
 -- Indexes for dumped tables
@@ -617,16 +586,6 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
--- Indexes for table `settlements`
---
-ALTER TABLE `settlements`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `settlements_merchant_fk_id_foreign` (`merchant_fk_id`),
-  ADD KEY `settlements_bank_account_to_fk_id_foreign` (`bank_account_to_fk_id`),
-  ADD KEY `settlements_bank_account_from_fk_id_foreign` (`bank_account_from_fk_id`),
-  ADD KEY `settlements_created_by_foreign` (`created_by`);
-
---
 -- Indexes for table `settlement_accounts`
 --
 ALTER TABLE `settlement_accounts`
@@ -721,12 +680,6 @@ ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `settlements`
---
-ALTER TABLE `settlements`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT for table `settlement_accounts`
 --
 ALTER TABLE `settlement_accounts`
@@ -742,7 +695,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
@@ -805,15 +758,6 @@ ALTER TABLE `payouts`
   ADD CONSTRAINT `payouts_created_by_foreign` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `payouts_customer_fk_id_foreign` FOREIGN KEY (`customer_fk_id`) REFERENCES `customers` (`id`),
   ADD CONSTRAINT `payouts_merchant_fk_id_foreign` FOREIGN KEY (`merchant_fk_id`) REFERENCES `merchants` (`id`);
-
---
--- Constraints for table `settlements`
---
-ALTER TABLE `settlements`
-  ADD CONSTRAINT `settlements_bank_account_from_fk_id_foreign` FOREIGN KEY (`bank_account_from_fk_id`) REFERENCES `bank_accounts` (`id`),
-  ADD CONSTRAINT `settlements_bank_account_to_fk_id_foreign` FOREIGN KEY (`bank_account_to_fk_id`) REFERENCES `bank_account_payouts` (`id`),
-  ADD CONSTRAINT `settlements_created_by_foreign` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `settlements_merchant_fk_id_foreign` FOREIGN KEY (`merchant_fk_id`) REFERENCES `merchants` (`id`);
 
 --
 -- Constraints for table `settlement_accounts`

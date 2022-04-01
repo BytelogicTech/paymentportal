@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('date_paid')->nullable();        
             $table->foreign('merchant_fk_id')->references('id')->on('merchants');
             $table->foreign('bank_account_to_fk_id')->references('id')->on('bank_account_payouts');
-            $table->foreign('bank_account_from_fk_id')->references('id')->on('bank_accounts');
+            $table->foreign('bank_account_from_fk_id')->references('id')->on('settlement_accounts');
             $table->unsignedBigInteger('created_by');
             $table->foreign('created_by')->references('id')->on('users');
            
