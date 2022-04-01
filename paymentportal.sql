@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 24, 2022 at 09:03 AM
+-- Generation Time: Apr 01, 2022 at 11:53 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -20,6 +20,34 @@ SET time_zone = "+00:00";
 --
 -- Database: `paymentportal`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `adjustments`
+--
+
+CREATE TABLE `adjustments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `merchant_fk_id` bigint(20) UNSIGNED NOT NULL,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `details` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remarks` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `adjustments`
+--
+
+INSERT INTO `adjustments` (`id`, `merchant_fk_id`, `type`, `details`, `remarks`, `created_by`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Currency Conversion', 'INR 200 converted to USD 300', 'Adjustment Remarks', 1, '2022-04-01 04:15:37', '2022-04-01 04:15:37'),
+(2, 2, 'Currency Conversion', 'USD 300 converted to INR 400', 'Ad.. remars1', 1, '2022-04-01 04:16:29', '2022-04-01 04:16:29'),
+(3, 3, 'Currency Conversion', 'BYR 400 converted to INR 600', 'Hello Remarks', 1, '2022-04-01 04:17:22', '2022-04-01 04:17:22'),
+(4, 1, 'Tier Commission', 'Date From: 2022-04-01 | Date To: 2022-04-08 | Incoming Percentage 10 | RR Percentage 20 | Payout Percentage 200 | B2B Percentage 12 | Remarks: Ad.. Remarks', 'Ad.. Remarks', 1, '2022-04-01 04:21:30', '2022-04-01 04:21:30'),
+(5, 2, 'RR Adjustment', 'INR 30 ( Credit ) Remarks: Other Adjustment', 'Other Adjustment', 1, '2022-04-01 04:22:43', '2022-04-01 04:22:43');
 
 -- --------------------------------------------------------
 
@@ -56,7 +84,9 @@ CREATE TABLE `banks` (
 --
 
 INSERT INTO `banks` (`id`, `beneficiary_name`, `beneficiary_address`, `bank_nickname`, `bank_name`, `bank_address`, `zip_code`, `country`, `swift_code`, `remarks`, `company_name`, `company_email`, `prefix`, `declaration_content`, `instructions_title`, `instructions_content`, `logo`, `status`, `created_at`, `updated_at`, `created_by`) VALUES
-(1, 'Dheeraj Ben1', 'noida', 'HDFC Nick', 'HDFC', 'noida', '201301', 'India', 'HDFC080', 'hello remarks dheeraj', 'company name 1', 'company1@gmail.com', 'Prefix1', NULL, NULL, NULL, '1648102321.png', 1, '2022-03-24 00:42:01', '2022-03-24 00:42:01', 1);
+(1, 'Rohit Sharma', 'Mumbai', 'Hitman', 'HDFC', 'Mumbai', '220320', 'India', 'PUNB01234', 'Bank Remarks', 'Lenovo', 'lenovo@gmail.com', 'Prefix9090', 'Declaration Content', 'Instruction Message', 'Instruction Content', '1648802707.jpg', 1, '2022-04-01 03:15:07', '2022-04-01 03:15:07', 1),
+(2, 'Virat Kohli', 'New Delhi', 'Chicku', 'Axis Bank', 'New Delhi', '202303', 'India', 'AXIX89089', 'Virat  Remarks', 'Puma', 'puma@gmail.com', 'Virat Prefix', 'Virat Content', 'Virat tittle', 'Virat Istruction', '1648802972.jpg', 1, '2022-04-01 03:19:32', '2022-04-01 03:19:32', 1),
+(3, 'Yuvraj Singh', 'Punjab', 'Yuvi', 'Punjab Bank', 'Chandigarh', '998990', 'American Samoa', 'PUNB9900', 'Yuvi Remarks', 'yuvi company', 'yuvi@gmail.com', 'Yuvi Prefix', 'Yuvi Content', 'Yuvi Tittle', 'Yuvi Content', '1648803314.jpg', 1, '2022-04-01 03:25:14', '2022-04-01 03:25:49', 1);
 
 -- --------------------------------------------------------
 
@@ -81,8 +111,12 @@ CREATE TABLE `bank_accounts` (
 --
 
 INSERT INTO `bank_accounts` (`id`, `bank_id`, `currency`, `account_number`, `nick_name`, `bank_charges`, `created_at`, `updated_at`, `created_by`) VALUES
-(1, 1, 'USD', '1234567812345678', 'Dheeraj Nick 1', '10', '2022-03-24 00:42:01', '2022-03-24 00:42:36', 1),
-(2, 1, 'GBP', '1111111122222222', 'Dheeraj Nick 2', '5', '2022-03-24 00:42:01', '2022-03-24 00:42:01', 1);
+(1, 1, 'INR', '444455556666', 'Hitman', '100', '2022-04-01 03:15:07', '2022-04-01 03:15:07', 1),
+(2, 1, 'INR', '999988887777', 'Hitman', '200', '2022-04-01 03:15:07', '2022-04-01 03:15:07', 1),
+(3, 2, 'INR', '333344445555', 'Chicku', '230', '2022-04-01 03:19:32', '2022-04-01 03:19:32', 1),
+(4, 2, 'INR', '999900008888', 'Anushka', '320', '2022-04-01 03:19:32', '2022-04-01 03:19:32', 1),
+(5, 3, 'USD', '89897676766', 'Yuvi', '600', '2022-04-01 03:25:14', '2022-04-01 03:25:14', 1),
+(6, 3, 'USD', '787755664433', 'yuvi', '220', '2022-04-01 03:25:14', '2022-04-01 03:25:14', 1);
 
 -- --------------------------------------------------------
 
@@ -119,9 +153,9 @@ CREATE TABLE `bank_account_payouts` (
 --
 
 INSERT INTO `bank_account_payouts` (`id`, `customer_fk_id`, `beneficiary_name`, `beneficiary_nickname`, `beneficiary_address`, `beneficiary_country`, `bank_name`, `bank_branch`, `bank_address`, `bank_country`, `bank_swift`, `account_number`, `currency`, `remarks`, `intermediary_bank_name`, `intermediary_bank_address`, `intermediary_bank_swift`, `intermediary_bank_details_remarks`, `created_at`, `updated_at`, `created_by`) VALUES
-(1, 2, 'anurag Kashyap', 'anu bytelogic', 'noida 63 ben address', 'India', 'idfc first bank', 'noida', 'noida 63', 'India', 'IDFCSWIFT', '8765432187654321', 'INR', 'no remarks', NULL, NULL, NULL, NULL, '2022-03-24 01:04:46', '2022-03-24 01:04:46', 1),
-(2, 2, 'Anurag Kashyap', 'anurag punjab & SIndh  bank', 'ghaziabad', 'India', 'Punjab & SIndh Bank', 'pratap vihar ghaziabad', 'pratap vihar gzb', 'India', 'PNSSWIFT', '1234567812345678', 'INR', 'hello remarks', NULL, NULL, NULL, NULL, '2022-03-24 01:04:46', '2022-03-24 01:04:46', 1),
-(3, 3, 'Virat', 'virat kohli', 'delhi', 'India', 'SBI', 'delhi', 'delhi', 'India', 'SBISWIFT', '5555555566666666', 'USD', 'no remarks', 'AXIS Bank', 'gurugram', 'AXISWIFT', NULL, '2022-03-24 01:19:50', '2022-03-24 01:19:50', 1);
+(1, 1, 'Surajsingh', 'SurajNick', 'Noida', 'India', 'SBI', 'Gwalior', 'Gwalior Address', 'India', 'suraj swift', '999988887777', 'INR', 'Suraj Remarks', 'Intermediary bank', 'Intermediary address', 'Intermediary bank optional', 'Remarks optional', '2022-04-01 03:42:50', '2022-04-01 03:42:50', 1),
+(2, 2, 'Punjab', 'PNB', 'Chandigarh', 'India', 'Punjab Bank', 'Chandigarh', 'Chandigarh', 'India', 'Dheeraj Swift 2', '777766665555', 'INR', 'Dheeraj Remarks', 'Intermediary Bank Name2', 'Intermediary address', 'intermediary bank swift', 'intermediary bank details optional', '2022-04-01 03:46:21', '2022-04-01 03:46:21', 1),
+(3, 3, 'Dheeraj', 'Dheeru', 'Unnao', 'India', 'ICICI', 'Unnao', 'Unnao', 'India', 'Dheeraj swift', '888877779999', 'INR', 'Dheeraj Remarks', 'Intermediary Bank Name22', 'Intermediary bank address Optional22', 'intermediary bank swift22', 'intermediary bank details optional22', '2022-04-01 03:50:32', '2022-04-01 03:50:32', 1);
 
 -- --------------------------------------------------------
 
@@ -151,8 +185,9 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `merchant_fk_id`, `first_name`, `last_name`, `email`, `phone`, `address`, `country`, `date_of_birth`, `id_number`, `status`, `created_at`, `updated_at`, `created_by`) VALUES
-(2, 1, 'Anurag Cust', 'Kashyap', 'anu.byte@gmail.com', '88888', 'noida 63', 'India', '2022-03-24', '0', 1, '2022-03-24 01:04:46', '2022-03-24 01:04:46', 1),
-(3, 2, 'Virat', 'Kohli', 'viratcust@gmail.com', '99999999', 'Delhi', 'India', '2022-03-24', 'hello id number', 1, '2022-03-24 01:19:50', '2022-03-24 01:19:50', 1);
+(1, 1, 'Suraj', 'Singh', 's@gmail.com', '8979797787', 'Gwalior', 'India', '2022-04-22', '909090', 1, '2022-04-01 03:42:50', '2022-04-01 03:42:50', 1),
+(2, 2, 'Dheeraj', 'Pal', 'dheeraj@gmail.com', '78769666669', 'Unnao', 'India', '2022-05-01', '78777979', 1, '2022-04-01 03:46:21', '2022-04-01 03:46:21', 1),
+(3, 3, 'Keshav', 'Singh', 'keshav@gmail.com', '9889766755', 'Ghaziabad', 'India', '2022-04-14', '686687', 1, '2022-04-01 03:50:32', '2022-04-01 03:50:32', 1);
 
 -- --------------------------------------------------------
 
@@ -175,9 +210,9 @@ CREATE TABLE `customer_documents` (
 --
 
 INSERT INTO `customer_documents` (`id`, `customer_fk_id`, `document_type`, `upload_file`, `created_at`, `updated_at`, `created_by`) VALUES
-(1, 2, 'photo_id', '', '2022-03-24 01:04:46', '2022-03-24 01:04:46', 1),
-(2, 2, 'bank_statement', '', '2022-03-24 01:04:46', '2022-03-24 01:04:46', 1),
-(3, 3, 'photo_id', '', '2022-03-24 01:19:50', '2022-03-24 01:19:50', 1);
+(1, 1, 'photo_id', '', '2022-04-01 03:42:50', '2022-04-01 03:42:50', 1),
+(2, 2, 'bank_statement', '', '2022-04-01 03:46:21', '2022-04-01 03:46:21', 1),
+(3, 3, 'photo_id', '', '2022-04-01 03:50:32', '2022-04-01 03:50:32', 1);
 
 -- --------------------------------------------------------
 
@@ -240,8 +275,9 @@ CREATE TABLE `merchants` (
 --
 
 INSERT INTO `merchants` (`id`, `merchant_name`, `bank_account_id`, `first_name`, `last_name`, `email`, `Country`, `secondary_email`, `invoice_email`, `payout_notification_email`, `settlement_notification_email`, `payout_notification_email_admin`, `settlement_notification_email_admin`, `incoming_percentage`, `payout_percentage`, `alternate_payout_commission`, `b2b_percentage`, `rolling_reserve_percentage`, `rolling_reserve_release_days`, `website`, `customer_support_number`, `invoice_remarks`, `upload_logo`, `enable_mail_for_customers`, `company_details_on_left`, `invoice_details_on_right`, `b2b_access`, `status`, `created_at`, `updated_at`, `created_by`) VALUES
-(1, 'Suraj Merch', 1, 'Suraj', 'Bhadoriya', 'surajmerch@gmail.com', 'India', 'surajmerchsecnd@gmail.com', 'surajmerchinvoice@gmail.com', 'surajmerchpayout@gmail.com', 'surajmerchsettle@gmail.com', 'adminpayout@gmail.com', 'adminsettle@gmail.com', 5, 4, 10, 3, 2, 9, 'abc.com', '9999999999', 'invoice remarks', '1648102830.png', 1, 1, 1, 1, 1, '2022-03-24 00:50:30', '2022-03-24 00:50:30', 1),
-(2, 'keshav Merchant', 2, 'keshav', 'kumar', 'keshavmerc@gmail.com', 'India', 'keshavmersecond@gmail.com', 'keshavmerinvoice@gmail.com', 'keshavmersecond@gmail.com', 'keshavmersecond@gmail.com', 'keshavmersecond@gmail.com', 'keshavmersecond@gmail.com', 10, 8, NULL, 5, 4, 9, 'xyz.com', '09809', 'helllo remarks', NULL, 1, 1, 1, 1, 1, '2022-03-24 01:15:36', '2022-03-24 01:15:36', 1);
+(1, 'Kartik Aaryan', 1, 'Kartik', 'Aaryan', 'kartik@gmail.com', 'India', 'kartik11@gmail.com', 'kartik11@gmail.com', 'kartik11@gmail.com', 'kartik11@gmail.com', 'kartik11@gmail.com', 'kartik11@gmail.com', 9, 8, 7, 6, 5, 4, 'bytelogic', '9988776655', 'Merchant Remarks', '1648803557.jpg', 1, 1, 1, 1, 1, '2022-04-01 03:29:17', '2022-04-01 03:29:17', 1),
+(2, 'Akshay kumar', 3, 'Akshay', 'Kumar', 'akshay@gmail.com', 'India', 'akshay11@gmail.com', 'akshay11@gmail.com', 'akshay11@gmail.com', 'akshay11@gmail.com', 'akshay11@gmail.com', 'akshay11@gmail.com', 2, 3, 4, 5, 6, 7, 'Akshay Website', '890877779', 'Akshay Remarks', '1648803807.jpg', 1, 1, 1, 1, 1, '2022-04-01 03:33:27', '2022-04-01 03:33:27', 1),
+(3, 'Ranveer Kapoor', 5, 'Ranveer', 'Kapoor', 'ranveer@gmail.com', 'India', 'ranveer11@gmail.com', 'ranveer11@gmail.com', 'ranveer11@gmail.com', 'ranveer11@gmail.com', 'ranveer11@gmail.com', 'ranveer11@gmail.com', 8, 3, 4, 2, 5, 7, 'Ranveer website', '8979797972', 'Ranveer Remarks', '1648804019.jpg', 1, 1, 1, 1, 1, '2022-04-01 03:36:59', '2022-04-01 03:36:59', 1);
 
 -- --------------------------------------------------------
 
@@ -271,7 +307,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (9, '2022_03_13_154645_create_bank_account_payouts_table', 1),
 (10, '2022_03_14_081522_create_customer_documents_table', 1),
 (11, '2022_03_15_084408_create_transactions_table', 1),
-(13, '2022_03_22_060642_create_payouts_table', 2);
+(12, '2022_03_22_060642_create_payouts_table', 1),
+(13, '2022_03_24_111642_create_settlements_table', 1),
+(14, '2022_03_27_163846_create_settlement_accounts_table', 1),
+(15, '2022_03_31_054604_create_adjustments_table', 1);
 
 -- --------------------------------------------------------
 
@@ -294,6 +333,8 @@ CREATE TABLE `password_resets` (
 CREATE TABLE `payouts` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `bank_account_to_fk_id` bigint(20) UNSIGNED NOT NULL,
+  `merchant_fk_id` bigint(20) UNSIGNED NOT NULL,
+  `customer_fk_id` bigint(20) UNSIGNED NOT NULL,
   `payout_amount` double NOT NULL,
   `remarks` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `notes` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -312,6 +353,15 @@ CREATE TABLE `payouts` (
   `created_by` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `payouts`
+--
+
+INSERT INTO `payouts` (`id`, `bank_account_to_fk_id`, `merchant_fk_id`, `customer_fk_id`, `payout_amount`, `remarks`, `notes`, `reference_id`, `upload_invoice`, `bank_processing_charges`, `date_paid`, `amount_returned`, `rejected_onhold_remarks`, `upload_reciept`, `bank_account_from_fk_id`, `status_of_payout`, `upload_extra_document`, `created_at`, `updated_at`, `created_by`) VALUES
+(1, 1, 1, 1, 1000, 'Shopping', NULL, '9908', '1648805167.jpg', '0', NULL, '0', NULL, '1648805167.jpg', 1, 'Paid', NULL, '2022-04-01 03:56:07', '2022-04-01 03:56:07', 1),
+(2, 2, 2, 2, 20000, 'Laptop', NULL, '787', '1648805208.jpg', '0', NULL, '0', NULL, '1648805208.jpg', 3, 'Hold', NULL, '2022-04-01 03:56:48', '2022-04-01 03:56:48', 1),
+(3, 3, 3, 3, 3000, 'Car Shopping', NULL, '909', '1648805268.jpg', '0', NULL, '0', NULL, '1648805268.jpg', 5, 'Canceled', NULL, '2022-04-01 03:57:48', '2022-04-01 03:57:48', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -329,6 +379,76 @@ CREATE TABLE `personal_access_tokens` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settlements`
+--
+
+CREATE TABLE `settlements` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `merchant_fk_id` bigint(20) UNSIGNED NOT NULL,
+  `bank_account_from_fk_id` bigint(20) UNSIGNED NOT NULL,
+  `bank_account_to_fk_id` bigint(20) UNSIGNED NOT NULL,
+  `settlement_amount` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `upload_settlement_invoice` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remarks` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `reference_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `rr_settlement` tinyint(1) DEFAULT NULL,
+  `status_of_settlement` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date_paid` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `settlements`
+--
+
+INSERT INTO `settlements` (`id`, `merchant_fk_id`, `bank_account_from_fk_id`, `bank_account_to_fk_id`, `settlement_amount`, `upload_settlement_invoice`, `remarks`, `reference_id`, `rr_settlement`, `status_of_settlement`, `date_paid`, `created_by`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 1, '100', '1648805626.jpg', 'For Shopping', 'ref_909', 1, 'New', NULL, 1, '2022-04-01 04:03:46', '2022-04-01 04:03:46'),
+(2, 2, 3, 2, '200', '1648805680.jpg', 'for laptop', '009', 1, 'Processing', NULL, 1, '2022-04-01 04:04:40', '2022-04-01 04:04:40'),
+(3, 3, 5, 3, '300', '1648805720.jpg', 'for Mouse', '333', 1, 'Paid', NULL, 1, '2022-04-01 04:05:20', '2022-04-01 04:05:20');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settlement_accounts`
+--
+
+CREATE TABLE `settlement_accounts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `merchant_fk_id` bigint(20) UNSIGNED NOT NULL,
+  `beneficiary_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `beneficiary_nickname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `beneficiary_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bank_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bank_branch` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bank_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bank_country` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bank_swift` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `account_number` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `currency` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remarks` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `intermediary_bank_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `intermediary_bank_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `intermediary_bank_swift` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `intermediary_bank_details_remarks` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `upload_bank_statement` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `settlement_accounts`
+--
+
+INSERT INTO `settlement_accounts` (`id`, `merchant_fk_id`, `beneficiary_name`, `beneficiary_nickname`, `beneficiary_address`, `bank_name`, `bank_branch`, `bank_address`, `bank_country`, `bank_swift`, `account_number`, `currency`, `remarks`, `intermediary_bank_name`, `intermediary_bank_address`, `intermediary_bank_swift`, `intermediary_bank_details_remarks`, `upload_bank_statement`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Suraj', 'Suraj', 'Gwalior', 'SBI', 'Gwalior', 'Gwalior', 'India', 'Suraj Swift', '999988887777', 'INR', 'Suraj Remarks', 'Inter Bank Name', 'Inter Bank Address', 'Inter Bank Swift', 'Inter Bank Remarks', '1648806055.jpg', '2022-04-01 04:10:55', '2022-04-01 04:10:55'),
+(2, 2, 'Dheeraj', 'Dheeraj', 'Unnao', 'Unnao', 'Unnao', 'Unnao', 'India', 'Dheeraj Swift', '888899997777', 'INR', 'Dheeraj Remarks', 'Inter Bank Name', 'Inter Bank Address', 'Inter Bank Swift', 'Inter Bank Remarks', '1648806159.jpg', '2022-04-01 04:12:39', '2022-04-01 04:12:39'),
+(3, 3, 'Keshav', 'Keshav', 'Noida', 'Noida', 'Noida', 'Noida', 'India', 'Keshav Swift', '66665555444', 'INR', 'Keshav Remarks', 'Inter Bank Name', 'Inter Bank Address', 'Inter Bank Swift', 'Inter Bank Remarks', '1648806251.jpg', '2022-04-01 04:14:11', '2022-04-01 04:14:11');
 
 -- --------------------------------------------------------
 
@@ -358,6 +478,15 @@ CREATE TABLE `transactions` (
   `created_by` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `transactions`
+--
+
+INSERT INTO `transactions` (`id`, `invoice_date`, `invoice_number`, `merchant_fk_id`, `bank_account_fk_id`, `customer_fk_id`, `product_name`, `product_price`, `remarks`, `reference_id`, `upload_signed_invoice`, `proof_of_payment`, `date_recieved`, `amount_recieved`, `status_of_transaction`, `type_of_transaction`, `created_at`, `updated_at`, `created_by`) VALUES
+(1, '2022-04-01', 'tran22041', 1, 1, 1, 'Product1', 100, 'Remarks1', '001', '1648804925.jpg', NULL, '2022-04-08', 200, 'New', 'C2B', '2022-04-01 03:52:05', '2022-04-01 03:52:05', 1),
+(2, '2022-04-02', 'tran22042', 2, 3, 2, 'Product 2', 200, 'Dheeraj Remarks', '9900', '1648805008.jpg', NULL, '2022-04-09', 250, 'Recieved', 'B2B', '2022-04-01 03:53:28', '2022-04-01 03:53:28', 1),
+(3, '2022-04-03', 'tran22043', 3, 3, 3, 'Product 3', 300, 'Keshav Remarks', '7987', '1648805088.jpg', NULL, '2022-04-10', 350, 'Canceled', 'C2B', '2022-04-01 03:54:48', '2022-04-01 03:54:48', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -385,11 +514,22 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `merchant_fk_id`, `phone`, `address`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'byte#123', NULL, NULL, NULL, 'admin@gmail.com', NULL, '$2y$10$/xf0tS2GYzDVjWMSUVQxo.dplF1/0U4XTeuTY3pI9eWOkYlpCRXt2', 'user', NULL, '2022-03-24 00:38:26', '2022-03-24 00:38:26');
+(1, 'Admin', 'Bytelogic', NULL, '9876543210', 'Noida', 'admin@gmail.com', NULL, '$2y$10$FQPx2avQspjRdf7atFnUZ.NiOiM9Zsj2Q9xnSIG9NZKxKSgCoqJ0y', 'Merchant Admin', NULL, '2022-04-01 03:09:36', '2022-04-01 03:09:36'),
+(2, 'Suraj', 'Singh', 1, '9898767655', 'Gwalior', 's@gmail.com', NULL, '$2y$10$LzBNdEnqH.xRZAHoRzfpn.b6l1pnZoAOFtnDd0.RtTqrHWy.L5UCe', 'Merchant Admin', NULL, '2022-04-01 03:59:44', '2022-04-01 03:59:44'),
+(3, 'Dheeraj', 'Pal', 2, '6876666697', 'Unnao', 'dheeraj@gmail.com', NULL, '$2y$10$/dARViy59JVeEwZattF/0u6eHVp6a7Ge0ZSQOgby/Sxsn.WD3YjS6', 'Merchant View-Only', NULL, '2022-04-01 04:00:45', '2022-04-01 04:00:45'),
+(4, 'Keshav', 'Singh', 3, '6786696678', 'Noida', 'keshav@gmail.com', NULL, '$2y$10$Pz8F/yCN/4ugaE5UzsldW.3VfcqPYltOXLmdwXKl57vD4LktRPSn.', 'Merchant Admin', NULL, '2022-04-01 04:01:50', '2022-04-01 04:01:50');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `adjustments`
+--
+ALTER TABLE `adjustments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `adjustments_merchant_fk_id_foreign` (`merchant_fk_id`),
+  ADD KEY `adjustments_created_by_foreign` (`created_by`);
 
 --
 -- Indexes for table `banks`
@@ -463,7 +603,10 @@ ALTER TABLE `password_resets`
 ALTER TABLE `payouts`
   ADD PRIMARY KEY (`id`),
   ADD KEY `payouts_created_by_foreign` (`created_by`),
-  ADD KEY `payouts_bank_account_to_fk_id_foreign` (`bank_account_to_fk_id`);
+  ADD KEY `payouts_bank_account_to_fk_id_foreign` (`bank_account_to_fk_id`),
+  ADD KEY `payouts_merchant_fk_id_foreign` (`merchant_fk_id`),
+  ADD KEY `payouts_customer_fk_id_foreign` (`customer_fk_id`),
+  ADD KEY `payouts_bank_account_from_fk_id_foreign` (`bank_account_from_fk_id`);
 
 --
 -- Indexes for table `personal_access_tokens`
@@ -472,6 +615,23 @@ ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indexes for table `settlements`
+--
+ALTER TABLE `settlements`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `settlements_merchant_fk_id_foreign` (`merchant_fk_id`),
+  ADD KEY `settlements_bank_account_to_fk_id_foreign` (`bank_account_to_fk_id`),
+  ADD KEY `settlements_bank_account_from_fk_id_foreign` (`bank_account_from_fk_id`),
+  ADD KEY `settlements_created_by_foreign` (`created_by`);
+
+--
+-- Indexes for table `settlement_accounts`
+--
+ALTER TABLE `settlement_accounts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `settlement_accounts_merchant_fk_id_foreign` (`merchant_fk_id`);
 
 --
 -- Indexes for table `transactions`
@@ -495,16 +655,22 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `adjustments`
+--
+ALTER TABLE `adjustments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `banks`
 --
 ALTER TABLE `banks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `bank_accounts`
 --
 ALTER TABLE `bank_accounts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `bank_account_payouts`
@@ -534,19 +700,19 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `merchants`
 --
 ALTER TABLE `merchants`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `payouts`
 --
 ALTER TABLE `payouts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -555,20 +721,39 @@ ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `settlements`
+--
+ALTER TABLE `settlements`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `settlement_accounts`
+--
+ALTER TABLE `settlement_accounts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `adjustments`
+--
+ALTER TABLE `adjustments`
+  ADD CONSTRAINT `adjustments_created_by_foreign` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `adjustments_merchant_fk_id_foreign` FOREIGN KEY (`merchant_fk_id`) REFERENCES `merchants` (`id`);
 
 --
 -- Constraints for table `banks`
@@ -615,8 +800,26 @@ ALTER TABLE `merchants`
 -- Constraints for table `payouts`
 --
 ALTER TABLE `payouts`
+  ADD CONSTRAINT `payouts_bank_account_from_fk_id_foreign` FOREIGN KEY (`bank_account_from_fk_id`) REFERENCES `bank_accounts` (`id`),
   ADD CONSTRAINT `payouts_bank_account_to_fk_id_foreign` FOREIGN KEY (`bank_account_to_fk_id`) REFERENCES `bank_account_payouts` (`id`),
-  ADD CONSTRAINT `payouts_created_by_foreign` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `payouts_created_by_foreign` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `payouts_customer_fk_id_foreign` FOREIGN KEY (`customer_fk_id`) REFERENCES `customers` (`id`),
+  ADD CONSTRAINT `payouts_merchant_fk_id_foreign` FOREIGN KEY (`merchant_fk_id`) REFERENCES `merchants` (`id`);
+
+--
+-- Constraints for table `settlements`
+--
+ALTER TABLE `settlements`
+  ADD CONSTRAINT `settlements_bank_account_from_fk_id_foreign` FOREIGN KEY (`bank_account_from_fk_id`) REFERENCES `bank_accounts` (`id`),
+  ADD CONSTRAINT `settlements_bank_account_to_fk_id_foreign` FOREIGN KEY (`bank_account_to_fk_id`) REFERENCES `bank_account_payouts` (`id`),
+  ADD CONSTRAINT `settlements_created_by_foreign` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `settlements_merchant_fk_id_foreign` FOREIGN KEY (`merchant_fk_id`) REFERENCES `merchants` (`id`);
+
+--
+-- Constraints for table `settlement_accounts`
+--
+ALTER TABLE `settlement_accounts`
+  ADD CONSTRAINT `settlement_accounts_merchant_fk_id_foreign` FOREIGN KEY (`merchant_fk_id`) REFERENCES `merchants` (`id`);
 
 --
 -- Constraints for table `transactions`
