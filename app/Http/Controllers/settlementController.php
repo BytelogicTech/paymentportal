@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\bankaccount;
 use App\Models\bank_account;
 use App\Models\bank_account_payouts;
+use App\Models\settlementaccount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +18,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class settlementController extends Controller
 {
-
+ 
 
     public function __construct()
     {
@@ -101,15 +102,17 @@ class settlementController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    { 
 
         $merchants = merchant::all();
+        $settlementaccounts = settlementaccount::where('merchant_fk_id',Auth::user()->merchant_fk_id)->get();
+        // dd($settlementaccounts);
         $bankaccounts =  DB::table('bank_accounts')
             ->join('banks', 'banks.id', '=', 'bank_accounts.bank_id')
             ->select('bank_accounts.id as bank_accountsid', 'bank_accounts.bank_id', 'banks.bank_name', 'banks.beneficiary_name', 'bank_accounts.currency', 'bank_accounts.account_number', 'bank_accounts.nick_name')
             ->get()
             ->groupBy('bank_id');
-        return view('settlement/create', compact('merchants', 'bankaccounts'));
+        return view('settlement/create', compact('merchants', 'bankaccounts','settlementaccounts'));
     }
 
     /**

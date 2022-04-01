@@ -31,34 +31,31 @@ Route::get('/', [HomeController::class, 'index']);
 
 
 Route::group(['prefix' => 'bank'], function(){
-    Route::get('/index', [BankController::class, 'index']);
-    Route::get('/create', [BankController::class, 'create']);
-    Route::post('/store', [BankController::class, 'store']);
-    Route::get('/edit/{id}', [BankController::class, 'edit']);
-    Route::post('/update', [BankController::class, 'update']);
-    Route::get('/delete/{id}', [BankController::class, 'destroy']);
+    Route::get('/index', [BankController::class, 'index'])->middleware('admin');
+    Route::get('/create', [BankController::class, 'create'])->middleware('admin');
+    Route::post('/store', [BankController::class, 'store'])->middleware('admin');
+    Route::get('/edit/{id}', [BankController::class, 'edit'])->middleware('admin');
+    Route::post('/update', [BankController::class, 'update'])->middleware('admin');
+    Route::get('/delete/{id}', [BankController::class, 'destroy'])->middleware('admin');
 });
-
-
-   
-    Route::post('/bankaccountupdate', [BankController::class, 'bankaccountupdate']);
-    Route::get('/bankaccountdestroy/{bankaccountid}', [BankController::class, 'bankaccountdestroy']);
+Route::post('/bankaccountupdate', [BankController::class, 'bankaccountupdate'])->middleware('admin');
+Route::get('/bankaccountdestroy/{bankaccountid}', [BankController::class, 'bankaccountdestroy'])->middleware('admin');
 
 
 Route::group(['prefix' => 'merchant'], function(){
-    Route::get('/index', [merchantController::class, 'index']);
-    Route::get('/create', [merchantController::class, 'create']);
-    Route::post('/store', [merchantController::class, 'store']);
-    Route::get('/edit/{id}', [merchantController::class, 'edit']);
-    Route::post('/update', [merchantController::class, 'update']);
-    Route::get('/delete/{id}', [merchantController::class, 'destroy']);
+    Route::get('/index', [merchantController::class, 'index'])->middleware('admin');
+    Route::get('/create', [merchantController::class, 'create'])->middleware('admin');
+    Route::post('/store', [merchantController::class, 'store'])->middleware('admin');
+    Route::get('/edit/{id}', [merchantController::class, 'edit'])->middleware('admin');
+    Route::post('/update', [merchantController::class, 'update'])->middleware('admin');
+    Route::get('/delete/{id}', [merchantController::class, 'destroy'])->middleware('admin');
 });
 
 
 
 Route::group(['prefix' => 'customer'], function(){
     Route::get('/index', [customerController::class, 'index']);
-    Route::get('/create', [customerController::class, 'create']);
+    Route::get('/create', [customerController::class, 'create'])->middleware('admin_madmin');
     Route::post('/store', [customerController::class, 'store']);
     Route::get('/edit/{id}', [customerController::class, 'edit']);
     Route::post('/update', [customerController::class, 'update']);
@@ -83,12 +80,12 @@ Route::group(['prefix' => 'transaction'], function(){
 
 
 Route::group(['prefix' => 'user'], function(){
-    Route::get('/index', [UserController::class, 'index']);
-    Route::get('/create', [UserController::class, 'create']);
-    Route::post('/store', [UserController::class, 'store']);
-    Route::get('/edit/{id}', [UserController::class, 'edit']);
-    Route::post('/update', [UserController::class, 'update']);
-    Route::get('/delete/{id}', [UserController::class, 'destroy']);
+    Route::get('/index', [UserController::class, 'index'])->middleware('admin');
+    Route::get('/create', [UserController::class, 'create'])->middleware('admin');
+    Route::post('/store', [UserController::class, 'store'])->middleware('admin');
+    Route::get('/edit/{id}', [UserController::class, 'edit'])->middleware('admin');
+    Route::post('/update', [UserController::class, 'update'])->middleware('admin');
+    Route::get('/delete/{id}', [UserController::class, 'destroy'])->middleware('admin');
 });
 
 Route::group(['prefix' => 'payout'], function(){

@@ -58,8 +58,12 @@
                                             <label for="description">Bank Account To Transfer To*</label>
                                             <select class="form-control" name="bank_account_to_fk_id" required id="bank_account_to_fk_id">
                                                 <option value="" disabled selected>Please Select One</option>
-                                           
-
+                                                @if(Auth::user()->role=="Merchant Admin")
+                                                @foreach($settlementaccounts as $settlementaccount)
+                                                <option value="{{$settlementaccount->id}}">{{$settlementaccount->bank_name}} - {{$settlementaccount->currency}} - {{$settlementaccount->account_number}}</option>
+                                                @endforeach
+                                                @endif
+ 
                                             </select>
                                         </div>
                                     </div>

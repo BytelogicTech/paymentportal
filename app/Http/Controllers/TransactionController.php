@@ -42,10 +42,17 @@ class TransactionController extends Controller
         $date_paid_to ="";
         $invoice_number = "";
         $merchants = merchant::all();
-        $customers = customer::all();
+        $customers = customer::where('merchant_fk_id',Auth::user()->merchant_fk_id)->get();
         $bankaccounts = bank_account::all();
         $bank_account_payouts = bank_account_payouts::all();
+        if(Auth::user()->role=="Admin")
+        {
         $transactions = transaction::all();
+        }
+        else
+        {
+            $transactions = transaction::where('merchant_fk_id',Auth::user()->merchant_fk_id)->get();
+        }
         $merchantpluck = merchant::pluck('merchant_name', 'id');
         $customerpluck = customer::pluck('first_name', 'id');
         $bankaccountpluk = bank_account::pluck('currency', 'id');
@@ -59,7 +66,7 @@ class TransactionController extends Controller
         ->get()
         ->groupBy('bank_id');
 // dd($currency);
-        return view('transaction/index', compact('transactions', 'merchantpluck', 'customerpluck', 'bankaccountpluk','userpluck','merchants','customers','merchant_fk_id','customer_fk_id','bankaccounts','bank_account_payouts','status_of_transaction','type_of_transaction','currency','bank_account_fk_id','transaction_amount_from','transaction_amount_to','date_paid_from','date_paid_to','invoice_number'));
+        return view('transaction/index', compact('customers','transactions', 'merchantpluck', 'customerpluck', 'bankaccountpluk','userpluck','merchants','merchant_fk_id','customer_fk_id','bankaccounts','bank_account_payouts','status_of_transaction','type_of_transaction','currency','bank_account_fk_id','transaction_amount_from','transaction_amount_to','date_paid_from','date_paid_to','invoice_number'));
 
         
     }
@@ -93,6 +100,7 @@ class TransactionController extends Controller
        
         if($merchant_fk_id!=null)
         {
+
             $transactions = $transactions->where('merchant_fk_id',$merchant_fk_id);
         }
 
@@ -151,7 +159,7 @@ class TransactionController extends Controller
         
         
         $bankaccounts = bank_account::all();
-        $customers = customer::all();
+        $customers = customer::where('merchant_fk_id',Auth::user()->merchant_fk_id)->get();
         $merchants = merchant::all();
         $bank_account_payouts = bank_account_payouts::all();
         $merchantpluck = merchant::pluck('merchant_name', 'id');
@@ -187,7 +195,7 @@ class TransactionController extends Controller
             ->select('bank_accounts.id as bank_accountsid', 'bank_accounts.bank_id', 'banks.bank_name', 'banks.beneficiary_name', 'bank_accounts.currency', 'bank_accounts.account_number', 'bank_accounts.nick_name')
             ->get()
             ->groupBy('bank_id');
-        $customers = customer::all();
+        $customers = customer::where('merchant_fk_id',Auth::user()->merchant_fk_id)->get();
         return view('transaction/create', compact('merchants', 'bankaccounts', 'customers'));
     }
 

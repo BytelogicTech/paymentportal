@@ -51,6 +51,7 @@
                                         </div>
                                     </div>
 
+                                    @if(Auth::user()->role=="Admin")
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Parent Merchant*</label>
@@ -62,6 +63,9 @@
                                             </select>
                                         </div>
                                     </div>
+                                    @else
+                                <input type="hidden" name="merchant_fk_id" value="{{Auth::user()->merchant_fk_id}}" />
+                                    @endif
 
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -85,6 +89,11 @@
                                             <label for="description">Customer*</label>
                                             <select class="select2 form-control" name="customer_fk_id"id="customer_fk_id" required>
                                                 <option value="customer_fk_id" disabled selected>Please Select One</option>
+                                                @if(Auth::user()->role=="Merchant Admin")
+                                                @foreach($customers as $customer)
+                                                <option value="{{$customer->id}}">{{$customer->first_name}}</option>
+                                                @endforeach
+                                                @endif
                                             </select>
                                         </div>
                                     </div>

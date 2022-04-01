@@ -1109,7 +1109,7 @@
                                 </div>
 
 
-                                
+                                @if(Auth::user()->role=="Admin")
                                 <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Parent Merchant *</label>
@@ -1121,6 +1121,11 @@
                                             </select>
                                     </div>
                                 </div>
+                                @else
+                                <input type="hidden" name="merchant_fk_id" value="{{Auth::user()->merchant_fk_id}}" />
+                                @endif
+
+                        
 
                                 <!-- Bootstrap Switch -->
                                 <center>
