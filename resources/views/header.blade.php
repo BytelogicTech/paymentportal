@@ -15,47 +15,46 @@
         <li class="nav-item d-none d-sm-inline-block">
           <a href="#" class="nav-link">Contact</a>
         </li>
-                        <!-- Authentication Links -->
-                        
-                    </ul>
+        <!-- Authentication Links -->
+
+      </ul>
 
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
         <!-- Navbar Search -->
         @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
+        @if (Route::has('login'))
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+        </li>
+        @endif
 
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item ">
-                                <a  class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                  Hello  {{ Auth::user()->first_name }} !
-                                </a>
+        @if (Route::has('register'))
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+        </li>
+        @endif
+        @else
+        <li class="nav-item ">
+          <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+            Hello {{ Auth::user()->first_name }} !
+          </a>
 
-                               
-                            </li>
-                            <li class="nav-item ">
-                            <a class="nav-link" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
+
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+            {{ __('Logout') }}
+          </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                            </li>
-                        @endguest
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+          </form>
+        </li>
+        @endguest
 
-    
+
       </ul>
     </nav>
     <!-- /.navbar -->
@@ -136,7 +135,7 @@
               </a>
             </li>
 
-          <li class="nav-header">SYSTEM</li>
+            <li class="nav-header">SYSTEM</li>
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-user"></i>
@@ -161,7 +160,7 @@
               </ul>
             </li>
 
-            
+
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-user"></i>
@@ -259,7 +258,9 @@
               </ul>
             </li>
 
-            
+
+
+
 
 
             <li class="nav-item">
@@ -286,7 +287,7 @@
               </ul>
             </li>
 
-            
+
 
 
             <li class="nav-item">
@@ -332,6 +333,46 @@
                   <a href="{{url('settlementaccount/create')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Add New Settlement Account</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fa fa-university"></i>
+                <p>
+                  Adjustments<i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{url('adjustment/index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Adjustments List
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{url('adjustment/adjustment_currency_conversion_create')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Currency Conversion</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{url('adjustment/adjustment_tier_commission_create')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Tier Commission
+
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{url('adjustment/other_adjustments_create')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Other Adjustments
+
+                    </p>
                   </a>
                 </li>
               </ul>
