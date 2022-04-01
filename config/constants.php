@@ -170,7 +170,7 @@
             "BTC" => "BTC",            
             "BTC/EUR" =>"BTC/EUR",
             "BTC/USD" => "BTC/USD",
-            "USDT" => "USDT"
+            "USDT" => "USDT",
         );
 
 

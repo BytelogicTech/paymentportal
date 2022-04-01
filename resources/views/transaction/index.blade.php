@@ -58,7 +58,7 @@
                 
                   <div class="col-md-3">
                     <label for="name">Invoie Number</label>
-                    <input type="text" name="invoice_number" class="form-control">
+                    <input type="text" name="invoice_number" id="invoice_number" class="form-control">
                   </div>
 
                   <div class="col-md-3">
@@ -88,15 +88,15 @@
                   <div class="col-md-3">
                     <label for="description">Currency</label>
                     <select name="currency" class="form-control" id="currency">
-                      <option value="" disabled selected>Please Select One</option>
-                      @foreach(config('constants.currency_list') as $key=> $currency)
+                      <option value="" selected >Please Select One</option>
+                      @foreach(config('constants.currency_list') as $key=> $currency1)
                       <option value="{{$key}}">{{$key}}</option>
                       @endforeach
                       
                     </select>
                   </div>
 
-                  <div class="col-md-3">
+                  <div class="col-md-4">
                   <label>Amount Received Between</label>
                     <div class="input-daterange input-group">
                       <input type="text" class="form-control m-input" name="transaction_amount_from" id="transaction_amount_from" placeholder="From" data-col-index="4">
@@ -107,18 +107,23 @@
                     </div>
                   </div>
 
-                  <div class="col-md-3">
+                  <div class="col-md-4">
                     <label>Date Received Between</label>
                     <div class="input-daterange input-group">
-                      <input type="date" class="form-control m-input bootdatepicker" name="date_paid_from" placeholder="From" data-col-index="11">
+                      <input type="date" class="form-control m-input bootdatepicker" name="date_paid_from" id="date_paid_from" placeholder="From" data-col-index="11">
                       <div class="input-group-append">
                         <span class="input-group-text"><i class="la la-ellipsis-h">...</i></span>
                       </div>
-                      <input type="date" class="form-control m-input bootdatepicker" name="date_paid_to" placeholder="To" data-col-index="11">
+                      <input type="date" class="form-control m-input bootdatepicker" name="date_paid_to" id="date_paid_to" placeholder="To" data-col-index="11">
                     </div>
                   </div>
 
-                  <div class="col-md-3">
+                  
+                </div>
+
+
+                <div class="row">
+                <div class="col-md-3">
                     <label for="description">Status</label>
                     <select name="status_of_transaction" class="form-control" id="status_of_transaction">
                       <option value="" disabled selected>Please Select One</option>
@@ -129,10 +134,6 @@
 
                     </select>
                   </div>
-                </div>
-
-
-                <div class="row">
                 <div class="col-md-3">
                     <label for="description">Type</label>
                     <select name="type_of_transaction" class="form-control" id="type_of_transaction">
@@ -238,6 +239,9 @@
   $('#merchant_fk_id').val('{{$merchant_fk_id}}');
 </script>
 
+<script>
+  $('#customer_fk_id').val('{{$customer_fk_id}}');
+</script>
 
 <script>
   $('#status_of_transaction').val('{{$status_of_transaction}}');
@@ -261,6 +265,18 @@ $('#transaction_amount_from').val('{{$transaction_amount_from}}');
 
 <script>
 $('#transaction_amount_to').val('{{$transaction_amount_to}}');
+</script>
+
+<script>
+$('#date_paid_from').val('{{$date_paid_from}}');
+</script>
+
+<script>
+$('#date_paid_to').val('{{$date_paid_to}}');
+</script>
+
+<script>
+$('#invoice_number').val('{{$invoice_number}}');
 </script>
 
 <script>

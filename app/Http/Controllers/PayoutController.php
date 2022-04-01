@@ -31,6 +31,13 @@ class PayoutController extends Controller
         $merchant_fk_id = "";
         $customer_fk_id = "";
         $bank_account_from_fk_id = "";
+        $currency = "";
+        $status_of_payout = "";
+        $payout_amount_from ="";
+        $payout_amount_to ="";
+        $date_paid_from ="";
+        $date_paid_to ="";
+        $reference_id ="";
         $merchants = merchant::all();
         $customers = customer::all();
         $bankaccounts = bank_account::all();
@@ -48,7 +55,7 @@ class PayoutController extends Controller
         ->groupBy('bank_id');
 
 
-        return view('payout/index', compact('bankaccounts','payouts','merchants','customers','bank_account_payouts','merchantpluck','customerpluck','bankaccountpluk','userpluck','bankaccountpayoutpluk','merchant_fk_id','bank_account_from_fk_id'));
+        return view('payout/index', compact('bankaccounts','payouts','merchants','customers','bank_account_payouts','merchantpluck','customerpluck','bankaccountpluk','userpluck','bankaccountpayoutpluk','merchant_fk_id','customer_fk_id','bank_account_from_fk_id','currency','status_of_payout','payout_amount_from','payout_amount_to','date_paid_from','date_paid_to','reference_id'));
     }
 
     public function search(Request $request)
@@ -63,6 +70,8 @@ class PayoutController extends Controller
         $date_paid_to= (date($request->date_paid_to));
         $bank_account_payouts = bank_account_payouts::all();
         $currency = $request->currency;
+        $status_of_payout = $request->status_of_payout;
+        $reference_id = $request->reference_id;
         
 
 
@@ -72,9 +81,9 @@ class PayoutController extends Controller
         {
             $payouts = $payouts->where('merchant_fk_id',$merchant_fk_id);
         }
-        if($request->reference_id!=null)
+        if($reference_id!=null)
         {
-            $payouts = $payouts->where('reference_id',$request->reference_id);
+            $payouts = $payouts->where('reference_id',$reference_id);
         }
         if($customer_fk_id!=null)
         {
@@ -100,9 +109,9 @@ class PayoutController extends Controller
         {
             $payouts = $payouts->where('date_paid','<=',$date_paid_to);
         }
-        if($request->status_of_payout!=null)
+        if($status_of_payout!=null)
         {
-            $payouts = $payouts->where('status_of_payout',$request->status_of_payout);
+            $payouts = $payouts->where('status_of_payout',$status_of_payout);
         }
         if($bank_account_from_fk_id!=null)
         {
@@ -135,7 +144,7 @@ class PayoutController extends Controller
         ->get()
         ->groupBy('bank_id');
 
-        return view('payout/index', compact('payouts','bank_account_payouts','merchants','customers','merchantpluck','customerpluck','bankaccountpluk','userpluck','bankaccountpayoutpluk','merchant_fk_id','bankaccounts'));
+        return view('payout/index', compact('payouts','bank_account_payouts','merchants','customers','merchantpluck','customerpluck','bankaccountpluk','userpluck','bankaccountpayoutpluk','merchant_fk_id','customer_fk_id','bankaccounts','currency','status_of_payout','bank_account_from_fk_id','payout_amount_from','payout_amount_to','date_paid_from','date_paid_to','reference_id'));
 
     }
 

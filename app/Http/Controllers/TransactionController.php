@@ -38,6 +38,9 @@ class TransactionController extends Controller
         $bank_account_fk_id = "";
         $transaction_amount_from = "";
         $transaction_amount_to = "";
+        $date_paid_from ="";
+        $date_paid_to ="";
+        $invoice_number = "";
         $merchants = merchant::all();
         $customers = customer::all();
         $bankaccounts = bank_account::all();
@@ -55,8 +58,8 @@ class TransactionController extends Controller
         ->select('bank_accounts.id as bank_accountsid','bank_accounts.bank_id','banks.bank_name','banks.beneficiary_name','bank_accounts.currency','bank_accounts.account_number','bank_accounts.nick_name')            
         ->get()
         ->groupBy('bank_id');
-
-        return view('transaction/index', compact('transactions', 'merchantpluck', 'customerpluck', 'bankaccountpluk','userpluck','merchants','customers','merchant_fk_id','customer_fk_id','bankaccounts','bank_account_payouts','status_of_transaction','type_of_transaction','currency','bank_account_fk_id','transaction_amount_from','transaction_amount_to'));
+// dd($currency);
+        return view('transaction/index', compact('transactions', 'merchantpluck', 'customerpluck', 'bankaccountpluk','userpluck','merchants','customers','merchant_fk_id','customer_fk_id','bankaccounts','bank_account_payouts','status_of_transaction','type_of_transaction','currency','bank_account_fk_id','transaction_amount_from','transaction_amount_to','date_paid_from','date_paid_to','invoice_number'));
 
         
     }
@@ -75,6 +78,7 @@ class TransactionController extends Controller
         $transaction_amount_to= (int)$request->transaction_amount_to;
         $date_paid_from= (date($request->date_paid_from));
         $date_paid_to= (date($request->date_paid_to));
+        $invoice_number = $request->invoice_number;
         
 
         $merchantpluck = merchant::pluck('merchant_name', 'id');
@@ -92,9 +96,9 @@ class TransactionController extends Controller
             $transactions = $transactions->where('merchant_fk_id',$merchant_fk_id);
         }
 
-        if($request->invoice_number!=null)
+        if($invoice_number!=null)
         {
-            $transactions = $transactions->where('invoice_number',$request->invoice_number);
+            $transactions = $transactions->where('invoice_number',$invoice_number);
         }
 
         if($customer_fk_id!=null)
@@ -160,7 +164,7 @@ class TransactionController extends Controller
         ->get()
         ->groupBy('bank_id');
             
-        return view('transaction/index', compact('transactions', 'merchantpluck', 'customerpluck', 'bankaccountpluk','userpluck','customers','merchants','bankaccounts','bank_account_payouts','merchant_fk_id','status_of_transaction','type_of_transaction','currency','bank_account_fk_id','transaction_amount_from','transaction_amount_to'));
+        return view('transaction/index', compact('transactions', 'merchantpluck', 'customerpluck', 'bankaccountpluk','userpluck','customers','merchants','bankaccounts','bank_account_payouts','merchant_fk_id','status_of_transaction','type_of_transaction','currency','bank_account_fk_id','transaction_amount_from','transaction_amount_to','date_paid_from','date_paid_to','invoice_number','customer_fk_id'));
     }
 
 

@@ -54,7 +54,7 @@
                   </div>
                   <div class="col-md-3">
                     <label for="name">Payout Request ID</label>
-                    <input type="text" name="reference_id" class="form-control">
+                    <input type="text" name="reference_id" id="reference_id" class="form-control">
                   </div>
                   <div class="col-md-3">
                     <label for="description">Customer</label>
@@ -64,9 +64,9 @@
                   </div>
                   <div class="col-md-3">
                     <label>Currency</label>
-                    <select class="form-control select2" style="width: 100%;" name="currency">
+                    <select class="form-control select2" style="width: 100%;" name="currency" id="currency">
                       <option value="" selected >Please Select One</option>
-                      @foreach(config('constants.currency_list') as $key=> $currency)
+                      @foreach(config('constants.currency_list') as $key=> $currency1)
                       <option value="{{$key}}">{{$key}}</option>
                       @endforeach
                     </select>
@@ -78,26 +78,17 @@
                   <div class="col-md-3">
                     <label>Payout Amount Between:</label>
                     <div class="input-daterange input-group">
-                      <input type="text" class="form-control m-input" name="payout_amount_from" placeholder="From" data-col-index="4">
+                      <input type="text" class="form-control m-input" name="payout_amount_from" id="payout_amount_from" placeholder="From" data-col-index="4">
                       <div class="input-group-append">
                         <span class="input-group-text"><i class="la la-ellipsis-h">...</i></span>
                       </div>
-                      <input type="text" class="form-control m-input" name="payout_amount_to" placeholder="To" data-col-index="4">
+                      <input type="text" class="form-control m-input" name="payout_amount_to" id="payout_amount_to" placeholder="To" data-col-index="4">
                     </div>
                   </div>
-                  <div class="col-md-3">
-                    <label>Date Paid Between:</label>
-                    <div class="input-daterange input-group">
-                      <input type="date" class="form-control m-input bootdatepicker" name="date_paid_from" placeholder="From" data-col-index="11">
-                      <div class="input-group-append">
-                        <span class="input-group-text"><i class="la la-ellipsis-h">...</i></span>
-                      </div>
-                      <input type="date" class="form-control m-input bootdatepicker" name="date_paid_to" placeholder="To" data-col-index="11">
-                    </div>
-                  </div>
+                  
                   <div class="col-md-3">
                     <label>Status</label>
-                    <select class="form-control" name="status_of_payout">
+                    <select class="form-control" name="status_of_payout" id="status_of_payout">
                       <option value="" selected >Select Status</option>
                       <option value="New">New</option>
                       <option value="Processing">Processing</option>
@@ -121,6 +112,18 @@
                       </optgroup>
                       @endforeach
                     </select>
+                  </div>
+                </div>
+                <div class="row">
+                <div class="col-md-4">
+                    <label>Date Paid Between:</label>
+                    <div class="input-daterange input-group">
+                      <input type="date" class="form-control m-input bootdatepicker" name="date_paid_from" id="date_paid_from" placeholder="From" data-col-index="11">
+                      <div class="input-group-append">
+                        <span class="input-group-text"><i class="la la-ellipsis-h">...</i></span>
+                      </div>
+                      <input type="date" class="form-control m-input bootdatepicker" name="date_paid_to" id="date_paid_to" placeholder="To" data-col-index="11">
+                    </div>
                   </div>
 
 
@@ -214,12 +217,46 @@
   $('#merchant_fk_id').val('{{$merchant_fk_id}}');
 </script>
 
+<script>
+  $('#customer_fk_id').val('{{$customer_fk_id}}');
+</script>
+
+<script>
+  $('#currency').val('{{$currency}}');
+</script>
+
+<script>
+  $('#status_of_payout').val('{{$status_of_payout}}');
+</script>
+
+<script>
+  $('#bank_account_from_fk_id').val('{{$bank_account_from_fk_id}}');
+</script>
+
+<script>
+  $('#payout_amount_from').val('{{$payout_amount_from}}');
+</script>
+
+<script>
+  $('#payout_amount_to').val('{{$payout_amount_to}}');
+</script>
+
+<script>
+  $('#date_paid_from').val('{{$date_paid_from}}');
+</script>
+
+<script>
+  $('#date_paid_to').val('{{$date_paid_to}}');
+</script>
+
+<script>
+  $('#reference_id').val('{{$reference_id}}');
+</script>
 
 
 <script>
   $('#merchant_fk_id').change(function() {
     $('#customer_fk_id').html('');
-    $('#bank_account_to_fk_id').html('');
     var merchant_fk_id = $(this).val();
 
     $.ajax({
@@ -245,6 +282,6 @@
         console.log(data);
       }
     });
-
+    $('#customer_fk_id').val('{{$customer_fk_id}}');
   });
 </script>
