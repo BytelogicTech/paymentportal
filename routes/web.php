@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PayoutController;
 use App\Http\Controllers\settlementController;
 use App\http\Controllers\settlementaccountController;
+use App\http\Controllers\adjustmentController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -125,6 +126,30 @@ Route::group(['prefix' => 'settlementaccount'], function(){
 });
 
 
+
+
+
+Route::group(['prefix' => 'adjustment'], function(){
+    Route::get('/index', [adjustmentController::class, 'index'])->name('adjustment.index');
+    Route::get('/adjustment_currency_conversion_create', [adjustmentController::class, 'adjustment_currency_conversion_create']);
+    Route::post('/adjustment_currency_conversion_store', [adjustmentController::class, 'adjustment_currency_conversion_store']);
+
+    Route::get('/adjustment_tier_commission_create', [adjustmentController::class, 'adjustment_tier_commission_create']);
+    Route::post('/adjustment_tier_commission_store', [adjustmentController::class, 'adjustment_tier_commission_store']);
+
+    Route::get('/other_adjustments_create', [adjustmentController::class, 'other_adjustments_create']);
+    Route::post('/other_adjustments_store', [adjustmentController::class, 'other_adjustments_store']);
+    Route::post('/search', [adjustmentController::class, 'search']);
+    Route::get('/search', [adjustmentController::class, 'index']);
+
+    Route::get('/edit/{id}', [adjustmentController::class, 'edit']);
+    Route::post('/update', [adjustmentController::class, 'update']);
+    Route::get('/delete/{id}', [adjustmentController::class, 'destroy']);
+});
+
+
+Route::post('/adjustmentupdate', [adjustmentController::class, 'adjustmentupdate']);
+
  
 Auth::routes();
 
@@ -136,3 +161,7 @@ Route::post('/getcustomers_bymerchant', [PayoutController::class, 'getcustomers_
 Route::post('/getpayout_bycustomer', [PayoutController::class, 'getpayout_bycustomer']);
 Route::post('/getpayouts_bymerchant', [PayoutController::class, 'getpayouts_bymerchant']);
 Route::post('/getpayout_bycustomer_table', [PayoutController::class, 'getpayout_bycustomer_table']);
+
+
+
+
