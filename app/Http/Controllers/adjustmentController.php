@@ -21,7 +21,6 @@ class adjustmentController extends Controller
     {
         $merchant_fk_id = '';
         $merchants = merchant::all();
-
         $adjustments = adjustment::all();
         $merchantpluck = merchant::pluck('merchant_name', 'id');
         $userpluck = User::pluck('first_name', 'id');
@@ -34,24 +33,24 @@ class adjustmentController extends Controller
         $adjustments = adjustment::all();
         $currency = $request->currency;
         $merchant_fk_id = $request->merchant_fk_id;
-        // $date_added_from = (date($request->date_added_from));
-        // $date_added_to = (date($request->date_added_to));
+        $date_added_from = (date($request->date_added_from));
+        $date_added_to = (date($request->date_added_to));
         $type = $request->type;
 
         $adjustments = adjustment::query();
 
-        // if ($merchant_fk_id != null) {
-        //     $adjustments = adjustment::where('merchant_fk_id', $merchant_fk_id);
-        // }
+        if ($merchant_fk_id != null) {
+            $adjustments = adjustment::where('merchant_fk_id', $merchant_fk_id);
+        }
 
-        // if($date_added_from!=null)
-        // {
-        //     $adjustments = $adjustments->where('created_at','>=',$date_added_from);
-        // }
-        // if($date_added_to!=null)
-        // {
-        //     $adjustments = $adjustments->where('created_at','<=',$date_added_to);
-        // }
+        if($date_added_from!=null)
+        {
+            $adjustments = $adjustments->where('created_at','>=',$date_added_from);
+        }
+        if($date_added_to!=null)
+        {
+            $adjustments = $adjustments->where('created_at','<=',$date_added_to);
+        }
 
         if($currency!=null)
         {
@@ -159,9 +158,7 @@ class adjustmentController extends Controller
         //dd("hello");
         $adjustment = adjustment::findorFail($request->adjustmentid);
         $adjustment->remarks = $request->remarks;
-
         $adjustment->save();
-
         return back();
     }
 }

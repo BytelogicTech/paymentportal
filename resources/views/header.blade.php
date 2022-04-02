@@ -9,12 +9,7 @@
         <li class="nav-item">
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="{{asset('public/index3.html')}}" class="nav-link">Home</a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="#" class="nav-link">Contact</a>
-        </li>
+        
         <!-- Authentication Links -->
 
       </ul>
@@ -63,53 +58,36 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="{{asset('public/index3.html')}}" class="brand-link">
-        <img src="{{asset('public/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
       </a>
 
       <!-- Sidebar -->
       <div class="sidebar">
         <!-- Sidebar user (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <div class="image">
-            <img src="{{asset('public/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
-          </div>
-          <div class="info">
-            <a href="#" class="d-block">Alexander Pierce</a>
-          </div>
+
         </div>
 
-        <!-- SidebarSearch Form -->
-        <div class="form-inline">
-          <div class="input-group" data-widget="sidebar-search">
-            <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-            <div class="input-group-append">
-              <button class="btn btn-sidebar">
-                <i class="fas fa-search fa-fw"></i>
-              </button>
-            </div>
-          </div>
-        </div>
+
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-            <li class="nav-item">
+            
               <a href="{{url('/home')}}" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Dashboard
                 </p>
               </a>
-            </li>
-            <li class="nav-header">Transactions</li>
+           
+            <li class="nav-header">TRANSACTIONS</li>
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-user"></i>
                 <p>
-                  Transaction
+                  Transactions
                   <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
@@ -117,7 +95,7 @@
                 <li class="nav-item">
                   <a href="{{url('transaction/index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>View All Transaction</p>
+                    <p>Transactions List</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -140,7 +118,7 @@
                 <li class="nav-item">
                   <a href="{{url('payout/index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>View All Payout</p>
+                    <p>Payouts List</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -152,165 +130,7 @@
               </ul>
             </li>
 
-            <li class="nav-header">Settlement</li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-user"></i>
-                <p>
-                Settlement
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="{{url('transaction/index')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>View All Transaction</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{url('transaction/create')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Add new Transaction</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-users"></i>
-                <p>
-                  Adjustments
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="{{url('payout/index')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>View All Adjustments</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{url('payout/create')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Add new Adjustments</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-
-            <li class="nav-header">SYSTEM</li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-user"></i>
-                <p>
-                  Customers
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="{{url('customer/index')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>View All Customers</p>
-                  </a>
-                </li>
-                @if(Auth::user()->role=="Admin" || Auth::user()->role=="Merchant Admin")
-                <li class="nav-item">
-                  <a href="{{url('customer/create')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Add new Customer</p>
-                  </a>
-                </li>
-                @endif
-              </ul>
-            </li>
-
-
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-user"></i>
-                <p>
-                  Users
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="{{url('user/index')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>View All Users</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{url('user/create')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Add new User</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-
-          
-
-            <li class="nav-header">ADMIN</li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-store"></i>
-                <p>
-                  Merchants
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="{{url('merchant/index')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>View All Merchants</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{url('merchant/create')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Add new Merchant</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-
-
-
-
-@if(Auth::user()->role=="Admin")
-
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-university"></i>
-                <p>
-                  Banks
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="{{url('bank/index')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>View All Banks</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{url('bank/create')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Add new Bank</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-@endif
-
-
-
+            <li class="nav-header">SETTLEMENTS</li>
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fa fa-university"></i>
@@ -323,7 +143,7 @@
                 <li class="nav-item">
                   <a href="{{url('settlement/index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>View All Settlements</p>
+                    <p>Settlements List</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -347,7 +167,7 @@
                 <li class="nav-item">
                   <a href="{{url('settlementaccount/index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>View All Settlement Accounts</p>
+                    <p>Settlement Account List</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -358,7 +178,6 @@
                 </li>
               </ul>
             </li>
-
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fa fa-university"></i>
@@ -398,6 +217,164 @@
                 </li>
               </ul>
             </li>
+
+            <li class="nav-header">SYSTEM</li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-user"></i>
+                <p>
+                  Customers
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{url('customer/index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Customer List</p>
+                  </a>
+                </li>
+                @if(Auth::user()->role=="Admin" || Auth::user()->role=="Merchant Admin")
+                <li class="nav-item">
+                  <a href="{{url('customer/create')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add new Customer</p>
+                  </a>
+                </li>
+                @endif
+              </ul>
+            </li>
+
+
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-user"></i>
+                <p>
+                  Users
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{url('user/index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Users List</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{url('user/create')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add new User</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-user"></i>
+                <p>
+                  Mailbox
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Mail List</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Compose</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+
+
+            <li class="nav-header">ADMIN</li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-store"></i>
+                <p>
+                  Merchants
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{url('merchant/index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Merchants List</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{url('merchant/create')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add new Merchant</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+
+
+
+            @if(Auth::user()->role=="Admin")
+
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fa fa-university"></i>
+                <p>
+                  Banks
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{url('bank/index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Banks List</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{url('bank/create')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add new Bank</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            @endif
+
+
+
+
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-store"></i>
+              <p>
+                Activity Log
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+
+
+
+
+            <li class="nav-header">SETTINGS</li>
+
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-store"></i>
+              <p>
+                Profile
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+
 
 
           </ul>
