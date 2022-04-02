@@ -9,7 +9,7 @@
         <li class="nav-item">
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
-        
+
         <!-- Authentication Links -->
 
       </ul>
@@ -74,14 +74,14 @@
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-            
-              <a href="{{url('/home')}}" class="nav-link">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p>
-                  Dashboard
-                </p>
-              </a>
-           
+
+            <a href="{{url('/home')}}" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Dashboard
+              </p>
+            </a>
+
             <li class="nav-header">TRANSACTIONS</li>
             <li class="nav-item">
               <a href="#" class="nav-link">
@@ -178,6 +178,8 @@
                 </li>
               </ul>
             </li>
+            @if(Auth::user()->role=="Admin")
+
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fa fa-university"></i>
@@ -201,8 +203,9 @@
                 </li>
               </ul>
             </li>
+            @endif
 
-  @if(Auth::user()->role=="Admin")
+            @if(Auth::user()->role=="Admin")
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-user"></i>
@@ -232,7 +235,7 @@
                 </li>
               </ul>
             </li>
-  @endif
+            @endif
 
             <li class="nav-header">SYSTEM</li>
             <li class="nav-item">
@@ -261,6 +264,7 @@
               </ul>
             </li>
 
+            @if(Auth::user()->role=="Admin")
 
             <li class="nav-item">
               <a href="#" class="nav-link">
@@ -310,7 +314,9 @@
               </ul>
             </li>
 
+            @endif
 
+            @if(Auth::user()->role=="Admin")
 
             <li class="nav-header">ADMIN</li>
             <li class="nav-item">
@@ -335,6 +341,31 @@
                   </a>
                 </li>
               </ul>
+
+
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-store"></i>
+                <p>
+                  Banks
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{url('bank/index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Banks List</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{url('bank/create')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add new Bank</p>
+                  </a>
+                </li>
+              </ul>
+
             </li>
 
 
@@ -367,9 +398,6 @@
             </li>
             @endif
 
-
-
-
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-store"></i>
               <p>
@@ -378,7 +406,7 @@
               </p>
             </a>
 
-
+            @endif
 
 
             <li class="nav-header">SETTINGS</li>
