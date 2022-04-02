@@ -142,6 +142,7 @@
 
                     </select>
                   </div>
+                  @if(Auth::user()->role=="Admin")
                   <div class="col-md-3">
                     <label for="description">Type</label>
                     <select name="type_of_transaction" class="form-control" id="type_of_transaction">
@@ -150,6 +151,7 @@
                       <option value="B2B">B2B</option>
                     </select>
                   </div>
+                  @endif
                 </div>
 
 
