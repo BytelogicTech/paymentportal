@@ -43,6 +43,7 @@
                                 @csrf
 
                                 <div class="row">
+                                @if(Auth::user()->role=="Admin")
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="name">Invoice Date*</label>
@@ -50,13 +51,14 @@
 
                                         </div>
                                     </div>
+                                    @endif
 
                                     @if(Auth::user()->role=="Admin")
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Parent Merchant*</label>
                                             <select class="select2 form-control" name="merchant_fk_id" id="merchant_fk_id" required>
-                                                <option value="" disabled selected>Please Select One</option>
+                                                <option value="" selected>Please Select One</option>
                                                 @foreach($merchants as $merchant)
                                                 <option value="{{$merchant->id}}">{{$merchant->merchant_name}}</option>
                                                 @endforeach
@@ -66,12 +68,13 @@
                                     @else
                                 <input type="hidden" name="merchant_fk_id" value="{{Auth::user()->merchant_fk_id}}" />
                                     @endif
-
+ 
+                                    
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Bank To*</label>
                                             <select name="bank_account_fk_id" class="select2 form-control" required>
-                                                <option>Select Bank Account</option>
+                                                <option value="" selected>Select Bank Account</option>
 
                                                 @foreach($bankaccounts as $bankaccount)
                                                 <optgroup label="{{$bankaccount[0]->bank_name}}">
@@ -83,12 +86,13 @@
                                             </select>
                                         </div>
                                     </div>
+                                   
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Customer*</label>
                                             <select class="select2 form-control" name="customer_fk_id"id="customer_fk_id" required>
-                                                <option value="customer_fk_id" disabled selected>Please Select One</option>
+                                                <option value="" selected>Please Select One</option>
                                                 @if(Auth::user()->role=="Merchant Admin")
                                                 @foreach($customers as $customer)
                                                 <option value="{{$customer->id}}">{{$customer->first_name}}</option>
@@ -101,14 +105,14 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Product Name*</label>
-                                            <input type="text" class="form-control" name="product_name" placeholder="Enter Product Name">
+                                            <input type="text" class="form-control" name="product_name" placeholder="Enter Product Name" required> 
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Product Price*</label>
-                                            <input type="text" class="form-control" name="product_price" placeholder="Enter Product Price">
+                                            <input type="number" class="form-control" name="product_price" placeholder="Enter Product Price" required>
                                         </div>
                                     </div>
 
@@ -136,7 +140,7 @@
 
 
                                 <div class="row">
-
+                                @if(Auth::user()->role=="Admin")
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Date Recieved</label>
@@ -171,7 +175,13 @@
                                             </select>
                                         </div>
                                     </div>
+                                    @else
+                                    <input type="date" class="form-control" name="invoice_date" placeholder="Enter Date of Amount Recieved" value="<?php echo date("Y-m-d"); ?>">
+                                    <input type="hidden" class="form-control" name="amount_recieved" placeholder="Enter Amount Recieved" value="0">
+                                    <input type="hidden" class="form-control" name="status_of_transaction" placeholder="Enter Amount Recieved" value="New">
+                                    <input type="hidden" class="form-control" name="type_of_transaction" placeholder="Enter Amount Recieved" value="C2B">
 
+                                    @endif
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Add</button>

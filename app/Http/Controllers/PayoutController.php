@@ -39,7 +39,7 @@ class PayoutController extends Controller
         $date_paid_to ="";
         $reference_id ="";
         $merchants = merchant::all();
-        $customers = customer::all();
+        $customers = customer::where('merchant_fk_id',Auth::user()->merchant_fk_id)->get();
         $bankaccounts = bank_account::all();
         $bank_account_payouts = bank_account_payouts::all();
         $merchantpluck = merchant::pluck('merchant_name', 'id');
@@ -129,9 +129,9 @@ class PayoutController extends Controller
 
      //dd($payouts);
 
-         $payouts = $payouts->get();
+        $payouts = $payouts->get();
         $merchants = merchant::all();
-        $customers = customer::all();
+        $customers = customer::where('merchant_fk_id',Auth::user()->merchant_fk_id)->get();
         
         $merchantpluck = merchant::pluck('merchant_name', 'id');
         $customerpluck = customer::pluck('first_name', 'id');
@@ -156,7 +156,8 @@ class PayoutController extends Controller
     public function create()
     {
         $payouts = payout::all();
-        $merchants = merchant::all();        
+        $merchants = merchant::all(); 
+        $customers = customer::where('merchant_fk_id',Auth::user()->merchant_fk_id)->get();       
         $bankaccounts =  DB::table('bank_accounts')
         ->join('banks','banks.id','=','bank_accounts.bank_id')
         ->select('bank_accounts.id as bank_accountsid','bank_accounts.bank_id','banks.bank_name','banks.beneficiary_name','bank_accounts.currency','bank_accounts.account_number','bank_accounts.nick_name')            
@@ -164,8 +165,9 @@ class PayoutController extends Controller
         ->groupBy('bank_id');
 
         // dd($bankaccounts);
+       
 
-        return view('payout/create', compact('payouts','merchants','bankaccounts'));
+        return view('payout/create', compact('payouts','merchants','bankaccounts','customers'));
     }
 
     /**

@@ -44,18 +44,21 @@
                 @csrf
 
                 <div class="row">
-
-                <div class="col-md-3">
+                @if(Auth::user()->role=="Admin")
+                  <div class="col-md-3">
+                    
                     <label for="description">Merchant Name</label>
                     <select name="merchant_fk_id" class="form-control" id="merchant_fk_id">
-                      <option value="" selected >Select Merchant</option>
+                      <option value="" selected>Select Merchant</option>
                       @foreach($merchants as $merchant)
                       <option value="{{$merchant->id}}">{{$merchant->merchant_name}}</option>
                       @endforeach
                     </select>
                   </div>
+                  @else
+                  <input type="hidden" name="merchant_fk_id" value="{{Auth::user()->merchant_fk_id}}" />
+                    @endif
 
-                
                   <div class="col-md-3">
                     <label for="name">Invoie Number</label>
                     <input type="text" name="invoice_number" id="invoice_number" class="form-control">
@@ -64,14 +67,19 @@
                   <div class="col-md-3">
                     <label for="description">Customer</label>
                     <select name="customer_fk_id" class="form-control" id="customer_fk_id">
-                      <option value="customer_fk_id" disabled selected>Please Select One</option>
+                      <option value="" selected>Please Select One</option>
+                      @if(Auth::user()->role=="Merchant Admin")
+                      @foreach($customers as $customer)
+                      <option value="{{$customer->id}}">{{$customer->first_name}}</option>
+                      @endforeach
+                      @endif
                     </select>
                   </div>
 
                   <div class="col-md-3">
                     <label for="description">Bank Paid From</label>
                     <select class="select2 form-control" name="bank_account_fk_id" id="bank_account_fk_id">
-                      <option value="" >Please Select One</option>
+                      <option value="" selected>Please Select One</option>
                       @foreach($bankaccounts as $bankaccount)
                       <optgroup label="{{$bankaccount[0]->bank_name}}">
                         @foreach($bankaccount as $item)
@@ -88,16 +96,16 @@
                   <div class="col-md-3">
                     <label for="description">Currency</label>
                     <select name="currency" class="form-control" id="currency">
-                      <option value="" selected >Please Select One</option>
+                      <option value="" selected>Please Select One</option>
                       @foreach(config('constants.currency_list') as $key=> $currency1)
                       <option value="{{$key}}">{{$key}}</option>
                       @endforeach
-                      
+
                     </select>
                   </div>
 
                   <div class="col-md-4">
-                  <label>Amount Received Between</label>
+                    <label>Amount Received Between</label>
                     <div class="input-daterange input-group">
                       <input type="text" class="form-control m-input" name="transaction_amount_from" id="transaction_amount_from" placeholder="From" data-col-index="4">
                       <div class="input-group-append">
@@ -118,15 +126,15 @@
                     </div>
                   </div>
 
-                  
+
                 </div>
 
 
                 <div class="row">
-                <div class="col-md-3">
+                  <div class="col-md-3">
                     <label for="description">Status</label>
                     <select name="status_of_transaction" class="form-control" id="status_of_transaction">
-                      <option value="" disabled selected>Please Select One</option>
+                      <option value="" selected>Please Select One</option>
                       <option value="New">New</option>
                       <option value="Recieved">Recieved</option>
                       <option value="Recieved">Recieved</option>
@@ -134,10 +142,10 @@
 
                     </select>
                   </div>
-                <div class="col-md-3">
+                  <div class="col-md-3">
                     <label for="description">Type</label>
                     <select name="type_of_transaction" class="form-control" id="type_of_transaction">
-                      <option value="" disabled selected>Select Type</option>
+                      <option value="" selected>Select Type</option>
                       <option value="C2B">C2B</option>
                       <option value="B2B">B2B</option>
                     </select>
@@ -151,87 +159,78 @@
               </form>
             </div>
 
+            <table id="example1" class="table table-bordered table-hover">
+
+              <thead>
+                <tr>
+                  <th>Sr.</th>
+                  <th>Merchant Name</th>
+                  <th>Invoice Number</th>
+                  <th>Customer Name</th>
+                  <th>Currency</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Amount Recieved</th>
+                  <th>Date Recieved</th>
+                  <th>Created At</th>
+                  <th>Actions</th>
+                  <th>Download</th>
+                </tr>
+              </thead>
 
 
+              @php $count=0; @endphp
+              @foreach($transactions as $transaction)
+
+              @php $count++; @endphp
+              <tr>
+                <td>{{$count}}</td>
+                <td>{{@$merchantpluck[$transaction->merchant_fk_id]}}</td>
+                <td>{{$transaction->invoice_number}}</td>
+                <td>{{@$customerpluck[$transaction->customer_fk_id]}}</td>
+                <td>{{@$bankaccountpluk[$transaction->bank_account_fk_id]}}</td>
+                <td>{{$transaction->product_price}}</td>
+                <td>{{$transaction->status_of_transaction}}</td>
+                <td>{{$transaction->amount_recieved}}</td>
+                <td>{{$transaction->date_recieved}}</td>
+                <td>{{$transaction->created_at}}</td>
+                <td>
+                  <a href="{{url('transaction/edit/'.$transaction->id)}}" class="btn btn-warning btn-sm"><i class="far fa-edit" aria-hidden="true"></i></a>
+                  @if(Auth::user()->role=="Admin")
+                  <a href="{{url('transaction/delete/'.$transaction->id)}}" onclick="return confirm('Are you sure, you want to delete it?')" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                  @endif
+                </td>
+
+                <td>
+                  @if($transaction->upload_signed_invoice)
+                  <a class="btn btn-primary" href="{{asset('public/invoice/'.$transaction->upload_signed_invoice)}}" target="_blank"><i class="fa fa-download"></i></a>
+                  @else
+                  No Invoice
+                  @endif
+
+                  @if($transaction->proof_of_payment)
+                  <a class="btn btn-default" href="{{asset('public/pop/'.$transaction->proof_of_payment)}}" target="_blank">POP</a>
+                  @else
+                  | No payment Proof
+                  @endif
+                </td>
+              </tr>
+              @endforeach
 
 
-
-
-
-
-
-
-
-
-                <table id="example1" class="table table-bordered table-hover">
-
-                  <thead>
-                    <tr>
-                      <th>Sr.</th>
-                      <th>Merchant Name</th>
-                      <th>Invoice Number</th>
-                      <th>Customer Name</th>
-                      <th>Currency</th>
-                      <th>Amount</th>
-                      <th>Status</th>
-                      <th>Amount Recieved</th>
-                      <th>Date Recieved</th>
-                      <th>Created At</th>
-                      <th>Actions</th>
-                      <th>Download</th>
-                    </tr>
-                  </thead>
-
-
-                  @php $count=0; @endphp
-                  @foreach($transactions as $transaction)
-
-                  @php $count++; @endphp
-                  <tr>
-                    <td>{{$count}}</td>
-                    <td>{{@$merchantpluck[$transaction->merchant_fk_id]}}</td>
-                    <td>{{$transaction->invoice_number}}</td>
-                    <td>{{@$customerpluck[$transaction->customer_fk_id]}}</td>
-                    <td>{{@$bankaccountpluk[$transaction->bank_account_fk_id]}}</td>
-                    <td>{{$transaction->product_price}}</td>
-                    <td>{{$transaction->status_of_transaction}}</td>
-                    <td>{{$transaction->amount_recieved}}</td>
-                    <td>{{$transaction->date_recieved}}</td>
-                    <td>{{$transaction->created_at}}</td>
-                    <td>
-                      <a href="{{url('transaction/edit/'.$transaction->id)}}" class="btn btn-warning btn-sm"><i class="far fa-edit" aria-hidden="true"></i></a>
-                      <a href="{{url('transaction/delete/'.$transaction->id)}}" onclick="return confirm('Are you sure, you want to delete it?')" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                    </td>
-                    <td>
-                      @if($transaction->upload_signed_invoice)
-                      <a class="btn btn-primary" href="{{asset('public/invoice/'.$transaction->upload_signed_invoice)}}" target="_blank"><i class="fa fa-download"></i></a>
-                      @else
-                      No Invoice
-                      @endif
-
-                      @if($transaction->proof_of_payment)
-                      <a class="btn btn-default" href="{{asset('public/pop/'.$transaction->proof_of_payment)}}" target="_blank">POP</a>
-                      @else
-                      | No payment Proof
-                      @endif
-                    </td>
-                  </tr>
-                  @endforeach
-
-
-                </table>
-            </div>
-            <!-- /.card-body -->
+            </table>
           </div>
-          <!-- /.card -->
+          <!-- /.card-body -->
         </div>
-        <!-- /.col -->
+        <!-- /.card -->
       </div>
-      <!-- /.row -->
+      <!-- /.col -->
     </div>
-    <!-- /.container-fluid -->
-  </section>
-  <!-- /.content -->
+    <!-- /.row -->
+</div>
+<!-- /.container-fluid -->
+</section>
+<!-- /.content -->
 </div>
 @include('footer')
 
@@ -248,35 +247,35 @@
 </script>
 
 <script>
-$('#type_of_transaction').val('{{$type_of_transaction}}');
+  $('#type_of_transaction').val('{{$type_of_transaction}}');
 </script>
 
 <script>
-$('#currency').val('{{$currency}}');
+  $('#currency').val('{{$currency}}');
 </script>
 
 <script>
-$('#bank_account_fk_id').val('{{$bank_account_fk_id}}');
+  $('#bank_account_fk_id').val('{{$bank_account_fk_id}}');
 </script>
 
 <script>
-$('#transaction_amount_from').val('{{$transaction_amount_from}}');
+  $('#transaction_amount_from').val('{{$transaction_amount_from}}');
 </script>
 
 <script>
-$('#transaction_amount_to').val('{{$transaction_amount_to}}');
+  $('#transaction_amount_to').val('{{$transaction_amount_to}}');
 </script>
 
 <script>
-$('#date_paid_from').val('{{$date_paid_from}}');
+  $('#date_paid_from').val('{{$date_paid_from}}');
 </script>
 
 <script>
-$('#date_paid_to').val('{{$date_paid_to}}');
+  $('#date_paid_to').val('{{$date_paid_to}}');
 </script>
 
 <script>
-$('#invoice_number').val('{{$invoice_number}}');
+  $('#invoice_number').val('{{$invoice_number}}');
 </script>
 
 <script>

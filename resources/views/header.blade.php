@@ -227,7 +227,7 @@
               </ul>
             </li>
 
-
+  @if(Auth::user()->role=="Admin")
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-user"></i>
@@ -251,6 +251,7 @@
                 </li>
               </ul>
             </li>
+  @endif
 
           
 

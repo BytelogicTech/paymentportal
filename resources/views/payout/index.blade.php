@@ -43,7 +43,9 @@
               <form action="{{url('payout/search')}}" method="post">
                 @csrf
                 <div class="row">
+                @if(Auth::user()->role=="Admin")
                   <div class="col-md-3">
+                  
                     <label for="description">Merchant Name</label>
                     <select name="merchant_fk_id" class="form-control" id="merchant_fk_id">
                       <option value="" selected >Select Merchant</option>
@@ -51,7 +53,14 @@
                       <option value="{{$merchant->id}}">{{$merchant->merchant_name}}</option>
                       @endforeach
                     </select>
+                  
                   </div>
+                  @else
+                  <input type="hidden" name="merchant_fk_id" value="{{Auth::user()->merchant_fk_id}}" />
+
+                  @endif
+                  
+
                   <div class="col-md-3">
                     <label for="name">Payout Request ID</label>
                     <input type="text" name="reference_id" id="reference_id" class="form-control">
@@ -59,7 +68,12 @@
                   <div class="col-md-3">
                     <label for="description">Customer</label>
                     <select name="customer_fk_id" class="form-control" id="customer_fk_id">
-                      <option value="customer_fk_id" disabled selected>Please Select One</option>
+                      <option value="" selected>Please Select One</option>
+                      @if(Auth::user()->role=="Merchant Admin")
+                      @foreach($customers as $customer)
+                      <option value="{{$customer->id}}">{{$customer->first_name}}</option>
+                      @endforeach
+                      @endif
                     </select>
                   </div>
                   <div class="col-md-3">
@@ -101,6 +115,7 @@
                     </select>
                   </div>
                   <div class="col-md-3">
+                  @if(Auth::user()->role=="Admin")
                     <label for="description">Bank Paid From</label>
                     <select class="select2 form-control" name="bank_account_from_fk_id" id="bank_account_from_fk_id">
                       <option value="" >Please Select One</option>
@@ -112,6 +127,7 @@
                       </optgroup>
                       @endforeach
                     </select>
+                    @endif
                   </div>
                 </div>
                 <div class="row">
@@ -155,7 +171,9 @@
                   <th>Date Paid</th>
                   <th>Created BY</th>
                   <th>Created On</th>
+                  @if(Auth::user()->role=="Admin")
                   <th>Actions</th>
+                  @endif
                   <th>Download</th>
                 </tr>
               </thead>
@@ -176,10 +194,12 @@
                 <td>{{$payout->date_paid}}</td>
                 <td>{{@$userpluck[$payout->created_by]}}</td>
                 <td>{{$payout->created_at}}</td>
+                @if(Auth::user()->role=="Admin")
                 <td>
                   <a href="{{url('payout/edit/'.$payout->id)}}" class="btn btn-warning btn-sm"><i class="far fa-edit" aria-hidden="true"></i></a>
                   <a href="{{url('payout/delete/'.$payout->id)}}" onclick="return confirm('Are you sure, you want to delete it?')" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
                 </td>
+                @endif
                 <td>
                   @if($payout->upload_invoice)
                   <a class="btn btn-primary" href="{{asset('public/invoice/'.$payout->upload_invoice)}}" target="_blank"><i class="fa fa-download"></i></a>

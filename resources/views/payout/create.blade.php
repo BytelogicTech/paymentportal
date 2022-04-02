@@ -44,48 +44,57 @@
 
 
 
-                            <div class="row">
-                                <div class="col-md-6">
+                                <div class="row">
+                                    @if(Auth::user()->role=="Admin")
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Parent Merchant*</label>
                                             <select class="select2 form-control" name="merchant_fk_id" required id="merchant_fk_id">
-                                                <option value="" disabled selected>Please Select One</option>
+                                                <option value="" selected>Please Select One</option>
                                                 @foreach($merchants as $merchant)
                                                 <option value="{{$merchant->id}}">{{$merchant->merchant_name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
+                                    </div>
+                                    @else
+                                    <input type="hidden" name="merchant_fk_id" value="{{Auth::user()->merchant_fk_id}}" />
+                                    @endif
                                 </div>
-                            </div>
 
-                            <div class="row">
+                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Customer*</label>
                                             <select class=" form-control" name="customer_fk_id" required id="customer_fk_id">
-                                                <option value="customer_fk_id" disabled selected>Please Select One</option>                                                
+                                                <option value="" selected>Please Select One</option>
+                                                @if(Auth::user()->role=="Merchant Admin")
+                                                @foreach($customers as $customer)
+                                                <option value="{{$customer->id}}">{{$customer->first_name}}</option>
+                                                @endforeach
+                                                @endif
                                             </select>
                                         </div>
                                     </div>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col-md-6">
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Bank Account To Transfer To*</label>
                                             <select class="form-control" name="bank_account_to_fk_id" required id="bank_account_to_fk_id">
-                                                <option value="" disabled selected>Please Select One</option>
-                                           
+                                                <option value="" selected>Please Select One</option>
+
                                             </select>
                                         </div>
-                                </div>
-                                    
+                                    </div>
 
-                               
+
+
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="name">Payment Amount*</label>
-                                            <input type="text" placeholder="Enter Payment Amount" class="form-control" name="payout_amount" required />
+                                            <input type="number" placeholder="Enter Payment Amount" class="form-control" name="payout_amount" required />
 
                                         </div>
                                     </div>
@@ -94,19 +103,19 @@
                                         <div class="form-group">
                                             <label for="name">Remarks / Purpose of Payment</label>
                                             <textarea placeholder="Remarks / Purpose of Payment" class="form-control" name="remarks"></textarea>
-                                            
+
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="name">Reference Id</label>
-                                            <input type="text" placeholder="Enter Reference Id" class="form-control" name="reference_id"/>
+                                            <input type="text" placeholder="Enter Reference Id" class="form-control" name="reference_id" />
 
                                         </div>
                                     </div>
 
-                                    
+
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Upload Invoice</label>
@@ -121,11 +130,12 @@
                                         </div>
                                     </div>
 
+                                    @if(Auth::user()->role=="Admin")
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Bank Account To Transfer From</label>
                                             <select class="select2 form-control" name="bank_account_from_fk_id">
-                                                <option>Please Select One</option>
+                                                <option value="" Selected>Please Select One</option>
                                                 @foreach($bankaccounts as $bankaccount)
                                                 <optgroup label="{{$bankaccount[0]->bank_name}}">
                                                     @foreach($bankaccount as $item)
@@ -136,11 +146,6 @@
                                             </select>
                                         </div>
                                     </div>
-
-
-
-
-                                    
 
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -153,17 +158,18 @@
                                                 <option value="Canceled">Canceled</option>
                                                 <option value="Returned">Returned</option>
                                                 <option value="Rejected">Rejected</option>
-                                                
+
                                             </select>
                                         </div>
                                     </div>
-                                    
-                                    
-
-                                    
+                                    @endif
 
 
-                                    
+
+
+
+
+
                                 </div>
 
 
@@ -196,71 +202,68 @@
 </script>
 
 <script>
-    $('#merchant_fk_id').change(function(){
+    $('#merchant_fk_id').change(function() {
         $('#customer_fk_id').html('');
         $('#bank_account_to_fk_id').html('');
         var merchant_fk_id = $(this).val();
 
         $.ajax({
-                type: 'POST',
-                url: "{{url('getcustomers_bymerchant')}}",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data: {
-                    merchant_fk_id: merchant_fk_id
-                },
-                success: function(data) {
-                    
+            type: 'POST',
+            url: "{{url('getcustomers_bymerchant')}}",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                merchant_fk_id: merchant_fk_id
+            },
+            success: function(data) {
+
                 var options = '<option value="" >Please Select One</option> ';
-                    $.each(data, function(i, value) {
-                    options+= '<option value='+value["id"]+'>'+value["first_name"]+'</option>';
-                    });
-                    //console.log(data);
-                    $('#customer_fk_id').html(options);
-                },
-                error: function(data) {
-                    console.log("error");
-                    console.log(data);
-                }
-            });
-        
+                $.each(data, function(i, value) {
+                    options += '<option value=' + value["id"] + '>' + value["first_name"] + '</option>';
+                });
+                //console.log(data);
+                $('#customer_fk_id').html(options);
+            },
+            error: function(data) {
+                console.log("error");
+                console.log(data);
+            }
+        });
+
     });
-    </script>
+</script>
 
 
 <script>
-    $('#customer_fk_id').change(function(){
+    $('#customer_fk_id').change(function() {
         $('#bank_account_to_fk_id').html('');
         var customer_fk_id = $(this).val();
-        
+
 
         $.ajax({
-                type: 'POST',
-                url: "{{url('getpayout_bycustomer')}}",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data: {
-                    customer_fk_id: customer_fk_id
-                },
-                success: function(data) {
-                    
+            type: 'POST',
+            url: "{{url('getpayout_bycustomer')}}",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                customer_fk_id: customer_fk_id
+            },
+            success: function(data) {
+
                 var options = '<option value="" disabled selected>Please Select One</option> ';
-                    $.each(data, function(i, value) {
-                    options+= '<option value='+value["id"]+'>'+value["beneficiary_name"]+'-'+value["currency"]+'-'+value["account_number"]+'</option>';
-                    });
-                    // console.log(data);
-                    $('#bank_account_to_fk_id').html(options);
-                },
-                error: function(data) {
-                    console.log("error");
-                    console.log(data);
-                }
-            });
-        
+                $.each(data, function(i, value) {
+                    options += '<option value=' + value["id"] + '>' + value["beneficiary_name"] + '-' + value["currency"] + '-' + value["account_number"] + '</option>';
+                });
+                // console.log(data);
+                $('#bank_account_to_fk_id').html(options);
+            },
+            error: function(data) {
+                console.log("error");
+                console.log(data);
+            }
+        });
+
     });
-    </script>
-    
-
-
+</script>
