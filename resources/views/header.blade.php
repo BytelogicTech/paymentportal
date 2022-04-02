@@ -199,8 +199,6 @@
                     <p>Currency Conversion</p>
                   </a>
                 </li>
-
-                @endif
               </ul>
             </li>
 
