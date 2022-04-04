@@ -166,7 +166,9 @@
               <thead>
                 <tr>
                   <th>Sr.</th>
+                  @if(Auth::user()->role=="Admin")
                   <th>Merchant Name</th>
+                  @endif
                   <th>Invoice Number</th>
                   <th>Customer Name</th>
                   <th>Currency</th>
@@ -187,7 +189,9 @@
               @php $count++; @endphp
               <tr>
                 <td>{{$count}}</td>
+                @if(Auth::user()->role=="Admin")
                 <td>{{@$merchantpluck[$transaction->merchant_fk_id]}}</td>
+                @endif
                 <td>{{$transaction->invoice_number}}</td>
                 <td>{{@$customerpluck[$transaction->customer_fk_id]}}</td>
                 <td>{{@$bankaccountpluk[$transaction->bank_account_fk_id]}}</td>
