@@ -162,7 +162,9 @@
               <thead>
                 <tr>
                   <th>Sr.</th>
+                  @if(Auth::user()->role=="Admin")
                   <th>Merchant Name</th>
+                  @endif
                   <th>Customer Name</th>
                   <th>Currency</th>
                   <th>Payout Amount</th>
@@ -185,7 +187,9 @@
               @php $count++; @endphp
               <tr>
                 <td>{{$count}}</td>
+                @if(Auth::user()->role=="Admin")
                 <td>{{@$merchantpluck[$payout->merchant_fk_id]}}</td>
+                @endif
                 <td>{{@$customerpluck[$payout->customer_fk_id]}}</td>
                 <td>{{@$bankaccountpayoutpluk[$payout->bank_account_to_fk_id]}}</td>
                 <td>{{$payout->payout_amount}}</td>
