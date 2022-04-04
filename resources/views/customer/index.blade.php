@@ -52,17 +52,14 @@
                   </div>
                   @endif
 
-
-
-
-
-             
+                  @if(Auth::user()->role=="Admin")
 
 
                   <div class="card-header">
                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search </button>
 
                   </div>
+                  @endif
 
                 </form>
               </div>
@@ -136,6 +133,7 @@
 <script>
   $('#merchant_fk_id').val('{{$merchant_fk_id}}');
 </script>
+
 
 
 

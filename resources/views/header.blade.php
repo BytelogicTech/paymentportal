@@ -201,22 +201,6 @@
                     <p>Currency Conversion</p>
                   </a>
                 </li>
-              </ul>
-            </li>
-            @endif
-
-            @if(Auth::user()->role=="Admin")
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-user"></i>
-                <p>
-                  Users
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-
-
                 <li class="nav-item">
                   <a href="{{url('adjustment/adjustment_tier_commission_create')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
@@ -237,6 +221,8 @@
             </li>
             @endif
 
+           
+
             <li class="nav-header">SYSTEM</li>
             <li class="nav-item">
               <a href="#" class="nav-link">
@@ -253,7 +239,7 @@
                     <p>Customer List</p>
                   </a>
                 </li>
-                @if(Auth::user()->role=="Admin" || Auth::user()->role=="Merchant Admin")
+                @if(Auth::user()->role=="Admin" || Auth::user()->role=="Merchant Admin" || Auth::user()->role=="Merchant Superadmin")
                 <li class="nav-item">
                   <a href="{{url('customer/create')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
@@ -264,7 +250,7 @@
               </ul>
             </li>
 
-            @if(Auth::user()->role=="Admin")
+            @if(Auth::user()->role=="Admin" || Auth::user()->role=="Merchant Superadmin")
 
             <li class="nav-item">
               <a href="#" class="nav-link">
@@ -341,33 +327,6 @@
                   </a>
                 </li>
               </ul>
-
-
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-store"></i>
-                <p>
-                  Banks
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="{{url('bank/index')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Banks List</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{url('bank/create')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Add new Bank</p>
-                  </a>
-                </li>
-              </ul>
-
-            </li>
-
 
 
 

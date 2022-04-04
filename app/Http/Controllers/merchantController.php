@@ -10,6 +10,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
 
 
 class merchantController extends Controller
@@ -146,6 +148,18 @@ class merchantController extends Controller
 
         $merchant->created_by = Auth::user()->id; 
         $merchant->save();
+
+
+        $merchant_fk_id = $merchant->id;
+        $user = new User();
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->phone = $request->customer_support_number;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->password = Hash::make($request->password);
+        $user->role = "Merchant Superadmin";
+        $user->save();
        
 
         // $merchantid = $merchant->id;  

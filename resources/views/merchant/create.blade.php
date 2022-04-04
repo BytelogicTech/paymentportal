@@ -438,8 +438,8 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="description">Rolling Reserve Release Days</label>
-                                        <input type="number" placeholder="Enter Rolling Reserve Release Days" class="form-control" name="rolling_reserve_release_days" />
+                                        <label for="description">Rolling Reserve Release Days*</label>
+                                        <input type="number" placeholder="Enter Rolling Reserve Release Days" class="form-control" name="rolling_reserve_release_days" required/>
                                     </div>
                                 </div>
 
