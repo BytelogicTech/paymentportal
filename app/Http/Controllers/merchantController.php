@@ -146,8 +146,8 @@ class merchantController extends Controller
 
         $merchant->created_by = Auth::user()->id; 
         $merchant->save();
-       
 
+        
         // $merchantid = $merchant->id;  
 
        
