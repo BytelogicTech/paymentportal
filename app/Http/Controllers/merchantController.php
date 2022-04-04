@@ -162,11 +162,6 @@ class merchantController extends Controller
         $user->save();
        
 
-        // $merchantid = $merchant->id;  
-
-       
-
-
         return redirect('merchant/index')->with('success', 'merchant Added Successfully');
     }
     /**

@@ -11,6 +11,7 @@ use App\Http\Controllers\PayoutController;
 use App\Http\Controllers\settlementController;
 use App\http\Controllers\settlementaccountController;
 use App\http\Controllers\adjustmentController;
+use App\http\Controllers\MailboxController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -82,11 +83,23 @@ Route::group(['prefix' => 'transaction'], function(){
 Route::group(['prefix' => 'user'], function(){
     Route::get('/index', [UserController::class, 'index'])->middleware('admin');
     Route::get('/create', [UserController::class, 'create'])->middleware('admin');
-    Route::post('/store', [UserController::class, 'store'])->middleware('admin');
+    Route::post('/store', [UserControllMailboxControllerer::class, 'store'])->middleware('admin');
     Route::get('/edit/{id}', [UserController::class, 'edit'])->middleware('admin');
     Route::post('/update', [UserController::class, 'update'])->middleware('admin');
     Route::get('/delete/{id}', [UserController::class, 'destroy'])->middleware('admin');
 });
+
+
+Route::group(['prefix' => 'mailbox'], function(){
+    Route::get('/index', [MailboxController::class, 'index']);
+    Route::get('/create', [MailboxController::class, 'create']);
+    Route::post('/store', [MailboxController::class, 'store']);
+    Route::get('/edit/{id}', [MailboxController::class, 'edit']);
+    Route::post('/update', [MailboxController::class, 'update']);
+    Route::get('/delete/{id}', [MailboxController::class, 'destroy']);
+});
+
+
 
 Route::group(['prefix' => 'payout'], function(){
     Route::get('/index', [PayoutController::class, 'index']);
