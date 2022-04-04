@@ -42,7 +42,10 @@
                  <thead>
                   <tr>
                     <th>Sr.</th>
+                    @if(Auth::user()->role=="Admin")
+
                     <th>Merchant Name</th>
+                    @endif
                     <th>Beneficiary Name</th>
                     <th>Beneficiary Nickname</th>
                     <th>Bank Name</th>
@@ -59,7 +62,10 @@
     @php $count++; @endphp
     <tr>
         <td>{{$count}}</td>
+        @if(Auth::user()->role=="Admin")
+
         <td>{{@$merchantpluck[$settlementaccount->merchant_fk_id]}}</td>
+        @endif
         <td>{{$settlementaccount->beneficiary_name}}</td>
         <td>{{$settlementaccount->beneficiary_nickname}}</td>    
         <td>{{$settlementaccount->bank_name}}</td>      

@@ -37,6 +37,8 @@
               <div class="col-md-6">
                 <form action="{{url('customer/search')}}" method="post">
                   @csrf
+                  @if(Auth::user()->role=="Admin")
+
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Merchant Name:</label>
@@ -48,6 +50,14 @@
                       </select>
                     </div>
                   </div>
+                  @endif
+
+
+
+
+
+             
+
 
                   <div class="card-header">
                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search </button>
@@ -67,7 +77,10 @@
                     <th>Last Name</th>
                     <th>Email</th>
                     <th>Phone</th>
+                    @if(Auth::user()->role=="Admin")
+
                     <th>Parent Merchant</th>
+                    @endif
                     <th>Created By</th>
                     <th>Created On</th>
                     <th>Status</th>
@@ -123,6 +136,9 @@
 <script>
   $('#merchant_fk_id').val('{{$merchant_fk_id}}');
 </script>
+
+
+
 
 <script>
   $(function() {

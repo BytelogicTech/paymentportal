@@ -38,6 +38,7 @@
                             <div class="card-body">
                                 @csrf
 
+                                @if(Auth::user()->role=="Admin")
 
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -50,6 +51,7 @@
                                         </select>
                                     </div>
                                 </div>
+                                @endif
 
 
                                 <div class="row">
@@ -103,6 +105,7 @@
                                     </div>
                                 </div>
 
+                                @if(Auth::user()->role=="Admin")
 
                                 <!-- Bootstrap Switch -->
                                 <center>
@@ -144,7 +147,7 @@
                                         </div>
                                     </div>
                                 </div>
-
+@endif
 
                                 <br />
                                 <button type="submit" class="btn btn-primary">Add</button>

@@ -42,6 +42,8 @@
               <form action="{{url('settlement/search')}}" method="post">
                 @csrf
                 <div class="row">
+                @if(Auth::user()->role=="Admin")
+
                   <div class="col-md-3">
                     <div class="form-group">
                       <label>Merchant Name:</label>
@@ -53,6 +55,7 @@
                       </select>
                     </div>
                   </div>
+                  @endif
 
                   <div class="col-md-3">
                     <div class="form-group">
@@ -110,7 +113,10 @@
               <thead>
                 <tr>
                   <th>Sr.</th>
+                  @if(Auth::user()->role=="Admin")
+
                   <th>Merchant Name</th>
+                  @endif
                   <th>Beneficiary Name</th>
                   <th>Currency</th>
                   <th>Settlement Amount</th>
@@ -129,7 +135,10 @@
               @php $count++; @endphp
               <tr>
                 <td>{{$count}}</td>
+                @if(Auth::user()->role=="Admin")
+
                 <td>{{@$merchantpluck[$settlement->merchant_fk_id]}}</td>
+                @endif
                 <td>{{@$bankaccountpayoutbnamepluk[$settlement->bank_account_to_fk_id]}}</td>
                 <td>{{@$bankaccountpayoutpluk[$settlement->bank_account_to_fk_id]}}</td>
                 <td>{{$settlement->settlement_amount}}</td>
