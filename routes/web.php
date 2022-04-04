@@ -92,6 +92,7 @@ Route::group(['prefix' => 'user'], function(){
 
 Route::group(['prefix' => 'mailbox'], function(){
     Route::get('/index', [MailboxController::class, 'index']);
+    Route::get('/sent', [MailboxController::class, 'sent']);
     Route::get('/create', [MailboxController::class, 'create']);
     Route::post('/store', [MailboxController::class, 'store']);
     Route::get('/edit/{id}', [MailboxController::class, 'edit']);
@@ -166,6 +167,9 @@ Route::post('/adjustmentupdate', [adjustmentController::class, 'adjustmentupdate
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/test', [App\Http\Controllers\HomeController::class, 'test']);
+
 
 /////// AJAX Functions
 

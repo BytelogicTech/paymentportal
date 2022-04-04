@@ -52,7 +52,20 @@
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <label for="description">To*</label>
-                                            <p>Admin</p>
+                                            
+                                            @if(Auth::user()->role=="Admin")
+                                            <select class="form-control" name="mail_to">
+                                                <option value="" selected disabled>Select User</option>
+                                                @foreach($merchant_superadmin_users as $user)
+                                                <option value="{{$user->id}}">{{$user->first_name}} {{$user->last_name}}</option>
+                                                @endforeach
+                                            </select>
+                                        @else
+                                        <label>Admin</label> 
+                                        <input type="hidden" value="{{$admin_id}}" name="mail_to"/>
+                                     
+
+                                            @endif
                                             
                                         </div>
                                     </div>

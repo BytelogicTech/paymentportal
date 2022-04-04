@@ -288,7 +288,13 @@
                 <li class="nav-item">
                   <a href="{{url('mailbox/index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Mail List</p>
+                    <p>Inbox</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{url('mailbox/sent')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Sent</p>
                   </a>
                 </li>
                 <li class="nav-item">
