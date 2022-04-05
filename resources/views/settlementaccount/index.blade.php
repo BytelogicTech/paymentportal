@@ -73,7 +73,9 @@
         <td>{{$settlementaccount->account_number}}</td>      
         <td>
             <a href="{{url('settlementaccount/edit/'.$settlementaccount->id)}}" class="btn btn-warning btn-sm"><i class="far fa-edit" aria-hidden="true"></i></a>
+            @if(Auth::user()->role=="Admin")
             <a href="{{url('settlementaccount/delete/'.$settlementaccount->id)}}" onclick="return confirm('Are you sure, you want to delete it?')" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
+            @endif
         </td>
     </tr>
     @endforeach

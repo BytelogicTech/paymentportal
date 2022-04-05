@@ -85,7 +85,8 @@
             <li class="nav-header">TRANSACTIONS</li>
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-user"></i>
+                <!-- <i class="nav-icon fas fa-user"></i> -->
+                <i class="nav-icon fa fa-list"></i>
                 <p>
                   Transactions
                   <i class="fas fa-angle-left right"></i>
@@ -334,7 +335,7 @@
                     <p>Add new Merchant</p>
                   </a>
                 </li>
-              </ul>
+              </ul> 
 
 
 
@@ -367,6 +368,8 @@
 
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-store"></i>
+           
+              
               
               <p>
                 Activity Log

@@ -147,11 +147,14 @@
                 <td>{{@$userpluck[$settlement->created_by]}}</td>
                 <td>{{$settlement->created_at}}</td>
                 <td>
+                @if(Auth::user()->role=="Admin")
                   <a href="{{url('settlement/edit/'.$settlement->id)}}" class="btn btn-warning btn-sm"><i class="far fa-edit" aria-hidden="true"></i></a>
-                  <a href="{{url('settlement/view/'.$settlement->id)}}" class="btn btn-primary"><i class="fa fa-download" aria-hidden="true"></i>
-                  </a>
-
                   <a href="{{url('settlement/delete/'.$settlement->id)}}" onclick="return confirm('Are you sure, you want to delete it?')" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                 
+                  @endif
+
+                  
+                  <a href="{{url('settlement/view/'.$settlement->id)}}" class="btn btn-primary"><i class="fa fa-download" aria-hidden="true"></i>
                 </td>
               </tr>
               @endforeach
@@ -184,20 +187,4 @@
 </script>
 
 
-<script>
-  $('#settlement_amount_from').val('{{$settlement_amount_from}}');
-</script>
-
-
-<script>
-  $('#settlement_amount_to').val('{{$settlement_amount_to}}');
-</script>
-
-<script>
-  $('#date_paid_from').val('{{$date_paid_from}}');
-</script>
-
-<script>
-  $('#date_paid_to').val('{{$date_paid_to}}');
-</script>
 
