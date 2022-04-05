@@ -108,6 +108,7 @@
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link">
+                
                 <i class="nav-icon fa fa-users"></i>
                 <p>
                   Payouts
@@ -226,7 +227,7 @@
             <li class="nav-header">SYSTEM</li>
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-user"></i>
+                <i class="nav-icon fa fa-user"></i>
                 <p>
                   Customers
                   <i class="fas fa-angle-left right"></i>
@@ -254,7 +255,7 @@
 
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-user"></i>
+                <i class="nav-icon fas fa-users"></i>
                 <p>
                   Users
                   <i class="fas fa-angle-left right"></i>
@@ -278,7 +279,7 @@
 
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-user"></i>
+                <i class="nav-icon far fa-envelope"></i>
                 <p>
                   Mailbox
                   <i class="fas fa-angle-left right"></i>
@@ -377,7 +378,7 @@
             <li class="nav-header">SETTINGS</li>
 
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-store"></i>
+            <i class="nav-icon fas fa-user"></i>
               <p>
                 Profile
                 <i class="fas fa-angle-left right"></i>
