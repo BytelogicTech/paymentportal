@@ -108,7 +108,8 @@
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-users"></i>
+               
+                <i class=" nav-icon fa fa-dollar-sign"></i> 
                 <p>
                   Payouts
                   <i class="fas fa-angle-left right"></i>
@@ -133,7 +134,7 @@
             <li class="nav-header">SETTLEMENTS</li>
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-university"></i>
+                <i class="nav-icon fa fa-money-check-alt"></i>
                 <p>
                   Settlements
                   <i class="fas fa-angle-left right"></i>
@@ -157,7 +158,7 @@
 
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-university"></i>
+                <i class="nav-icon fa fa-money-check-alt"></i>
                 <p>
                   Settlement Accounts
                   <i class="fas fa-angle-left right"></i>
@@ -182,7 +183,7 @@
 
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-university"></i>
+                <i class="nav-icon fa fa-sliders-h"></i>
                 <p>
                   Adjustments<i class="fas fa-angle-left right"></i>
                 </p>
@@ -313,7 +314,8 @@
             <li class="nav-header">ADMIN</li>
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-store"></i>
+                <!-- <i class="nav-icon fas fa-store"></i> -->
+                <i class="nav-icon fa fa-tags"></i>
                 <p>
                   Merchants
                   <i class="fas fa-angle-left right"></i>
@@ -340,7 +342,7 @@
 
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-university"></i>
+                <i class="nav-icon fa fa-piggy-bank"></i>
                 <p>
                   Banks
                   <i class="fas fa-angle-left right"></i>
@@ -364,7 +366,8 @@
             @endif
 
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-store"></i>
+              <!-- <i class="nav-icon fas fa-store"></i> -->
+              <i class="nav-icon fa-thin fa-calendar-clock"></i>
               <p>
                 Activity Log
                 <i class="fas fa-angle-left right"></i>

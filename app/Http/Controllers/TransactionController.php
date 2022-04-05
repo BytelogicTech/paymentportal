@@ -28,7 +28,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transactions = transaction::all();
+        $transactions = transaction::orderBy('id', 'DESC')->get();;
         $merchant_fk_id = "";
         $customer_fk_id = "";
         $bank_account_fk_id = "";

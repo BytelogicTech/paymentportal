@@ -214,7 +214,7 @@
                   @if($payout->upload_reciept)
                   <a class="btn btn-default" href="{{asset('public/pop/'.$payout->upload_reciept)}}" target="_blank">POP</a>
                   @else
-                  | No payment Proof
+                  No payment Proof
                   @endif
                 </td>
               </tr>

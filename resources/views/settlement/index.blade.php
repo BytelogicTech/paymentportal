@@ -86,8 +86,8 @@
                   <div class="col-md-3">
                     <div class="form-group">
                       <label for="description">Status:</label>
-                      <select class="form-control" name="status">
-                      <option value="" selected disabled>Please Select One</option>
+                      <select class="form-control" name="status_of_settlement" id="status_of_settlement">
+                      <option value="" selected>Please Select One</option>
                         <option value="New">New</option>
                         <option value="Processing">Processing</option>
                         <option value="Paid">Paid</option>
@@ -174,4 +174,9 @@
 @include('footer')
 <script>
   $('#merchant_fk_id').val('{{$merchant_fk_id}}');
+</script>
+
+
+<script>
+  $('#status_of_settlement').val('{{$status_of_settlement}}');
 </script>

@@ -18,7 +18,7 @@ class BankController extends Controller
 
     public function index()
     {
-        $banks = bank::all();
+        $banks = bank::orderBy('id', 'DESC')->get();
         // dd($banks);
         return view('bank/index', compact('banks'));
     }

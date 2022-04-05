@@ -16,12 +16,12 @@ use Illuminate\Support\Facades\Auth;
 
 class adjustmentController extends Controller
 {
-
+   
     public function index()
     {
+        $adjustments = adjustment::orderBy('id', 'DESC')->get();
         $merchant_fk_id = '';
         $merchants = merchant::all();
-        $adjustments = adjustment::all();
         $merchantpluck = merchant::pluck('merchant_name', 'id');
         $userpluck = User::pluck('first_name', 'id');
         return view('adjustment/index', compact('adjustments', 'merchantpluck', 'userpluck', 'merchants', 'merchant_fk_id'));

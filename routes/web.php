@@ -83,7 +83,7 @@ Route::group(['prefix' => 'transaction'], function(){
 Route::group(['prefix' => 'user'], function(){
     Route::get('/index', [UserController::class, 'index'])->middleware('admin');
     Route::get('/create', [UserController::class, 'create'])->middleware('admin');
-    Route::post('/store', [UserControllMailboxControllerer::class, 'store'])->middleware('admin');
+    Route::post('/store', [UserController::class, 'store'])->middleware('admin');
     Route::get('/edit/{id}', [UserController::class, 'edit'])->middleware('admin');
     Route::post('/update', [UserController::class, 'update'])->middleware('admin');
     Route::get('/delete/{id}', [UserController::class, 'destroy'])->middleware('admin');
