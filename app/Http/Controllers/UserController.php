@@ -63,6 +63,15 @@ class UserController extends Controller
         return view('user/edit', compact('user','merchants'));
     }
 
+    public function selfedit()
+    {
+      
+        $merchants = merchant::all();
+        $users = user::all();
+        return view('user/selfedit', compact('users','merchants'));
+        
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -93,6 +102,13 @@ class UserController extends Controller
         $user->save();
         return redirect('user/index')->with('message','User Updated Successfully');
     }
+
+    public function selfupdate(Request $request)
+    {
+      
+        return redirect('user/index')->with('message','User Updated Successfully');
+    }
+
 
     /**
      * Remove the specified resource from storage.

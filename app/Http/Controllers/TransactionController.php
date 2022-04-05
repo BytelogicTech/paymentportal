@@ -193,6 +193,7 @@ class TransactionController extends Controller
         $bankaccounts =  DB::table('bank_accounts')
             ->join('banks', 'banks.id', '=', 'bank_accounts.bank_id')
             ->select('bank_accounts.id as bank_accountsid', 'bank_accounts.bank_id', 'banks.bank_name', 'banks.beneficiary_name', 'bank_accounts.currency', 'bank_accounts.account_number', 'bank_accounts.nick_name')
+            ->where('banks.status',1)
             ->get()
             ->groupBy('bank_id');
         $customers = customer::where('merchant_fk_id',Auth::user()->merchant_fk_id)->get();

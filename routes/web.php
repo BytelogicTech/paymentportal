@@ -86,6 +86,11 @@ Route::group(['prefix' => 'user'], function(){
     Route::post('/store', [UserControllMailboxControllerer::class, 'store'])->middleware('admin');
     Route::get('/edit/{id}', [UserController::class, 'edit'])->middleware('admin');
     Route::post('/update', [UserController::class, 'update'])->middleware('admin');
+
+
+    Route::get('/selfedit', [UserController::class, 'selfedit'])->middleware('admin');
+    Route::post('/selfupdate', [UserController::class, 'selfupdate'])->middleware('admin');
+
     Route::get('/delete/{id}', [UserController::class, 'destroy'])->middleware('admin');
 });
 

@@ -20,7 +20,7 @@ class admin_madmin
         if(Auth::check())
         {
             $role = Auth::user()->role;
-            if($role=="Admin" || $role=="Merchant Admin")
+            if($role=="Admin" || $role=="Merchant Admin" || $role=="Merchant Superadmin")
             {
                 return $next($request);
             }            
