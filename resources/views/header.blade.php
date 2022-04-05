@@ -202,6 +202,26 @@
                     <p>Currency Conversion</p>
                   </a>
                 </li>
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+                @endif
+              </ul>
+            </li>
+
+  @if(Auth::user()->role=="Admin")
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-user"></i>
+                <p>
+                  Users
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+=======
+>>>>>>> 731f54c0d73fcbc22b855443e50b56a6c1bba258
+>>>>>>> Stashed changes
                 <li class="nav-item">
                   <a href="{{url('adjustment/adjustment_tier_commission_create')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
