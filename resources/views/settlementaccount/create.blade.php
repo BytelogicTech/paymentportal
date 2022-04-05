@@ -39,6 +39,7 @@
                                 @csrf
 
                                 @if(Auth::user()->role=="Admin")
+                                <hr>
 
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -80,6 +81,8 @@
                                             <input type="text" placeholder="Enter Beneficiary Address " class="form-control" name="beneficiary_address"  />
                                         </div>
                                     </div>
+
+                                    <hr>
 
                                 <div class="row">
                                 <div class="col-md-6">
@@ -482,6 +485,8 @@
                                     </div>
                                 </div>
 
+                                <hr>
+
                                 <div class="row">
                                 <div class="col-md-6">
                                         <div class="form-group">
@@ -512,7 +517,7 @@
                                     </div>
                                 </div>
                                 <!-- /.card -->
-
+<hr>
                              
                                 <div class="col-md-6">
                                         <div class="form-group">
@@ -521,7 +526,7 @@
                                         </div>
                                     </div>
                                     
-
+<hr>
                                 <br />
                                 <button type="submit" class="btn btn-primary">Add</button>
                             </div>

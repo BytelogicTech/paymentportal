@@ -36,7 +36,7 @@
                         <form action="{{url('customer/store')}}" method="POST" enctype="multipart/form-data">
                             <div class="card-body">
                                 @csrf
-
+<hr>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -352,7 +352,7 @@
                                     </div>
                                 </div>
 
-
+<hr>
                                 <h4>Bank Account Details for Payout</h4>
                                 <p>Only mandatory for customer payouts/withdrawals
                                 </p>
@@ -1073,6 +1073,7 @@
                                     <a href="javascript:void(0);" name="add" id="add_accounts_bank" class="btn btn-success"><i class="fa fa-plus"></i> Additional Payout Account</a>
 
                                 </div>
+                                <hr>
 
                                 <h4>Documents
                                 </h4>
@@ -1107,6 +1108,7 @@
                                     <a href="javascript:void(0);" name="add" id="add_document" class="btn btn-success"><i class="fa fa-plus"></i> Add Document</a>
 
                                 </div>
+                                <hr>
 
                                 @if(Auth::user()->role=="Admin")
 

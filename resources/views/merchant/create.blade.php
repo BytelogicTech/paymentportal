@@ -411,7 +411,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="account_number">Alternate Payout Commission</label>
                                         <input type="number" placeholder="Enter Alternate Payout Commission" class="form-control" name="alternate_payout_commission" />
@@ -422,9 +422,10 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">B2B Percentage*</label>
-                                        </div>
                                             <input type="number" placeholder="Enter B2B Percentage" class="form-control" name="b2b_percentage" required />
                                     </div>
+                                    </div>
+
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Rolling Reserve Percentage*</label>
@@ -436,7 +437,7 @@
 
 
 
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="description">Rolling Reserve Release Days*</label>
                                         <input type="number" placeholder="Enter Rolling Reserve Release Days" class="form-control" name="rolling_reserve_release_days" required/>

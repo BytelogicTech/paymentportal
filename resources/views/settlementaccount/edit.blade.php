@@ -107,7 +107,7 @@
                                         <div class="form-group">
                                             <label>Country</label>
 
-                                            <select class="form-control select2" name="bank_country" required value="{{$settlementaccount->bank_country}}" id="bank_country">
+                                            <select class="form-control select2" name="bank_country" value="{{$settlementaccount->bank_country}}" id="bank_country">
                                                 <option value="" selected disabled>Please Select One</option>
                                                 @foreach(config('constants.countryar') as $bank_country)
                                                 <option value="{{$bank_country}}" @if($bank_country==$settlementaccount->bank_country) selected @endif>{{$bank_country}}</option>

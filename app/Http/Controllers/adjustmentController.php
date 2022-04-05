@@ -21,10 +21,14 @@ class adjustmentController extends Controller
     {
         $adjustments = adjustment::orderBy('id', 'DESC')->get();
         $merchant_fk_id = '';
+        $type = '';
+        $date_added_from = '';
+        $date_added_to = '';
+        $currency = '';
         $merchants = merchant::all();
         $merchantpluck = merchant::pluck('merchant_name', 'id');
         $userpluck = User::pluck('first_name', 'id');
-        return view('adjustment/index', compact('adjustments', 'merchantpluck', 'userpluck', 'merchants', 'merchant_fk_id'));
+        return view('adjustment/index', compact('adjustments','type','date_added_from','date_added_to','date_added_to','currency','merchantpluck', 'userpluck', 'merchants', 'merchant_fk_id'));
     }
 
     public function search(Request $request)
@@ -67,7 +71,7 @@ class adjustmentController extends Controller
         $merchantpluck = merchant::pluck('merchant_name', 'id');
         $merchants = merchant::all();
 
-        return view('adjustment/index', compact('adjustments', 'merchants', 'merchant_fk_id', 'merchantpluck'));
+        return view('adjustment/index', compact('adjustments', 'type','date_added_from','date_added_to','currency','merchants', 'merchant_fk_id', 'merchantpluck'));
     }
 
 
