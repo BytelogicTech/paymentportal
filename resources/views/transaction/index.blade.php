@@ -92,7 +92,6 @@
                 </div>
 
                 <div class="row">
-
                   <div class="col-md-3">
                     <label for="description">Currency</label>
                     <select name="currency" class="form-control" id="currency">

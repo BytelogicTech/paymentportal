@@ -48,7 +48,7 @@
                     <div class="form-group">
                       <label>Merchant Name:</label>
                       <select class="select2 form-control" name="merchant_fk_id" id="merchant_fk_id">
-                        <option value="" selected disabled>Select Merchant</option>
+                        <option value="" selected>Select Merchant</option>
                         @foreach($merchants as $merchant)
                         <option value="{{$merchant->id}}">{{$merchant->merchant_name}}</option>
                         @endforeach
@@ -61,11 +61,11 @@
                     <div class="form-group">
                       <label>Settlement Amount Between:</label>
                       <div class="input-daterange input-group">
-                        <input type="text" class="form-control m-input bootdatepicker" name="settlement_amount_from" placeholder="From" data-col-index="11">
+                        <input type="text" class="form-control m-input bootdatepicker" name="settlement_amount_from" id="settlement_amount_from" placeholder="From" data-col-index="11">
                         <div class="input-group-append">
                           <span class="input-group-text"><i class="la la-ellipsis-h">...</i></span>
                         </div>
-                        <input type="text" class="form-control m-input bootdatepicker" name="settlement_amount_to" placeholder="To" data-col-index="11">
+                        <input type="text" class="form-control m-input bootdatepicker" name="settlement_amount_to" id="settlement_amount_to" placeholder="To" data-col-index="11">
                       </div>
                     </div>
                   </div>
@@ -74,11 +74,11 @@
                     <div class="form-group">
                       <label>Date Paid Between:</label>
                       <div class="input-daterange input-group">
-                        <input type="date" class="form-control m-input bootdatepicker" name="date_paid_from" placeholder="From" data-col-index="11">
+                        <input type="date" class="form-control m-input bootdatepicker" name="date_paid_from" id="date_paid_from" placeholder="From" data-col-index="11">
                         <div class="input-group-append">
                           <span class="input-group-text"><i class="la la-ellipsis-h">...</i></span>
                         </div>
-                        <input type="date" class="form-control m-input bootdatepicker" name="date_from_to" placeholder="To" data-col-index="11">
+                        <input type="date" class="form-control m-input bootdatepicker" name="date_paid_to" id="date_paid_to" placeholder="To" data-col-index="11">
                       </div>
                     </div>
                   </div>
@@ -86,8 +86,8 @@
                   <div class="col-md-3">
                     <div class="form-group">
                       <label for="description">Status:</label>
-                      <select class="form-control" name="status">
-                      <option value="" selected disabled>Please Select One</option>
+                      <select class="form-control" name="status_of_settlement" id="status_of_settlement">
+                      <option value="" selected>Please Select One</option>
                         <option value="New">New</option>
                         <option value="Processing">Processing</option>
                         <option value="Paid">Paid</option>
@@ -174,4 +174,28 @@
 @include('footer')
 <script>
   $('#merchant_fk_id').val('{{$merchant_fk_id}}');
+</script>
+
+
+
+<script>
+  $('#status_of_settlement').val('{{$status_of_settlement}}');
+</script>
+
+
+<script>
+  $('#settlement_amount_from').val('{{$settlement_amount_from}}');
+</script>
+
+
+<script>
+  $('#settlement_amount_to').val('{{$settlement_amount_to}}');
+</script>
+
+<script>
+  $('#date_paid_from').val('{{$date_paid_from}}');
+</script>
+
+<script>
+  $('#date_paid_to').val('{{$date_paid_to}}');
 </script>

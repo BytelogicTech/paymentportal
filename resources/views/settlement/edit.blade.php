@@ -72,7 +72,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Settlement Amount *</label>
-                                            <input type="text" placeholder="Enter Settlement Amount " class="form-control" name="settlement_amount" required value="{{$settlement->settlement_amount}}" />
+                                            <input type="number" placeholder="Enter Settlement Amount " class="form-control" name="settlement_amount" required value="{{$settlement->settlement_amount}}" />
                                         </div>
                                     </div>
                                 </div>

@@ -43,7 +43,7 @@
                     <div class="form-group">
                       <label>Merchant Name:</label>
                       <select class="select2 form-control" name="merchant_fk_id" id="merchant_fk_id">
-                        <option value="" selected disabled>Select Merchant</option>
+                        <option value="" selected >Select Merchant</option>
                         @foreach($merchants as $merchant)
                         <option value="{{$merchant->id}}">{{$merchant->merchant_name}}</option>
                         @endforeach

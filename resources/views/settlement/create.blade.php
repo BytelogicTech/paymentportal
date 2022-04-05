@@ -40,6 +40,8 @@
 
                                 @if(Auth::user()->role=="Admin")
 
+                                <hr>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="description">Parent Merchant*</label>
@@ -76,7 +78,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Settlement Amount *</label>
-                                            <input type="text" placeholder="Enter Settlement Amount " class="form-control" name="settlement_amount" required />
+                                            <input type="number" placeholder="Enter Settlement Amount " class="form-control" name="settlement_amount" required />
                                         </div>
                                     </div>
                                 </div>
@@ -106,6 +108,8 @@
                                 </div>
 
                                 @if(Auth::user()->role=="Admin")
+
+                                <hr>
 
                                 <!-- Bootstrap Switch -->
                                 <center>

@@ -66,7 +66,7 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="description">Phone</label>
+                                            <label for="description">Phone*</label>
                                             <input type="text" placeholder="Enter Phone" class="form-control" name="phone" required value="{{$customer->phone}}" />
                                         </div>
                                     </div>
@@ -141,7 +141,7 @@
                                     </div>
                                 </div>
 
-
+<hr>
                                 <h4>Bank Account Details for Payout</h4>
                                 <p>Only mandatory for customer payouts/withdrawals
                                 </p>
@@ -159,14 +159,14 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="description">Beneficiary Name</label>
-                                                <input type="text" placeholder="Enter Beneficiary Name" class="form-control" name="beneficiary_name" value="{{$bankaccountpayout->beneficiary_name}}" />
+                                                <label for="description">Beneficiary Name*</label>
+                                                <input type="text" placeholder="Enter Beneficiary Name" required class="form-control" name="beneficiary_name" value="{{$bankaccountpayout->beneficiary_name}}" />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="description">Beneficiary Nickname</label>
-                                                <input type="text" placeholder="Enter Beneficiary Nick Name" class="form-control" name="beneficiary_nickname" value="{{$bankaccountpayout->beneficiary_nickname}}" />
+                                                <label for="description">Beneficiary Nickname*</label>
+                                                <input type="text" placeholder="Enter Beneficiary Nick Name" required class="form-control" name="beneficiary_nickname" value="{{$bankaccountpayout->beneficiary_nickname}}" />
                                             </div>
                                         </div>
                                     </div>
@@ -180,8 +180,8 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Beneficiary Country</label>
-                                                <select class="form-control select2" style="width: 100%;" name="beneficiary_country" value="{{$bankaccountpayout->beneficiary_country}}">
+                                                <label>Beneficiary Country*</label>
+                                                <select class="form-control select2" required style="width: 100%;" name="beneficiary_country" value="{{$bankaccountpayout->beneficiary_country}}">
                                                     <option value="" selected disabled>Please Select One</option>
                                                     <option value="Afganistan" @if($bankaccountpayout->beneficiary_country == 'Afganistan') selected @endif>Afganistan</option>
                                                     <option value="Albania" @if($bankaccountpayout->beneficiary_country == 'Albania') selected @endif>Albania</option>
@@ -218,14 +218,14 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="description">Bank Name</label>
-                                                <input type="text" placeholder="Enter Bank Name" class="form-control" name="bank_name" value="{{$bankaccountpayout->bank_name}}" />
+                                                <label for="description">Bank Name*</label>
+                                                <input type="text" placeholder="Enter Bank Name" required class="form-control" name="bank_name" value="{{$bankaccountpayout->bank_name}}" />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="description">Bank Branch</label>
-                                                <input type="text" placeholder="Enter Bank Branch" class="form-control" name="bank_branch" value="{{$bankaccountpayout->bank_branch}}" />
+                                                <label for="description">Bank Branch*</label>
+                                                <input type="text" placeholder="Enter Bank Branch" required class="form-control" name="bank_branch" value="{{$bankaccountpayout->bank_branch}}" />
                                             </div>
                                         </div>
                                     </div>
@@ -233,14 +233,14 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="description">Bank Address</label>
-                                                <input type="text" placeholder="Bank Address" class="form-control" name="bank_address" value="{{$bankaccountpayout->bank_address}}" />
+                                                <label for="description">Bank Address*</label>
+                                                <input type="text" placeholder="Bank Address" required class="form-control" name="bank_address" value="{{$bankaccountpayout->bank_address}}" />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Bank Country</label>
-                                                <select class="select2 form-control" style="width: 100%;" name="bank_country" value="{{$bankaccountpayout->bank_country}}">
+                                                <label>Bank Country*</label>
+                                                <select class="select2 form-control" required style="width: 100%;" name="bank_country" value="{{$bankaccountpayout->bank_country}}">
                                                     <option value="" selected disabled>Please Select One</option>
                                                     <option value="Afganistan" @if($bankaccountpayout->bank_country == 'Afganistan') selected @endif>Afganistan</option>
                                                     <option value="Albania" @if($bankaccountpayout->bank_country == 'Albania') selected @endif>Albania</option>
@@ -390,8 +390,8 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="description">Remarks</label>
-                                                <input type="text" placeholder="Remarks/ABA Code/Sort Code/Routing Number/IFSc Code" class="form-control" name="remarks" required value="{{$bankaccountpayout->remarks}}" />
+                                                <label for="description">Remarks*</label>
+                                                <input type="text" required placeholder="Remarks/ABA Code/Sort Code/Routing Number/IFSc Code" class="form-control" name="remarks" required value="{{$bankaccountpayout->remarks}}" />
                                             </div>
                                         </div>
                                     </div>
@@ -437,7 +437,7 @@
                                     <a href="javascript:void(0);" name="add" id="add_accounts_bank" class="btn btn-success"><i class="fa fa-plus"></i> Additional Payout Account</a>
 
                                 </div>
-
+<hr>
 
                                 <h4>Documents
                                 </h4>
@@ -451,7 +451,7 @@
 
                                             <div class="form-group">
                                                 <label>Document Type *</label>
-                                                <select class="form-control select2" style="width: 100%;" name="document_type" required value="{{$customerdocument->document_type}}">
+                                                <select class="form-control select2" required style="width: 100%;" name="document_type" required value="{{$customerdocument->document_type}}">
                                                     <option value="" selected disabled>Please Select One</option>
                                                     <option value="photo_id" @if($customerdocument->document_type == 'photo_id') selected @endif>Photo ID</option>
                                                     <option value="bank_statement" @if($customerdocument->document_type == 'bank_statement') selected @endif>Bank Statement</option>

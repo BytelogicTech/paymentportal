@@ -80,7 +80,7 @@
                                         <div class="form-group">
                                             <label>Merchant Name:</label>
                                             <select class="select2 form-control" name="merchant_fk_id" id="merchant_fk_id">
-                                                <option value="" selected disabled>Select Merchant</option>
+                                                <option value="" selected >Select Merchant</option>
                                                 @foreach($merchants as $merchant)
                                                 <option value="{{$merchant->id}}">{{$merchant->merchant_name}}</option>
                                                 @endforeach
@@ -91,8 +91,8 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="description">Type</label>
-                                            <select class="form-control" name="type">
-                                                <option value="" selected disabled>Please Select One</option>
+                                            <select class="form-control" name="type" id="type">
+                                                <option value="" selected >Please Select One</option>
                                                 <option value="Other Adjustment">Other Adjustment</option>
                                                 <option value="RR Adjustment">RR Adjustment</option>
                                                 <option value="Currency Conversion">Currency Conversion</option>
@@ -107,19 +107,19 @@
                                         <div class="form-group">
                                             <label>Added Between:</label>
                                             <div class="input-daterange input-group">
-                                                <input type="date" class="form-control m-input bootdatepicker" name="date_added_from" placeholder="From" data-col-index="11">
+                                                <input type="date" class="form-control m-input bootdatepicker" name="date_added_from" id="date_added_from" placeholder="From" data-col-index="11">
                                                 <div class="input-group-append">
                                                     <span class="input-group-text"><i class="la la-ellipsis-h">...</i></span>
                                                 </div>
-                                                <input type="date" class="form-control m-input bootdatepicker" name="date_added_to" placeholder="To" data-col-index="11">
+                                                <input type="date" class="form-control m-input bootdatepicker" name="date_added_to" id="date_added_from" placeholder="To" data-col-index="11">
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <label>Currency</label>
-                                        <select class="form-control select2" style="width: 100%;" name="currency">
-                                            <option value="" selected disabled>Please Select One</option>
+                                        <select class="form-control select2" style="width: 100%;" name="currency" id="currency">
+                                            <option value="" selected >Please Select One</option>
                                             @foreach(config('constants.currency_list') as $key=> $currency)
                                             <option value="{{$key}}">{{$key}}</option>
                                             @endforeach
@@ -225,4 +225,22 @@
 <script>
   $('#merchant_fk_id').val('{{$merchant_fk_id}}');
 </script>
+
+<script>
+  $('#type').val('{{$type}}');
+</script>
+
+<script>
+  $('#date_added_from').val('{{$date_added_from}}');
+</script>
+
+<script>
+  $('#date_added_to').val('{{$date_added_to}}');
+</script>
+
+<script>
+  $('#currency').val('{{$currency}}');
+</script>
+
+
 
