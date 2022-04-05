@@ -44,7 +44,7 @@ class settlementController extends Controller
 
 
         // dd($settlements);
-        return view('settlement/index', compact('userpluck','date_from_to','status_of_settlement','settlement_amount_from','settlement_amount_to', 'settlements', 'merchants', 'merchant_fk_id', 'settlements', 'bankaccountpayoutpluk', 'bankaccountpayoutbnamepluk', 'merchantpluck'));
+        return view('settlement/index', compact('userpluck','date_paid_to','date_paid_from','status_of_settlement','settlement_amount_from','settlement_amount_to', 'settlements', 'merchants', 'merchant_fk_id', 'settlements', 'bankaccountpayoutpluk', 'bankaccountpayoutbnamepluk', 'merchantpluck'));
     }
 
 
