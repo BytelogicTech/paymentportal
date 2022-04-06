@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 04, 2022 at 02:02 PM
+-- Generation Time: Apr 05, 2022 at 10:18 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -86,7 +86,8 @@ CREATE TABLE `banks` (
 INSERT INTO `banks` (`id`, `beneficiary_name`, `beneficiary_address`, `bank_nickname`, `bank_name`, `bank_address`, `zip_code`, `country`, `swift_code`, `remarks`, `company_name`, `company_email`, `prefix`, `declaration_content`, `instructions_title`, `instructions_content`, `logo`, `status`, `created_at`, `updated_at`, `created_by`) VALUES
 (1, 'Rohit Sharma', 'Mumbai', 'Hitman', 'HDFC', 'Mumbai', '220320', 'India', 'PUNB01234', 'Bank Remarks', 'Lenovo', 'lenovo@gmail.com', 'Prefix9090', 'Declaration Content', 'Instruction Message', 'Instruction Content', '1648802707.jpg', 1, '2022-04-01 03:15:07', '2022-04-01 03:15:07', 1),
 (2, 'Virat Kohli', 'New Delhi', 'Chicku', 'Axis Bank', 'New Delhi', '202303', 'India', 'AXIX89089', 'Virat  Remarks', 'Puma', 'puma@gmail.com', 'Virat Prefix', 'Virat Content', 'Virat tittle', 'Virat Istruction', '1648802972.jpg', 1, '2022-04-01 03:19:32', '2022-04-01 03:19:32', 1),
-(3, 'Yuvraj Singh', 'Punjab', 'Yuvi', 'Punjab Bank', 'Chandigarh', '998990', 'American Samoa', 'PUNB9900', 'Yuvi Remarks', 'yuvi company', 'yuvi@gmail.com', 'Yuvi Prefix', 'Yuvi Content', 'Yuvi Tittle', 'Yuvi Content', '1648803314.jpg', 1, '2022-04-01 03:25:14', '2022-04-01 03:25:49', 1);
+(3, 'Yuvraj Singh', 'Punjab', 'Yuvi', 'Punjab Bank', 'Chandigarh', '998990', 'American Samoa', 'PUNB9900', 'Yuvi Remarks', 'yuvi company', 'yuvi@gmail.com', 'Yuvi Prefix', 'Yuvi Content', 'Yuvi Tittle', 'Yuvi Content', '1648803314.jpg', 1, '2022-04-01 03:25:14', '2022-04-01 03:25:49', 1),
+(4, 'Hello Bank', 'Noida', NULL, 'HDFC', 'noida', NULL, 'American Samoa', 'PUNB01234', NULL, '12345678', NULL, '4523', NULL, NULL, NULL, '', 1, '2022-04-04 22:51:20', '2022-04-04 22:53:25', 5);
 
 -- --------------------------------------------------------
 
@@ -116,7 +117,8 @@ INSERT INTO `bank_accounts` (`id`, `bank_id`, `currency`, `account_number`, `nic
 (3, 2, 'INR', '333344445555', 'Chicku', '230', '2022-04-01 03:19:32', '2022-04-01 03:19:32', 1),
 (4, 2, 'INR', '999900008888', 'Anushka', '320', '2022-04-01 03:19:32', '2022-04-01 03:19:32', 1),
 (5, 3, 'USD', '89897676766', 'Yuvi', '600', '2022-04-01 03:25:14', '2022-04-01 03:25:14', 1),
-(6, 3, 'USD', '787755664433', 'yuvi', '220', '2022-04-01 03:25:14', '2022-04-01 03:25:14', 1);
+(6, 3, 'USD', '787755664433', 'yuvi', '220', '2022-04-01 03:25:14', '2022-04-01 03:25:14', 1),
+(7, 4, 'ALL', '90909', 'NickName', '765', '2022-04-04 22:51:20', '2022-04-04 22:51:20', 5);
 
 -- --------------------------------------------------------
 
@@ -157,7 +159,8 @@ INSERT INTO `bank_account_payouts` (`id`, `customer_fk_id`, `beneficiary_name`, 
 (2, 2, 'Punjab', 'PNB', 'Chandigarh', 'India', 'Punjab Bank', 'Chandigarh', 'Chandigarh', 'India', 'Dheeraj Swift 2', '777766665555', 'INR', 'Dheeraj Remarks', 'Intermediary Bank Name2', 'Intermediary address', 'intermediary bank swift', 'intermediary bank details optional', '2022-04-01 03:46:21', '2022-04-01 03:46:21', 1),
 (3, 3, 'Dheeraj', 'Dheeru', 'Unnao', 'India', 'ICICI', 'Unnao', 'Unnao', 'India', 'Dheeraj swift', '888877779999', 'INR', 'Dheeraj Remarks', 'Intermediary Bank Name22', 'Intermediary bank address Optional22', 'intermediary bank swift22', 'intermediary bank details optional22', '2022-04-01 03:50:32', '2022-04-01 03:50:32', 1),
 (4, 4, 'Rahul', 'Rahu', 'Gurugram', 'India', 'CBI', 'Gurugram', 'Gurugram', 'India', 'R Bank Swift', '222299993333', 'INR', 'Rahul Remarks', 'Intermediary Bank Name2', 'Intermediary bank address Optional', 'intermediary bank swift', 'intermediary bank details optional', '2022-04-01 22:22:57', '2022-04-01 22:22:57', 1),
-(5, 5, 'SUN', 'SUN', 'SUN Address', 'India', 'PNB', 'Dabra', 'Dabra', 'India', 'Bank Swift 2', '9988889900', 'INR', 'SUN Remarks', 'Hello Remarks Optional', 'Intermediary bank address Optional', 'intermediary bank swift', 'intermediary bank details optional', '2022-04-02 01:11:24', '2022-04-02 01:11:24', 2);
+(5, 5, 'SUN', 'SUN', 'SUN Address', 'India', 'PNB', 'Dabra', 'Dabra', 'India', 'Bank Swift 2', '9988889900', 'INR', 'SUN Remarks', 'Hello Remarks Optional', 'Intermediary bank address Optional', 'intermediary bank swift', 'intermediary bank details optional', '2022-04-02 01:11:24', '2022-04-02 01:11:24', 2),
+(6, 6, 'suraj', 'suraj', 'sss', 'India', 'dsdx', 'ds', 'xsz', 'Algeria', 'dsx', '26768', 'AED', 'wde', NULL, NULL, NULL, NULL, '2022-04-04 22:33:18', '2022-04-04 22:33:18', 5);
 
 -- --------------------------------------------------------
 
@@ -191,7 +194,8 @@ INSERT INTO `customers` (`id`, `merchant_fk_id`, `first_name`, `last_name`, `ema
 (2, 2, 'Dheeraj', 'Pal', 'dheeraj@gmail.com', '78769666669', 'Unnao', 'India', '2022-05-01', '78777979', 1, '2022-04-01 03:46:21', '2022-04-01 03:46:21', 1),
 (3, 3, 'Keshav', 'Singh', 'keshav@gmail.com', '9889766755', 'Ghaziabad', 'India', '2022-04-14', '686687', 1, '2022-04-01 03:50:32', '2022-04-01 03:50:32', 1),
 (4, 2, 'Rahul', 'Sharma', 'rahul@gmail.com', '9889766777', 'Gurugram', 'India', '2022-04-02', '770', 1, '2022-04-01 22:22:57', '2022-04-01 22:22:57', 1),
-(5, 1, 'Suraj 22', 'Singh22', 'ma3@gmail.com', '9967547546', 'Bhind', 'India', '2022-04-03', NULL, 1, '2022-04-02 01:11:24', '2022-04-02 01:11:24', 2);
+(5, 1, 'Suraj 22', 'Singh22', 'ma3@gmail.com', '9967547546', 'Bhind', 'India', '2022-04-03', NULL, 1, '2022-04-02 01:11:24', '2022-04-02 01:11:24', 2),
+(6, 2, 'Suraj', 'Singh', 's@3gmail.com', '9770286553', NULL, 'India', NULL, NULL, 1, '2022-04-04 22:33:18', '2022-04-04 22:33:18', 5);
 
 -- --------------------------------------------------------
 
@@ -218,7 +222,8 @@ INSERT INTO `customer_documents` (`id`, `customer_fk_id`, `document_type`, `uplo
 (2, 2, 'bank_statement', '', '2022-04-01 03:46:21', '2022-04-01 03:46:21', 1),
 (3, 3, 'photo_id', '', '2022-04-01 03:50:32', '2022-04-01 03:50:32', 1),
 (4, 4, 'photo_id', '', '2022-04-01 22:22:57', '2022-04-01 22:22:57', 1),
-(5, 5, 'photo_id', '', '2022-04-02 01:11:25', '2022-04-02 01:11:25', 2);
+(5, 5, 'photo_id', '', '2022-04-02 01:11:25', '2022-04-02 01:11:25', 2),
+(6, 6, 'bank_statement', '', '2022-04-04 22:33:18', '2022-04-04 22:33:18', 5);
 
 -- --------------------------------------------------------
 
@@ -318,7 +323,9 @@ INSERT INTO `merchants` (`id`, `merchant_name`, `bank_account_id`, `first_name`,
 (2, 'Akshay kumar', 3, 'Akshay', 'Kumar', 'akshay@gmail.com', 'India', 'akshay11@gmail.com', 'akshay11@gmail.com', 'akshay11@gmail.com', 'akshay11@gmail.com', 'akshay11@gmail.com', 'akshay11@gmail.com', 2, 3, 4, 5, 6, 7, 'Akshay Website', '890877779', 'Akshay Remarks', '1648803807.jpg', 1, 1, 1, 1, 1, '2022-04-01 03:33:27', '2022-04-01 03:33:27', 1),
 (3, 'Ranveer Kapoor', 5, 'Ranveer', 'Kapoor', 'ranveer@gmail.com', 'India', 'ranveer11@gmail.com', 'ranveer11@gmail.com', 'ranveer11@gmail.com', 'ranveer11@gmail.com', 'ranveer11@gmail.com', 'ranveer11@gmail.com', 8, 3, 4, 2, 5, 7, 'Ranveer website', '8979797972', 'Ranveer Remarks', '1648804019.jpg', 1, 1, 1, 1, 1, '2022-04-01 03:36:59', '2022-04-01 03:36:59', 1),
 (4, 'suraj merchant', 1, 'suraj', 'Bhadoriya', 'surajbhadoriya401@gmail.com', 'Indonesia', NULL, NULL, NULL, NULL, NULL, NULL, 5, 5, NULL, 5, 5, 9, NULL, NULL, NULL, NULL, 1, 1, 1, 1, 1, '2022-04-04 03:57:39', '2022-04-04 03:57:39', 5),
-(5, 'dheeraj merchant', 3, 'Dheeraj', 'Pal', 'dheeraj@gmail.com', 'Azerbaijan', NULL, NULL, NULL, NULL, NULL, NULL, 5, 5, NULL, 5, 5, 5, NULL, NULL, NULL, NULL, 1, 1, 1, 1, 1, '2022-04-04 04:05:39', '2022-04-04 04:05:39', 5);
+(5, 'dheeraj merchant', 3, 'Dheeraj', 'Pal', 'dheeraj@gmail.com', 'Azerbaijan', NULL, NULL, NULL, NULL, NULL, NULL, 5, 5, NULL, 5, 5, 5, NULL, NULL, NULL, NULL, 1, 1, 1, 1, 1, '2022-04-04 04:05:39', '2022-04-04 04:05:39', 5),
+(7, 'Hello merchant', 5, 'Rohit', 'Singh', 's@gmail.com', 'Bahrain', NULL, NULL, NULL, NULL, NULL, NULL, 2, 2, NULL, 2, 2, 2, NULL, NULL, NULL, NULL, 1, 1, 1, 1, 1, '2022-04-04 22:43:51', '2022-04-04 22:43:51', 5),
+(8, 'Hello merchant', 3, 'Suraj', 'Singh', 'dixitshivam132@gmail.com', 'India', NULL, NULL, NULL, NULL, NULL, NULL, 4324, 4, 4, 4, 4, 4, NULL, NULL, NULL, NULL, 1, 1, 1, 1, 1, '2022-04-04 23:41:00', '2022-04-04 23:41:00', 5);
 
 -- --------------------------------------------------------
 
@@ -402,7 +409,10 @@ CREATE TABLE `payouts` (
 INSERT INTO `payouts` (`id`, `bank_account_to_fk_id`, `merchant_fk_id`, `customer_fk_id`, `payout_amount`, `remarks`, `notes`, `reference_id`, `upload_invoice`, `bank_processing_charges`, `date_paid`, `amount_returned`, `rejected_onhold_remarks`, `upload_reciept`, `bank_account_from_fk_id`, `status_of_payout`, `upload_extra_document`, `created_at`, `updated_at`, `created_by`) VALUES
 (1, 1, 1, 1, 1000, 'Shopping', NULL, '9908', '1648805167.jpg', '0', NULL, '0', NULL, '1648805167.jpg', 1, 'Paid', NULL, '2022-04-01 03:56:07', '2022-04-01 03:56:07', 1),
 (2, 2, 2, 2, 20000, 'Laptop', NULL, '787', '1648805208.jpg', '0', NULL, '0', NULL, '1648805208.jpg', 3, 'Hold', NULL, '2022-04-01 03:56:48', '2022-04-01 03:56:48', 1),
-(3, 3, 3, 3, 3000, 'Car Shopping', NULL, '909', '1648805268.jpg', '0', NULL, '0', NULL, '1648805268.jpg', 5, 'Canceled', NULL, '2022-04-01 03:57:48', '2022-04-01 03:57:48', 1);
+(3, 3, 3, 3, 3000, 'Car Shopping', NULL, '909', '1648805268.jpg', '0', NULL, '0', NULL, '1648805268.jpg', 5, 'Canceled', NULL, '2022-04-01 03:57:48', '2022-04-01 03:57:48', 1),
+(4, 2, 2, 2, 66, NULL, NULL, NULL, '', '0', NULL, '0', NULL, '', 2, 'New', NULL, '2022-04-04 23:07:00', '2022-04-04 23:07:00', 5),
+(5, 4, 2, 4, 22, NULL, NULL, NULL, '', '0', NULL, '0', NULL, '', 2, 'New', NULL, '2022-04-04 23:09:42', '2022-04-04 23:09:42', 5),
+(6, 1, 1, 1, 545, NULL, NULL, NULL, '1649139888.jpg', '0', NULL, '0', NULL, '1649139888.pdf', 3, 'New', NULL, '2022-04-05 00:54:48', '2022-04-05 00:54:48', 5);
 
 -- --------------------------------------------------------
 
@@ -445,6 +455,13 @@ CREATE TABLE `settlements` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `settlements`
+--
+
+INSERT INTO `settlements` (`id`, `merchant_fk_id`, `bank_account_from_fk_id`, `bank_account_to_fk_id`, `settlement_amount`, `upload_settlement_invoice`, `remarks`, `reference_id`, `rr_settlement`, `status_of_settlement`, `date_paid`, `created_by`, `created_at`, `updated_at`) VALUES
+(1, 2, 2, 2, '1222', NULL, NULL, NULL, 1, 'Processing', NULL, 5, '2022-04-04 06:46:13', '2022-04-04 06:52:05');
+
 -- --------------------------------------------------------
 
 --
@@ -481,7 +498,8 @@ CREATE TABLE `settlement_accounts` (
 INSERT INTO `settlement_accounts` (`id`, `merchant_fk_id`, `beneficiary_name`, `beneficiary_nickname`, `beneficiary_address`, `bank_name`, `bank_branch`, `bank_address`, `bank_country`, `bank_swift`, `account_number`, `currency`, `remarks`, `intermediary_bank_name`, `intermediary_bank_address`, `intermediary_bank_swift`, `intermediary_bank_details_remarks`, `upload_bank_statement`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Suraj', 'Suraj', 'Gwalior', 'SBI', 'Gwalior', 'Gwalior', 'India', 'Suraj Swift', '999988887777', 'INR', 'Suraj Remarks', 'Inter Bank Name', 'Inter Bank Address', 'Inter Bank Swift', 'Inter Bank Remarks', '1648806055.jpg', '2022-04-01 04:10:55', '2022-04-01 04:10:55'),
 (2, 2, 'Dheeraj', 'Dheeraj', 'Unnao', 'Unnao', 'Unnao', 'Unnao', 'India', 'Dheeraj Swift', '888899997777', 'INR', 'Dheeraj Remarks', 'Inter Bank Name', 'Inter Bank Address', 'Inter Bank Swift', 'Inter Bank Remarks', '1648806159.jpg', '2022-04-01 04:12:39', '2022-04-01 04:12:39'),
-(3, 3, 'Keshav', 'Keshav', 'Noida', 'Noida', 'Noida', 'Noida', 'India', 'Keshav Swift', '66665555444', 'INR', 'Keshav Remarks', 'Inter Bank Name', 'Inter Bank Address', 'Inter Bank Swift', 'Inter Bank Remarks', '1648806251.jpg', '2022-04-01 04:14:11', '2022-04-01 04:14:11');
+(3, 3, 'Keshav', 'Keshav', 'Noida', 'Noida', 'Noida', 'Noida', 'India', 'Keshav Swift', '66665555444', 'INR', 'Keshav Remarks', 'Inter Bank Name', 'Inter Bank Address', 'Inter Bank Swift', 'Inter Bank Remarks', '1648806251.jpg', '2022-04-01 04:14:11', '2022-04-01 04:14:11'),
+(4, 2, NULL, NULL, NULL, NULL, NULL, NULL, 'Albania', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1649075339.png', '2022-04-04 06:53:41', '2022-04-04 06:58:59');
 
 -- --------------------------------------------------------
 
@@ -516,11 +534,11 @@ CREATE TABLE `transactions` (
 --
 
 INSERT INTO `transactions` (`id`, `invoice_date`, `invoice_number`, `merchant_fk_id`, `bank_account_fk_id`, `customer_fk_id`, `product_name`, `product_price`, `remarks`, `reference_id`, `upload_signed_invoice`, `proof_of_payment`, `date_recieved`, `amount_recieved`, `status_of_transaction`, `type_of_transaction`, `created_at`, `updated_at`, `created_by`) VALUES
-(1, '2022-04-01', 'tran22041', 1, 1, 1, 'Product1', 100, 'Remarks1', '001', '1648804925.jpg', NULL, '2022-04-08', 200, 'New', 'C2B', '2022-04-01 03:52:05', '2022-04-01 03:52:05', 1),
+(1, '2022-04-01', 'tran22046', 1, 1, 1, 'Product1', 100, 'Remarks1', '001', '1649135299.jpg', '1649135299.jpg', '2022-04-08', 200, 'new', 'C2B', '2022-04-01 03:52:05', '2022-04-04 23:38:19', 1),
 (2, '2022-04-02', 'tran22042', 2, 3, 2, 'Product 2', 200, 'Dheeraj Remarks', '9900', '1648805008.jpg', NULL, '2022-04-09', 250, 'Recieved', 'B2B', '2022-04-01 03:53:28', '2022-04-01 03:53:28', 1),
 (3, '2022-04-03', 'tran22043', 3, 3, 3, 'Product 3', 300, 'Keshav Remarks', '7987', '1648805088.jpg', NULL, '2022-04-10', 350, 'Canceled', 'C2B', '2022-04-01 03:54:48', '2022-04-01 03:54:48', 1),
 (4, '0000-00-00', 'tran22044', 1, 1, 5, 'product 222', 45, NULL, NULL, NULL, NULL, NULL, 0, 'New', 'C2B', '2022-04-02 05:55:35', '2022-04-02 05:55:35', 2),
-(5, '2022-04-02', 'tran22045', 1, 1, 1, '5r4r4', 8687, NULL, NULL, NULL, NULL, NULL, 0, 'New', 'C2B', '2022-04-02 06:02:51', '2022-04-02 06:02:51', 2);
+(5, '2022-04-02', 'tran22046', 1, 1, 1, '5r4r4', 8687, NULL, NULL, '1649138313.jpg', '1649138313.jpg', NULL, 0, 'new', 'C2B', '2022-04-02 06:02:51', '2022-04-05 00:28:33', 2);
 
 -- --------------------------------------------------------
 
@@ -555,7 +573,10 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `merchant_fk_id`, `phone`,
 (4, 'Keshav', 'Singh', 3, '6786696678', 'Noida', 'ma2@gmail.com', NULL, '$2y$10$Pz8F/yCN/4ugaE5UzsldW.3VfcqPYltOXLmdwXKl57vD4LktRPSn.', 'Merchant Admin', NULL, '2022-04-01 04:01:50', '2022-04-01 04:01:50'),
 (5, 'Admin', 'Bytelogic', 0, '9876543210', 'Noida', 'admin@gmail.com', NULL, '$2y$10$FQPx2avQspjRdf7atFnUZ.NiOiM9Zsj2Q9xnSIG9NZKxKSgCoqJ0y', 'Admin', NULL, '2022-04-01 03:09:36', '2022-04-01 03:09:36'),
 (6, 'suraj', 'Bhadoriya', NULL, NULL, NULL, 'surajbhadoriya401@gmail.com', NULL, '$2y$10$/qY2LCaF5dZpkaRNhcAiXOMiUE8Sla9.fvibvTXbLlIZqX6H2oL5W', 'Merchant Superadmin', NULL, '2022-04-04 03:57:39', '2022-04-04 03:57:39'),
-(7, 'Dheeraj', 'Pal', NULL, NULL, NULL, 'dheeraj@gmail.com', NULL, '$2y$10$FYbti6W05v5mI3sxrWDvg.tGRlygUGzk7RTk1VMlo3o2fnJbE0Jfy', 'Merchant Superadmin', NULL, '2022-04-04 04:05:39', '2022-04-04 04:05:39');
+(7, 'Dheeraj', 'Pal', NULL, NULL, NULL, 'dheeraj@gmail.com', NULL, '$2y$10$FYbti6W05v5mI3sxrWDvg.tGRlygUGzk7RTk1VMlo3o2fnJbE0Jfy', 'Merchant Superadmin', NULL, '2022-04-04 04:05:39', '2022-04-04 04:05:39'),
+(8, 'Rohit', 'Singh', NULL, NULL, NULL, 's@gmail.com', NULL, '$2y$10$9LJIpMy.24gG3G8OKFOfQuhxK1cgPYQ0wJ01mdWMvXua3sN4AFEC2', 'Merchant Superadmin', NULL, '2022-04-04 22:43:51', '2022-04-04 22:43:51'),
+(11, 'Suraj', 'Singh', 2, '9070286553', 'MP', 'admin111@gmail.com', NULL, '$2y$10$d3iGpQ6860sy8D39LZmJO.oMUwLm/W5wWIBAGOfnc08vtAhUP7wBG', 'merchant admin', NULL, '2022-04-04 23:30:54', '2022-04-04 23:33:41'),
+(12, 'Suraj', 'Singh', NULL, NULL, NULL, 'dixitshivam132@gmail.com', NULL, '$2y$10$4n4O2VdytBdIOt7aW0IRAeDkqndjvx7EkuibxWFuh3NFddGT/Skum', 'Merchant Superadmin', NULL, '2022-04-04 23:41:00', '2022-04-04 23:41:00');
 
 --
 -- Indexes for dumped tables
@@ -710,31 +731,31 @@ ALTER TABLE `adjustments`
 -- AUTO_INCREMENT for table `banks`
 --
 ALTER TABLE `banks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `bank_accounts`
 --
 ALTER TABLE `bank_accounts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `bank_account_payouts`
 --
 ALTER TABLE `bank_account_payouts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `customer_documents`
 --
 ALTER TABLE `customer_documents`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -752,7 +773,7 @@ ALTER TABLE `mailboxes`
 -- AUTO_INCREMENT for table `merchants`
 --
 ALTER TABLE `merchants`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -764,7 +785,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `payouts`
 --
 ALTER TABLE `payouts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -776,13 +797,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `settlements`
 --
 ALTER TABLE `settlements`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `settlement_accounts`
 --
 ALTER TABLE `settlement_accounts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `transactions`
@@ -794,7 +815,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables

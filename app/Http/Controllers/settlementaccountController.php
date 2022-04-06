@@ -26,7 +26,7 @@ class settlementaccountController extends Controller
 
     public function index()
     {
-        $settlementaccounts = settlementaccount::all();
+        $settlementaccounts = settlementaccount::orderBy('id', 'DESC')->get();
         $merchantpluck = merchant::pluck('merchant_name', 'id');
         return view('settlementaccount/index',compact('settlementaccounts','merchantpluck'));
 

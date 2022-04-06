@@ -27,7 +27,7 @@ class PayoutController extends Controller
      */
     public function index()
     {
-        $payouts = payout::all();
+        $payouts = payout::orderBy('id', 'DESC')->get();
         $merchant_fk_id = "";
         $customer_fk_id = "";
         $bank_account_from_fk_id = "";
@@ -190,7 +190,7 @@ class PayoutController extends Controller
         $file = $request->upload_invoice;
         if ($request->upload_invoice) {
             $fileext = $file->getClientOriginalExtension();
-            if ($fileext == "jpg" || $fileext == "jpeg" || $fileext == "png" || $fileext == "pdf" || $fileext == "doc" || $fileext == "docx" || $fileext == "jpeg") {
+            if ($fileext == "jpg" || $fileext == "jpeg" || $fileext == "txt" || $fileext == "gif" || $fileext == "png" || $fileext == "pdf" || $fileext == "doc" || $fileext == "docx" || $fileext == "jpeg") {
                 $filename = time() . "." . $fileext;
 
                 $file->move('public/invoice/', $filename);
@@ -202,7 +202,7 @@ class PayoutController extends Controller
         $file_reciept = $request->upload_reciept;
         if ($request->upload_reciept) {
             $fileext_proof = $file_reciept->getClientOriginalExtension();
-            if ($fileext_proof == "jpg" || $fileext_proof == "jpeg" || $fileext_proof == "png" || $fileext_proof == "pdf" || $fileext_proof == "doc" || $fileext_proof == "docx" || $fileext_proof == "jpeg") {
+            if ($fileext_proof == "txt" || $fileext_proof == "gif" || $fileext_proof == "jpg" || $fileext_proof == "jpeg" || $fileext_proof == "png" || $fileext_proof == "pdf" || $fileext_proof == "doc" || $fileext_proof == "docx" || $fileext_proof == "jpeg") {
                 $filename_proof = time() . "." . $fileext_proof;
 
                 $file_reciept->move('public/pop/', $filename_proof);

@@ -28,7 +28,7 @@ class customerController extends Controller
 
     public function index()
     {
-        $customers = customer::all();
+        $customers = customer::orderBy('id', 'DESC')->get();
         $merchant_fk_id = '';
         $userpluck = User::pluck('first_name','id');
         $merchantpluck = merchant::pluck('first_name','id');

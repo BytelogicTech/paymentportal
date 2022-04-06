@@ -78,6 +78,9 @@
             <a href="{{url('settlementaccount/delete/'.$settlementaccount->id)}}" onclick="return confirm('Are you sure, you want to delete it?')" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
         @endif
           </td>
+            <a href="{{url('settlementaccount/delete/'.$settlementaccount->id)}}" onclick="return confirm('Are you sure, you want to delete it?')" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
+            @endif
+        </td>
     </tr>
     @endforeach
 

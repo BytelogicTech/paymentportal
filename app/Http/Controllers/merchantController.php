@@ -30,7 +30,7 @@ class merchantController extends Controller
    
     public function index()
     {   
-        $merchants = merchant::all();
+        $merchants = merchant::orderBy('id', 'DESC')->get();
         $userpluck = User::pluck('first_name','id');
         return view('merchant/index', compact('merchants','userpluck'));
     }

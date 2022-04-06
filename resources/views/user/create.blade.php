@@ -91,8 +91,10 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="phone">Phone No</label>
-                                            <input id="phone" type="text" placeholder="Enter Phone No." class="form-control" name="phone" required autocomplete="phone" autofocus>
+                                            <label for="phone">Phone No*
+                                                
+                                            </label>
+                                            <input id="phone" type="number" placeholder="Enter Phone No." class="form-control" name="phone" required autocomplete="phone" autofocus>
                                               
                                             @error('phone')
                                             <span class="invalid-feedback" role="alert">
@@ -122,7 +124,7 @@
                                         <div class="form-group">
                                             <label for="role">User Role*</label>
                                             <select class="select2 form-control" name="role" required>
-                                                <option value="" disabled selected>Please Select One</option>                                            
+                                                <option value="" selected>Please Select One</option>                                            
                                                 <option value="Merchant Admin">Merchant Admin</option>
                                                 <option value="Merchant View-Only">Merchant View-Only</option>
                                                 
@@ -172,8 +174,8 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Parent Merchant*</label>
-                                            <select class="select2 form-control" name="merchant_fk_id">
-                                                <option value="" disabled selected>Please Select One</option>
+                                            <select class="select2 form-control" name="merchant_fk_id" required>
+                                                <option value="" selected>Please Select One</option>
                                                 
                                                 @foreach($merchants as $merchant)
                                                 <option value="{{$merchant->id}}">{{$merchant->merchant_name}}</option>

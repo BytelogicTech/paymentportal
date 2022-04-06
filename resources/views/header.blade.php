@@ -86,7 +86,8 @@
             <li class="nav-header">TRANSACTIONS</li>
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-user"></i>
+                <!-- <i class="nav-icon fas fa-user"></i> -->
+                <i class="nav-icon fa fa-list"></i>
                 <p>
                   Transactions
                   <i class="fas fa-angle-left right"></i>
@@ -109,8 +110,8 @@
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link">
-                
-                <i class="nav-icon fa fa-users"></i>
+               
+                <i class=" nav-icon fa fa-dollar-sign"></i> 
                 <p>
                   Payouts
                   <i class="fas fa-angle-left right"></i>
@@ -135,7 +136,7 @@
             <li class="nav-header">SETTLEMENTS</li>
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-university"></i>
+                <i class="nav-icon fa fa-money-check-alt"></i>
                 <p>
                   Settlements
                   <i class="fas fa-angle-left right"></i>
@@ -159,7 +160,7 @@
 
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-university"></i>
+                <i class="nav-icon fa fa-money-check-alt"></i>
                 <p>
                   Settlement Accounts
                   <i class="fas fa-angle-left right"></i>
@@ -184,7 +185,7 @@
 
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-university"></i>
+                <i class="nav-icon fa fa-sliders-h"></i>
                 <p>
                   Adjustments<i class="fas fa-angle-left right"></i>
                 </p>
@@ -228,7 +229,7 @@
             <li class="nav-header">SYSTEM</li>
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-user"></i>
+                <i class="nav-icon fas fa-user"></i>
                 <p>
                   Customers
                   <i class="fas fa-angle-left right"></i>
@@ -256,7 +257,7 @@
 
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-users"></i>
+                <i class="nav-icon fas fa-user"></i>
                 <p>
                   Users
                   <i class="fas fa-angle-left right"></i>
@@ -280,7 +281,7 @@
 
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon far fa-envelope"></i>
+                <i class="nav-icon fas fa-user"></i>
                 <p>
                   Mailbox
                   <i class="fas fa-angle-left right"></i>
@@ -321,7 +322,8 @@
             <li class="nav-header">ADMIN</li>
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-store"></i>
+                <!-- <i class="nav-icon fas fa-store"></i> -->
+                <i class="nav-icon fa fa-tags"></i>
                 <p>
                   Merchants
                   <i class="fas fa-angle-left right"></i>
@@ -340,14 +342,14 @@
                     <p>Add new Merchant</p>
                   </a>
                 </li>
-              </ul>
+              </ul> 
 
 
 
 
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-university"></i>
+                <i class="nav-icon fa fa-piggy-bank"></i>
                 <p>
                   Banks
                   <i class="fas fa-angle-left right"></i>
@@ -372,6 +374,9 @@
 
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-store"></i>
+           
+              
+              
               <p>
                 Activity Log
                 <i class="fas fa-angle-left right"></i>
@@ -385,6 +390,9 @@
 
             <a href="{{url('user/selfedit')}}" class="nav-link">
             <i class="nav-icon fas fa-user"></i>
+
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-store"></i>
               <p>
                 Profile
                 <i class="fas fa-angle-left right"></i>

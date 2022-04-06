@@ -62,6 +62,11 @@ Route::group(['prefix' => 'customer'], function(){
     Route::post('/update', [customerController::class, 'update'])->middleware('admin_madmin');
     Route::get('/delete/{id}', [customerController::class, 'destroy'])->middleware('admin');
     Route::post('/search', [customerController::class, 'search'])->middleware('admin_madmin');
+    Route::post('/store', [customerController::class, 'store']);
+    Route::get('/edit/{id}', [customerController::class, 'edit']);
+    Route::post('/update', [customerController::class, 'update']);
+    Route::get('/delete/{id}', [customerController::class, 'destroy'])->middleware('admin');
+    Route::post('/search', [customerController::class, 'search']);
 });
 
 Route::get('/bankaccountpayoutdestroy/{bankaccountpayoutid}', [customerController::class, 'bankaccountpayoutdestroy'])->middleware('admin');
@@ -77,6 +82,14 @@ Route::group(['prefix' => 'transaction'], function(){
     Route::get('/delete/{id}', [TransactionController::class, 'destroy'])->middleware('admin');
     Route::post('/search', [TransactionController::class, 'search'])->middleware('admin_madmin');
     Route::get('/search', [TransactionController::class, 'index'])->middleware('admin_madmin');
+    Route::get('/index', [TransactionController::class, 'index']);
+    Route::get('/create', [TransactionController::class, 'create']);
+    Route::post('/store', [TransactionController::class, 'store']);
+    Route::get('/edit/{id}', [TransactionController::class, 'edit']);
+    Route::post('/update', [TransactionController::class, 'update']);
+    Route::get('/delete/{id}', [TransactionController::class, 'destroy'])->middleware('admin');
+    Route::post('/search', [TransactionController::class, 'search']);
+    Route::get('/search', [TransactionController::class, 'index']);
 });
 
 
@@ -91,6 +104,11 @@ Route::group(['prefix' => 'user'], function(){
     Route::get('/selfedit', [UserController::class, 'selfedit'])->middleware('auth');
     Route::post('/selfupdate', [UserController::class, 'selfupdate'])->middleware('auth');
 
+    Route::get('/index', [UserController::class, 'index'])->middleware('admin');
+    Route::get('/create', [UserController::class, 'create'])->middleware('admin');
+    Route::post('/store', [UserController   ::class, 'store'])->middleware('admin');
+    Route::get('/edit/{id}', [UserController::class, 'edit'])->middleware('admin');
+    Route::post('/update', [UserController::class, 'update'])->middleware('admin');
     Route::get('/delete/{id}', [UserController::class, 'destroy'])->middleware('admin');
 });
 
@@ -115,6 +133,14 @@ Route::group(['prefix' => 'payout'], function(){
     Route::get('/delete/{id}', [PayoutController::class, 'destroy'])->middleware('admin');
     Route::post('/search', [PayoutController::class, 'search'])->middleware('admin_madmin');
     Route::get('/search', [PayoutController::class, 'index'])->middleware('admin_madmin');
+    Route::get('/index', [PayoutController::class, 'index']);
+    Route::get('/create', [PayoutController::class, 'create']);
+    Route::post('/store', [PayoutController::class, 'store']);
+    Route::get('/edit/{id}', [PayoutController::class, 'edit'])->middleware('admin');
+    Route::post('/update', [PayoutController::class, 'update'])->middleware('admin');
+    Route::get('/delete/{id}', [PayoutController::class, 'destroy'])->middleware('admin');
+    Route::post('/search', [PayoutController::class, 'search']);
+    Route::get('/search', [PayoutController::class, 'index']);
 });
 
 
@@ -129,6 +155,16 @@ Route::group(['prefix' => 'settlement'], function(){
     Route::get('/search', [settlementController::class, 'index'])->middleware('admin_madmin');
 
     Route::get('/view/{id}', [settlementController::class, 'view'])->middleware('admin_madmin');
+    Route::get('/index', [settlementController::class, 'index']);
+    Route::get('/create', [settlementController::class, 'create']);
+    Route::post('/store', [settlementController::class, 'store']);
+    Route::get('/edit/{id}', [settlementController::class, 'edit'])->middleware('admin');
+    Route::post('/update', [settlementController::class, 'update'])->middleware('admin');
+    Route::get('/delete/{id}', [settlementController::class, 'destroy'])->middleware('admin');
+    Route::post('/search', [settlementController::class, 'search']);
+    Route::get('/search', [settlementController::class, 'index']);
+
+    Route::get('/view/{id}', [settlementController::class, 'view'])->middleware('admin');
 });
 
 Route::group(['prefix' => 'settlementaccount'], function(){
@@ -144,6 +180,7 @@ Route::group(['prefix' => 'settlementaccount'], function(){
 
 Route::group(['prefix' => 'adjustment'], function(){
     Route::get('/index', [adjustmentController::class, 'index'])->name('adjustment.index')->middleware('admin');
+    Route::get('/index', [adjustmentController::class, 'index'])->name('adjustment.index');
     Route::get('/adjustment_currency_conversion_create', [adjustmentController::class, 'adjustment_currency_conversion_create'])->middleware('admin');
     Route::post('/adjustment_currency_conversion_store', [adjustmentController::class, 'adjustment_currency_conversion_store'])->middleware('admin');
 
