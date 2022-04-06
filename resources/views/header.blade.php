@@ -37,6 +37,7 @@
 
 
         </li>
+        
         <li class="nav-item ">
           <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -292,12 +293,19 @@
                     <p>Inbox</p>
                   </a>
                 </li>
+                @endif
+                @if(Auth::user()->role=="Admin")
+
                 <li class="nav-item">
                   <a href="{{url('mailbox/sent')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Sent</p>
                   </a>
                 </li>
+                @endif
+
+                @if(Auth::user()->role=="Admin" || Auth::user()->role=="Merchant Superadmin")
+
                 <li class="nav-item">
                   <a href="{{url('mailbox/create')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
@@ -306,8 +314,7 @@
                 </li>
               </ul>
             </li>
-
-            @endif
+@endif
 
             @if(Auth::user()->role=="Admin")
 
@@ -337,7 +344,6 @@
 
 
 
-            @if(Auth::user()->role=="Admin")
 
             <li class="nav-item">
               <a href="#" class="nav-link">
@@ -362,7 +368,7 @@
                 </li>
               </ul>
             </li>
-            @endif
+            
 
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-store"></i>
@@ -377,7 +383,7 @@
 
             <li class="nav-header">SETTINGS</li>
 
-            <a href="#" class="nav-link">
+            <a href="{{url('user/selfedit')}}" class="nav-link">
             <i class="nav-icon fas fa-user"></i>
               <p>
                 Profile

@@ -208,15 +208,14 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
+
         // dd($request->invoice_date);
         $maxtranid = transaction::max('id');
         $invoice_number = "tran" . date("y") . date("m") . $maxtranid + 1;
         // dd($invoice_number);
-
         $transaction = new transaction();
         $transaction->id = $request->id;
         $transaction->invoice_date = $request->invoice_date;
-     
         $transaction->invoice_number = $invoice_number;
         $transaction->merchant_fk_id = $request->merchant_fk_id;
         $transaction->bank_account_fk_id = $request->bank_account_fk_id;
@@ -225,7 +224,6 @@ class TransactionController extends Controller
         $transaction->product_price = $request->product_price;
         $transaction->remarks = $request->remarks;
         $transaction->reference_id = $request->reference_id;
-
         $file = $request->upload_signed_invoice;
         if ($request->upload_signed_invoice) {
             $fileext = $file->getClientOriginalExtension();

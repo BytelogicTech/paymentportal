@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{url('/home')}}">Home</a></li>
                         <li class="breadcrumb-item active">User</li>
                     </ol>
                 </div>
@@ -106,7 +106,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="address">Address</label>
-                                            <textarea id="address" type="textarea" placeholder="Enter Address" class="form-control" name="address" required autocomplete="address" autofocus></textarea>
+                                            <textarea id="address" type="textarea" placeholder="Enter Address" class="form-control" name="address" autocomplete="address" autofocus></textarea>
                                             
      
                                             @error('address')

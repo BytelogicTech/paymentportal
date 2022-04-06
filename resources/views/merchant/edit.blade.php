@@ -7,12 +7,14 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Merchants</h1>
+                <h1>Edit Merchant - {{$merchant->merchant_name}} </h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">General Form</li>
+                        <li class="breadcrumb-item"><a href="{{url('/home')}}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{url('merchant/index')}}">All Merchants</a></li>
+                        <li class="breadcrumb-item active" >Edit Merchant - {{$merchant->merchant_name}}</li>
+                    
                     </ol>
                 </div>
             </div>
@@ -581,7 +583,7 @@
 
 
                                 <br />
-                                <button type="submit" class="btn btn-primary">Add</button>
+                                <button type="submit" class="btn btn-primary">Update</button>
                             </div>
 
                         </form>

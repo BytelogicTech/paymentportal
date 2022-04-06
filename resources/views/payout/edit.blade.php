@@ -8,12 +8,14 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Payout</h1>
-                </div>
+                <h1>Edit Payout - {{$payout->payout_amount}} </h1>                
+            </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Payout</li>
+                        <li class="breadcrumb-item"><a href="{{url('')}}">Home</a></li>
+                        <li class="breadcrumb-item active"><a href="{{url('payout/index')}}">All Payouts</a></li>
+                        <li class="breadcrumb-item active" >Edit Payout - {{$payout->payout_amount}}</li>
+
                     </ol>
                 </div>
             </div>
