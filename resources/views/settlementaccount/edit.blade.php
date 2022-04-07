@@ -273,7 +273,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="upload_bank_statement">Upload Bank Statement/Bank Account Confirmation Letter *</label>
-                                        <input type="file" class="form-control" name="upload_bank_statement" value="{{$settlementaccount->upload_bank_statement}}" required>
+                                        <input type="file" class="form-control" name="upload_bank_statement" value="{{$settlementaccount->upload_bank_statement}}" >
                                     </div>
                                 </div>
 

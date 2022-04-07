@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class admin_msuperadmin
+class admin_madmin_msuperadmin
 {
     /**
      * Handle an incoming request.
@@ -20,7 +20,7 @@ class admin_msuperadmin
         if(Auth::check())
         {
             $role = Auth::user()->role;
-            if($role=="Admin" || $role=="Merchant Superadmin")
+            if($role=="Admin" || $role=="Merchant Admin" || $role=="Merchant Superadmin")
             {
                 return $next($request);
             }            
@@ -33,6 +33,5 @@ class admin_msuperadmin
         {
             return redirect('/login');
         }
-    
     }
 }

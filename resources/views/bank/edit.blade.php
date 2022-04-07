@@ -1,67 +1,67 @@
 @include('header')
 
 <div class="modal fade" id="modal-default">
-        <div class="modal-dialog">
-          <div class="modal-content">
+    <div class="modal-dialog">
+        <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Edit Bank Account</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+                <h4 class="modal-title">Edit Bank Account</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <form action="{{url('bankaccountupdate')}}" method="post">
 
-            @csrf
+                @csrf
 
-            <input type="hidden" name="bankaccountid" id="id_edit" />
-            <div class="modal-body">
-              
-            <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="description">Currency*</label>
-                                            <input type="text" readonly name="currency" id="currency_edit" class="form-control" />                                           
-                                        </div>
-                                    </div>
+                <input type="hidden" name="bankaccountid" id="id_edit" />
+                <div class="modal-body">
 
-
-                                    <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="account_number">Account Number/IBAN:</label>
-                                                <input id="account_number_edit" type="text" placeholder="Enter Account Number" class="form-control" name="account_number" readonly />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="nickname">Nickname:</label>
-                                                <input id="nickname_edit" type="text" placeholder="Enter Account Nickname" class="form-control" name="nick_name"  />
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="bank_charges">Bank Charges:</label>
-                                                <input id="bank_charges_edit" type="number" placeholder="Enter Bank Charges" required class="form-control" name="bank_charges" required />
-                                            </div>
-                                        </div>
-                                 
-                                </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="description">Currency*</label>
+                                <input type="text" readonly name="currency" id="currency_edit" class="form-control" />
+                            </div>
+                        </div>
 
 
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="account_number">Account Number/IBAN:</label>
+                                <input id="account_number_edit" type="text" placeholder="Enter Account Number" class="form-control" name="account_number" readonly />
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="nickname">Nickname:</label>
+                                <input id="nickname_edit" type="text" placeholder="Enter Account Nickname" class="form-control" name="nick_name" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="bank_charges">Bank Charges:</label>
+                                <input id="bank_charges_edit" type="number" placeholder="Enter Bank Charges" required class="form-control" name="bank_charges" required />
+                            </div>
+                        </div>
+
+                    </div>
 
 
-            </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Save changes</button>
-            </div>
+
+
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
             </form>
-          </div>
-          <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
-      </div>
-      <!-- /.modal -->
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
 
 <!-- Content Wrapper. Contains page content -->
@@ -164,44 +164,44 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Country*</label>
-                                            
+
                                             <select class="form-control select2" style="width: 100%;" name="country" required value="{{$bank->country}}" id="country">
                                                 <option value="" selected disabled>Please Select One</option>
-                                               @foreach(config('constants.countryar') as $country)
-                                               <option value="{{$country}}" @if($country==$bank->country) selected @endif>{{$country}}</option>
-                                               @endforeach
+                                                @foreach(config('constants.countryar') as $country)
+                                                <option value="{{$country}}" @if($country==$bank->country) selected @endif>{{$country}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                 </div>
 
-                                <table  class="table table-bordered table-hover">
+                                <table class="table table-bordered table-hover">
 
                                     <thead>
-                                    <tr class="alert-primary">                                
-                                    <th>Currency</th>
-                                    <th>Account No./IBAN</th>
-                                    <th>Nickname</th>
-                                    <th>Bank Charges</th>
-                                    <th>Action</th>
-                                    </tr>
+                                        <tr class="alert-primary">
+                                            <th>Currency</th>
+                                            <th>Account No./IBAN</th>
+                                            <th>Nickname</th>
+                                            <th>Bank Charges</th>
+                                            <th>Action</th>
+                                        </tr>
                                     </thead>
-                                <tbody>
-                                @foreach($bankaccounts as $bankaccount)
-                                <tr>
-                                    <td>{{$bankaccount->currency}}</td>
-                                    <td>{{$bankaccount->account_number}}</td>
-                                    <td>{{$bankaccount->nick_name}}</td>                                 
-                                    <td>{{$bankaccount->bank_charges}}</td>                            
-                                    <td>
-                                    <a href="#"  data-toggle="modal" data-target="#modal-default" class="btn btn-warning btn-sm" data-bankaccountid="{{$bankaccount->id}}" data-currency="{{$bankaccount->currency}}" data-account_number="{{$bankaccount->account_number}}" data-nickname="{{$bankaccount->nick_name}}" data-bank_charges="{{$bankaccount->bank_charges}}" >
-                                        <i class="far fa-edit" aria-hidden="true"></i>
-                                    </a>
-            <a href="{{url('bankaccountdestroy/'.$bankaccount->id)}}" onclick="return confirm('Are you sure, you want to delete it?')" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                    </td>                                
-                                </tr>
-                                @endforeach
-                                </tbody>
+                                    <tbody>
+                                        @foreach($bankaccounts as $bankaccount)
+                                        <tr>
+                                            <td>{{$bankaccount->currency}}</td>
+                                            <td>{{$bankaccount->account_number}}</td>
+                                            <td>{{$bankaccount->nick_name}}</td>
+                                            <td>{{$bankaccount->bank_charges}}</td>
+                                            <td>
+                                                <a href="#" data-toggle="modal" data-target="#modal-default" class="btn btn-warning btn-sm" data-bankaccountid="{{$bankaccount->id}}" data-currency="{{$bankaccount->currency}}" data-account_number="{{$bankaccount->account_number}}" data-nickname="{{$bankaccount->nick_name}}" data-bank_charges="{{$bankaccount->bank_charges}}">
+                                                    <i class="far fa-edit" aria-hidden="true"></i>
+                                                </a>
+                                                <a href="{{url('bankaccountdestroy/'.$bankaccount->id)}}" onclick="return confirm('Are you sure, you want to delete it?')" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
                                 </table>
 
                                 <div id="bank_accounts" style="margin-top: 20px;">
@@ -212,9 +212,9 @@
                                                 <select class="form-control" style="width: 100%;" name="currency[]">
                                                     <option value="" selected disabled>Please Select One</option>
                                                     @foreach(config('constants.currency_list') as $key=> $currency)
-                                               <option value="{{$key}}">{{$key}}</option>
-                                               @endforeach
-                                                   
+                                                    <option value="{{$key}}">{{$key}}</option>
+                                                    @endforeach
+
                                                 </select>
                                             </div>
                                         </div>
@@ -234,14 +234,14 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="nickname">Bank Charges:</label>
-                                                <input type="number" placeholder="Enter Bank Charges" class="form-control" name="bank_charges[]"  />
+                                                <input type="number" placeholder="Enter Bank Charges" class="form-control" name="bank_charges[]" />
                                             </div>
                                         </div>
 
                                     </div>
                                 </div>
 
-                             
+
 
 
                                 <div class="text-center">
@@ -323,19 +323,19 @@
 
 
 
-                                <div class="form-group">
-                                    <label for="logo">Upload Logo:</label>
-                                    <input type="file" placeholder="Choose File" class="form-control" name="logo" value="{{$bank->logo}}" />
-                                </div>
+                                        <div class="form-group">
+                                            <label for="logo">Upload Logo:</label>
+                                            <input type="file" placeholder="Choose File" class="form-control" name="logo" value="{{$bank->logo}}" />
+                                        </div>
                                     </div>
                                     <div class="col-md-6">
 
 
 
-                                    <div class="form-group">
-                                        <img src="{{asset('public/images/'.$bank->logo)}}" style="width:200px;"/>
-                                    </div>
+                                        <div class="form-group">
+                                            <img src="{{asset('public/images/'.$bank->logo)}}" style="width:200px;" />
                                         </div>
+                                    </div>
                                 </div>
 
 
@@ -505,31 +505,31 @@
 </script>
 
 <script type="text/javascript">
-  // wordofday Edit
-  $(document).ready(function() {
-     
+    // wordofday Edit
+    $(document).ready(function() {
 
 
-    $('#modal-default').on('show.bs.modal', function(event) {
-      var button = $(event.relatedTarget)
-      var bankaccountid = button.data('bankaccountid');
-      var currency = button.data('currency');
-      var account_number = button.data('account_number');
-      var nickname = button.data('nickname');
-      var bank_charges = button.data('bank_charges');
 
-     
+        $('#modal-default').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var bankaccountid = button.data('bankaccountid');
+            var currency = button.data('currency');
+            var account_number = button.data('account_number');
+            var nickname = button.data('nickname');
+            var bank_charges = button.data('bank_charges');
 
-      var modal = $(this)
-      modal.find('#currency_edit').val(currency); 
-      modal.find('#account_number_edit').val(account_number);  
-      modal.find('#nickname_edit').val(nickname);
-      modal.find('#bank_charges_edit').val(bank_charges);    
-      modal.find('#id_edit').val(bankaccountid)   ;     
-    }); 
-    
-    
-  });
+
+
+            var modal = $(this)
+            modal.find('#currency_edit').val(currency);
+            modal.find('#account_number_edit').val(account_number);
+            modal.find('#nickname_edit').val(nickname);
+            modal.find('#bank_charges_edit').val(bank_charges);
+            modal.find('#id_edit').val(bankaccountid);
+        });
+
+
+    });
 </script>
 
 <script>

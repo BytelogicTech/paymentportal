@@ -87,42 +87,19 @@
                                     </div>
 
 
-
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Country*</label>
-                                            <select class="form-control select2" style="width: 100%;" name="country" required value="{{$customer->country}}">
+                                            
+                                            <select class="form-control select2" style="width: 100%;" name="country" required value="{{$customer->country}}" id="country">
                                                 <option value="" selected disabled>Please Select One</option>
-                                                <option value="Afganistan" @if($customer->country == 'Afganistan') selected @endif>Afganistan</option>
-                                                <option value="Albania" @if($customer->country == 'Albania') selected @endif>Albania</option>
-                                                <option value="Algeria" @if($customer->country == 'Algeria') selected @endif>Algeria</option>
-                                                <option value="American Samoa" @if($customer->country == 'American Samoa') selected @endif>American Samoa</option>
-                                                <option value="Andorra" @if($customer->country == 'Andorra') selected @endif>Andorra</option>
-                                                <option value="Angola" @if($customer->country == 'Angola') selected @endif>Angola</option>
-                                                <option value="Anguilla" @if($customer->country== 'Anguilla') selected @endif>Anguilla</option>
-                                                <option value="Antigua & Barbuda" @if($customer->country == 'Antigua & Barbuda') selected @endif>Antigua & Barbuda</option>
-                                                <option value="Argentina" @if($customer->country == 'Argentina') selected @endif>Argentina</option>
-                                                <option value="Armenia" @if($customer->country == 'Armenia') selected @endif>Armenia</option>
-                                                <option value="Aruba" @if($customer->country == 'Aruba') selected @endif>Aruba</option>
-                                                <option value="Australia" @if($customer->country == 'Australia') selected @endif>Australia</option>
-                                                <option value="Austria" @if($customer->country == 'Austria') selected @endif>Austria</option>
-                                                <option value="Azerbaijan" @if($customer->country == 'Azerbaijan') selected @endif>Azerbaijan</option>
-                                                <option value="Bahamas" @if($customer->country == 'Bahamas') selected @endif>Bahamas</option>
-                                                <option value="Bahrain" @if($customer->country == 'Bahrain') selected @endif>Bahrain</option>
-                                                <option value="Bangladesh" @if($customer->country == 'Bangladesh') selected @endif>Bangladesh</option>
-                                                <option value="Barbados" @if($customer->country == 'Barbados') selected @endif>Barbados</option>
-                                                <option value="Bahamas" @if($customer->country == 'Bahamas') selected @endif>Bahamas</option>
-                                                <option value="Barbados" @if($customer->country == 'Barbados') selected @endif>Barbados</option>
-                                                <option value="Belarus" @if($customer->country == 'Belarus') selected @endif>Belarus</option>
-                                                <option value="Belgium" @if($customer->country == 'Belgium') selected @endif>Belgium</option>
-                                                <option value="Belize" @if($customer->country == 'Belize') selected @endif>Belize</option>
-                                                <option value="Benin" @if($customer->country == 'Benin') selected @endif>Benin</option>
-                                                <option value="Bermuda" @if($customer->country == 'Bermuda') selected @endif>Bermuda</option>
-                                                <option value="Bhutan" @if($customer->country == 'Bhutan') selected @endif>Bhutan</option>
-                                                <option value="Bolivia" @if($customer->country == 'Bolivia') selected @endif>Bolivia</option>
+                                               @foreach(config('constants.countryar') as $country)
+                                               <option value="{{$country}}" @if($country==$customer->country) selected @endif>{{$country}}</option>
+                                               @endforeach
                                             </select>
                                         </div>
                                     </div>
+                                    
                                 </div>
 
 
@@ -178,41 +155,27 @@
                                                 <input type="text" placeholder="Enter Beneficiary Name" class="form-control" name="beneficiary_address" required value="{{$bankaccountpayout->beneficiary_address}}" />
                                             </div>
                                         </div>
+
+
+
+
+                                 
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Beneficiary Country*</label>
-                                                <select class="form-control select2" required style="width: 100%;" name="beneficiary_country" value="{{$bankaccountpayout->beneficiary_country}}">
-                                                    <option value="" selected disabled>Please Select One</option>
-                                                    <option value="Afganistan" @if($bankaccountpayout->beneficiary_country == 'Afganistan') selected @endif>Afganistan</option>
-                                                    <option value="Albania" @if($bankaccountpayout->beneficiary_country == 'Albania') selected @endif>Albania</option>
-                                                    <option value="Algeria" @if($bankaccountpayout->beneficiary_country == 'Algeria') selected @endif>Algeria</option>
-                                                    <option value="American Samoa" @if($bankaccountpayout->beneficiary_country == 'American Samoa') selected @endif>American Samoa</option>
-                                                    <option value="Andorra" @if($bankaccountpayout->beneficiary_country == 'Andorra') selected @endif>Andorra</option>
-                                                    <option value="Angola" @if($bankaccountpayout->bank_country == 'Angola') selected @endif>Angola</option>
-                                                    <option value="Anguilla" @if($bankaccountpayout->beneficiary_country == 'Anguilla') selected @endif>Anguilla</option>
-                                                    <option value="Antigua & Barbuda" @if($bankaccountpayout->beneficiary_country == 'Antigua & Barbuda') selected @endif>Antigua & Barbuda</option>
-                                                    <option value="Argentina" @if($bankaccountpayout->beneficiary_country == 'Argentina') selected @endif>Argentina</option>
-                                                    <option value="Armenia" @if($bankaccountpayout->beneficiary_country == 'Armenia') selected @endif>Armenia</option>
-                                                    <option value="Aruba" @if($bankaccountpayout->beneficiary_country == 'Aruba') selected @endif>Aruba</option>
-                                                    <option value="Australia" @if($bankaccountpayout->beneficiary_country == 'Australia') selected @endif>Australia</option>
-                                                    <option value="Austria" @if($bankaccountpayout->beneficiary_country == 'Austria') selected @endif>Austria</option>
-                                                    <option value="Azerbaijan" @if($bankaccountpayout->beneficiary_country == 'Azerbaijan') selected @endif>Azerbaijan</option>
-                                                    <option value="Bahamas" @if($bankaccountpayout->beneficiary_country == 'Bahamas') selected @endif>Bahamas</option>
-                                                    <option value="Bahrain" @if($bankaccountpayout->beneficiary_country == 'Bahrain') selected @endif>Bahrain</option>
-                                                    <option value="Bangladesh" @if($bankaccountpayout->beneficiary_country == 'Bangladesh') selected @endif>Bangladesh</option>
-                                                    <option value="Barbados" @if($bankaccountpayout->beneficiary_country == 'Barbados') selected @endif>Barbados</option>
-                                                    <option value="Bahamas" @if($bankaccountpayout->beneficiary_country == 'Bahamas') selected @endif>Bahamas</option>
-                                                    <option value="Barbados" @if($bankaccountpayout->beneficiary_country == 'Barbados') selected @endif>Barbados</option>
-                                                    <option value="Belarus" @if($bankaccountpayout->beneficiary_country == 'Belarus') selected @endif>Belarus</option>
-                                                    <option value="Belgium" @if($bankaccountpayout->beneficiary_country == 'Belgium') selected @endif>Belgium</option>
-                                                    <option value="Belize" @if($bankaccountpayout->beneficiary_country == 'Belize') selected @endif>Belize</option>
-                                                    <option value="Benin" @if($bankaccountpayout->beneficiary_country == 'Benin') selected @endif>Benin</option>
-                                                    <option value="Bermuda" @if($bankaccountpayout->beneficiary_country == 'Bermuda') selected @endif>Bermuda</option>
-                                                    <option value="Bhutan" @if($bankaccountpayout->beneficiary_country == 'Bhutan') selected @endif>Bhutan</option>
-                                                    <option value="Bolivia" @if($bankaccountpayout->beneficiary_country == 'Bolivia') selected @endif>Bolivia</option>
-                                                </select>
-                                            </div>
+                                        <div class="form-group">
+                                            <label>Beneficiary Country*</label>
+                                            
+                                            <select class="form-control select2" style="width: 100%;" name="beneficiary_country" required value="{{$customer->beneficiary_country}}" id="beneficiary_country">
+                                                <option value="" selected disabled>Please Select One</option>
+                                               @foreach(config('constants.countryar') as $country)
+                                               <option value="{{$country}}" @if($country==$customer->country) selected @endif>{{$country}}</option>
+                                               @endforeach
+                                            </select>
                                         </div>
+                                    </div>
+
+
+
+                                        
                                     </div>
 
                                     <div class="row">
@@ -237,41 +200,21 @@
                                                 <input type="text" placeholder="Bank Address" required class="form-control" name="bank_address" value="{{$bankaccountpayout->bank_address}}" />
                                             </div>
                                         </div>
+
+
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Bank Country*</label>
-                                                <select class="select2 form-control" required style="width: 100%;" name="bank_country" value="{{$bankaccountpayout->bank_country}}">
-                                                    <option value="" selected disabled>Please Select One</option>
-                                                    <option value="Afganistan" @if($bankaccountpayout->bank_country == 'Afganistan') selected @endif>Afganistan</option>
-                                                    <option value="Albania" @if($bankaccountpayout->bank_country == 'Albania') selected @endif>Albania</option>
-                                                    <option value="Algeria" @if($bankaccountpayout->bank_country == 'Algeria') selected @endif>Algeria</option>
-                                                    <option value="American Samoa" @if($bankaccountpayout->bank_country == 'American Samoa') selected @endif>American Samoa</option>
-                                                    <option value="Andorra" @if($bankaccountpayout->bank_country == 'Andorra') selected @endif>Andorra</option>
-                                                    <option value="Angola" @if($bankaccountpayout->bank_country == 'Angola') selected @endif>Angola</option>
-                                                    <option value="Anguilla" @if($bankaccountpayout->bank_country == 'Anguilla') selected @endif>Anguilla</option>
-                                                    <option value="Antigua & Barbuda" @if($bankaccountpayout->bank_country == 'Antigua & Barbuda') selected @endif>Antigua & Barbuda</option>
-                                                    <option value="Argentina" @if($bankaccountpayout->bank_country == 'Argentina') selected @endif>Argentina</option>
-                                                    <option value="Armenia" @if($bankaccountpayout->bank_country == 'Armenia') selected @endif>Armenia</option>
-                                                    <option value="Aruba" @if($bankaccountpayout->bank_country == 'Aruba') selected @endif>Aruba</option>
-                                                    <option value="Australia" @if($bankaccountpayout->bank_country == 'Australia') selected @endif>Australia</option>
-                                                    <option value="Austria" @if($bankaccountpayout->bank_country == 'Austria') selected @endif>Austria</option>
-                                                    <option value="Azerbaijan" @if($bankaccountpayout->bank_country == 'Azerbaijan') selected @endif>Azerbaijan</option>
-                                                    <option value="Bahamas" @if($bankaccountpayout->bank_country == 'Bahamas') selected @endif>Bahamas</option>
-                                                    <option value="Bahrain" @if($bankaccountpayout->bank_country == 'Bahrain') selected @endif>Bahrain</option>
-                                                    <option value="Bangladesh" @if($bankaccountpayout->bank_country == 'Bangladesh') selected @endif>Bangladesh</option>
-                                                    <option value="Barbados" @if($bankaccountpayout->bank_country == 'Barbados') selected @endif>Barbados</option>
-                                                    <option value="Bahamas" @if($bankaccountpayout->bank_country == 'Bahamas') selected @endif>Bahamas</option>
-                                                    <option value="Barbados" @if($bankaccountpayout->bank_country == 'Barbados') selected @endif>Barbados</option>
-                                                    <option value="Belarus" @if($bankaccountpayout->bank_country == 'Belarus') selected @endif>Belarus</option>
-                                                    <option value="Belgium" @if($bankaccountpayout->bank_country == 'Belgium') selected @endif>Belgium</option>
-                                                    <option value="Belize" @if($bankaccountpayout->bank_country == 'Belize') selected @endif>Belize</option>
-                                                    <option value="Benin" @if($bankaccountpayout->bank_country == 'Benin') selected @endif>Benin</option>
-                                                    <option value="Bermuda" @if($bankaccountpayout->bank_country == 'Bermuda') selected @endif>Bermuda</option>
-                                                    <option value="Bhutan" @if($bankaccountpayout->bank_country == 'Bhutan') selected @endif>Bhutan</option>
-                                                    <option value="Bolivia" @if($bankaccountpayout->bank_country == 'Bolivia') selected @endif>Bolivia</option>
-                                                </select>
-                                            </div>
+                                        <div class="form-group">
+                                            <label>Bank Country*</label>
+                                            
+                                            <select class="form-control select2" style="width: 100%;" name="bank_country" required value="{{$customer->bank_country}}" id="bank_country">
+                                                <option value="" selected disabled>Please Select One</option>
+                                               @foreach(config('constants.countryar') as $country)
+                                               <option value="{{$country}}" @if($country==$customer->country) selected @endif>{{$country}}</option>
+                                               @endforeach
+                                            </select>
                                         </div>
+                                    </div>
+                                       
                                     </div>
 
 
@@ -292,13 +235,13 @@
                                         </div>
                                     </div>
 
-
+                                  
 
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Currency *</label>
-                                                <select class="form-control select2" style="width: 100%;" name="currency" required value="{{$bankaccountpayout->currency}}">
+                                                <label>Currency </label>
+                                                <select class="form-control select2" style="width: 100%;" name="currency" value="{{$bankaccountpayout->currency}}">
                                                     <option value="" selected disabled>Please Select One</option>
                                                     <option value="USD" @if($bankaccountpayout->currency == 'USD') selected @endif >USD</option>
                                                     <option value="EUR" @if($bankaccountpayout->currency == 'EUR') selected @endif>EUR</option>
@@ -464,8 +407,8 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="upload_file">Upload File *</label>
-                                                <input type="file" placeholder="Choose File" class="form-control" name="upload_file" required value="{{$customerdocument->upload_file}}" />
+                                                <label for="upload_file">Upload File </label>
+                                                <input type="file" placeholder="Choose File" class="form-control" name="upload_file" value="{{$customerdocument->upload_file}}" />
                                             </div>
                                         </div>
                                     </div>

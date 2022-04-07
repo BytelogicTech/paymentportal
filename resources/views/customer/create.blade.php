@@ -1111,23 +1111,23 @@
                                 <hr>
 
                                 @if(Auth::user()->role=="Admin")
-
-                                     <div class="col-md-6">
+                                    <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Parent Merchant *</label>
-                                            <select class="select2 form-control" name="merchant_fk_id" required>
-                                                <option value="" selected disabled>Please Select One</option>
+                                            <label for="description">Parent Merchant*</label>
+                                            <select class="select2 form-control" name="merchant_fk_id" id="merchant_fk_id" required>
+                                                <option value="" selected>Please Select One</option>
                                                 @foreach($merchants as $merchant)
                                                 <option value="{{$merchant->id}}">{{$merchant->merchant_name}}</option>
-                                              @endforeach
+                                                @endforeach
                                             </select>
+                                        </div>
                                     </div>
-                                </div>
-                                @endif
+                                    @else
+                                    
+                                <input type="hidden" name="merchant_fk_id" value="{{Auth::user()->merchant_fk_id}}" />
+                                    @endif
+ 
                                
-
-                        
-
                                 <!-- Bootstrap Switch -->
                                 <center>
                                     <p>Status</p>
@@ -1139,8 +1139,6 @@
                                 <br />
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
-
-
 
                         </form>
                     </div>

@@ -109,7 +109,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="address">Address</label>
-                                            <textarea id="address" type="textarea" placeholder="Enter Address" class="form-control" name="address" required autocomplete="address" autofocus>{{$user->address}}</textarea>
+                                            <textarea id="address" type="textarea" placeholder="Enter Address" class="form-control" name="address" autocomplete="address" autofocus>{{$user->address}}</textarea>
 
 
                                             @error('address')

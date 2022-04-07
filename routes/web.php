@@ -55,18 +55,13 @@ Route::group(['prefix' => 'merchant'], function(){
 
 
 Route::group(['prefix' => 'customer'], function(){
-    Route::get('/index', [customerController::class, 'index'])->middleware('admin_madmin');
-    Route::get('/create', [customerController::class, 'create'])->middleware('admin_madmin');
-    Route::post('/store', [customerController::class, 'store'])->middleware('admin_madmin');
-    Route::get('/edit/{id}', [customerController::class, 'edit'])->middleware('admin_madmin');
-    Route::post('/update', [customerController::class, 'update'])->middleware('admin_madmin');
+    Route::get('/index', [customerController::class, 'index'])->middleware('admin_madmin_msuperadmin');
+    Route::get('/create', [customerController::class, 'create'])->middleware('admin_madmin_msuperadmin');
+    Route::post('/store', [customerController::class, 'store'])->middleware('admin_madmin_msuperadmin');
+    Route::get('/edit/{id}', [customerController::class, 'edit'])->middleware('admin_madmin_msuperadmin');
+    Route::post('/update', [customerController::class, 'update'])->middleware('admin_madmin_msuperadmin');
     Route::get('/delete/{id}', [customerController::class, 'destroy'])->middleware('admin');
-    Route::post('/search', [customerController::class, 'search'])->middleware('admin_madmin');
-    Route::post('/store', [customerController::class, 'store']);
-    Route::get('/edit/{id}', [customerController::class, 'edit']);
-    Route::post('/update', [customerController::class, 'update']);
-    Route::get('/delete/{id}', [customerController::class, 'destroy'])->middleware('admin');
-    Route::post('/search', [customerController::class, 'search']);
+    Route::post('/search', [customerController::class, 'search'])->middleware('admin_madmin_msuperadmin');
 });
 
 Route::get('/bankaccountpayoutdestroy/{bankaccountpayoutid}', [customerController::class, 'bankaccountpayoutdestroy'])->middleware('admin');
@@ -74,22 +69,17 @@ Route::get('/bankaccountpayoutdestroy/{bankaccountpayoutid}', [customerControlle
 
 
 Route::group(['prefix' => 'transaction'], function(){
-    Route::get('/index', [TransactionController::class, 'index'])->name('transaction.index')->middleware('admin_madmin');
-    Route::get('/create', [TransactionController::class, 'create'])->middleware('admin_madmin');
-    Route::post('/store', [TransactionController::class, 'store'])->middleware('admin_madmin');
-    Route::get('/edit/{id}', [TransactionController::class, 'edit'])->middleware('admin_madmin');
-    Route::post('/update', [TransactionController::class, 'update'])->middleware('admin_madmin');
+    Route::get('/index', [TransactionController::class, 'index'])->name('transaction.index')->middleware('admin_madmin_msuperadmin');
+    Route::get('/create', [TransactionController::class, 'create'])->middleware('admin_madmin_msuperadmin');
+    Route::post('/store', [TransactionController::class, 'store'])->middleware('admin_madmin_msuperadmin');
+    Route::get('/edit/{id}', [TransactionController::class, 'edit'])->middleware('admin_madmin_msuperadmin');
+    Route::post('/update', [TransactionController::class, 'update'])->middleware('admin_madmin_msuperadmin');
     Route::get('/delete/{id}', [TransactionController::class, 'destroy'])->middleware('admin');
-    Route::post('/search', [TransactionController::class, 'search'])->middleware('admin_madmin');
-    Route::get('/search', [TransactionController::class, 'index'])->middleware('admin_madmin');
-    Route::get('/index', [TransactionController::class, 'index']);
-    Route::get('/create', [TransactionController::class, 'create']);
-    Route::post('/store', [TransactionController::class, 'store']);
-    Route::get('/edit/{id}', [TransactionController::class, 'edit']);
-    Route::post('/update', [TransactionController::class, 'update']);
+    Route::post('/search', [TransactionController::class, 'search'])->middleware('admin_madmin_msuperadmin');
+    Route::get('/search', [TransactionController::class, 'index'])->middleware('admin_madmin_msuperadmin');
     Route::get('/delete/{id}', [TransactionController::class, 'destroy'])->middleware('admin');
-    Route::post('/search', [TransactionController::class, 'search']);
-    Route::get('/search', [TransactionController::class, 'index']);
+    Route::post('/search', [TransactionController::class, 'search'])->middleware('admin_madmin_msuperadmin');
+    Route::get('/search', [TransactionController::class, 'index'])->middleware('admin_madmin_msuperadmin');
 });
 
 
@@ -100,79 +90,55 @@ Route::group(['prefix' => 'user'], function(){
     Route::get('/edit/{id}', [UserController::class, 'edit'])->middleware('admin_msuperadmin');
     Route::post('/update', [UserController::class, 'update'])->middleware('admin_msuperadmin');
 
-
     Route::get('/selfedit', [UserController::class, 'selfedit'])->middleware('auth');
     Route::post('/selfupdate', [UserController::class, 'selfupdate'])->middleware('auth');
 
-    Route::get('/index', [UserController::class, 'index'])->middleware('admin');
-    Route::get('/create', [UserController::class, 'create'])->middleware('admin');
-    Route::post('/store', [UserController   ::class, 'store'])->middleware('admin');
-    Route::get('/edit/{id}', [UserController::class, 'edit'])->middleware('admin');
-    Route::post('/update', [UserController::class, 'update'])->middleware('admin');
     Route::get('/delete/{id}', [UserController::class, 'destroy'])->middleware('admin');
 });
 
 
 Route::group(['prefix' => 'mailbox'], function(){
-    Route::get('/index', [MailboxController::class, 'index'])->middleware('admin');
-    Route::get('/sent', [MailboxController::class, 'sent'])->middleware('admin');
-    Route::get('/create', [MailboxController::class, 'create'])->middleware('admin');
-    Route::post('/store', [MailboxController::class, 'store'])->middleware('admin');
-    Route::get('/edit/{id}', [MailboxController::class, 'edit'])->middleware('admin');
-    Route::post('/update', [MailboxController::class, 'update'])->middleware('admin');
+    Route::get('/index', [MailboxController::class, 'index'])->middleware('admin_msuperadmin');
+    Route::get('/sent', [MailboxController::class, 'sent'])->middleware('admin_msuperadmin');
+    Route::get('/create', [MailboxController::class, 'create'])->middleware('admin_msuperadmin');
+    Route::post('/store', [MailboxController::class, 'store'])->middleware('admin_msuperadmin');
+    Route::get('/edit/{id}', [MailboxController::class, 'edit'])->middleware('admin_msuperadmin');
+    Route::post('/update', [MailboxController::class, 'update'])->middleware('admin_msuperadmin');
     Route::get('/delete/{id}', [MailboxController::class, 'destroy'])->middleware('admin');
 });
 
 
 Route::group(['prefix' => 'payout'], function(){
-    Route::get('/index', [PayoutController::class, 'index'])->middleware('admin_madmin');
-    Route::get('/create', [PayoutController::class, 'create'])->middleware('admin_madmin');
-    Route::post('/store', [PayoutController::class, 'store'])->middleware('admin_madmin');
-    Route::get('/edit/{id}', [PayoutController::class, 'edit'])->middleware('admin_madmin');
-    Route::post('/update', [PayoutController::class, 'update'])->middleware('admin_madmin');
+    Route::get('/index', [PayoutController::class, 'index'])->middleware('admin_madmin_msuperadmin');
+    Route::get('/create', [PayoutController::class, 'create'])->middleware('admin_madmin_msuperadmin');
+    Route::post('/store', [PayoutController::class, 'store'])->middleware('admin_madmin_msuperadmin');
+    Route::get('/edit/{id}', [PayoutController::class, 'edit'])->middleware('admin_madmin_msuperadmin');
+    Route::post('/update', [PayoutController::class, 'update'])->middleware('admin_madmin_msuperadmin');
     Route::get('/delete/{id}', [PayoutController::class, 'destroy'])->middleware('admin');
-    Route::post('/search', [PayoutController::class, 'search'])->middleware('admin_madmin');
-    Route::get('/search', [PayoutController::class, 'index'])->middleware('admin_madmin');
-    Route::get('/index', [PayoutController::class, 'index']);
-    Route::get('/create', [PayoutController::class, 'create']);
-    Route::post('/store', [PayoutController::class, 'store']);
-    Route::get('/edit/{id}', [PayoutController::class, 'edit'])->middleware('admin');
-    Route::post('/update', [PayoutController::class, 'update'])->middleware('admin');
-    Route::get('/delete/{id}', [PayoutController::class, 'destroy'])->middleware('admin');
-    Route::post('/search', [PayoutController::class, 'search']);
-    Route::get('/search', [PayoutController::class, 'index']);
+    Route::post('/search', [PayoutController::class, 'search'])->middleware('admin_madmin_msuperadmin');
+    Route::get('/search', [PayoutController::class, 'index'])->middleware('admin_madmin_msuperadmin');
 });
 
 
 Route::group(['prefix' => 'settlement'], function(){
-    Route::get('/index', [settlementController::class, 'index'])->name('settlement.index')->middleware('admin_madmin');
-    Route::get('/create', [settlementController::class, 'create'])->middleware('admin_madmin');
-    Route::post('/store', [settlementController::class, 'store'])->middleware('admin_madmin');
-    Route::get('/edit/{id}', [settlementController::class, 'edit'])->middleware('admin_madmin');
-    Route::post('/update', [settlementController::class, 'update'])->middleware('admin_madmin');
+    Route::get('/index', [settlementController::class, 'index'])->name('settlement.index')->middleware('admin_madmin_msuperadmin');
+    Route::get('/create', [settlementController::class, 'create'])->middleware('admin_madmin_msuperadmin');
+    Route::post('/store', [settlementController::class, 'store'])->middleware('admin_madmin_msuperadmin');
+    Route::get('/edit/{id}', [settlementController::class, 'edit'])->middleware('admin_madmin_msuperadmin');
+    Route::post('/update', [settlementController::class, 'update'])->middleware('admin_madmin_msuperadmin');
     Route::get('/delete/{id}', [settlementController::class, 'destroy'])->middleware('admin');
-    Route::post('/search', [settlementController::class, 'search'])->middleware('admin_madmin');
-    Route::get('/search', [settlementController::class, 'index'])->middleware('admin_madmin');
+    Route::post('/search', [settlementController::class, 'search'])->middleware('admin_madmin_msuperadmin');
+    Route::get('/search', [settlementController::class, 'index'])->middleware('admin_madmin_msuperadmin');
 
-    Route::get('/view/{id}', [settlementController::class, 'view'])->middleware('admin_madmin');
-    Route::get('/index', [settlementController::class, 'index']);
-    Route::get('/create', [settlementController::class, 'create']);
-    Route::post('/store', [settlementController::class, 'store']);
-    Route::get('/edit/{id}', [settlementController::class, 'edit'])->middleware('admin');
-    Route::post('/update', [settlementController::class, 'update'])->middleware('admin');
-    Route::get('/delete/{id}', [settlementController::class, 'destroy'])->middleware('admin');
-    Route::post('/search', [settlementController::class, 'search']);
-    Route::get('/search', [settlementController::class, 'index']);
-
-    Route::get('/view/{id}', [settlementController::class, 'view'])->middleware('admin');
+    Route::get('/view/{id}', [settlementController::class, 'view'])->middleware('admin_madmin_msuperadmin');
 });
 
 Route::group(['prefix' => 'settlementaccount'], function(){
-    Route::get('/index', [settlementaccountController::class, 'index'])->name('settlementaccount.index')->middleware('admin_madmin');
-    Route::get('/create', [settlementaccountController::class, 'create'])->middleware('admin_madmin');
-    Route::post('/store', [settlementaccountController::class, 'store'])->middleware('admin_madmin');
-    Route::get('/edit/{id}', [settlementaccountController::class, 'edit'])->middleware('admin_madmin');
-    Route::post('/update', [settlementaccountController::class, 'update'])->middleware('admin_madmin');
+    Route::get('/index', [settlementaccountController::class, 'index'])->name('settlementaccount.index')->middleware('admin_madmin_msuperadmin');
+    Route::get('/create', [settlementaccountController::class, 'create'])->middleware('admin_madmin_msuperadmin');
+    Route::post('/store', [settlementaccountController::class, 'store'])->middleware('admin_madmin_msuperadmin');
+    Route::get('/edit/{id}', [settlementaccountController::class, 'edit'])->middleware('admin_madmin_msuperadmin');
+    Route::post('/update', [settlementaccountController::class, 'update'])->middleware('admin_madmin_msuperadmin');
     Route::get('/delete/{id}', [settlementaccountController::class, 'destroy'])->middleware('admin');
 });
 

@@ -257,7 +257,7 @@
 
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-user"></i>
+                <i class="nav-icon fas fa-users"></i>
                 <p>
                   Users
                   <i class="fas fa-angle-left right"></i>
@@ -281,7 +281,7 @@
 
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-user"></i>
+                <i class="nav-icon far fa-envelope"></i>
                 <p>
                   Mailbox
                   <i class="fas fa-angle-left right"></i>
@@ -390,9 +390,6 @@
 
             <a href="{{url('user/selfedit')}}" class="nav-link">
             <i class="nav-icon fas fa-user"></i>
-
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-store"></i>
               <p>
                 Profile
                 <i class="fas fa-angle-left right"></i>

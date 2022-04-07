@@ -38,7 +38,6 @@ class customerController extends Controller
 
     public function search(Request $request)
     {
-
         $merchant_fk_id = $request->merchant_fk_id;
         // dd($request->all());
         $customers = customer::where('merchant_fk_id',$merchant_fk_id)->get();
