@@ -20,7 +20,7 @@
               <input type="file" class="form-control" name="photo" value="{{$category->photo}}"/><br/><br/>  
           </div>  
 <br/>  
-<button type="submit" class="btn-btn" >Submit</button> 
+<button type="submit" class="btn-btn" >Update</button> 
 
 
 </form>

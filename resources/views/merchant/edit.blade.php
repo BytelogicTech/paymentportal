@@ -7,13 +7,20 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Merchants</h1>
+                <h1>Edit Merchant - {{$merchant->merchant_name}} </h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
+<<<<<<< HEAD
                     <li class="breadcrumb-item"><a href="{{url('/home')}}">Home</a></li>
                         <li class="breadcrumb-item"><a href="{{url('merchant/index')}}">All Merchants</a></li>
                         <li class="breadcrumb-item active">Edit Merchant - {{$merchant->first_name}} {{$merchant->last_name}}</li>
+=======
+                        <li class="breadcrumb-item"><a href="{{url('/home')}}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{url('merchant/index')}}">All Merchants</a></li>
+                        <li class="breadcrumb-item active" >Edit Merchant - {{$merchant->merchant_name}}</li>
+                    
+>>>>>>> 3d96ad11b34f1822705fc53f9d848c78903268e3
                     </ol>
                 </div>
             </div>
@@ -356,13 +363,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Secondary Email</label>
-                                            <input type="email" placeholder="Enter Secondary Email" class="form-control" name="secondary_email" required value="{{$merchant->secondary_email}}" />
+                                            <input type="email" placeholder="Enter Secondary Email" class="form-control" name="secondary_email" value="{{$merchant->secondary_email}}" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Invoice Email</label>
-                                            <input type="email" placeholder="Enter Invoice Email" class="form-control" name="invoice_email" required value="{{$merchant->invoice_email}}" />
+                                            <input type="email" placeholder="Enter Invoice Email" class="form-control" name="invoice_email"  value="{{$merchant->invoice_email}}" />
                                         </div>
                                     </div>
                                 </div>
@@ -372,13 +379,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Payout Notification Email</label>
-                                            <input type="email" placeholder="Enter Payout Notification Email" class="form-control" name="payout_notification_email" required value="{{$merchant->payout_notification_email}}" />
+                                            <input type="email" placeholder="Enter Payout Notification Email" class="form-control" name="payout_notification_email"  value="{{$merchant->payout_notification_email}}" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Settlement Notification Email</label>
-                                            <input type="email" placeholder="Enter Settlement Notification Email" class="form-control" name="settlement_notification_email" required value="{{$merchant->settlement_notification_email}}" />
+                                            <input type="email" placeholder="Enter Settlement Notification Email" class="form-control" name="settlement_notification_email"  value="{{$merchant->settlement_notification_email}}" />
                                         </div>
                                     </div>
                                 </div>
@@ -387,13 +394,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Payout Notification Email [FOR ADMIN]l</label>
-                                            <input type="email" placeholder="Enter Payout Notification Email FOR ADMIN" class="form-control" name="payout_notification_email_admin" required value="{{$merchant->payout_notification_email_admin}}" />
+                                            <input type="email" placeholder="Enter Payout Notification Email FOR ADMIN" class="form-control" name="payout_notification_email_admin"  value="{{$merchant->payout_notification_email_admin}}" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Settlement Notification Email [FOR ADMIN]</label>
-                                            <input type="email" placeholder="Enter Settlement Notification Email FOR ADMIN" class="form-control" name="settlement_notification_email_admin" required value="{{$merchant->settlement_notification_email_admin}}" />
+                                            <input type="email" placeholder="Enter Settlement Notification Email FOR ADMIN" class="form-control" name="settlement_notification_email_admin"  value="{{$merchant->settlement_notification_email_admin}}" />
                                         </div>
                                     </div>
                                 </div>
@@ -449,7 +456,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="company_name">Password*</label>
-                                            <input type="text" placeholder="New Password" class="form-control" name="company_name" required value="{{$merchant->company_name}}" />
+                                            <input type="text" placeholder="New Password" class="form-control" name="company_name"  value="{{$merchant->company_name}}" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -465,7 +472,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="prefix">Website</label>
-                                            <input type="text" placeholder="Enter Website" class="form-control" name="website" required value="{{$merchant->website}}" />
+                                            <input type="text" placeholder="Enter Website" class="form-control" name="website"  value="{{$merchant->website}}" />
                                         </div>
                                     </div>
 

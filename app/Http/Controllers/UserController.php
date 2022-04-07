@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\logger;
 use App\Models\merchant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -75,6 +76,12 @@ class UserController extends Controller
         $merchants = merchant::all();
         return view('user/edit', compact('user','merchants'));
     }
+    public function selfedit()
+    {
+        $user = Auth::user();
+        $merchants = merchant::all();
+        return view('user/selfedit', compact('user','merchants'));
+    }
 
     /**
      * Update the specified resource in storage.
@@ -113,6 +120,30 @@ class UserController extends Controller
         $logger->created_by = Auth::user()->id;
         $logger->save();
         return redirect('user/index')->with('message','User Updated Successfully');
+    }
+
+    public function selfupdate(Request $request)
+    {
+        $id = $request->id;
+        $user = User::find($id);
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->country = $request->country;
+        $user->website = $request->website;
+        $user->logo = $request->logo;
+        $user->merchant_fk_id = $request->merchant_fk_id;
+        $user->phone = $request->phone;
+        $user->email = $request->email;
+        $user->email_verified_at = $request->email_verified_at;
+        if($request->password)
+        {
+            $user->password = Hash::make($request->password);
+        }
+      
+        $user->role = $request->role;
+        $user->remember_token = $request->remember_token;
+        $user->save();
+        return redirect('user/index')->with('message','Profile Updated Successfully');
     }
 
     /**

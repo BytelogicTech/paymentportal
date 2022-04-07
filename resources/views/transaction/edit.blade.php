@@ -12,11 +12,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{url('/home')}}">Home</a></li>
                         <li class="breadcrumb-item"><a href="{{url('transaction/index')}}">All Transactions</a></li>
-
-                     
-
                         <li class="breadcrumb-item active" >Edit Transaction - {{$transaction->product_name}}</li>
                     </ol>
                 </div>
@@ -126,6 +123,9 @@
                                         </div>
                                     </div>
 
+
+                            
+                            
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Upload Signed Invoice</label>

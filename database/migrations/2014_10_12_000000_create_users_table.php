@@ -20,6 +20,9 @@ return new class extends Migration
             $table->integer('merchant_fk_id')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
+            $table->string('country')->nullable();
+            $table->string('website')->nullable();
+            $table->string('logo')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

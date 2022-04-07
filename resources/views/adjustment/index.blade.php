@@ -50,7 +50,12 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
+<<<<<<< HEAD
                         <li class="breadcrumb-item active">View All Adjustments</li>
+=======
+                        <li class="breadcrumb-item active">View All Adjustments
+                        </li>
+>>>>>>> 3d96ad11b34f1822705fc53f9d848c78903268e3
                     </ol>
                 </div>
             </div>
@@ -80,7 +85,7 @@
                                         <div class="form-group">
                                             <label>Merchant Name:</label>
                                             <select class="select2 form-control" name="merchant_fk_id" id="merchant_fk_id">
-                                                <option value="" selected >Select Merchant</option>
+                                                <option value="" selected>Select Merchant</option>
                                                 @foreach($merchants as $merchant)
                                                 <option value="{{$merchant->id}}">{{$merchant->merchant_name}}</option>
                                                 @endforeach
@@ -92,7 +97,7 @@
                                         <div class="form-group">
                                             <label for="description">Type</label>
                                             <select class="form-control" name="type" id="type">
-                                                <option value="" selected >Please Select One</option>
+                                                <option value="" selected>Please Select One</option>
                                                 <option value="Other Adjustment">Other Adjustment</option>
                                                 <option value="RR Adjustment">RR Adjustment</option>
                                                 <option value="Currency Conversion">Currency Conversion</option>
@@ -119,7 +124,7 @@
                                     <div class="col-md-3">
                                         <label>Currency</label>
                                         <select class="form-control select2" style="width: 100%;" name="currency" id="currency">
-                                            <option value="" selected >Please Select One</option>
+                                            <option value="" selected>Please Select One</option>
                                             @foreach(config('constants.currency_list') as $key=> $currency)
                                             <option value="{{$key}}">{{$key}}</option>
                                             @endforeach
@@ -167,7 +172,10 @@
                                     <a href="#" data-toggle="modal" data-target="#modal-default" class="btn btn-warning btn-sm" data-adjustmentid="{{$adjustment->id}}" data-remarks="{{$adjustment->remarks}}">
                                         <i class="far fa-edit" aria-hidden="true"></i>
                                     </a>
+                                    @if(Auth::user()->role=="Admin")
+
                                     <a href="{{url('adjustment/delete/'.$adjustment->id)}}" onclick="return confirm('Are you sure, you want to delete it?')" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                    @endif
                                 </td>
 
                             </tr>
@@ -223,24 +231,21 @@
     });
 </script>
 <script>
-  $('#merchant_fk_id').val('{{$merchant_fk_id}}');
+    $('#merchant_fk_id').val('{{$merchant_fk_id}}');
 </script>
 
 <script>
-  $('#type').val('{{$type}}');
+    $('#type').val('{{$type}}');
 </script>
 
 <script>
-  $('#date_added_from').val('{{$date_added_from}}');
+    $('#date_added_from').val('{{$date_added_from}}');
 </script>
 
 <script>
-  $('#date_added_to').val('{{$date_added_to}}');
+    $('#date_added_to').val('{{$date_added_to}}');
 </script>
 
 <script>
-  $('#currency').val('{{$currency}}');
+    $('#currency').val('{{$currency}}');
 </script>
-
-
-

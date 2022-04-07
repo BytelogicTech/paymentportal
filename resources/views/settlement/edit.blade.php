@@ -8,13 +8,22 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Settlements</h1>
+                    <h1>Edit Settlement - {{$settlement->settlement_amount}} </h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
+<<<<<<< HEAD
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item"><a href="{{url('settlement/index')}}">All Settlements</a></li>
                     <li class="breadcrumb-item active" >Edit Settlement - {{$settlement->merchant_fk_id}}</li>
+=======
+                        <li class="breadcrumb-item"><a href="{{url('/home')}}">Home</a></li>
+
+                        <li class="breadcrumb-item"><a href="{{url('settlement/index')}}">All Settlements</a></li>
+
+                        <li class="breadcrumb-item active">Edit Settlement - {{$settlement->settlement_amount}}</li>
+
+>>>>>>> 3d96ad11b34f1822705fc53f9d848c78903268e3
                     </ol>
                 </div>
             </div>
@@ -53,9 +62,9 @@
                                 </div>
 
 
-                <div class="row">
+                                <div class="row">
 
-                                <div class="col-md-6">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Bank Account To Transfer To*</label>
                                             <select class="select2 form-control" name="bank_account_to_fk_id" id="bank_account_to_fk_id" required>
@@ -67,7 +76,7 @@
                                         </div>
                                     </div>
 
-                                    
+
 
 
                                     <div class="col-md-6">
@@ -91,7 +100,7 @@
                                         <div class="form-group">
                                             <label for="description">Remarks / Purpose of Transfer</label>
                                             <textarea placeholder="Remarks / Purpose of Transfer" class="form-control" name="remarks">
-                                                {{$settlement->remarks}}
+                                            {{$settlement->remarks}}
                                             </textarea>
 
                                         </div>
@@ -108,17 +117,17 @@
                                 <!-- Bootstrap Switch -->
                                 <center>
                                     <p>RR Settlement?</p>
-                                    <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="YES" data-off-text="NO" name="rr_settlement" >
+                                    <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="YES" data-off-text="NO" name="rr_settlement">
 
                                 </center>
 
-                            <div class="col-md-6">
-                            </div>
+                                <div class="col-md-6">
+                                </div>
 
                                 <!-- /.card -->
 
                                 <div class="row">
-                                <div class="col-md-6">
+                                    <div class="col-md-6">
                                         <label for="description">Bank Account To Transform From</label>
                                         <select class="select2 form-control" name="bank_account_from_fk_id" value="{{$settlement->bank_account_from_fk_id}}" required>
                                             <option value="" disabled selected>Please Select One</option>
@@ -134,16 +143,16 @@
 
                                     <div class="col-md-6">
                                         <label for="description">Status Of Settlement</label>
-                                        <select class="form-control" name="status_of_settlement" value="{{$settlement->status_of_settlement}}" >
-                                        <option value="New" @if($settlement->status_of_settlement == 'New') selected @endif>New</option>
-                                        <option value="Processing" @if($settlement->status_of_settlement == 'Processing') selected @endif>Processing</option>
-                                        <option value="Paid" @if($settlement->status_of_settlement == 'Paid') selected @endif>Paid</option>
-                                        <option value="Hold" @if($settlement->status_of_settlement == 'Hold') selected @endif>Hold</option>
-                                        <option value="Canceled" @if($settlement->status_of_settlement == 'Canceled') selected @endif>Canceled</option>
-                                        <option value="Returned" @if($settlement->status_of_settlement == 'Returned') selected @endif>Returned</option>
-                                        <option value="Rejected" @if($settlement->status_of_settlement == 'Rejected') selected @endif>Rejected</option>
-                                        
-                                        </select> 
+                                        <select class="form-control" name="status_of_settlement" value="{{$settlement->status_of_settlement}}">
+                                            <option value="New" @if($settlement->status_of_settlement == 'New') selected @endif>New</option>
+                                            <option value="Processing" @if($settlement->status_of_settlement == 'Processing') selected @endif>Processing</option>
+                                            <option value="Paid" @if($settlement->status_of_settlement == 'Paid') selected @endif>Paid</option>
+                                            <option value="Hold" @if($settlement->status_of_settlement == 'Hold') selected @endif>Hold</option>
+                                            <option value="Canceled" @if($settlement->status_of_settlement == 'Canceled') selected @endif>Canceled</option>
+                                            <option value="Returned" @if($settlement->status_of_settlement == 'Returned') selected @endif>Returned</option>
+                                            <option value="Rejected" @if($settlement->status_of_settlement == 'Rejected') selected @endif>Rejected</option>
+
+                                        </select>
                                     </div>
                                 </div>
 
@@ -177,41 +186,34 @@
 </script>
 
 <script>
-    $('#merchant_fk_id').change(function(){
+    $('#merchant_fk_id').change(function() {
         $('#bank_account_to_fk_id').html('');
         var merchant_fk_id = $(this).val();
 
         $.ajax({
-                type: 'POST',
-                url: "{{url('getpayouts_bymerchant')}}",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data: {
-                    merchant_fk_id: merchant_fk_id
-                },
-                success: function(data) {
-                    console.log(data);
-                    
+            type: 'POST',
+            url: "{{url('getpayouts_bymerchant')}}",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                merchant_fk_id: merchant_fk_id
+            },
+            success: function(data) {
+                console.log(data);
+
                 var options = '<option value="" >Please Select One</option> ';
-                    $.each(data, function(i, value) {
-                    options+= '<option value='+value["id"]+'>'+value["beneficiary_name"]+'-'+value["currency"]+'-'+value["account_number"]+'</option>';
-                    });
-                    // console.log(data);
-                    $('#bank_account_to_fk_id').html(options);
-                },
-                error: function(data) {
-                    console.log("error");
-                    console.log(data);
-                }
-            });
-        
+                $.each(data, function(i, value) {
+                    options += '<option value=' + value["id"] + '>' + value["beneficiary_name"] + '-' + value["currency"] + '-' + value["account_number"] + '</option>';
+                });
+                // console.log(data);
+                $('#bank_account_to_fk_id').html(options);
+            },
+            error: function(data) {
+                console.log("error");
+                console.log(data);
+            }
+        });
+
     });
-    </script>
-
-
-
-
-
-
-
+</script>
