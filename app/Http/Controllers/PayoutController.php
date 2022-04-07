@@ -222,7 +222,7 @@ class PayoutController extends Controller
         $logger->itemid = $payoutid;
         $logger->module = "payout";
         $logger->action = "add";
-        $logger->created_by = Auth::user()->first_name;
+        $logger->created_by = Auth::user()->id;
         $logger->save();
 
         return redirect('payout/index')->with('success', 'Payout Added Successfully');
@@ -339,7 +339,7 @@ class PayoutController extends Controller
         $logger->itemid = $request->id;
         $logger->module = "payout";
         $logger->action = "update";
-        $logger->created_by = Auth::user()->first_name;
+        $logger->created_by = Auth::user()->id;
         $logger->save();
 
         return redirect('payout/index')->with('success', 'Payout Added Successfully');
@@ -360,7 +360,7 @@ class PayoutController extends Controller
         $logger->itemid = $id;
         $logger->module = "payout";
         $logger->action = "delete";
-        $logger->created_by = Auth::user()->first_name;
+        $logger->created_by = Auth::user()->id;
         $logger->save();
 
         return redirect('payout/index')->with('success', 'Payout Deleted Successfully');  

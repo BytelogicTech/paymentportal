@@ -59,9 +59,10 @@ class customerController extends Controller
     {
         // $bankaccounts = bank_account::groupBy('bank_account.banks_id')->get();
         $merchants = merchant::all();
+        $customers = customer::where('merchant_fk_id',Auth::user()->merchant_fk_id)->get();
         
        
-        return view('customer/create', compact('merchants'));
+        return view('customer/create', compact('merchants','customers'));
     }
 
     /**

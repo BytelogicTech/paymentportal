@@ -50,12 +50,10 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
-<<<<<<< HEAD
-                        <li class="breadcrumb-item active">View All Adjustments</li>
-=======
+
                         <li class="breadcrumb-item active">View All Adjustments
                         </li>
->>>>>>> 3d96ad11b34f1822705fc53f9d848c78903268e3
+
                     </ol>
                 </div>
             </div>

@@ -13,13 +13,10 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-<<<<<<< HEAD
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active"><a href="{{url('adjustment/index')}}">View All Adjustments</a></li>
-=======
+
+
                         <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
                         <li class="breadcrumb-item active">Other Adjustments</li>
->>>>>>> 3d96ad11b34f1822705fc53f9d848c78903268e3
                     </ol>
                 </div>
             </div>

@@ -37,7 +37,7 @@
 
 
         </li>
-        
+
         <li class="nav-item ">
           <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -110,8 +110,8 @@
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link">
-               
-                <i class=" nav-icon fa fa-dollar-sign"></i> 
+
+                <i class=" nav-icon fa fa-dollar-sign"></i>
                 <p>
                   Payouts
                   <i class="fas fa-angle-left right"></i>
@@ -224,7 +224,7 @@
             </li>
             @endif
 
-           
+
 
             <li class="nav-header">SYSTEM</li>
             <li class="nav-item">
@@ -315,7 +315,7 @@
                 </li>
               </ul>
             </li>
-@endif
+            @endif
 
             @if(Auth::user()->role=="Admin")
 
@@ -342,7 +342,7 @@
                     <p>Add new Merchant</p>
                   </a>
                 </li>
-              </ul> 
+              </ul>
 
 
 
@@ -370,18 +370,16 @@
                 </li>
               </ul>
             </li>
-            
 
+            @if(Auth::user()->role=="Admin")
             <a href="{{url('logger/index')}}" class="nav-link">
               <i class="nav-icon fas fa-store"></i>
-           
-              
-              
               <p>
                 Activity Log
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
+            @endif
 
             @endif
 
@@ -389,7 +387,7 @@
             <li class="nav-header">SETTINGS</li>
 
             <a href="{{url('user/selfedit')}}" class="nav-link">
-            <i class="nav-icon fas fa-user"></i>
+              <i class="nav-icon fas fa-user"></i>
               <p>
                 Profile
                 <i class="fas fa-angle-left right"></i>
