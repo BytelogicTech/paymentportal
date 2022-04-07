@@ -10,20 +10,15 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Edit User - {{$user->first_name}} </h1>
+                    <h1>Edit User - {{$user->first_name}} {{$user->last_name}} </h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-<<<<<<< HEAD
                     <li class="breadcrumb-item"><a href="{{url('/home')}}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{url('user/index')}}">All Customers</a></li>
-                        <li class="breadcrumb-item active">Edit User - {{$user->first_name}} {{$user->last_name}}</li>
-=======
-                        <li class="breadcrumb-item"><a href="{{url('/home')}}">Home</a></li>
                         <li class="breadcrumb-item"><a href="{{url('user/index')}}">All Users</a></li>
-                        <li class="breadcrumb-item active">Edit User - {{$user->first_name}}</li>
+                        <li class="breadcrumb-item active">Edit User - {{$user->first_name}} {{$user->last_name}}</li>
 
->>>>>>> 3d96ad11b34f1822705fc53f9d848c78903268e3
+
                     </ol>
                 </div>
             </div>

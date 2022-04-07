@@ -9,22 +9,13 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1></h1>
-                    <h1>Edit Settlement Accounts </h1>
+                    <h1>Edit Settlement Account - {{$settlementaccount->beneficiary_name}}</h1>
                 </div>
                 <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-<<<<<<< HEAD
-                    
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{url('settlementaccount/index')}}">All Settlementaccount</a></li>
-                        <li class="breadcrumb-item active" >Edit Settlement - {{$settlementaccount->merchant_fk_id}}</li>
-=======
+                    <ol class="breadcrumb float-sm-right">                   
                         <li class="breadcrumb-item"><a href="{{url('/home')}}">Home</a></li>
-
                         <li class="breadcrumb-item"><a href="{{url('settlementaccount/index')}}">All Settlement Accounts</a></li>
-
-                        <li class="breadcrumb-item active">Edit Settlement Account</li>
->>>>>>> 3d96ad11b34f1822705fc53f9d848c78903268e3
+                        <li class="breadcrumb-item active" >Edit Settlement Account - {{$settlementaccount->beneficiary_name}}</li>
                     </ol>
                 </div>
             </div>

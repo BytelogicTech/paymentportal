@@ -8,7 +8,6 @@ use App\Models\customer;
 use App\Models\merchant;
 use App\Models\bank_account_payouts;
 use App\Models\customer_documents;
-use App\Models\logger;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 // use App\Models\customer_account;
@@ -39,7 +38,7 @@ class customerController extends Controller
 
     public function search(Request $request)
     {
-        $merchant_fk_id = $request->merchant_fk_id;
+        $merchant_fk_id = $request->merchant_fk_id; 
         // dd($request->all());
         $customers = customer::where('merchant_fk_id',$merchant_fk_id)->get();
         // dd($customers);
@@ -59,11 +58,8 @@ class customerController extends Controller
     {
         // $bankaccounts = bank_account::groupBy('bank_account.banks_id')->get();
         $merchants = merchant::all();
-        
-       
         return view('customer/create', compact('merchants'));
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -152,16 +148,6 @@ class customerController extends Controller
             $customerdocuments->save();
         }
         
-
-        $logger = new logger();
-        $logger->itemid = $customerid;
-        $logger->module = "customer";
-        $logger->action = "add";
-        $logger->created_by = Auth::user()->id;
-        $logger->save();
-
-
-
         return redirect('customer/index')->with('success', 'customer Added Successfully');
     }
     /**
@@ -226,12 +212,7 @@ class customerController extends Controller
 
         $customer->update();
 
-        $logger = new logger();
-        $logger->itemid = $request->id;
-        $logger->module = "customer";
-        $logger->action = "update";
-        $logger->created_by = Auth::user()->id;
-        $logger->save();
+
 
         return redirect('customer/index')->with('success', 'customer Added Successfully');
     }
@@ -246,13 +227,6 @@ class customerController extends Controller
     {
         $customer = customer::findorFail($id);
         $customer->delete();
-
-        $logger = new logger();
-        $logger->itemid = $id;
-        $logger->module = "customer";
-        $logger->action = "delete";
-        $logger->created_by = Auth::user()->id;
-        $logger->save();
 
         return redirect('customer/index')->with('success', 'customer Deleted Successfully');
     }

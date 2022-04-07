@@ -173,7 +173,6 @@ class merchantController extends Controller
         $user->role = "Merchant Superadmin";
         $user->save();
        
-
         return redirect('merchant/index')->with('success', 'merchant Added Successfully');
     }
     /**

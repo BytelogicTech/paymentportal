@@ -9,17 +9,10 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PayoutController;
 use App\Http\Controllers\settlementController;
-<<<<<<< HEAD
 use App\http\Controllers\settlementaccountController;
 use App\http\Controllers\adjustmentController;
 use App\http\Controllers\MailboxController;
 use App\http\Controllers\LoggerController;
-=======
-use App\Http\Controllers\settlementaccountController;
-use App\Http\Controllers\adjustmentController;
-use App\Http\Controllers\MailboxController;
->>>>>>> 3d96ad11b34f1822705fc53f9d848c78903268e3
-
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -76,19 +69,13 @@ Route::get('/bankaccountpayoutdestroy/{bankaccountpayoutid}', [customerControlle
 
 
 Route::group(['prefix' => 'transaction'], function(){
-<<<<<<< HEAD
-    Route::get('/index', [TransactionController::class, 'index'])->name('transaction'.'index');
-    Route::get('/create', [TransactionController::class, 'create']);
-    Route::post('/store', [TransactionController::class, 'store']);
-    Route::get('/edit/{id}', [TransactionController::class, 'edit']);
-    Route::post('/update', [TransactionController::class, 'update']);
-=======
+
+
     Route::get('/index', [TransactionController::class, 'index'])->name('transaction.index')->middleware('admin_madmin_msuperadmin');
     Route::get('/create', [TransactionController::class, 'create'])->middleware('admin_madmin_msuperadmin');
     Route::post('/store', [TransactionController::class, 'store'])->middleware('admin_madmin_msuperadmin');
     Route::get('/edit/{id}', [TransactionController::class, 'edit'])->middleware('admin_madmin_msuperadmin');
     Route::post('/update', [TransactionController::class, 'update'])->middleware('admin_madmin_msuperadmin');
->>>>>>> 3d96ad11b34f1822705fc53f9d848c78903268e3
     Route::get('/delete/{id}', [TransactionController::class, 'destroy'])->middleware('admin');
     Route::post('/search', [TransactionController::class, 'search'])->middleware('admin_madmin_msuperadmin');
     Route::get('/search', [TransactionController::class, 'index'])->middleware('admin_madmin_msuperadmin');
@@ -159,7 +146,6 @@ Route::group(['prefix' => 'settlementaccount'], function(){
 
 
 
-<<<<<<< HEAD
 
 Route::group(['prefix' => 'logger'], function(){
     Route::get('/index', [LoggerController::class, 'index']);
@@ -171,12 +157,6 @@ Route::group(['prefix' => 'logger'], function(){
     Route::post('/search', [LoggerController::class, 'search']);
 });
 
-
-
-
-
-=======
->>>>>>> 3d96ad11b34f1822705fc53f9d848c78903268e3
 Route::group(['prefix' => 'adjustment'], function(){
     Route::get('/index', [adjustmentController::class, 'index'])->name('adjustment.index')->middleware('admin');
     Route::get('/index', [adjustmentController::class, 'index'])->name('adjustment.index');
