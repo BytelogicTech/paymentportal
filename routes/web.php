@@ -12,6 +12,7 @@ use App\Http\Controllers\settlementController;
 use App\http\Controllers\settlementaccountController;
 use App\http\Controllers\adjustmentController;
 use App\http\Controllers\MailboxController;
+use App\http\Controllers\LoggerController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -69,7 +70,7 @@ Route::get('/bankaccountpayoutdestroy/{bankaccountpayoutid}', [customerControlle
 
 
 Route::group(['prefix' => 'transaction'], function(){
-    Route::get('/index', [TransactionController::class, 'index']);
+    Route::get('/index', [TransactionController::class, 'index'])->name('transaction'.'index');
     Route::get('/create', [TransactionController::class, 'create']);
     Route::post('/store', [TransactionController::class, 'store']);
     Route::get('/edit/{id}', [TransactionController::class, 'edit']);
@@ -136,6 +137,19 @@ Route::group(['prefix' => 'settlementaccount'], function(){
     Route::get('/edit/{id}', [settlementaccountController::class, 'edit']);
     Route::post('/update', [settlementaccountController::class, 'update']);
     Route::get('/delete/{id}', [settlementaccountController::class, 'destroy']);
+});
+
+
+
+
+Route::group(['prefix' => 'logger'], function(){
+    Route::get('/index', [LoggerController::class, 'index']);
+    Route::get('/create', [LoggerController::class, 'create']);
+    Route::post('/store', [LoggerController::class, 'store']);
+    Route::get('/edit/{id}', [LoggerController::class, 'edit']);
+    Route::post('/update', [LoggerController::class, 'update']);
+    Route::get('/delete/{id}', [LoggerController::class, 'destroy']);
+    Route::post('/search', [LoggerController::class, 'search']);
 });
 
 

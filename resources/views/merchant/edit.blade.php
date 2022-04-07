@@ -11,8 +11,9 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">General Form</li>
+                    <li class="breadcrumb-item"><a href="{{url('/home')}}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{url('merchant/index')}}">All Merchants</a></li>
+                        <li class="breadcrumb-item active">Edit Merchant - {{$merchant->first_name}} {{$merchant->last_name}}</li>
                     </ol>
                 </div>
             </div>
@@ -581,7 +582,7 @@
 
 
                                 <br />
-                                <button type="submit" class="btn btn-primary">Add</button>
+                                <button type="submit" class="btn btn-primary">Update</button>
                             </div>
 
                         </form>

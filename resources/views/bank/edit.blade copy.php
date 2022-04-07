@@ -570,7 +570,7 @@
 
 
                                 <br />
-                                <button type="submit" class="btn btn-primary">Add</button>
+                                <button type="submit" class="btn btn-primary">Update</button>
                             </div>
 
                         </form>

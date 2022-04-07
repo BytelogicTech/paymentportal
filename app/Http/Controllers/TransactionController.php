@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\bank;
 use App\Models\User;
+use App\Models\logger;
 use App\Models\bank_account;
 use App\Models\bank_account_payouts;
 use App\Models\customer;
@@ -246,6 +247,15 @@ class TransactionController extends Controller
 
             $transaction->save();
 
+            $transactionid = $transaction->id;
+
+            $logger = new logger();
+        $logger->itemid = $transactionid;
+        $logger->module = "transaction";
+        $logger->action = "add";
+        $logger->created_by = Auth::user()->id;
+        $logger->save();
+
             return redirect('transaction/index')->with('success', 'transaction Added Successfully');
     }
 
@@ -340,7 +350,14 @@ class TransactionController extends Controller
             $transaction->type_of_transaction = $request->type_of_transaction;
             $transaction->save();
 
-            // dd("hello");
+            $logger = new logger();
+        $logger->itemid = $request->id;
+        $logger->module = "transaction";
+        $logger->action = "update";
+        $logger->created_by = Auth::user()->id;
+        $logger->save();
+
+            
 
             return redirect()->route('transaction.index')->with('success', 'Transaction Updated Successfully');
         
@@ -356,6 +373,13 @@ class TransactionController extends Controller
     {
         $transaction = transaction::findorFail($id);
         $transaction->delete();
+
+        $logger = new logger();
+        $logger->itemid = $id;
+        $logger->module = "transaction";
+        $logger->action = "delete";
+        $logger->created_by = Auth::user()->id;
+        $logger->save();
 
         return redirect('transaction/index')->with('success','Transaction Deleted Successfully');
     }

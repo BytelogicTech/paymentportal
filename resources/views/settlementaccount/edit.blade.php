@@ -12,8 +12,10 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
+                    
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">General Form</li>
+                        <li class="breadcrumb-item"><a href="{{url('settlementaccount/index')}}">All Settlementaccount</a></li>
+                        <li class="breadcrumb-item active" >Edit Settlement - {{$settlementaccount->merchant_fk_id}}</li>
                     </ol>
                 </div>
             </div>
@@ -275,7 +277,7 @@
                                     
 
                                 <br />
-                                <button type="submit" class="btn btn-primary">Add</button>
+                                <button type="submit" class="btn btn-primary">Update</button>
                             </div>
 
                         </form>

@@ -12,8 +12,9 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">General Form</li>
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{url('settlement/index')}}">All Settlements</a></li>
+                    <li class="breadcrumb-item active" >Edit Settlement - {{$settlement->merchant_fk_id}}</li>
                     </ol>
                 </div>
             </div>

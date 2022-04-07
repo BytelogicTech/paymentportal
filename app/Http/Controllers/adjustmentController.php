@@ -9,6 +9,7 @@ use App\Models\payout;
 use App\Models\merchant;
 use App\Models\customer;
 use App\Models\User;
+use App\Models\logger;
 use App\Models\bankaccount;
 use App\Models\bank_account_payouts;
 use Illuminate\Http\Request;
@@ -154,6 +155,13 @@ class adjustmentController extends Controller
         $adjustment = adjustment::findorFail($id);
         $adjustment->delete();
 
+        $logger = new logger();
+        $logger->itemid = $id;
+        $logger->module = "adjustment";
+        $logger->action = "delete";
+        $logger->created_by = Auth::user()->id;
+        $logger->save();
+
         return redirect('adjustment/index')->with('success', 'Adjustment Deleted Successfully');
     }
 
@@ -163,6 +171,14 @@ class adjustmentController extends Controller
         $adjustment = adjustment::findorFail($request->adjustmentid);
         $adjustment->remarks = $request->remarks;
         $adjustment->save();
+
+        $logger = new logger();
+        $logger->itemid = $request->id;
+        $logger->module = "adjustment";
+        $logger->action = "update";
+        $logger->created_by = Auth::user()->id;
+        $logger->save();
+        
         return back();
     }
 }

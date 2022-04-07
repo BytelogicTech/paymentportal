@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\bank;
+use App\Models\logger;
 use App\Models\bank_account;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -95,6 +96,13 @@ class BankController extends Controller
             $bankaccount->save();
         }
 
+        $logger = new logger();
+        $logger->itemid = $bankid;
+        $logger->module = "bank";
+        $logger->action = "add";
+        $logger->created_by = Auth::user()->id;
+        $logger->save();
+
 
 
 
@@ -178,6 +186,15 @@ class BankController extends Controller
 
         $bankid = $bank->id;
 
+        $logger = new logger();
+        $logger->itemid = $request->id;
+        $logger->module = "bank";
+        $logger->action = "update";
+        $logger->created_by = Auth::user()->id;
+        $logger->save();
+
+       
+
         if ($request->currency) {
             $addmorecount = count($request->currency);
 
@@ -219,6 +236,13 @@ class BankController extends Controller
     {
         $bank = bank::findorFail($id);
         $bank->delete();
+
+        $logger = new logger();
+        $logger->itemid = $id;
+        $logger->module = "bank";
+        $logger->action = "delete";
+        $logger->created_by = Auth::user()->id;
+        $logger->save();
 
         return redirect('bank/index')->with('success', 'Bank Deleted Successfully');
     }

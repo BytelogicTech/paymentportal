@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\bank;
+use App\Models\logger;
 use App\Models\bank_account;
 use App\Models\merchant;
 use App\Models\User;
@@ -149,8 +150,19 @@ class merchantController extends Controller
         $merchant->created_by = Auth::user()->id; 
         $merchant->save();
 
+        
+
 
         $merchant_fk_id = $merchant->id;
+
+        $logger = new logger();
+        $logger->itemid = $merchant_fk_id;
+        $logger->module = "merchant";
+        $logger->action = "add";
+        $logger->created_by = Auth::user()->id;
+        $logger->save();
+
+
         $user = new User();
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
@@ -290,6 +302,13 @@ class merchantController extends Controller
 
         $merchant->save();
 
+        $logger = new logger();
+        $logger->itemid = $request->id;
+        $logger->module = "merchant";
+        $logger->action = "update";
+        $logger->created_by = Auth::user()->id;
+        $logger->save();
+
 
 
         return redirect('merchant/index')->with('success', 'merchant Added Successfully');
@@ -305,6 +324,13 @@ class merchantController extends Controller
     {
         $merchant = merchant::findorFail($id);
         $merchant->delete();
+
+        $logger = new logger();
+        $logger->itemid = $id;
+        $logger->module = "merchant";
+        $logger->action = "delete";
+        $logger->created_by = Auth::user()->id;
+        $logger->save();
 
         return redirect('merchant/index')->with('success', 'merchant Deleted Successfully');
     }

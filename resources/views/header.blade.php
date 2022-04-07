@@ -366,7 +366,7 @@
             </li>
             @endif
 
-            <a href="#" class="nav-link">
+            <a href="{{url('logger/index')}}" class="nav-link">
               <i class="nav-icon fas fa-store"></i>
            
               

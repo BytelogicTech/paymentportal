@@ -6,6 +6,7 @@ use App\Models\payout;
 use App\Models\merchant;
 use App\Models\customer;
 use App\Models\User;
+use App\Models\logger;
 use App\Models\bankaccount;
 use App\Models\bank_account;
 use App\Models\bank_account_payouts;
@@ -216,6 +217,14 @@ class PayoutController extends Controller
         $payout->created_by = Auth::user()->id;
         $payout->save();
         $payoutid = $payout->id;
+
+        $logger = new logger();
+        $logger->itemid = $payoutid;
+        $logger->module = "payout";
+        $logger->action = "add";
+        $logger->created_by = Auth::user()->first_name;
+        $logger->save();
+
         return redirect('payout/index')->with('success', 'Payout Added Successfully');
     
     }
@@ -325,6 +334,14 @@ class PayoutController extends Controller
         $payout->created_by = Auth::user()->id;
         $payout->save();
         $payoutid = $payout->id;
+
+        $logger = new logger();
+        $logger->itemid = $request->id;
+        $logger->module = "payout";
+        $logger->action = "update";
+        $logger->created_by = Auth::user()->first_name;
+        $logger->save();
+
         return redirect('payout/index')->with('success', 'Payout Added Successfully');
     }
 
@@ -338,6 +355,13 @@ class PayoutController extends Controller
     {
         $payout = payout::findorFail($id);
         $payout->delete();
+
+        $logger = new logger();
+        $logger->itemid = $id;
+        $logger->module = "payout";
+        $logger->action = "delete";
+        $logger->created_by = Auth::user()->first_name;
+        $logger->save();
 
         return redirect('payout/index')->with('success', 'Payout Deleted Successfully');  
     }

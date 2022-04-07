@@ -7,6 +7,7 @@ use App\Models\payout;
 use App\Models\merchant;
 use App\Models\customer;
 use App\Models\User;
+use App\Models\logger;
 use App\Models\settlementaccount;
 use App\Models\bankaccount;
 use App\Models\bank_account;
@@ -90,6 +91,17 @@ class settlementaccountController extends Controller
         }
 
         $settlementaccount->save();
+        $settlementid = $settlementaccount->id;
+
+        $logger = new logger;
+        $logger->itemid = $settlementid;
+        $logger->module = "settlementaccount";
+        $logger->action = "add";
+        $logger->created_by = Auth::user()->id;
+        $logger->save();
+
+      
+
 
         return redirect('settlementaccount/index')->with('success', 'settlement Added Successfully');
     }
@@ -152,6 +164,14 @@ class settlementaccountController extends Controller
 
         $settlementaccount->save();
         $settlementaccountid = $settlementaccount->id;
+
+        $logger = new logger;
+        $logger->itemid = $request->id;
+        $logger->module = "settlementaccount";
+        $logger->action = "update";
+        $logger->created_by = Auth::user()->id;
+        $logger->save();
+
         return redirect('settlementaccount/index')->with('success', 'Settlement Account Added Successfully');
     }
 
@@ -175,6 +195,13 @@ class settlementaccountController extends Controller
     {
         $settlementaccount = settlementaccount::findorFail($id);
         $settlementaccount->delete();
+
+        $logger = new logger;
+        $logger->itemid = $id;
+        $logger->module = "settlementaccount";
+        $logger->action = "delete";
+        $logger->created_by = Auth::user()->id;
+        $logger->save();
 
         return redirect('settlementaccount/index')->with('success', 'Settlement Account Deleted Successfully');  
     }

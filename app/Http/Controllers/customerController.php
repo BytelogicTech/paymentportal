@@ -8,6 +8,7 @@ use App\Models\customer;
 use App\Models\merchant;
 use App\Models\bank_account_payouts;
 use App\Models\customer_documents;
+use App\Models\logger;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 // use App\Models\customer_account;
@@ -153,6 +154,13 @@ class customerController extends Controller
         }
         
 
+        $logger = new logger();
+        $logger->itemid = $customerid;
+        $logger->module = "customer";
+        $logger->action = "add";
+        $logger->created_by = Auth::user()->id;
+        $logger->save();
+
 
 
         return redirect('customer/index')->with('success', 'customer Added Successfully');
@@ -219,7 +227,12 @@ class customerController extends Controller
 
         $customer->update();
 
-
+        $logger = new logger();
+        $logger->itemid = $request->id;
+        $logger->module = "customer";
+        $logger->action = "update";
+        $logger->created_by = Auth::user()->id;
+        $logger->save();
 
         return redirect('customer/index')->with('success', 'customer Added Successfully');
     }
@@ -234,6 +247,13 @@ class customerController extends Controller
     {
         $customer = customer::findorFail($id);
         $customer->delete();
+
+        $logger = new logger();
+        $logger->itemid = $id;
+        $logger->module = "customer";
+        $logger->action = "delete";
+        $logger->created_by = Auth::user()->id;
+        $logger->save();
 
         return redirect('customer/index')->with('success', 'customer Deleted Successfully');
     }

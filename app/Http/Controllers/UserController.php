@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\logger;
 use App\Models\merchant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -40,6 +42,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $user = new User();
+        $user->id = $request->id;
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         $user->merchant_fk_id = $request->merchant_fk_id;
@@ -51,6 +54,16 @@ class UserController extends Controller
         $user->role = $request->role;
         $user->remember_token = $request->remember_token;
         $user->save();
+        $userid = $user->id;
+
+        $logger = new logger();
+        $logger->itemid = $userid;
+        $logger->module = "user";
+        $logger->action = "add";
+        $logger->created_by = Auth::user()->id;
+        $logger->save();
+
+
         return redirect('user/index')->with('message','User Added Successfully');
    
     }
@@ -91,6 +104,14 @@ class UserController extends Controller
         $user->role = $request->role;
         $user->remember_token = $request->remember_token;
         $user->save();
+        $userid = $request->id;
+
+        $logger = new logger();
+        $logger->itemid = $userid;
+        $logger->module = "user";
+        $logger->action = "update";
+        $logger->created_by = Auth::user()->id;
+        $logger->save();
         return redirect('user/index')->with('message','User Updated Successfully');
     }
 
@@ -104,6 +125,12 @@ class UserController extends Controller
     {
         $user = user::find($id);
         $user->delete();
+        $logger = new logger();
+        $logger->itemid = $id;
+        $logger->module = "user";
+        $logger->action = "delete";
+        $logger->created_by = Auth::user()->id;
+        $logger->save();
 
         return redirect('user/index')->with('success','User Deleted Successfully');
     }
