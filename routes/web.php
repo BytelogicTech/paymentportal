@@ -66,11 +66,7 @@ Route::group(['prefix' => 'customer'], function(){
 
 Route::get('/bankaccountpayoutdestroy/{bankaccountpayoutid}', [customerController::class, 'bankaccountpayoutdestroy'])->middleware('admin');
 
-
-
 Route::group(['prefix' => 'transaction'], function(){
-
-
     Route::get('/index', [TransactionController::class, 'index'])->name('transaction.index')->middleware('admin_madmin_msuperadmin');
     Route::get('/create', [TransactionController::class, 'create'])->middleware('admin_madmin_msuperadmin');
     Route::post('/store', [TransactionController::class, 'store'])->middleware('admin_madmin_msuperadmin');
@@ -79,9 +75,7 @@ Route::group(['prefix' => 'transaction'], function(){
     Route::get('/delete/{id}', [TransactionController::class, 'destroy'])->middleware('admin');
     Route::post('/search', [TransactionController::class, 'search'])->middleware('admin_madmin_msuperadmin');
     Route::get('/search', [TransactionController::class, 'index'])->middleware('admin_madmin_msuperadmin');
-    Route::get('/delete/{id}', [TransactionController::class, 'destroy'])->middleware('admin');
-    Route::post('/search', [TransactionController::class, 'search'])->middleware('admin_madmin_msuperadmin');
-    Route::get('/search', [TransactionController::class, 'index'])->middleware('admin_madmin_msuperadmin');
+    
 });
 
 

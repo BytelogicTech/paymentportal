@@ -197,7 +197,7 @@ class TransactionController extends Controller
             ->where('banks.status',1)
             ->get()
             ->groupBy('bank_id');
-        $customers = customer::where('merchant_fk_id',Auth::user()->merchant_fk_id)->get();
+          
         return view('transaction/create', compact('merchants', 'bankaccounts', 'customers'));
     }
 

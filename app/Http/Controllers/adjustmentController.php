@@ -168,17 +168,18 @@ class adjustmentController extends Controller
     public function adjustmentupdate(Request $request)
     {
         //dd("hello");
+
         $adjustment = adjustment::findorFail($request->adjustmentid);
         $adjustment->remarks = $request->remarks;
         $adjustment->save();
 
         $logger = new logger();
-        $logger->itemid = $request->id;
+        $logger->itemid = $request->adjustmentid;
         $logger->module = "adjustment";
         $logger->action = "update";
         $logger->created_by = Auth::user()->id;
         $logger->save();
-        
+
         return back();
     }
 }

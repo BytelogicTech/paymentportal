@@ -14,11 +14,9 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{url('/home')}}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{url('/home')}}">Home</a></li>
                         <li class="breadcrumb-item"><a href="{{url('user/index')}}">All Users</a></li>
                         <li class="breadcrumb-item active">Edit User - {{$user->first_name}} {{$user->last_name}}</li>
-
-
                     </ol>
                 </div>
             </div>
@@ -96,7 +94,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="phone">Phone No</label>
-                                            <input id="phone" type="text" placeholder="Enter Phone No." class="form-control" name="phone" value="{{$user->phone}}" required autocomplete="phone" autofocus>
+                                            <input id="phone" type="text" placeholder="Enter Phone No." class="form-control" name="phone" value="{{$user->phone}}" autocomplete="phone" autofocus>
 
                                             @error('phone')
                                             <span class="invalid-feedback" role="alert">

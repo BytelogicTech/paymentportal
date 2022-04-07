@@ -59,6 +59,8 @@ class customerController extends Controller
         // $bankaccounts = bank_account::groupBy('bank_account.banks_id')->get();
         $merchants = merchant::all();
         return view('customer/create', compact('merchants'));
+        
+
     }
     /**
      * Store a newly created resource in storage.
