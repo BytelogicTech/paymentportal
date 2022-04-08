@@ -52,6 +52,9 @@
                                         </select>
                                     </div>
                                 </div>
+                                @else
+                                    <input type="hidden" name="merchant_fk_id" value="{{Auth::user()->merchant_fk_id}}" />
+                                    
                                 @endif
 
 

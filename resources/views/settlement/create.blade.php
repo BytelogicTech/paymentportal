@@ -46,13 +46,16 @@
                                     <div class="form-group">
                                         <label for="description">Parent Merchant*</label>
                                         <select class="select2 form-control" name="merchant_fk_id" required id="merchant_fk_id">
-                                            <option value="" disabled selected>Please Select One</option>
+                                            <option value="" selected>Please Select One</option>
                                             @foreach($merchants as $merchant)
                                             <option value="{{$merchant->id}}">{{$merchant->first_name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
+                                @else
+                                    <input type="hidden" name="merchant_fk_id" value="{{Auth::user()->merchant_fk_id}}" />
+                                    
                                 @endif
 
 
@@ -61,12 +64,12 @@
                                         <div class="form-group">
                                             <label for="description">Bank Account To Transfer To*</label>
                                             <select class="form-control" name="bank_account_to_fk_id" required id="bank_account_to_fk_id">
-                                                <option value="" disabled selected>Please Select One</option>
-                                                @if(Auth::user()->role=="Merchant Admin")
+                                                <option value="" selected>Please Select One</option>
+                                               
                                                 @foreach($settlementaccounts as $settlementaccount)
                                                 <option value="{{$settlementaccount->id}}">{{$settlementaccount->bank_name}} - {{$settlementaccount->currency}} - {{$settlementaccount->account_number}}</option>
                                                 @endforeach
-                                                @endif
+                                             
  
                                             </select>
                                         </div>
@@ -117,6 +120,7 @@
                                     <input type="checkbox" checked data-toggle="switch" data-handle-width="100" data-on-text="YES" data-off-text="NO" name="rr_settlement">
 
                                 </center>
+                                @endif
 
                                 <!-- /.card -->
 
@@ -124,7 +128,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Bank Account To Transfer From*</label>
-                                            <select class="select2 form-control" name="bank_account_from_fk_id">
+                                            <select class="select2 form-control" name="bank_account_from_fk_id" id="bank_account_from_fk_id" required>
                                                 <option>Please Select One</option>
                                                 @foreach($bankaccounts as $bankaccount)
                                                 <optgroup label="{{$bankaccount[0]->bank_name}}">
@@ -136,7 +140,8 @@
                                             </select>
                                         </div>
                                     </div>
-
+            
+                                    @if(Auth::user()->role=="Admin")
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Status of Settlement</label>
@@ -150,8 +155,9 @@
                                             </select>
                                         </div>
                                     </div>
+                                    @endif
                                 </div>
-@endif
+
 
                                 <br />
                                 <button type="submit" class="btn btn-primary">Add</button>
@@ -171,11 +177,7 @@
 
 @include('footer')
 
-<script>
-    $(function() {
-        $('.select2').select2()
-    });
-</script>
+
 
 <script>
     $('[data-toggle="switch"]').bootstrapSwitch();

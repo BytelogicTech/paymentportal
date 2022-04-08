@@ -184,8 +184,7 @@ Route::get('/test', [App\Http\Controllers\HomeController::class, 'test'])->middl
 /////// AJAX Functions
 
 Route::post('/getcustomers_bymerchant', [PayoutController::class, 'getcustomers_bymerchant'])->middleware('admin');
-Route::post('/getpayout_bycustomer', [PayoutController::class, 'getpayout_bycustomer'])->middleware('admin');
-Route::post('/getpayouts_bymerchant', [PayoutController::class, 'getpayouts_bymerchant'])->middleware('admin');
-Route::post('/getpayout_bycustomer_table', [PayoutController::class, 'getpayout_bycustomer_table'])->middleware('admin');
+Route::post('/getpayout_bycustomer', [PayoutController::class, 'getpayout_bycustomer'])->middleware('admin_madmin_msuperadmin');
+Route::post('/getpayouts_bymerchant', [PayoutController::class, 'getpayouts_bymerchant'])->middleware('admin_madmin_msuperadmin');
+Route::post('/getpayout_bycustomer_table', [PayoutController::class, 'getpayout_bycustomer_table'])->middleware('admin_madmin_msuperadmin');
 
-Route::post('/getcustomers_bymerchant', [TransactionController::class, 'getcustomers_bymerchant'])->middleware('admin');

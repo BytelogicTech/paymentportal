@@ -68,11 +68,16 @@
                                             <label for="description">Customer*</label>
                                             <select class=" form-control" name="customer_fk_id" required id="customer_fk_id">
                                                 <option value="" selected>Please Select One</option>
-                                                @if(Auth::user()->role=="Merchant Admin")
+                                                
                                                 @foreach($customers as $customer)
                                                 <option value="{{$customer->id}}">{{$customer->first_name}}</option>
                                                 @endforeach
-                                                @endif
+                                               
+                                            
+                                                
+                                              
+                                               
+                                                
                                             </select>
                                         </div>
                                     </div>
@@ -130,11 +135,11 @@
                                         </div>
                                     </div>
 
-                                    @if(Auth::user()->role=="Admin")
+                                  
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="description">Bank Account To Transfer From*</label>
-                                            <select class="select2 form-control" name="bank_account_from_fk_id" required>
+                                            <label for="description">Bank Account To Transfer From</label>
+                                            <select class="select2 form-control" name="bank_account_from_fk_id">
                                                 <option value="" Selected>Please Select One</option>
                                                 @foreach($bankaccounts as $bankaccount)
                                                 <optgroup label="{{$bankaccount[0]->bank_name}}">
@@ -146,6 +151,9 @@
                                             </select>
                                         </div>
                                     </div>
+
+                                    
+                                    @if(Auth::user()->role=="Admin")
 
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -162,6 +170,9 @@
                                             </select>
                                         </div>
                                     </div>
+
+                                    @else 
+                                    <input type="hidden" class="form-control" name="status_of_payout" placeholder="Enter Amount Recieved" value="New">                                    
                                     @endif
 
 
@@ -256,7 +267,7 @@
                 $.each(data, function(i, value) {
                     options += '<option value=' + value["id"] + '>' + value["beneficiary_name"] + '-' + value["currency"] + '-' + value["account_number"] + '</option>';
                 });
-                // console.log(data);
+                console.log(data);
                 $('#bank_account_to_fk_id').html(options);
             },
             error: function(data) {

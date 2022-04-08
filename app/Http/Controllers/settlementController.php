@@ -123,11 +123,26 @@ class settlementController extends Controller
         $merchants = merchant::all();
         $settlementaccounts = settlementaccount::where('merchant_fk_id',Auth::user()->merchant_fk_id)->get();
         // dd($settlementaccounts);
+        if(Auth::user()->role=="Admin")
+        {
         $bankaccounts =  DB::table('bank_accounts')
-            ->join('banks', 'banks.id', '=', 'bank_accounts.bank_id')
-            ->select('bank_accounts.id as bank_accountsid', 'bank_accounts.bank_id', 'banks.bank_name', 'banks.beneficiary_name', 'bank_accounts.currency', 'bank_accounts.account_number', 'bank_accounts.nick_name')
+        ->join('banks','banks.id','=','bank_accounts.bank_id')
+        ->select('bank_accounts.id as bank_accountsid','bank_accounts.bank_id','banks.bank_name','banks.beneficiary_name','bank_accounts.currency','bank_accounts.account_number','bank_accounts.nick_name')            
+        ->get()
+        ->groupBy('bank_id');
+        }
+        else
+        {
+            $parent_self_merchant_id = Auth::user()->merchant_fk_id;
+        $bank_accountid = merchant::where('id',$parent_self_merchant_id)->first()->bank_account_id;
+            $bankaccounts =  DB::table('bank_accounts')
+            ->join('banks','banks.id','=','bank_accounts.bank_id')
+            ->select('bank_accounts.id as bank_accountsid','bank_accounts.bank_id','banks.bank_name','banks.beneficiary_name','bank_accounts.currency','bank_accounts.account_number','bank_accounts.nick_name')            
+            ->where('bank_accounts.id',$bank_accountid)
             ->get()
             ->groupBy('bank_id');
+
+        }
         return view('settlement/create', compact('merchants', 'bankaccounts','settlementaccounts'));
     }
 
