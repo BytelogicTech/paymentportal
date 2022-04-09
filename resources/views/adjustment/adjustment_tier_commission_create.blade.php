@@ -87,7 +87,7 @@
                                 <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Incoming Percentage</label>
-                                            <input type="text" placeholder="Enter Incoming Percentage" class="form-control" name="incoming_percentage" required />
+                                            <input type="text" placeholder="Enter Incoming Percentage" class="form-control" name="incoming_percentage"  />
                                         </div>
                                     </div>
                              
@@ -95,7 +95,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">RR Percentage</label>
-                                            <input type="text" placeholder="Enter RR Percentage" class="form-control" name="rr_percentage" required />
+                                            <input type="text" placeholder="Enter RR Percentage" class="form-control" name="rr_percentage"  />
                                         </div>
                                     </div>
                                 </div>
@@ -104,7 +104,7 @@
                                 <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Payout Percentage</label>
-                                            <input type="text" placeholder="Enter Payout Percentage" class="form-control" name="payout_percentage" required />
+                                            <input type="text" placeholder="Enter Payout Percentage" class="form-control" name="payout_percentage"  />
                                         </div>
                                     </div>
                              
@@ -112,7 +112,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">B2B Percentage</label>
-                                            <input type="text" placeholder="Enter B2B Percentage" class="form-control" name="b2b_percentage" required />
+                                            <input type="text" placeholder="Enter B2B Percentage" class="form-control" name="b2b_percentage"  />
                                         </div>
                                     </div>
                                 </div>

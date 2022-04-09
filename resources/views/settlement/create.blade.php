@@ -127,9 +127,9 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="description">Bank Account To Transfer From*</label>
-                                            <select class="select2 form-control" name="bank_account_from_fk_id" id="bank_account_from_fk_id" required>
-                                                <option>Please Select One</option>
+                                            <label for="description">Bank Account To Transfer From *</label>
+                                            <select class="select2 form-control" name="bank_account_from_fk_id" required>
+                                                <option value="" Selected>Please Select One</option>
                                                 @foreach($bankaccounts as $bankaccount)
                                                 <optgroup label="{{$bankaccount[0]->bank_name}}">
                                                     @foreach($bankaccount as $item)
@@ -140,6 +140,7 @@
                                             </select>
                                         </div>
                                     </div>
+
             
                                     @if(Auth::user()->role=="Admin")
                                     <div class="col-md-6">
