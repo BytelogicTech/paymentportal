@@ -73,11 +73,6 @@
                                                 <option value="{{$customer->id}}">{{$customer->first_name}}</option>
                                                 @endforeach
                                                
-                                            
-                                                
-                                              
-                                               
-                                                
                                             </select>
                                         </div>
                                     </div>
@@ -138,8 +133,8 @@
                                   
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="description">Bank Account To Transfer From</label>
-                                            <select class="select2 form-control" name="bank_account_from_fk_id">
+                                            <label for="description">Bank Account To Transfer From *</label>
+                                            <select class="select2 form-control" name="bank_account_from_fk_id" required>
                                                 <option value="" Selected>Please Select One</option>
                                                 @foreach($bankaccounts as $bankaccount)
                                                 <optgroup label="{{$bankaccount[0]->bank_name}}">

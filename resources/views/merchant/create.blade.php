@@ -52,8 +52,8 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Bank Accounts Assigned*</label>
-                                            <select name="bank_account_id" class="select2 form-control">
-                                                <option>Select Bank Account</option>
+                                            <select name="bank_account_id" class="select2 form-control" required>
+                                                <option value="" Selected>Select Bank Account</option>
                                                 @foreach($bankaccounts as $bankaccount)
                                                 <optgroup label="{{$bankaccount[0]->bank_name}}">
                                                     @foreach($bankaccount as $item)
@@ -65,7 +65,6 @@
                                         </div>
                                     </div>
                                 </div>
-
 
 
                                 <div class="row">

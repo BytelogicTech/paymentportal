@@ -138,11 +138,12 @@ class UserController extends Controller
         {
             $user->password = Hash::make($request->password);
         }
-      
-        $user->role = $request->role;
+        
+        //$user->role = $request->role;
+        $user->role = Auth::user()->role;
         $user->remember_token = $request->remember_token;
         $user->save();
-        return redirect('user/index')->with('message','Profile Updated Successfully');
+        return redirect('user/selfedit')->with('message','Profile Updated Successfully');
     }
 
     /**
