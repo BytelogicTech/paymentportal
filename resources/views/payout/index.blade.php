@@ -1,10 +1,6 @@
 @include('header')
 
 
-
-
-
-
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -43,23 +39,23 @@
               <form action="{{url('payout/search')}}" method="post">
                 @csrf
                 <div class="row">
-                @if(Auth::user()->role=="Admin")
+                  @if(Auth::user()->role=="Admin")
                   <div class="col-md-3">
-                  
+
                     <label for="description">Merchant Name</label>
                     <select name="merchant_fk_id" class="form-control" id="merchant_fk_id">
-                      <option value="" selected >Select Merchant</option>
+                      <option value="" selected>Select Merchant</option>
                       @foreach($merchants as $merchant)
                       <option value="{{$merchant->id}}">{{$merchant->merchant_name}}</option>
                       @endforeach
                     </select>
-                  
+
                   </div>
                   @else
                   <input type="hidden" name="merchant_fk_id" value="{{Auth::user()->merchant_fk_id}}" />
 
                   @endif
-                  
+
 
                   <div class="col-md-3">
                     <label for="name">Payout Request ID</label>
@@ -79,7 +75,7 @@
                   <div class="col-md-3">
                     <label>Currency</label>
                     <select class="form-control select2" style="width: 100%;" name="currency" id="currency">
-                      <option value="" selected >Please Select One</option>
+                      <option value="" selected>Please Select One</option>
                       @foreach(config('constants.currency_list') as $key=> $currency1)
                       <option value="{{$key}}">{{$key}}</option>
                       @endforeach
@@ -99,11 +95,11 @@
                       <input type="text" class="form-control m-input" name="payout_amount_to" id="payout_amount_to" placeholder="To" data-col-index="4">
                     </div>
                   </div>
-                  
+
                   <div class="col-md-3">
                     <label>Status</label>
                     <select class="form-control" name="status_of_payout" id="status_of_payout">
-                      <option value="" selected >Select Status</option>
+                      <option value="" selected>Select Status</option>
                       <option value="New">New</option>
                       <option value="Processing">Processing</option>
                       <option value="Paid">Paid</option>
@@ -115,10 +111,10 @@
                     </select>
                   </div>
                   <div class="col-md-3">
-                  @if(Auth::user()->role=="Admin")
+                    @if(Auth::user()->role=="Admin")
                     <label for="description">Bank Paid From</label>
                     <select class="select2 form-control" name="bank_account_from_fk_id" id="bank_account_from_fk_id">
-                      <option value="" >Please Select One</option>
+                      <option value="">Please Select One</option>
                       @foreach($bankaccounts as $bankaccount)
                       <optgroup label="{{$bankaccount[0]->bank_name}}">
                         @foreach($bankaccount as $item)
@@ -131,7 +127,7 @@
                   </div>
                 </div>
                 <div class="row">
-                <div class="col-md-4">
+                  <div class="col-md-4">
                     <label>Date Paid Between:</label>
                     <div class="input-daterange input-group">
                       <input type="date" class="form-control m-input bootdatepicker" name="date_paid_from" id="date_paid_from" placeholder="From" data-col-index="11">
@@ -204,7 +200,7 @@
                   @if(Auth::user()->role=="Admin")
 
                   <a href="{{url('payout/delete/'.$payout->id)}}" onclick="return confirm('Are you sure, you want to delete it?')" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                @endif
+                  @endif
                 </td>
                 @endif
                 <td>

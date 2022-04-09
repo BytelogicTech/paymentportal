@@ -43,7 +43,7 @@
                                 @csrf
 
                                 <div class="row">
-                                @if(Auth::user()->role=="Admin")
+                                    @if(Auth::user()->role=="Admin")
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="name">Invoice Date*</label>
@@ -66,10 +66,10 @@
                                         </div>
                                     </div>
                                     @else
-                                <input type="hidden" name="merchant_fk_id" value="{{Auth::user()->merchant_fk_id}}" />
+                                    <input type="hidden" name="merchant_fk_id" value="{{Auth::user()->merchant_fk_id}}" />
                                     @endif
- 
-                                    
+
+
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Bank To*</label>
@@ -86,17 +86,16 @@
                                             </select>
                                         </div>
                                     </div>
-                                   
+
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Customer*</label>
-                                            <select class="select2 form-control" name="customer_fk_id"id="customer_fk_id" required>
+                                            <select class="select2 form-control" name="customer_fk_id" id="customer_fk_id" required>
                                                 <option value="" selected>Please Select One</option>
                                                 @foreach($customers as $customer)
                                                 <option value="{{$customer->id}}">{{$customer->first_name}}</option>
                                                 @endforeach
-                                                
                                             </select>
                                         </div>
                                     </div>
@@ -104,7 +103,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Product Name*</label>
-                                            <input type="text" class="form-control" name="product_name" placeholder="Enter Product Name" required> 
+                                            <input type="text" class="form-control" name="product_name" placeholder="Enter Product Name" required>
                                         </div>
                                     </div>
 
@@ -139,7 +138,7 @@
 
 
                                 <div class="row">
-                                @if(Auth::user()->role=="Admin")
+                                    @if(Auth::user()->role=="Admin")
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Date Recieved</label>
@@ -207,36 +206,33 @@
 </script>
 
 <script>
-    $('#merchant_fk_id').change(function(){
+    $('#merchant_fk_id').change(function() {
         $('#customer_fk_id').html('');
         var merchant_fk_id = $(this).val();
 
         $.ajax({
-                type: 'POST',
-                url: "{{url('getcustomers_bymerchant')}}",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data: {
-                    merchant_fk_id: merchant_fk_id
-                },
-                success: function(data) {
-                    
+            type: 'POST',
+            url: "{{url('getcustomers_bymerchant')}}",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                merchant_fk_id: merchant_fk_id
+            },
+            success: function(data) {
+
                 var options = '<option value="" >Please Select One</option> ';
-                    $.each(data, function(i, value) {
-                    options+= '<option value='+value["id"]+'>'+value["first_name"]+'</option>';
-                    });
-                    //console.log(data);
-                    $('#customer_fk_id').html(options);
-                },
-                error: function(data) {
-                    console.log("error");
-                    console.log(data);
-                }
-            });
-        
+                $.each(data, function(i, value) {
+                    options += '<option value=' + value["id"] + '>' + value["first_name"] + '</option>';
+                });
+                //console.log(data);
+                $('#customer_fk_id').html(options);
+            },
+            error: function(data) {
+                console.log("error");
+                console.log(data);
+            }
+        });
+
     });
 </script>
-
-
-
