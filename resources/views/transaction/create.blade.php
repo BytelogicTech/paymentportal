@@ -93,11 +93,11 @@
                                             <label for="description">Customer*</label>
                                             <select class="select2 form-control" name="customer_fk_id"id="customer_fk_id" required>
                                                 <option value="" selected>Please Select One</option>
-                                                @if(Auth::user()->role=="Merchant Admin")
+                                               
                                                 @foreach($customers as $customer)
                                                 <option value="{{$customer->id}}">{{$customer->first_name}}</option>
                                                 @endforeach
-                                                @endif
+                                            
                                             </select>
                                         </div>
                                     </div>
